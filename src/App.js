@@ -1,58 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
+// import './App.css'
+
+import { Home } from './pages/home'
+import { Recipes } from './pages/recipes'
+import { MenuPlanning } from './pages/menuplanning'
+import { Markets } from './pages/markets'
+import { Products } from './pages/products'
+import { ShoppingList } from './pages/shoppinglist'
+import { Checkout } from './pages/checkout'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+	return (
+		<Router>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/recipes" element={<Recipes />} />
+				<Route path="/menuplanning" element={<MenuPlanning />} />
+				<Route path="/markets" element={<Markets />} />
+				<Route path="/products" element={<Products />} />
+				<Route path="/shoppinglist" element={<ShoppingList />} />
+				<Route path="/checkout" element={<Checkout />} />
+			</Routes>
+		</Router>
+	)
 }
 
-export default App;
+export default App
