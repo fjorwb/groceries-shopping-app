@@ -1,15 +1,18 @@
 :root {
-	--clr-fonts: #070b7a;
+	--clr-font: #070b7a;
 	--clr-font-contrast: #ffffff;
 	--clr-grid: #707070;
 	--clr-contrast: #2596be;
 	--clr-background: #fff;
+
+	--fnt-menu: 1rem;
 }
 
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	/* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }

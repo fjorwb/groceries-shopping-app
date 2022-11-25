@@ -1,38 +1,21 @@
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-body {
-	font-family: 'Roboto', sans-serif;
-	font-style: 16px;
-	background-color: var(--clr-background);
-	color: var(--clr-font);
-	text-align: center;
-}
-
 h1 {
 	font-size: 1rem;
 	background: lightgrey;
-}
-
-.container {
-	max-width: 80%;
-	min-width: 40vh;
-	margin: 0 auto;
-	padding: 0 1rem;
-	display: flex;
 }
 
 .header {
 	width: 90%;
 	display: flex;
 	flex-direction: row;
-	color: rgb(0, 3, 5);
+	color: var(--clr-font);
 	justify-content: space-between;
-	align-items: center;
-	margin: 0 2rem;
+	/* align-items: center; */
+	margin-top: 1rem;
+	padding: 1rem;
+	background: var(--clr-background);
+
+	/* position: fixed; */
+	margin: auto;
 }
 
 .footer {
@@ -43,16 +26,20 @@ h1 {
 	color: var(--clr-font-contrast);
 	justify-content: center;
 	align-items: center;
-	margin: 0 2rem;
-	padding: 2rem 0;
+	margin: auto;
+	padding: 1rem 0;
 }
 
 .logo {
 	width: 100px;
+	margin-right: 2rem;
 }
 
-.bodycontainer {
-	min-height: 60vh;
+.maincontainer {
+	width: 90%;
+	margin: auto;
+
+	min-height: 70vh;
 }
 
 .navbarcontainer,
@@ -69,13 +56,30 @@ h1 {
 	flex-direction: row;
 	justify-content: left;
 	font-size: 1.25rem;
+	align-items: center;
+}
+
+ul {
+	height: fit-content;
 }
 
 li {
 	padding: 0.5rem 0.5rem;
 	color: var(--clr-font);
+	font-size: var(--fnt-menu);
 }
 
 li:hover {
 	border-bottom: 4px solid var(--clr-contrast);
+	cursor: pointer;
+}
+
+.login {
+	padding: 0.5rem;
+	font-size: var(--fnt-menu);
+}
+
+.login:hover {
+	border-bottom: 4px solid var(--clr-contrast);
+	cursor: pointer;
 }
