@@ -1,7 +1,7 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 
-// import './App.css'
+import './App.css'
 
 import { Home } from './pages/home'
 import { Recipes } from './pages/recipes'
@@ -24,6 +24,36 @@ function App() {
 				<Route path="/checkout" element={<Checkout />} />
 			</Routes>
 		</Router>
+	)
+}
+
+export function Navigation() {
+	return (
+		<nav>
+			<ul>
+				<li>
+					<Link to="/">Home</Link>
+				</li>
+				<li>
+					<Link to="/recipes">Recipes</Link>
+				</li>
+				<li>
+					<Link to="/menuplanning">Menu Planning</Link>
+				</li>
+				<li>
+					<Link to="/markets">Markets</Link>
+				</li>
+				<li>
+					<Link to="/products">Products</Link>
+				</li>
+				<li>
+					<Link to="/shoppinglist">Shopping List</Link>
+				</li>
+				<li>
+					<Link to="/checkout">Checkout</Link>
+				</li>
+			</ul>
+		</nav>
 	)
 }
 

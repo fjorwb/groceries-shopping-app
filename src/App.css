@@ -5,8 +5,13 @@
 }
 
 body {
+	width: 100%;
 	font-family: 'Roboto', sans-serif;
-	background-color: rgb(246, 245, 245);
-	color: blue;
+	font-style: 16px;
+	background-color: var(--clr-background);
+	color: var(--clr-font);
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
