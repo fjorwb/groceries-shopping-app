@@ -6,11 +6,13 @@
 	--clr-background: #fff;
 
 	--fnt-menu: 1rem;
+	--fnt-fam: Georgia, 'Times New Roman', Times, serif;
 }
 
 body {
 	margin: 0;
-	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-family: var(--fnt-fam);
+	/* Georgia, 'Times New Roman', Times, serif; */
 	/* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
 		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; */
 	-webkit-font-smoothing: antialiased;

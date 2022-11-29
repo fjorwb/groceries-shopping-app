@@ -2,7 +2,7 @@ import React from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 
-import styles from '../styles.module.css'
+import styles from '../styles/styles.module.css'
 
 export function ShoppingList() {
 	return (

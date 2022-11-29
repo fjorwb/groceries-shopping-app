@@ -1,16 +1,16 @@
 import React from 'react'
 
 // import logo from '../images/logo.png'
-import styles from '../styles.module.css'
+import styles from '../styles/styles.module.css'
 
 import { Navbar } from './Navbar'
-import { Login } from './Login'
+import { Auth } from './Auth'
 
 export function Header() {
 	return (
 		<div className={styles.header}>
 			<Navbar />
-			<Login />
+			<Auth />
 		</div>
 	)
 }

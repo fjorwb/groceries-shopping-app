@@ -2,7 +2,7 @@ import React from 'react'
 
 import './Modal.css'
 
-export function Modal({ children, isOpen, closeModal }) {
+export function Register({ children, isOpen, closeModal }) {
 	const handleModalClick = e => e.stopPropagation()
 	return (
 		<div>
@@ -18,4 +18,4 @@ export function Modal({ children, isOpen, closeModal }) {
 	)
 }
 
-export default Modal
+export default Register

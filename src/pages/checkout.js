@@ -3,7 +3,7 @@ import React from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 
-import styles from '../styles.module.css'
+import styles from '../styles/styles.module.css'
 
 export function Checkout() {
 	return (
