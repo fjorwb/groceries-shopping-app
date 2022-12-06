@@ -1,18 +1,19 @@
 import React from 'react'
-import { useForm } from '../Hooks/useForm'
+import { useForm } from '../customHooks/useForm'
 
-import '../App.css'
+import './Form.css'
 import Loader from './Loader'
 import Message from './Message'
 
-export const LoginForm = () => {
+export const LoginForm = ({ data, setData, url }) => {
 	const initialForm = { email: '', password: '' }
 
 	const validationsForm = form => {
 		let errors = {}
 
 		// let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/
-		let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/
+		// let regexPassword = /^(?=^.{1,}$)$/
+		// let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/
 		let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/
 		// let regexComments = /^.{1,255}$/
 
@@ -22,26 +23,26 @@ export const LoginForm = () => {
 			errors.email = 'email field is not valid'
 		}
 
-		if (!form.password.trim()) {
-			errors.password = 'password field is required'
-		} else if (!regexPassword.test(form.password)) {
-			errors.password = 'password field is not valid'
-		}
+		// if (!form.password.trim()) {
+		// 	errors.password = 'password field is required'
+		// } else if (!regexPassword.test(form.password)) {
+		// 	errors.password = 'password field is not valid'
+		// }
 
 		return errors
 	}
 
 	const { form, errors, loading, response, handleChange, handleBlur, handleSubmit } = useForm(
 		initialForm,
-		validationsForm
+		validationsForm,
+		url,
+		data,
+		setData
 	)
 
-	console.log('from contact form>>> ', response)
-
 	return (
-		<div className="contac-form-container">
-			Contact Form
-			<form onSubmit={handleSubmit} className="contact-form">
+		<div className="form-container">
+			<form onSubmit={handleSubmit} className="form">
 				<input
 					type="text"
 					name="email"
@@ -51,6 +52,7 @@ export const LoginForm = () => {
 					onChange={handleChange}
 					value={form.email}
 					required
+					className="form-input"
 				/>
 				{errors.email && <p className="error-message">{errors.email}</p>}
 				<input
@@ -62,12 +64,13 @@ export const LoginForm = () => {
 					onChange={handleChange}
 					value={form.password}
 					required
+					className="form-input"
 				/>
-				{errors.password && <p className="error-message">{errors.password}</p>}
-				<input type="submit" value="send" onSubmit={handleSubmit} />
+				{/* {errors.password && <p className="error-message">{errors.password}</p>} */}
+				<input type="submit" value="send" onSubmit={handleSubmit} className="form-btn" />
 			</form>
 			{loading && <Loader />}
-			{response && <Message message="" bgColor="#198754" />}
+			{response && <Message message="data sent successfully" bgColor="#198754" />}
 		</div>
 	)
 }

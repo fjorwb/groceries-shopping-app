@@ -1,20 +1,21 @@
 import React from 'react'
 
-const Message = ({ msg, bgColor }) => {
+export const Message = ({ message, bgColor }) => {
 	let styles = {
 		padding: '1rem',
+		marginTop: '1rem',
 		marginBottom: '1rem',
 		textAlign: 'center',
-		color: '#fff',
-		fontWeight: 'bold',
+		// fontWeight: 'bold',
 		backgroundColor: bgColor,
-		width: '100%'
+		color: '#FFFFFF',
+		width: '100%',
+		fontSize: '.9rem'
 	}
 
 	return (
 		<div style={styles}>
-			{/* <p>{msg}</p> */}
-			<p dangerouslySetInnerHTML={{ __html: msg }} />
+			<p>{message}</p>
 		</div>
 	)
 }

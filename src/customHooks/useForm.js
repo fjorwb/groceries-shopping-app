@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { helpHttp } from '../helpers/helpHttp'
 
-export const useForm = (initialForm, validateForm) => {
+export const useForm = (initialForm, validateForm, url, data, setData) => {
 	const [form, setForm] = useState(initialForm)
 	const [errors, setErrors] = useState({})
 	const [loading, setLoading] = useState(false)
@@ -27,10 +27,10 @@ export const useForm = (initialForm, validateForm) => {
 		setErrors(validateForm(form))
 
 		if (Object.keys(errors).length === 0) {
-			alert('form sent')
 			setLoading(true)
+
 			helpHttp()
-				.post('https://formsubmit.co/jfoliveri.ca@gmail.com', {
+				.post(`http://localhost:5000/auth/${url}`, {
 					body: form,
 					headers: {
 						'Content-Type': 'application/json',
@@ -38,6 +38,7 @@ export const useForm = (initialForm, validateForm) => {
 					}
 				})
 				.then(res => {
+					setData(res)
 					setLoading(false)
 					setResponse(true)
 					setTimeout(() => {
@@ -45,9 +46,19 @@ export const useForm = (initialForm, validateForm) => {
 					}, 5000)
 					setForm(initialForm)
 				})
+				.catch(err => {
+					setData(err)
+					console.log(err)
+					setLoading(false)
+					setTimeout(() => {
+						setResponse(false)
+					}, 5000)
+					setForm(initialForm)
+				})
 		}
 	}
-	return { form, errors, loading, response, handleChange, handleBlur, handleSubmit }
+
+	return { data, form, errors, loading, response, handleChange, handleBlur, handleSubmit }
 }
 
 export default useForm

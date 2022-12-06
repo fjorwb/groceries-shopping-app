@@ -1,6 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 
+import { Provider } from 'react-redux'
+import store from './store/store'
+
 import './App.css'
 
 import { Home } from './pages/home'
@@ -13,17 +16,19 @@ import { Checkout } from './pages/checkout'
 
 function App() {
 	return (
-		<Router>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/recipes" element={<Recipes />} />
-				<Route path="/menuplanning" element={<MenuPlanning />} />
-				<Route path="/markets" element={<Markets />} />
-				<Route path="/products" element={<Products />} />
-				<Route path="/shoppinglist" element={<ShoppingList />} />
-				<Route path="/checkout" element={<Checkout />} />
-			</Routes>
-		</Router>
+		<Provider store={store}>
+			<Router>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/recipes" element={<Recipes />} />
+					<Route path="/menuplanning" element={<MenuPlanning />} />
+					<Route path="/markets" element={<Markets />} />
+					<Route path="/products" element={<Products />} />
+					<Route path="/shoppinglist" element={<ShoppingList />} />
+					<Route path="/checkout" element={<Checkout />} />
+				</Routes>
+			</Router>
+		</Provider>
 	)
 }
 
