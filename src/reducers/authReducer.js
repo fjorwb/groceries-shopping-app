@@ -2,7 +2,8 @@ import { TO_LOGIN, TO_LOGOUT, TO_REGISTER } from '../types'
 
 const authInitialState = {
 	user: null,
-	register: null
+	register: null,
+	isLogedIn: false
 }
 
 export default function authReducer(state = authInitialState, action) {
@@ -16,7 +17,8 @@ export default function authReducer(state = authInitialState, action) {
 
 			return {
 				...state,
-				user: action.payload
+				user: action.payload,
+				isLogedIn: true
 			}
 		}
 		case TO_LOGOUT: {

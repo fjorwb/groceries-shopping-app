@@ -24,6 +24,7 @@ export function Auth() {
 	const dispatch = useDispatch()
 
 	const user = auth.user
+	const isLogedIn = auth.isLogedIn
 
 	const [isOpenLogin, openLoginModal, closeLoginModal] = useModal(false)
 	const [isOpenRegister, openRegisterModal, closeRegisterModal] = useModal(false)
@@ -53,7 +54,7 @@ export function Auth() {
 		<div>
 			<div className="auth-container">
 				<div>
-					{user === null ? (
+					{!isLogedIn ? (
 						<div>
 							<button onClick={openLoginModal} className="auth-btn">
 								login

@@ -30,7 +30,7 @@ export const useForm = (initialForm, validateForm, url, data, setData) => {
 			setLoading(true)
 
 			helpHttp()
-				.post(`http://localhost:5000/auth/${url}`, {
+				.post(`https://groceries-shopping.herokuapp.com/auth/${url}`, {
 					body: form,
 					headers: {
 						'Content-Type': 'application/json',
