@@ -1,8 +1,10 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 
-import { Provider } from 'react-redux'
-import store from './store/store'
+import { useSelector } from 'react-redux'
+// import store from './store/store'
+
+import { ProtectedRoute } from './components/ProtectedRoute'
 
 import './App.css'
 
@@ -15,20 +17,31 @@ import { ShoppingList } from './pages/shoppinglist'
 import { Checkout } from './pages/checkout'
 
 function App() {
+	const state = useSelector(state => state)
+
+	let isAllowed
+	if (state.auth.user !== null) {
+		isAllowed = true
+	} else {
+		isAllowed = false
+	}
+
 	return (
-		<Provider store={store}>
-			<Router>
-				<Routes>
-					<Route path="/" element={<Home />} />
+		// <Provider store={store}>
+		<Router>
+			<Routes>
+				<Route index path="/" element={<Home />} />
+				<Route element={<ProtectedRoute isAllowed={isAllowed} />}>
 					<Route path="/recipes" element={<Recipes />} />
 					<Route path="/menuplanning" element={<MenuPlanning />} />
 					<Route path="/markets" element={<Markets />} />
 					<Route path="/products" element={<Products />} />
 					<Route path="/shoppinglist" element={<ShoppingList />} />
 					<Route path="/checkout" element={<Checkout />} />
-				</Routes>
-			</Router>
-		</Provider>
+				</Route>
+			</Routes>
+		</Router>
+		// </Provider>
 	)
 }
 

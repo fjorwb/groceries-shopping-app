@@ -54,6 +54,9 @@ export const RegisterForm = ({ data, setData, url }) => {
 
 		if (!form.password.trim()) {
 			errors.password = 'password field is required'
+		} else if (!regexPassword.test(form.password)) {
+			errors.password =
+				'password field is not valid. It must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character'
 		}
 
 		if (!form.phone.trim()) {
@@ -156,7 +159,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 						/>
 						{errors.email && <p className="error-message">{errors.email}</p>}
 						<input
-							type="text"
+							type="password"
 							name="password"
 							id="password"
 							placeholder="password"

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { login, logout, register } from '../actions/authActions'
+import { login, logout } from '../actions/authActions'
 
 // import { helpHttp } from '../helpers/helpHttp'
 
@@ -15,32 +15,18 @@ import './auth.css'
 export function Auth() {
 	const state = useSelector(state => state)
 
-	const [data, setData] = useState(null)
-	console.log('data', data)
-
 	const { auth } = state
 
-	console.log(auth)
+	const [data, setData] = useState(auth.user)
 
 	const dispatch = useDispatch()
 
-	const user = auth.user
+	// const user = auth.user
+
 	const isLogedIn = auth.isLogedIn
-	console.log('Log?', isLogedIn)
 
 	const [isOpenLogin, openLoginModal, closeLoginModal] = useModal(false)
 	const [isOpenRegister, openRegisterModal, closeRegisterModal] = useModal(false)
-
-	// let api = helpHttp()
-	// let url = 'http://localhost:5000/api/auth/'
-	// let url
-
-	// if (user === null) {
-	// 	// url = `${url}login`
-	// 	url = 'login'
-	// }
-
-	// isLogedIn ? (url = 'rgistr') : (url = 'login')
 
 	useEffect(() => {
 		if (data) {
@@ -49,10 +35,6 @@ export function Auth() {
 			dispatch(logout())
 		}
 	}, [data, dispatch])
-
-	// const register = data => {
-	// 	dispatch({ register, payload: data })
-	// }
 
 	return (
 		<div>

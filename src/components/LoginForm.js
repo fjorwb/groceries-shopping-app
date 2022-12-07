@@ -46,7 +46,7 @@ export const LoginForm = ({ data, setData, url }) => {
 				<input
 					type="text"
 					name="email"
-					id="email"
+					id="emailLogin"
 					placeholder="email"
 					onBlur={handleBlur}
 					onChange={handleChange}
@@ -58,7 +58,7 @@ export const LoginForm = ({ data, setData, url }) => {
 				<input
 					type="text"
 					name="password"
-					id="password"
+					id="passwordLogin"
 					placeholder="password"
 					onBlur={handleBlur}
 					onChange={handleChange}

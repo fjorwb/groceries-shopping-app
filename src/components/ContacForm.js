@@ -45,8 +45,6 @@ export const ContacForm = () => {
 		validationsForm
 	)
 
-	console.log('from contact form>>> ', response)
-
 	return (
 		<div className="contac-form-container">
 			Contact Form

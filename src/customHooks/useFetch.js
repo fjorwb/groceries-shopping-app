@@ -1,14 +1,23 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export function useFetch(url) {
+export function useFetch(url, token) {
 	const [data, setData] = useState(null)
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(null)
 
+	console.log('TOKEN', token)
+
+	const api = axios.create({
+		baseURL: `https://groceries-shopping.herokuapp.com/recipe`,
+		headers: {
+			Authorization: `Bearer ${token}`
+		}
+	})
+
 	useEffect(() => {
 		setLoading(true)
-		axios
+		api
 			.get(url)
 			.then(response => {
 				setData(response.data)
@@ -19,7 +28,7 @@ export function useFetch(url) {
 			.finally(() => {
 				setLoading(false)
 			})
-	}, [url])
+	}, [api, url])
 
 	return { data, loading, error }
 }
