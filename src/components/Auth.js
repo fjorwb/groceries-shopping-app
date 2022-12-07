@@ -16,6 +16,7 @@ export function Auth() {
 	const state = useSelector(state => state)
 
 	const [data, setData] = useState(null)
+	console.log('data', data)
 
 	const { auth } = state
 
@@ -25,18 +26,21 @@ export function Auth() {
 
 	const user = auth.user
 	const isLogedIn = auth.isLogedIn
+	console.log('Log?', isLogedIn)
 
 	const [isOpenLogin, openLoginModal, closeLoginModal] = useModal(false)
 	const [isOpenRegister, openRegisterModal, closeRegisterModal] = useModal(false)
 
 	// let api = helpHttp()
 	// let url = 'http://localhost:5000/api/auth/'
-	let url
+	// let url
 
-	if (user === null) {
-		// url = `${url}login`
-		url = 'login'
-	}
+	// if (user === null) {
+	// 	// url = `${url}login`
+	// 	url = 'login'
+	// }
+
+	// isLogedIn ? (url = 'rgistr') : (url = 'login')
 
 	useEffect(() => {
 		if (data) {
@@ -46,9 +50,9 @@ export function Auth() {
 		}
 	}, [data, dispatch])
 
-	const register = data => {
-		dispatch({ register, payload: data })
-	}
+	// const register = data => {
+	// 	dispatch({ register, payload: data })
+	// }
 
 	return (
 		<div>
@@ -76,13 +80,13 @@ export function Auth() {
 				<Modal isOpen={isOpenLogin} closeModal={closeLoginModal}>
 					<div>
 						<h3 className="auth.title">Login</h3>
-						<LoginForm data={data} setData={setData} url={url} login={login} />
+						<LoginForm data={data} setData={setData} url={'login'} />
 					</div>
 				</Modal>
 				<Modal isOpen={isOpenRegister} closeModal={closeRegisterModal}>
 					<div>
 						<h3>Register</h3>
-						<RegisterForm data={data} register={register} />
+						<RegisterForm data={data} setData={setData} url={'register'} />
 					</div>
 				</Modal>
 			</div>

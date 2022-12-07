@@ -25,6 +25,8 @@ export const useForm = (initialForm, validateForm, url, data, setData) => {
 	const handleSubmit = e => {
 		e.preventDefault()
 		setErrors(validateForm(form))
+		console.log('FORM', form)
+		console.log('URL', url)
 
 		if (Object.keys(errors).length === 0) {
 			setLoading(true)

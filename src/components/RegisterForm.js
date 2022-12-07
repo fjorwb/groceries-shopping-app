@@ -5,15 +5,29 @@ import './Form.css'
 import Loader from './Loader'
 import Message from './Message'
 
-export const LoginForm = () => {
-	const initialForm = { email: '', password: '' }
+export const RegisterForm = ({ data, setData, url }) => {
+	const initialForm = {
+		firstname: '',
+		lastname: '',
+		username: '',
+		email: '',
+		password: '',
+		phone: '',
+		address: '',
+		address2: '',
+		city: '',
+		state: '',
+		zip_code: '',
+		country: '',
+		role: 'user'
+	}
 
 	const validationsForm = form => {
 		let errors = {}
 
 		let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/
 		let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/
-
+		let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/
 		let regexPhone = /^\d{7,14}$/
 
 		if (!form.firstname.trim()) {
@@ -21,16 +35,25 @@ export const LoginForm = () => {
 		} else if (!regexName.test(form.firstname)) {
 			errors.firstname = 'firstname field only accepts letters and spaces'
 		}
+
 		if (!form.lastname.trim()) {
 			errors.lastname = 'lastname field is required'
 		} else if (!regexName.test(form.lastname)) {
 			errors.lastname = 'lastname field only accepts letters and spaces'
 		}
-
+		if (!form.username.trim()) {
+			errors.username = 'username field is required'
+		} else if (!regexName.test(form.username)) {
+			errors.username = 'username field only accepts letters and spaces'
+		}
 		if (!form.email.trim()) {
 			errors.email = 'email field is required'
 		} else if (!regexEmail.test(form.email)) {
 			errors.email = 'email field is not valid'
+		}
+
+		if (!form.password.trim()) {
+			errors.password = 'password field is required'
 		}
 
 		if (!form.phone.trim()) {
@@ -41,12 +64,12 @@ export const LoginForm = () => {
 
 		if (!form.address.trim()) {
 			errors.address = 'address field is required'
-		} else if (!regexName.test(form.address)) {
-			errors.address = 'address field is not valid'
 		}
-		if (!regexName.test(form.address)) {
-			errors.address = 'additional address field is not valid'
-		}
+
+		// if (!regexName.test(form.address2)) {
+		// 	errors.address2 = 'additional address field is not valid'
+		// }
+
 		if (!form.city.trim()) {
 			errors.city = 'city field is required'
 		} else if (!regexName.test(form.city)) {
@@ -58,11 +81,10 @@ export const LoginForm = () => {
 		} else if (!regexName.test(form.state)) {
 			errors.state = 'state field is not valid'
 		}
-		if (!form.zip.trim()) {
-			errors.zip = 'zip field is required'
-		} else if (!regexName.test(form.zip)) {
-			errors.zip = 'zip field is not valid'
+		if (!form.zip_code.trim()) {
+			errors.zip_code = 'zip_code field is required'
 		}
+
 		if (!form.country.trim()) {
 			errors.country = 'country field is required'
 		} else if (!regexName.test(form.country)) {
@@ -74,7 +96,10 @@ export const LoginForm = () => {
 
 	const { form, errors, loading, response, handleChange, handleBlur, handleSubmit } = useForm(
 		initialForm,
-		validationsForm
+		validationsForm,
+		url,
+		data,
+		setData
 	)
 
 	return (
@@ -130,6 +155,18 @@ export const LoginForm = () => {
 							className="form-input"
 						/>
 						{errors.email && <p className="error-message">{errors.email}</p>}
+						<input
+							type="text"
+							name="password"
+							id="password"
+							placeholder="password"
+							onBlur={handleBlur}
+							onChange={handleChange}
+							value={form.password}
+							required
+							className="form-input"
+						/>
+						{errors.password && <p className="error-message">{errors.password}</p>}
 						<input
 							type="text"
 							name="phone"
@@ -226,4 +263,4 @@ export const LoginForm = () => {
 	)
 }
 
-export default LoginForm
+export default RegisterForm
