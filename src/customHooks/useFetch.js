@@ -8,8 +8,6 @@ export function useFetch(url, token) {
 
 	const Bearer = `Bearer ${token}`
 
-	console.log(error)
-
 	// const api = axios.create({
 	// 	baseURL: 'https://groceries-shopping.herokuapp.com',
 	// 	headers: {
@@ -34,7 +32,6 @@ export function useFetch(url, token) {
 				}
 			})
 			.then(response => {
-				console.log(response.data)
 				setFetchData(response.data)
 			})
 			.catch(error => {

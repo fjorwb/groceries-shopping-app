@@ -2,11 +2,11 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useFetch } from '../customHooks/useFetch'
 
-import Loader from '../components/Loader'
+import Loader from './Loader'
 
-import './RecipeCard.css'
+import './RecipesCard.css'
 
-function RecipeCard() {
+function RecipesCard() {
 	const token = useSelector(state => state.auth.user.accessToken)
 	const [recipeName, setRecipeName] = useState('')
 	const [cuisine, setCuisine] = useState('')
@@ -18,8 +18,6 @@ function RecipeCard() {
 
 	let url = ''
 
-	console.log(recipeName, cuisine, recipesBook)
-
 	const handleChange = e => {
 		const { name, value } = e.target
 		setForm({
@@ -30,7 +28,6 @@ function RecipeCard() {
 
 	const handleSearch = e => {
 		e.preventDefault()
-		console.log(recipeName, cuisine)
 		setRecipeName(form.recipeName)
 		setCuisine(form.cuisine)
 		setRecipesBook(form.recipeBook)
@@ -59,11 +56,7 @@ function RecipeCard() {
 		}
 	}
 
-	console.log(url)
-
 	const { fetchData, loading } = useFetch(url, token)
-
-	// console.log(fetchData.length)
 
 	return (
 		<div>
@@ -85,6 +78,7 @@ function RecipeCard() {
 						value={form.recipeName}
 						onChange={handleChange}
 						placeholder="ingredients or recipe name"
+						required
 					/>
 					<input
 						className="recipe-input"
@@ -127,4 +121,4 @@ function RecipeCard() {
 	)
 }
 
-export default RecipeCard
+export default RecipesCard
