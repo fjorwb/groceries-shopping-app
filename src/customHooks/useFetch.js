@@ -28,6 +28,7 @@ export function useFetch(url, token) {
 				headers: {
 					'content-type': 'application/json',
 					accept: 'application/json',
+					'Access-Control-Allow-Origin': '*',
 					Authorization: Bearer
 				}
 			})

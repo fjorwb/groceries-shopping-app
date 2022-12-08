@@ -49,9 +49,9 @@
 
 .recipe-btn {
 	width: 100px;
-	margin: 0.5rem;
+	/* margin: 0.5rem; */
 	padding: 0.5rem;
-	margin-top: 0.125rem;
+	margin-top: 0.5rem;
 	border-radius: 5px;
 	background-color: var(--clr-contrast);
 	color: var(--clr-font-contrast);
@@ -92,9 +92,30 @@
 }
 
 .recipe-servings {
-	font-size: 0.8rem;
+	/* font-size: 0.8rem; */
 	margin: 0.5rem 0;
 }
 .recipe-img {
 	width: 200px;
+}
+
+.recipe-ingredients {
+	text-align: left;
+}
+.recipe-other {
+	text-align: justify;
+	color: var(--clr-font);
+	font-family: var(--font-family);
+	line-height: 1.4rem;
+	background-color: aliceblue;
+	padding: 0.5rem;
+}
+
+.recipe-cont {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	grid-gap: 8rem;
+	align-items: top;
+	justify-content: left;
+	margin-bottom: 1rem;
 }

@@ -8,6 +8,7 @@ import { useModal } from '../customHooks/useModal'
 import Loader from './Loader'
 
 import './RecipesCard.css'
+import RecipeDetails from './RecipeDetails'
 
 function RecipesCard() {
 	const token = useSelector(state => state.auth.user.accessToken)
@@ -15,8 +16,7 @@ function RecipesCard() {
 	const [cuisine, setCuisine] = useState('')
 	const [form, setForm] = useState({})
 	const [recipesBook, setRecipesBook] = useState('own book')
-
-	let extid = ''
+	const [extid, setExtid] = useState('')
 
 	// setRecipeName(form.recipeName)
 	// setCuisine(form.cuisine)
@@ -45,8 +45,8 @@ function RecipesCard() {
 	}
 
 	const handleExtermalId = id => {
-		extid = id
-		console.log('recipe.id', extid.id)
+		setExtid(id)
+		openModal()
 	}
 
 	if (recipesBook === 'own book') {
@@ -68,8 +68,6 @@ function RecipesCard() {
 	}
 
 	const { fetchData, loading } = useFetch(url, token)
-	// console.log(Object.keys(fetchData))
-	// console.log(Object.values(fetchData)[0].id)
 
 	return (
 		<div>
@@ -136,7 +134,8 @@ function RecipesCard() {
 			</section>
 
 			<Modal isOpen={isOpen} closeModal={closeModal}>
-				<h1>Modal</h1>
+				{/* <h1>Modal</h1> */}
+				<RecipeDetails extid={extid} token={token} />
 			</Modal>
 		</div>
 	)
