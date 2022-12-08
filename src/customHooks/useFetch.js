@@ -2,25 +2,40 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export function useFetch(url, token) {
-	const [data, setData] = useState(null)
+	const [fetchData, setFetchData] = useState(null)
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(null)
 
-	console.log('TOKEN', token)
+	const Bearer = `Bearer ${token}`
 
-	const api = axios.create({
-		baseURL: `https://groceries-shopping.herokuapp.com/recipe`,
-		headers: {
-			Authorization: `Bearer ${token}`
-		}
-	})
+	console.log(error)
+
+	// const api = axios.create({
+	// 	baseURL: 'https://groceries-shopping.herokuapp.com',
+	// 	headers: {
+	// 		'content-type': 'application/json',
+	// 		accept: 'application/json',
+	// 		Autorization: Bearer
+	// 	}
+	// })
 
 	useEffect(() => {
+		if (!url) {
+			return
+		}
+
 		setLoading(true)
-		api
-			.get(url)
+		axios
+			.get(`https://groceries-shopping.herokuapp.com/${url}`, {
+				headers: {
+					'content-type': 'application/json',
+					accept: 'application/json',
+					Authorization: Bearer
+				}
+			})
 			.then(response => {
-				setData(response.data)
+				console.log(response.data)
+				setFetchData(response.data)
 			})
 			.catch(error => {
 				setError(error)
@@ -28,9 +43,9 @@ export function useFetch(url, token) {
 			.finally(() => {
 				setLoading(false)
 			})
-	}, [api, url])
+	}, [Bearer, url])
 
-	return { data, loading, error }
+	return { fetchData, loading, error }
 }
 
 export default useFetch

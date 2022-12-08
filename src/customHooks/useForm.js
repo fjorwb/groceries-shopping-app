@@ -9,6 +9,7 @@ export const useForm = (initialForm, validateForm, url, data, setData) => {
 	const [response, setResponse] = useState(null)
 
 	const handleChange = e => {
+		e.preventDefault()
 		const { name, value } = e.target
 		e.preventDefault()
 		setForm({

@@ -1,0 +1,100 @@
+.recipe-main {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.recipe-form {
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1rem;
+}
+
+.recipe-container {
+	width: 90%;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	grid-gap: 1rem;
+	padding: 1rem;
+	padding-bottom: 6rem;
+	border-top: 4px solid var(--clr-contrast);
+	border-bottom: 4px solid var(--clr-contrast);
+	margin-bottom: 1rem;
+}
+
+.recipe-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid var(--clr-contrast);
+	border-radius: 10px;
+	padding: 1rem;
+	/* text-align: left; */
+}
+
+.recipe-title {
+	font-size: 1rem;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+	background-color: white;
+}
+
+.recipe-btn {
+	width: 100px;
+	margin: 0.5rem;
+	padding: 0.5rem;
+	margin-top: 0.125rem;
+	border-radius: 5px;
+	background-color: var(--clr-contrast);
+	color: var(--clr-font-contrast);
+	border: none;
+	outline: none;
+}
+
+.recipe-input {
+	/* width: 90%; */
+	min-width: 300px;
+	text-align: left;
+	margin: 0.5rem;
+	padding: 0.5rem;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	font-family: var(--font-family);
+}
+
+.recipe-select {
+	/* width: 90%; */
+	min-width: 100px;
+	text-align: left;
+	margin: 0.5rem;
+	padding: 0.5rem;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	font-family: var(--font-family);
+}
+
+.recipe-message {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	font-size: 1.5rem;
+	margin: 0.5rem 0;
+	padding: 2rem;
+	background-color: red;
+	color: white;
+}
+
+.recipe-servings {
+	font-size: 0.8rem;
+	margin: 0.5rem 0;
+}
+.recipe-img {
+	width: 200px;
+}
