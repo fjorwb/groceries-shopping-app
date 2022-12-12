@@ -3,9 +3,18 @@ import { useFetch } from '../customHooks/useFetch'
 
 import Loader from './Loader'
 
-function RecipeDetails({ extid, token }) {
+function RecipeDetails({ extid, token, closeModal }) {
+	// let audio = new Audio('https://www.soundjay.com/button/sounds/button-3.mp3')
+
+	// function AudioClick() {
+	// 	audio.play()
+	// }
+
 	let id = extid.id
+	let idext = id
 	let url = `recipes/recipes/${id}`
+
+	let Bearer = `Bearer ${token}`
 
 	const { fetchData: data, loading } = useFetch(url, token)
 
@@ -25,12 +34,14 @@ function RecipeDetails({ extid, token }) {
 		image = recipes[4]
 	}
 
-	const addToBook = async () => {
-		await axios
-			.post(
+	// console.log(ingredients)
+
+	async function addRecipe() {
+		try {
+			const resp = await axios.post(
 				'https://groceries-shopping.herokuapp.com/recipes',
 				{
-					idext: id,
+					idext: idext,
 					title: title,
 					image: image,
 					instructions: instructions,
@@ -38,39 +49,57 @@ function RecipeDetails({ extid, token }) {
 				},
 				{
 					headers: {
-						'content-type': 'application/json',
+						// 'content-type': 'application/json',
 						accept: 'application/json',
-						Authorization: `Bearer ${token}`
+						Authorization: Bearer
 					}
 				}
 			)
-			.then(response => {})
-			.catch(error => {})
+			console.log(resp)
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
-		await axios
-			.post(
+	async function addIngredients() {
+		try {
+			const resp = await axios.post(
 				'https://groceries-shopping.herokuapp.com/ingredients',
 				{
-					idext: id,
-					ingredient: ingredients,
+					idext: idext,
+					ingredients: ingredients,
 					servings: servings,
 					instructions: instructions
 				},
 				{
 					headers: {
-						'content-type': 'application/json',
+						// 'content-type': 'application/json',
 						accept: 'application/json',
-						Authorization: `Bearer ${token}`
+						Authorization: Bearer
 					}
 				}
 			)
-			.then(response => {})
-			.catch(error => {})
+			console.log(resp)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	const addToBook = e => {
+		e.preventDefault()
+		// AudioClick()
+		Promise.all([addRecipe(), addIngredients()])
+			.then(() => {
+				closeModal()
+				console.log('done')
+			})
+			.catch(error => {
+				console.log(error)
+			})
 	}
 
 	return (
 		<div>
-			{/* <h1>Recipe Details</h1> */}
 			<div>
 				<div>
 					<h2 style={{ marginBottom: '1rem' }}>{title}</h2>
@@ -80,7 +109,6 @@ function RecipeDetails({ extid, token }) {
 							alt=""
 							style={{
 								width: '400px',
-								// border: '1px solid var(--clr-contrast)',
 								borderRadius: '15px'
 							}}
 						/>

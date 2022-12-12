@@ -8,15 +8,6 @@ export function useFetch(url, token) {
 
 	const Bearer = `Bearer ${token}`
 
-	// const api = axios.create({
-	// 	baseURL: 'https://groceries-shopping.herokuapp.com',
-	// 	headers: {
-	// 		'content-type': 'application/json',
-	// 		accept: 'application/json',
-	// 		Autorization: Bearer
-	// 	}
-	// })
-
 	useEffect(() => {
 		if (!url) {
 			return

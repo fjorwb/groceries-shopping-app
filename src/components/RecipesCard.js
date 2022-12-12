@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useFetch } from '../customHooks/useFetch'
@@ -15,16 +16,15 @@ function RecipesCard() {
 	const [recipeName, setRecipeName] = useState('')
 	const [cuisine, setCuisine] = useState('')
 	const [form, setForm] = useState({})
-	const [recipesBook, setRecipesBook] = useState('own book')
+	const [recipesBook, setRecipesBook] = useState('external book')
 	const [extid, setExtid] = useState('')
 
-	// setRecipeName(form.recipeName)
-	// setCuisine(form.cuisine)
 	const [isOpen, openModal, closeModal] = useModal(false)
 
 	let url = ''
 
 	const handleChange = e => {
+		e.preventDefault()
 		const { name, value } = e.target
 		setForm({
 			...form,
@@ -49,8 +49,39 @@ function RecipesCard() {
 		openModal()
 	}
 
+	async function deleteRecipe(id) {
+		console.log(id.id)
+		try {
+			const resp = await axios.delete(`https://groceries-shopping.herokuapp.com/recipes/${id.id}`, {
+				headers: {
+					'content-type': 'application/json',
+					accept: 'application/json',
+					Authorization: `Bearer ${token}`
+				}
+			})
+			const resp2 = await axios.get(
+				`https://groceries-shopping.herokuapp.com/ingredients/${id.id}`,
+				{
+					headers: {
+						'content-type': 'application/json',
+						accept: 'application/json',
+						Authorization: `Bearer ${token}`
+					}
+				}
+			)
+
+			console.log('RESP>>>>', resp)
+			console.log('RESP2>>>>', resp2)
+			if (resp.status === 200) {
+				setRecipesBook('external book')
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	if (recipesBook === 'own book') {
-		url = `recipes`
+		url = 'recipes'
 	} else if (recipesBook === 'external book') {
 		switch (recipeName && cuisine) {
 			case recipeName && cuisine:
@@ -63,7 +94,8 @@ function RecipesCard() {
 				url = `recipes/recipes?cuisine=${cuisine}`
 				break
 			default:
-				url = `recipes/recipes`
+				url = `recipes`
+				break
 		}
 	}
 
@@ -78,7 +110,7 @@ function RecipesCard() {
 						name="recipeBook"
 						id="recipeBook"
 						onChange={handleChange}
-						value={form.recipeBook}>
+						value={form.recipeBook || ''}>
 						<option value="own book">own book</option>
 						<option value="external book">external book</option>
 					</select>
@@ -89,7 +121,7 @@ function RecipesCard() {
 						value={form.recipeName}
 						onChange={handleChange}
 						placeholder="ingredients or recipe name"
-						required
+						// required
 					/>
 					<input
 						className="recipe-input"
@@ -122,9 +154,15 @@ function RecipesCard() {
 										<button
 											className="recipe-btn"
 											onClick={() => handleExtermalId({ id: recipe.id })}>
-											add to book
+											view recipe
+											{/* add to book */}
 										</button>
 									)}
+									{recipesBook === 'own book' ? (
+										<button className="recipe-btn" onClick={() => deleteRecipe({ id: recipe.id })}>
+											delete recipe
+										</button>
+									) : null}
 									<button className="recipe-btn">add to menu</button>
 								</article>
 							)
@@ -135,7 +173,7 @@ function RecipesCard() {
 
 			<Modal isOpen={isOpen} closeModal={closeModal}>
 				{/* <h1>Modal</h1> */}
-				<RecipeDetails extid={extid} token={token} />
+				<RecipeDetails extid={extid} token={token} closeModal={closeModal} />
 			</Modal>
 		</div>
 	)

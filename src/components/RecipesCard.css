@@ -57,6 +57,11 @@
 	color: var(--clr-font-contrast);
 	border: none;
 	outline: none;
+	cursor: pointer;
+}
+
+.recipe-btn:hover {
+	background-color: var(--clr-contrast-hover);
 }
 
 .recipe-input {
