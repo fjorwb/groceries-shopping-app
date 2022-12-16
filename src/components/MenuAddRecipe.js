@@ -1,21 +1,81 @@
 import axios from 'axios'
-import { useFetch } from '../customHooks/useFetch'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import getWeekNumber from '../helpers/calcWeekNumber'
+// import useFetch from '../customHooks/useFetch'
 
-function MenuAddRecipe({ extid, token, closeMenuModal }) {
-	const Bearer = `Bearer ${token}`
-	const id = extid.id
-	console.log(Bearer)
-	console.log(extid)
+import './MenuAddRecipe.css'
 
-	let url = `recipes/1`
+function MenuAddRecipe({ recipe, token, closeMenuModal }) {
+	const [servings, setServings] = useState(recipe?.recipe.servings || 0)
 
-	const { fetchData: data, loading } = useFetch(url, token)
+	const increment = () => setServings(servings + 1)
+	const decrement = () => setServings(servings - 1)
 
-	console.log(data)
+	const { register, handleSubmit } = useForm()
+
+	const onSubmit = data => {
+		const week = getWeekNumber(data.date)
+		data = {
+			...data,
+			recipe_id: recipe.recipe.id,
+			recipe_title: recipe.recipe.title,
+			servings: servings,
+			week
+		}
+		console.log(data)
+		closeMenuModal()
+		addToMenu(data)
+	}
+
+	const addToMenu = async data => {
+		console.log(data)
+		try {
+			const resp = await axios(`https://groceries-shopping.herokuapp.com/menus`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					accept: 'application/json',
+					Authorization: `Bearer ${token}`
+				},
+				data: JSON.stringify(data)
+			})
+			console.log(resp)
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
 	return (
 		<div>
-			<h1>Menu Modal</h1>
+			{/* <h1>Menu Modal</h1> */}
+			<h3>{recipe?.recipe.title}</h3>
+			<h4>servings</h4>
+
+			<div className="MenuAddRecipe-servings">
+				<button onClick={decrement} className="MenuAddRecipe-btn">
+					-
+				</button>
+				<p className="MenuAddRecipe-counter">{servings}</p>
+				<button onClick={increment} className="MenuAddRecipe-btn">
+					+
+				</button>
+			</div>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<article className="MenuAddRecipe-container">
+					<input type="date" {...register('date')} className="MenuAddRecipe-cal" />
+
+					<select defaultValue="lunch" {...register('meal')} className="MenuAddRecipe-select">
+						<option value="breakfast">breakfast</option>
+						<option value="lunch">lunch</option>
+						<option value="dinner">dinner</option>
+					</select>
+					<input type="submit" value="add to menu" className="MenuAddRecipe-submit-btn" />
+					{/* <button type="button" className="MenuAddRecipe-submit-btn" onClick={handleSubmit}>
+						add to menu
+					</button> */}
+				</article>
+			</form>
 		</div>
 	)
 }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useFetch } from '../customHooks/useFetch'
 
@@ -9,19 +9,29 @@ import { useModal } from '../customHooks/useModal'
 import Loader from './Loader'
 
 import './RecipesCard.css'
+
 import RecipeDetails from './RecipeDetails'
+import MenuAddRecipe from './MenuAddRecipe'
 
 function RecipesCard() {
-	const token = useSelector(state => state.auth.user.accessToken)
+	const auth = useSelector(state => state.auth.user)
+
+	const token = auth.accessToken
+	const user_id = auth.id
+
 	const [recipeName, setRecipeName] = useState('')
 	const [cuisine, setCuisine] = useState('')
 	const [form, setForm] = useState({})
 	const [recipesBook, setRecipesBook] = useState('external book')
-	const [extid, setExtid] = useState('')
+	const [extid, setExtid] = useState(null)
+	// const [extMenuId, setExtMenuId] = useState('')
+	const [recipe, setRecipe] = useState(null)
+	const [url, setUrl] = useState('recipes')
 
 	const [isOpen, openModal, closeModal] = useModal(false)
+	const [isOpenMenu, openMenuModal, closeMenuModal] = useModal(false)
 
-	let url = ''
+	// let url = ''
 
 	const handleChange = e => {
 		e.preventDefault()
@@ -49,6 +59,13 @@ function RecipesCard() {
 		openModal()
 	}
 
+	const handleAddToMenu = recipe => {
+		setRecipe(recipe)
+		// setExtMenuId(recipe.id)
+		// console.log(extMenuId)
+		openMenuModal()
+	}
+
 	async function deleteRecipe(id) {
 		console.log(id.id)
 		try {
@@ -56,15 +73,18 @@ function RecipesCard() {
 				headers: {
 					'content-type': 'application/json',
 					accept: 'application/json',
+					'Access-Control-Allow-Origin': '*',
 					Authorization: `Bearer ${token}`
 				}
 			})
-			const resp2 = await axios.get(
+
+			const resp2 = await axios.delete(
 				`https://groceries-shopping.herokuapp.com/ingredients/${id.id}`,
 				{
 					headers: {
 						'content-type': 'application/json',
 						accept: 'application/json',
+						'Access-Control-Allow-Origin': '*',
 						Authorization: `Bearer ${token}`
 					}
 				}
@@ -80,24 +100,31 @@ function RecipesCard() {
 		}
 	}
 
-	if (recipesBook === 'own book') {
-		url = 'recipes'
-	} else if (recipesBook === 'external book') {
-		switch (recipeName && cuisine) {
-			case recipeName && cuisine:
-				url = `recipes/recipes?recipe=${recipeName}&cuisine=${cuisine}`
-				break
-			case recipeName:
-				url = `recipes/recipes?recipe=${recipeName}`
-				break
-			case cuisine:
-				url = `recipes/recipes?cuisine=${cuisine}`
-				break
-			default:
-				url = `recipes`
-				break
+	useEffect(() => {
+		if (recipesBook === 'own book') {
+			// url = `recipes`
+			setUrl(`recipes`)
+		} else if (recipesBook === 'external book') {
+			switch (recipeName && cuisine) {
+				case recipeName && cuisine:
+					// url = `recipes/recipes?recipe=${recipeName}&cuisine=${cuisine}`
+					setUrl(`recipes/recipes?recipe=${recipeName}&cuisine=${cuisine}`)
+					break
+				case recipeName:
+					// url = `recipes/recipes?recipe=${recipeName}`
+					setUrl(`recipes/recipes?recipe=${recipeName}`)
+					break
+				case cuisine:
+					// url = `recipes/recipes?cuisine=${cuisine}`
+					setUrl(`recipes/recipes?cuisine=${cuisine}`)
+					break
+				default:
+					// url = `recipes/${user_id}`
+					setUrl(`recipes/${user_id}`)
+					break
+			}
 		}
-	}
+	}, [url, recipesBook, recipeName, cuisine, user_id])
 
 	const { fetchData, loading } = useFetch(url, token)
 
@@ -110,7 +137,7 @@ function RecipesCard() {
 						name="recipeBook"
 						id="recipeBook"
 						onChange={handleChange}
-						value={form.recipeBook || ''}>
+						value={form.recipeBook}>
 						<option value="own book">own book</option>
 						<option value="external book">external book</option>
 					</select>
@@ -136,7 +163,6 @@ function RecipesCard() {
 					</button>
 				</form>
 				<div>{loading && <Loader />}</div>
-
 				<div className="recipe-container">
 					{fetchData?.length === 0 ? (
 						<h1 className="recipe-message">no recipes found</h1>
@@ -163,7 +189,11 @@ function RecipesCard() {
 											delete recipe
 										</button>
 									) : null}
-									<button className="recipe-btn">add to menu</button>
+									{recipesBook === 'own book' ? (
+										<button className="recipe-btn" onClick={() => handleAddToMenu({ recipe })}>
+											add to menu
+										</button>
+									) : null}
 								</article>
 							)
 						})
@@ -171,9 +201,17 @@ function RecipesCard() {
 				</div>
 			</section>
 
-			<Modal isOpen={isOpen} closeModal={closeModal}>
+			{extid !== null ? (
+				<Modal isOpen={isOpen} closeModal={closeModal}>
+					{/* <h1>Modal</h1> */}
+
+					<RecipeDetails extid={extid} user_id={user_id} token={token} closeModal={closeModal} />
+				</Modal>
+			) : null}
+
+			<Modal isOpen={isOpenMenu} closeModal={closeMenuModal}>
 				{/* <h1>Modal</h1> */}
-				<RecipeDetails extid={extid} token={token} closeModal={closeModal} />
+				<MenuAddRecipe recipe={recipe} token={token} closeMenuModal={closeMenuModal} />
 			</Modal>
 		</div>
 	)

@@ -3,7 +3,7 @@ import { useFetch } from '../customHooks/useFetch'
 
 import Loader from './Loader'
 
-function RecipeDetails({ extid, token, closeModal }) {
+function RecipeDetails({ extid, user_id, token, closeModal }) {
 	// let audio = new Audio('https://www.soundjay.com/button/sounds/button-3.mp3')
 
 	// function AudioClick() {
@@ -12,6 +12,7 @@ function RecipeDetails({ extid, token, closeModal }) {
 
 	let id = extid.id
 	let idext = id
+
 	let url = `recipes/recipes/${id}`
 
 	let Bearer = `Bearer ${token}`
@@ -41,11 +42,12 @@ function RecipeDetails({ extid, token, closeModal }) {
 			const resp = await axios.post(
 				'https://groceries-shopping.herokuapp.com/recipes',
 				{
-					idext: idext,
-					title: title,
-					image: image,
-					instructions: instructions,
-					servings: servings
+					idext: idext || '',
+					title: title || '',
+					image: image || '',
+					instructions: instructions || '',
+					servings: servings || '',
+					user_id: user_id
 				},
 				{
 					headers: {
@@ -66,10 +68,10 @@ function RecipeDetails({ extid, token, closeModal }) {
 			const resp = await axios.post(
 				'https://groceries-shopping.herokuapp.com/ingredients',
 				{
-					idext: idext,
-					ingredients: ingredients,
-					servings: servings,
-					instructions: instructions
+					idext: idext || '',
+					ingredients: ingredients || '',
+					servings: servings || '',
+					instructions: instructions || ''
 				},
 				{
 					headers: {

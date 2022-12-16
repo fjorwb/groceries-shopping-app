@@ -11,7 +11,7 @@ export const useForm = (initialForm, validateForm, url, data, setData) => {
 	const handleChange = e => {
 		e.preventDefault()
 		const { name, value } = e.target
-		e.preventDefault()
+		// e.preventDefault()
 		setForm({
 			...form,
 			[name]: value
