@@ -120,6 +120,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 							value={form.firstname}
 							required
 							className="form-input"
+							autoComplete="on"
 						/>
 						{errors.firstname && <p className="error-message">{errors.firstname}</p>}
 						<input
@@ -132,6 +133,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 							value={form.lastname}
 							required
 							className="form-input"
+							autoComplete="on"
 						/>
 						{errors.lastname && <p className="error-message">{errors.lastname}</p>}
 						<input
@@ -144,6 +146,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 							value={form.username}
 							required
 							className="form-input"
+							autoComplete="on"
 						/>
 						{errors.username && <p className="error-message">{errors.username}</p>}
 						<input
@@ -156,6 +159,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 							value={form.email}
 							required
 							className="form-input"
+							autoComplete="on"
 						/>
 						{errors.email && <p className="error-message">{errors.email}</p>}
 						<input
@@ -168,6 +172,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 							value={form.password}
 							required
 							className="form-input"
+							autoComplete="off"
 						/>
 						{errors.password && <p className="error-message">{errors.password}</p>}
 						<input
@@ -180,6 +185,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 							value={form.phone}
 							required
 							className="form-input"
+							autoComplete="on"
 						/>
 						{errors.phone && <p className="error-message">{errors.phone}</p>}
 					</div>
@@ -194,6 +200,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 							value={form.address}
 							required
 							className="form-input"
+							autoComplete="on"
 						/>
 						{errors.address && <p className="error-message">{errors.address}</p>}
 						<input
@@ -205,6 +212,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 							onChange={handleChange}
 							value={form.address2}
 							className="form-input"
+							autoComplete="on"
 						/>
 						{errors.address2 && <p className="error-message">{errors.address2}</p>}
 						<input
@@ -217,6 +225,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 							value={form.city}
 							required
 							className="form-input"
+							autoComplete="on"
 						/>
 						{errors.city && <p className="error-message">{errors.city}</p>}
 						<input
@@ -229,6 +238,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 							value={form.state}
 							required
 							className="form-input"
+							autoComplete="on"
 						/>
 						{errors.state && <p className="error-message">{errors.state}</p>}
 						<input
@@ -241,6 +251,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 							value={form.zip_code}
 							required
 							className="form-input"
+							autoComplete="on"
 						/>
 						{errors.zip_code && <p className="error-message">{errors.zip_code}</p>}
 						<input
@@ -253,6 +264,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 							value={form.country}
 							required
 							className="form-input"
+							autoComplete="on"
 						/>
 						{errors.country && <p className="error-message">{errors.country}</p>}
 					</div>

@@ -19,7 +19,8 @@ export function useFetch(url, token) {
 				headers: {
 					'content-type': 'application/json',
 					accept: 'application/json',
-					Authorization: Bearer
+					Authorization: Bearer,
+					sameSite: 'Lax'
 				}
 			})
 			.then(response => {

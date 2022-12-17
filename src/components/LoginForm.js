@@ -53,6 +53,7 @@ export const LoginForm = ({ data, setData, url }) => {
 					value={form.email}
 					required
 					className="form-input"
+					autoComplete="on"
 				/>
 				{errors.email && <p className="error-message">{errors.email}</p>}
 				<input
@@ -65,6 +66,7 @@ export const LoginForm = ({ data, setData, url }) => {
 					value={form.password}
 					required
 					className="form-input"
+					autoComplete="on"
 				/>
 				{/* {errors.password && <p className="error-message">{errors.password}</p>} */}
 				<input type="submit" value="send" onSubmit={handleSubmit} className="form-btn" />

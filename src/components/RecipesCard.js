@@ -131,13 +131,14 @@ function RecipesCard() {
 	return (
 		<div>
 			<section>
-				<form className="recipe-form">
+				<form onSubmit={handleSearch} className="recipe-form">
 					<select
 						className="recipe-select"
 						name="recipeBook"
 						id="recipeBook"
 						onChange={handleChange}
-						value={form.recipeBook}>
+						value={form.recipeBook}
+						autoComplete="off">
 						<option value="own book">own book</option>
 						<option value="external book">external book</option>
 					</select>
@@ -148,6 +149,7 @@ function RecipesCard() {
 						value={form.recipeName}
 						onChange={handleChange}
 						placeholder="ingredients or recipe name"
+						autoComplete="on"
 						// required
 					/>
 					<input
@@ -157,6 +159,7 @@ function RecipesCard() {
 						value={form.cuisine}
 						onChange={handleChange}
 						placeholder="cuisine"
+						autoComplete="on"
 					/>
 					<button className="recipe-btn" onClick={handleSearch}>
 						search

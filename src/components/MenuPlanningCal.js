@@ -1,5 +1,5 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 import { Calendar, Views, dateFnsLocalizer } from 'react-big-calendar'
 // import { momentLocalizer } from 'react-big-calendar'
@@ -18,41 +18,6 @@ import axios from 'axios'
 
 const DnDCalendar = withDragAndDrop(Calendar)
 
-// const events = [
-// 	{
-// 		id: 1,
-// 		title: 'My event',
-// 		allDay: false,
-// 		start: new Date(2022, 11, 10, 8, 0, 0),
-// 		end: new Date(2022, 11, 10, 12, 0, 0)
-// 	},
-// 	{
-// 		id: 2,
-// 		title: 'My event 2',
-// 		allDay: false,
-// 		start: new Date(2022, 11, 7, 12, 0, 0),
-// 		end: new Date(2022, 11, 7, 16, 0)
-// 	},
-// 	{
-// 		id: 3,
-// 		title: 'My event 3',
-// 		allDay: false,
-// 		start: new Date(2022, 11, 8, 12),
-// 		end: new Date(2022, 11, 8, 16)
-// 	},
-// 	{
-// 		id: 4,
-// 		title: 'My event 4',
-// 		allDay: false,
-// 		start: new Date(2022, 11, 9, 16),
-// 		end: new Date(2022, 11, 9, 20),
-// 		resource: {
-// 			id: 1,
-// 			title: 'Room 1'
-// 		}
-// 	}
-// ]
-
 export default function MenuPlanning() {
 	const auth = useSelector(state => state.auth.user)
 
@@ -70,7 +35,6 @@ export default function MenuPlanning() {
 					Authorization: `Bearer ${token}`
 				}
 			})
-			// console.log(resp)
 			return resp.data
 		} catch (error) {
 			console.log(error)
@@ -176,7 +140,7 @@ export default function MenuPlanning() {
 	const defaultDate = useMemo(() => new Date(), [])
 
 	const locales = {
-		'en-US': require('date-fns/locale/en-US')
+		'en-US': import('date-fns/locale/en-US')
 	}
 
 	const localizer = dateFnsLocalizer({
@@ -196,6 +160,7 @@ export default function MenuPlanning() {
 				events={myEvents}
 				// startAccessor="start"
 				// endAccessor="end"
+				// views={{ month: true, week: true }}
 				views={{ month: true, week: true, day: true }}
 				style={{ height: 500, margin: '50px' }}
 				onEventDrop={moveEvent}
@@ -209,6 +174,6 @@ export default function MenuPlanning() {
 	)
 }
 
-MenuPlanning.propTypes = {
-	localizer: PropTypes.instanceOf(dateFnsLocalizer)
-}
+// MenuPlanning.propTypes = {
+// 	localizer: PropTypes.instanceOf(dateFnsLocalizer)
+// }
