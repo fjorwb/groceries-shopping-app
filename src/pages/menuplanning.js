@@ -1,17 +1,16 @@
-import React from 'react'
-import Footer from '../components/Footer'
+// import Footer from '../components/Footer'
 import Header from '../components/Header'
+import MenuPlanningCal from '../components/MenuPlanningCal'
 
-import styles from '../styles/styles.module.css'
+// import styles from '../styles/styles.module.css'
 
 export function MenuPlanning() {
 	return (
 		<div>
-			<h1>Menu Planning</h1>
 			<Header />
-			<div className={styles.maincontainer}></div>
+			<MenuPlanningCal />
 
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	)
 }
