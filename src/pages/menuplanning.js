@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import React, { lazy, Suspense } from 'react'
 
 // import Footer from '../components/Footer'
 const Header = lazy(() => import('../components/Header'))

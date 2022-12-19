@@ -1,16 +1,12 @@
-import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
-// import PropTypes from 'prop-types'
+import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Calendar, Views, dateFnsLocalizer } from 'react-big-calendar'
-// import { momentLocalizer } from 'react-big-calendar'
-// import moment from 'moment'
 
 import { format } from 'date-fns'
 import { parse } from 'date-fns'
 import { startOfWeek } from 'date-fns'
 import { getDay } from 'date-fns'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
-// import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import { useSelector } from 'react-redux'
@@ -158,22 +154,14 @@ export default function MenuPlanning() {
 				defaultView={Views.WEEK}
 				localizer={localizer}
 				events={myEvents}
-				// startAccessor="start"
-				// endAccessor="end"
 				views={{ month: true, week: true }}
-				// views={{ month: true, week: true, day: true }}
 				style={{ height: 500, margin: '50px' }}
 				onEventDrop={moveEvent}
 				max={new Date(2022, 11, 10, 20, 0, 0)}
 				min={new Date(2020, 11, 10, 8, 0, 0)}
 				timeslots={3}
 				step={80}
-				// draggableAccessor={event => true}
 			/>
 		</>
 	)
 }
-
-// MenuPlanning.propTypes = {
-// 	localizer: PropTypes.instanceOf(dateFnsLocalizer)
-// }

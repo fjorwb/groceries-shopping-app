@@ -2,6 +2,8 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 
+// import styles from '../styles/styles.module.css'
+
 import './stylescarousel.css'
 
 import images from '../imagesmock'

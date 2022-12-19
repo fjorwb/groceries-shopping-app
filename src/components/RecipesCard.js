@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useEffect, useState, lazy } from 'react'
+import React, { useEffect, useState, lazy } from 'react'
 import { useSelector } from 'react-redux'
 import { useFetch } from '../customHooks/useFetch'
 
@@ -9,11 +9,12 @@ import { useModal } from '../customHooks/useModal'
 import Loader from './Loader'
 
 import './RecipesCard.css'
+import { Suspense } from 'react'
 
-// import RecipeDetails from './RecipeDetails'
+import RecipeDetails from './RecipeDetails'
 // import MenuAddRecipe from './MenuAddRecipe'
 
-const RecipeDetails = lazy(() => import('./RecipeDetails'))
+// const RecipeDetails = lazy(() => import('./RecipeDetails'))
 const MenuAddRecipe = lazy(() => import('./MenuAddRecipe'))
 
 function RecipesCard() {
@@ -141,7 +142,8 @@ function RecipesCard() {
 						onChange={handleChange}
 						value={form.recipesBook}
 						autoComplete="on"
-						defaultValue={'own book'}>
+						defaultValue={'own book'}
+					>
 						<option value="own book">own book</option>
 						<option value="external book">external book</option>
 					</select>
@@ -185,7 +187,8 @@ function RecipesCard() {
 									{recipesBook === 'own book' ? null : (
 										<button
 											className="recipe-btn"
-											onClick={() => handleExtermalId({ id: recipe.id })}>
+											onClick={() => handleExtermalId({ id: recipe.id })}
+										>
 											view recipe
 											{/* add to book */}
 										</button>
@@ -210,20 +213,21 @@ function RecipesCard() {
 			{extid !== null ? (
 				<Modal isOpen={isOpen} closeModal={closeModal}>
 					{/* <h1>Modal</h1> */}
-
 					<RecipeDetails extid={extid} user_id={user_id} token={token} closeModal={closeModal} />
 				</Modal>
 			) : null}
 
 			<Modal isOpen={isOpenMenu} closeModal={closeMenuModal}>
 				{/* <h1>Modal</h1> */}
-				<MenuAddRecipe
-					recipe={recipe}
-					// serves={recipe.recipe.servings}
-					user_id={user_id}
-					token={token}
-					closeMenuModal={closeMenuModal}
-				/>
+				<Suspense>
+					<MenuAddRecipe
+						recipe={recipe}
+						// serves={recipe.recipe.servings}
+						user_id={user_id}
+						token={token}
+						closeMenuModal={closeMenuModal}
+					/>
+				</Suspense>
 			</Modal>
 		</div>
 	)
