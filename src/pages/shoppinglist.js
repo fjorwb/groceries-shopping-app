@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+import { lazy, Suspense } from 'react'
 
 import styles from '../styles/styles.module.css'
 
@@ -9,10 +9,12 @@ export function ShoppingList() {
 	return (
 		<div>
 			<h1>Shopping List</h1>
-			<Header />
-			<div className={styles.maincontainer}></div>
+			<Suspense>
+				<Header />
+				<div className={styles.maincontainer}></div>
 
-			<Footer />
+				<Footer />
+			</Suspense>
 		</div>
 	)
 }

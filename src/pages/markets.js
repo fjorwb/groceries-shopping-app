@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+import { lazy, Suspense } from 'react'
 
 import styles from '../styles/styles.module.css'
 
@@ -8,11 +8,13 @@ const Footer = lazy(() => import('../components/Footer'))
 export function Markets() {
 	return (
 		<div>
-			<h1>Markets</h1>
-			<Header />
-			<div className={styles.maincontainer}></div>
+			<Suspense>
+				<h1>Markets</h1>
+				<Header />
+				<div className={styles.maincontainer}></div>
 
-			<Footer />
+				<Footer />
+			</Suspense>
 		</div>
 	)
 }

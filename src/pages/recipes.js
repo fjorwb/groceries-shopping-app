@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+import { lazy, Suspense } from 'react'
 
 import '../components/RecipesCard.css'
 
@@ -8,9 +8,11 @@ const RecipesCard = lazy(() => import('../components/RecipesCard'))
 export function Recipes() {
 	return (
 		<div>
-			<Header />
-			<RecipesCard />
-			{/* <Footer /> */}
+			<Suspense>
+				<Header />
+				<RecipesCard />
+				{/* <Footer /> */}
+			</Suspense>
 		</div>
 	)
 }

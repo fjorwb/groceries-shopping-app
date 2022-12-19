@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+import { Suspense, lazy } from 'react'
 
 import styles from '../styles/styles.module.css'
 
@@ -9,9 +9,11 @@ const SlideShow = lazy(() => import('../components/SlideShow'))
 export function Home() {
 	return (
 		<div className={styles.container}>
-			<Header />
-			<SlideShow />
-			<Footer />
+			<Suspense>
+				<Header />
+				<SlideShow />
+				<Footer />
+			</Suspense>
 		</div>
 	)
 }
