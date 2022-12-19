@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { login, logout } from '../actions/authActions'
 
+import useModal from '../customHooks/useModal'
+
 // import { helpHttp } from '../helpers/helpHttp'
-
-import { Modal } from './Modal'
-import { useModal } from '../customHooks/useModal'
-
-import LoginForm from './LoginForm'
-import RegisterForm from './RegisterForm'
-
 import './auth.css'
+
+const Modal = lazy(() => import('./Modal'))
+
+const LoginForm = lazy(() => import('./LoginForm'))
+const RegisterForm = lazy(() => import('./RegisterForm'))
 
 export function Auth() {
 	const state = useSelector(state => state)

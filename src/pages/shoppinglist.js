@@ -1,7 +1,9 @@
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import { lazy } from 'react'
 
 import styles from '../styles/styles.module.css'
+
+const Header = lazy(() => import('../components/Header'))
+const Footer = lazy(() => import('../components/Footer'))
 
 export function ShoppingList() {
 	return (

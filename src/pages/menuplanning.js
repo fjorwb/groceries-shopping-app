@@ -1,8 +1,8 @@
-// import Footer from '../components/Footer'
-import Header from '../components/Header'
-import MenuPlanningCal from '../components/MenuPlanningCal'
+import { lazy } from 'react'
 
-// import styles from '../styles/styles.module.css'
+// import Footer from '../components/Footer'
+const Header = lazy(() => import('../components/Header'))
+const MenuPlanningCal = lazy(() => import('../components/MenuPlanningCal'))
 
 export function MenuPlanning() {
 	return (

@@ -1,13 +1,19 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import getWeekNumber from '../helpers/calcWeekNumber'
 // import useFetch from '../customHooks/useFetch'
 
 import './MenuAddRecipe.css'
 
-function MenuAddRecipe({ recipe, token, closeMenuModal }) {
-	const [servings, setServings] = useState(recipe?.recipe.servings || 0)
+function MenuAddRecipe({ recipe, user_id, token, closeMenuModal }) {
+	const serves = recipe && recipe.recipe.servings
+
+	const [servings, setServings] = useState(serves)
+
+	useEffect(() => {
+		setServings(serves)
+	}, [serves])
 
 	const increment = () => setServings(servings + 1)
 	const decrement = () => setServings(servings - 1)
@@ -21,7 +27,8 @@ function MenuAddRecipe({ recipe, token, closeMenuModal }) {
 			recipe_id: recipe.recipe.id,
 			recipe_title: recipe.recipe.title,
 			servings: servings,
-			week
+			week,
+			user_id
 		}
 		console.log(data)
 		closeMenuModal()

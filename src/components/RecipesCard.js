@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, lazy } from 'react'
 import { useSelector } from 'react-redux'
 import { useFetch } from '../customHooks/useFetch'
 
@@ -10,8 +10,11 @@ import Loader from './Loader'
 
 import './RecipesCard.css'
 
-import RecipeDetails from './RecipeDetails'
-import MenuAddRecipe from './MenuAddRecipe'
+// import RecipeDetails from './RecipeDetails'
+// import MenuAddRecipe from './MenuAddRecipe'
+
+const RecipeDetails = lazy(() => import('./RecipeDetails'))
+const MenuAddRecipe = lazy(() => import('./MenuAddRecipe'))
 
 function RecipesCard() {
 	const auth = useSelector(state => state.auth.user)
@@ -21,11 +24,10 @@ function RecipesCard() {
 
 	const [recipeName, setRecipeName] = useState('')
 	const [cuisine, setCuisine] = useState('')
-	const [form, setForm] = useState({})
+	const [form, setForm] = useState('')
 	const [recipesBook, setRecipesBook] = useState('external book')
 	const [extid, setExtid] = useState(null)
-	// const [extMenuId, setExtMenuId] = useState('')
-	const [recipe, setRecipe] = useState(null)
+	const [recipe, setRecipe] = useState()
 	const [url, setUrl] = useState('recipes')
 
 	const [isOpen, openModal, closeModal] = useModal(false)
@@ -46,11 +48,11 @@ function RecipesCard() {
 		e.preventDefault()
 		setRecipeName(form.recipeName)
 		setCuisine(form.cuisine)
-		setRecipesBook(form.recipeBook)
+		setRecipesBook(form.recipesBook)
 		setForm({
 			recipeName: '',
 			cuisine: '',
-			recipeBook: 'own book'
+			recipesBook: 'own book'
 		})
 	}
 
@@ -134,11 +136,12 @@ function RecipesCard() {
 				<form onSubmit={handleSearch} className="recipe-form">
 					<select
 						className="recipe-select"
-						name="recipeBook"
-						id="recipeBook"
+						name="recipesBook"
+						id="recipesBook"
 						onChange={handleChange}
-						value={form.recipeBook}
-						autoComplete="off">
+						value={form.recipesBook}
+						autoComplete="on"
+						defaultValue={'own book'}>
 						<option value="own book">own book</option>
 						<option value="external book">external book</option>
 					</select>
@@ -214,7 +217,13 @@ function RecipesCard() {
 
 			<Modal isOpen={isOpenMenu} closeModal={closeMenuModal}>
 				{/* <h1>Modal</h1> */}
-				<MenuAddRecipe recipe={recipe} token={token} closeMenuModal={closeMenuModal} />
+				<MenuAddRecipe
+					recipe={recipe}
+					// serves={recipe.recipe.servings}
+					user_id={user_id}
+					token={token}
+					closeMenuModal={closeMenuModal}
+				/>
 			</Modal>
 		</div>
 	)

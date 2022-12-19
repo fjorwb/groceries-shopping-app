@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 // import PropTypes from 'prop-types'
 
 import { Calendar, Views, dateFnsLocalizer } from 'react-big-calendar'
@@ -23,6 +23,18 @@ export default function MenuPlanning() {
 
 	const token = auth.accessToken
 	// const user_id = auth.id
+
+	const locales = {
+		'en-US': import('date-fns/locale/en-US')
+	}
+
+	const localizer = dateFnsLocalizer({
+		format,
+		parse,
+		startOfWeek,
+		getDay,
+		locales
+	})
 
 	const [myEvents, setMyEvents] = useState([])
 
@@ -139,18 +151,6 @@ export default function MenuPlanning() {
 
 	const defaultDate = useMemo(() => new Date(), [])
 
-	const locales = {
-		'en-US': import('date-fns/locale/en-US')
-	}
-
-	const localizer = dateFnsLocalizer({
-		format,
-		parse,
-		startOfWeek,
-		getDay,
-		locales
-	})
-
 	return (
 		<>
 			<DnDCalendar
@@ -160,15 +160,15 @@ export default function MenuPlanning() {
 				events={myEvents}
 				// startAccessor="start"
 				// endAccessor="end"
-				// views={{ month: true, week: true }}
-				views={{ month: true, week: true, day: true }}
+				views={{ month: true, week: true }}
+				// views={{ month: true, week: true, day: true }}
 				style={{ height: 500, margin: '50px' }}
 				onEventDrop={moveEvent}
 				max={new Date(2022, 11, 10, 20, 0, 0)}
 				min={new Date(2020, 11, 10, 8, 0, 0)}
 				timeslots={3}
 				step={80}
-				draggableAccessor={event => true}
+				// draggableAccessor={event => true}
 			/>
 		</>
 	)

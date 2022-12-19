@@ -1,4 +1,3 @@
-import React from 'react'
 import { useForm } from '../customHooks/useForm'
 
 import './Form.css'

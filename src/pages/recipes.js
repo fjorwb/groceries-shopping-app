@@ -1,10 +1,9 @@
-// import React from 'react'
-// import Footer from '../components/Footer'
-import Header from '../components/Header'
-import RecipesCard from '../components/RecipesCard'
+import { lazy } from 'react'
 
-// import styles from '../styles.module.css'
 import '../components/RecipesCard.css'
+
+const Header = lazy(() => import('../components/Header'))
+const RecipesCard = lazy(() => import('../components/RecipesCard'))
 
 export function Recipes() {
 	return (
