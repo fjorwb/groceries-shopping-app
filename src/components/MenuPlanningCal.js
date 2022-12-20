@@ -10,7 +10,10 @@ import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import { useSelector } from 'react-redux'
-import axios from 'axios'
+
+import { getMenus, editMenuItem, updateMenu } from '../services'
+
+import './MenuPlanningCal.css'
 
 const DnDCalendar = withDragAndDrop(Calendar)
 
@@ -34,23 +37,8 @@ export default function MenuPlanning() {
 
 	const [myEvents, setMyEvents] = useState([])
 
-	const getMenus = async () => {
-		try {
-			const resp = await axios('https://groceries-shopping.herokuapp.com/menus', {
-				headers: {
-					'Content-Type': 'application/json',
-					accept: 'application/json',
-					Authorization: `Bearer ${token}`
-				}
-			})
-			return resp.data
-		} catch (error) {
-			console.log(error)
-		}
-	}
-
 	useEffect(() => {
-		getMenus().then(data => {
+		getMenus(token).then(data => {
 			let startDate, endDate, day, month, year, date
 
 			const events = data.map(menu => {
@@ -83,6 +71,8 @@ export default function MenuPlanning() {
 
 				return {
 					id: menu.id,
+					recipe_id: menu.recipe_id,
+					meal: menu.meal,
 					title: `${menu.recipe_title}\nservings: ${menu.servings}`,
 					allDay: false,
 					start,
@@ -92,39 +82,6 @@ export default function MenuPlanning() {
 			setMyEvents(events)
 		})
 	})
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	const updateMenu = async (id, date, meal) => {
-		if (date.getHours() < 12) {
-			meal = 'breakfast'
-		}
-		if (date.getHours() >= 12 && date.getHours() < 16) {
-			meal = 'lunch'
-		}
-		if (date.getHours() >= 16) {
-			meal = 'dinner'
-		}
-
-		try {
-			const resp = await axios.put(
-				`https://groceries-shopping.herokuapp.com/menus/${id}`,
-				{
-					date,
-					meal
-				},
-				{
-					headers: {
-						'Content-Type': 'application/json',
-						accept: 'application/json',
-						Authorization: `Bearer ${token}`
-					}
-				}
-			)
-			console.log(resp)
-		} catch (error) {
-			console.log(error)
-		}
-	}
 
 	const moveEvent = useCallback(
 		({ event, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
@@ -139,10 +96,9 @@ export default function MenuPlanning() {
 				return [...filtered, { ...existing, start, end, allDay }]
 			})
 
-			updateMenu(event.id, start, event.meal)
+			updateMenu(event.id, start, event.meal, token)
 		},
-
-		[updateMenu]
+		[token]
 	)
 
 	const defaultDate = useMemo(() => new Date(), [])
@@ -155,12 +111,15 @@ export default function MenuPlanning() {
 				localizer={localizer}
 				events={myEvents}
 				views={{ month: true, week: true }}
-				style={{ height: 500, margin: '50px' }}
+				style={{ height: 400, margin: '50px' }}
 				onEventDrop={moveEvent}
 				max={new Date(2022, 11, 10, 20, 0, 0)}
 				min={new Date(2020, 11, 10, 8, 0, 0)}
 				timeslots={3}
 				step={80}
+				onSelectEvent={event =>
+					editMenuItem({ id: event.id, recipe_id: event.recipe_id, meal: event.meal })
+				}
 			/>
 		</>
 	)

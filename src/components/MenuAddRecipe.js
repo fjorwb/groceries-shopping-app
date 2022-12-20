@@ -30,13 +30,11 @@ function MenuAddRecipe({ recipe, user_id, token, closeMenuModal }) {
 			week,
 			user_id
 		}
-		console.log(data)
 		closeMenuModal()
 		addToMenu(data)
 	}
 
 	const addToMenu = async data => {
-		console.log(data)
 		try {
 			const resp = await axios(`https://groceries-shopping.herokuapp.com/menus`, {
 				method: 'POST',

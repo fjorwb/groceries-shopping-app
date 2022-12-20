@@ -1,0 +1,44 @@
+.rbc-calendar {
+	background: var(--clr-background);
+	color: var(--clr-font);
+}
+
+.rbc-current-time-indicator {
+	display: none;
+}
+.rbc-row {
+	display: flex;
+	min-height: fit-content;
+	line-height: 1rem;
+	z-index: 10;
+}
+
+.rbc-header {
+	display: flex;
+	justify-content: center;
+	background: var(--clr-contrast);
+	color: var(--clr-font-contrast);
+	min-height: 2rem;
+}
+
+.rbc-label {
+	display: none;
+}
+
+.rbc-event {
+	background-color: var(--clr-contrast);
+}
+
+.rbc-selected-cell {
+	background-color: var(--clr-font-contrast);
+	justify-content: center;
+	align-items: center;
+}
+
+.rbc-event-label {
+	display: none;
+}
+
+.rbc-event-content {
+	font-size: 12px;
+}
