@@ -1,8 +1,9 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import getWeekNumber from '../helpers/calcWeekNumber'
 // import useFetch from '../customHooks/useFetch'
+
+import { addToMenu } from '../services'
 
 import './MenuAddRecipe.css'
 
@@ -21,6 +22,7 @@ function MenuAddRecipe({ recipe, user_id, token, closeMenuModal }) {
 	const { register, handleSubmit } = useForm()
 
 	const onSubmit = data => {
+		console.log(data)
 		const week = getWeekNumber(data.date)
 		data = {
 			...data,
@@ -31,25 +33,25 @@ function MenuAddRecipe({ recipe, user_id, token, closeMenuModal }) {
 			user_id
 		}
 		closeMenuModal()
-		addToMenu(data)
+		addToMenu(data, token)
 	}
 
-	const addToMenu = async data => {
-		try {
-			const resp = await axios(`https://groceries-shopping.herokuapp.com/menus`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					accept: 'application/json',
-					Authorization: `Bearer ${token}`
-				},
-				data: JSON.stringify(data)
-			})
-			console.log(resp)
-		} catch (error) {
-			console.log(error)
-		}
-	}
+	// const addToMenu = async data => {
+	// 	try {
+	// 		const resp = await axios(`https://groceries-shopping.herokuapp.com/menus`, {
+	// 			method: 'POST',
+	// 			headers: {
+	// 				'Content-Type': 'application/json',
+	// 				accept: 'application/json',
+	// 				Authorization: `Bearer ${token}`
+	// 			},
+	// 			data: JSON.stringify(data)
+	// 		})
+	// 		console.log(resp)
+	// 	} catch (error) {
+	// 		console.log(error)
+	// 	}
+	// }
 
 	return (
 		<div>
@@ -67,6 +69,7 @@ function MenuAddRecipe({ recipe, user_id, token, closeMenuModal }) {
 				</button>
 			</div>
 			<form onSubmit={handleSubmit(onSubmit)}>
+				{/* <form onSubmit={handleSubmit(onSubmit)}> */}
 				<article className="MenuAddRecipe-container">
 					<input type="date" {...register('date')} className="MenuAddRecipe-cal" />
 

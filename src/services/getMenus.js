@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export async function getMenus(token) {
+export function getMenus(token) {
 	try {
-		const resp = await axios('https://groceries-shopping.herokuapp.com/menus', {
+		const resp = axios('https://groceries-shopping.herokuapp.com/menus', {
 			headers: {
 				'Content-Type': 'application/json',
 				accept: 'application/json',

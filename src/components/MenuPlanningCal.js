@@ -10,10 +10,15 @@ import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import { useSelector } from 'react-redux'
+// import axios from 'axios'
 
-import { getMenus, editMenuItem, updateMenu } from '../services'
+// import editMenuItem from '../services/editMenuItem'
+// import getMenus from '../services/getMenus'
+
+import { editMenuItem, updateMenu } from '../services'
 
 import './MenuPlanningCal.css'
+import axios from 'axios'
 
 const DnDCalendar = withDragAndDrop(Calendar)
 
@@ -36,6 +41,21 @@ export default function MenuPlanning() {
 	})
 
 	const [myEvents, setMyEvents] = useState([])
+
+	const getMenus = async () => {
+		try {
+			const resp = await axios('https://groceries-shopping.herokuapp.com/menus', {
+				headers: {
+					'Content-Type': 'application/json',
+					accept: 'application/json',
+					Authorization: `Bearer ${token}`
+				}
+			})
+			return resp.data
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
 	useEffect(() => {
 		getMenus(token).then(data => {
@@ -82,6 +102,39 @@ export default function MenuPlanning() {
 			setMyEvents(events)
 		})
 	})
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// const updateMenu = async (id, date, meal) => {
+	// 	if (date.getHours() < 12) {
+	// 		meal = 'breakfast'
+	// 	}
+	// 	if (date.getHours() >= 12 && date.getHours() < 16) {
+	// 		meal = 'lunch'
+	// 	}
+	// 	if (date.getHours() >= 16) {
+	// 		meal = 'dinner'
+	// 	}
+
+	// 	try {
+	// 		const resp = await axios.put(
+	// 			`https://groceries-shopping.herokuapp.com/menus/${id}`,
+	// 			{
+	// 				date,
+	// 				meal
+	// 			},
+	// 			{
+	// 				headers: {
+	// 					'Content-Type': 'application/json',
+	// 					accept: 'application/json',
+	// 					Authorization: `Bearer ${token}`
+	// 				}
+	// 			}
+	// 		)
+	// 		console.log(resp)
+	// 	} catch (error) {
+	// 		console.log(error)
+	// 	}
+	// }
 
 	const moveEvent = useCallback(
 		({ event, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
