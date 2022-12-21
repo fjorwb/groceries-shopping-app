@@ -103,39 +103,6 @@ export default function MenuPlanning() {
 		})
 	})
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// const updateMenu = async (id, date, meal) => {
-	// 	if (date.getHours() < 12) {
-	// 		meal = 'breakfast'
-	// 	}
-	// 	if (date.getHours() >= 12 && date.getHours() < 16) {
-	// 		meal = 'lunch'
-	// 	}
-	// 	if (date.getHours() >= 16) {
-	// 		meal = 'dinner'
-	// 	}
-
-	// 	try {
-	// 		const resp = await axios.put(
-	// 			`https://groceries-shopping.herokuapp.com/menus/${id}`,
-	// 			{
-	// 				date,
-	// 				meal
-	// 			},
-	// 			{
-	// 				headers: {
-	// 					'Content-Type': 'application/json',
-	// 					accept: 'application/json',
-	// 					Authorization: `Bearer ${token}`
-	// 				}
-	// 			}
-	// 		)
-	// 		console.log(resp)
-	// 	} catch (error) {
-	// 		console.log(error)
-	// 	}
-	// }
-
 	const moveEvent = useCallback(
 		({ event, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
 			const { allDay } = event
