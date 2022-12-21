@@ -36,23 +36,6 @@ function MenuAddRecipe({ recipe, user_id, token, closeMenuModal }) {
 		addToMenu(data, token)
 	}
 
-	// const addToMenu = async data => {
-	// 	try {
-	// 		const resp = await axios(`https://groceries-shopping.herokuapp.com/menus`, {
-	// 			method: 'POST',
-	// 			headers: {
-	// 				'Content-Type': 'application/json',
-	// 				accept: 'application/json',
-	// 				Authorization: `Bearer ${token}`
-	// 			},
-	// 			data: JSON.stringify(data)
-	// 		})
-	// 		console.log(resp)
-	// 	} catch (error) {
-	// 		console.log(error)
-	// 	}
-	// }
-
 	return (
 		<div>
 			{/* <h1>Menu Modal</h1> */}

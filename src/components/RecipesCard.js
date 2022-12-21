@@ -1,4 +1,4 @@
-import axios from 'axios'
+// import axios from 'axios'
 import React, { useEffect, useState, lazy } from 'react'
 import { useSelector } from 'react-redux'
 import { useFetch } from '../customHooks/useFetch'
@@ -12,9 +12,9 @@ import './RecipesCard.css'
 import { Suspense } from 'react'
 
 import RecipeDetails from './RecipeDetails'
+import deleteRecipe from '../services/deleteRecipe'
 // import MenuAddRecipe from './MenuAddRecipe'
 
-// const RecipeDetails = lazy(() => import('./RecipeDetails'))
 const MenuAddRecipe = lazy(() => import('./MenuAddRecipe'))
 
 function RecipesCard() {
@@ -33,8 +33,6 @@ function RecipesCard() {
 
 	const [isOpen, openModal, closeModal] = useModal(false)
 	const [isOpenMenu, openMenuModal, closeMenuModal] = useModal(false)
-
-	// let url = ''
 
 	const handleChange = e => {
 		e.preventDefault()
@@ -67,40 +65,6 @@ function RecipesCard() {
 		// setExtMenuId(recipe.id)
 		// console.log(extMenuId)
 		openMenuModal()
-	}
-
-	async function deleteRecipe(id) {
-		console.log(id.id)
-		try {
-			const resp = await axios.delete(`https://groceries-shopping.herokuapp.com/recipes/${id.id}`, {
-				headers: {
-					'content-type': 'application/json',
-					accept: 'application/json',
-					'Access-Control-Allow-Origin': '*',
-					Authorization: `Bearer ${token}`
-				}
-			})
-
-			const resp2 = await axios.delete(
-				`https://groceries-shopping.herokuapp.com/ingredients/${id.id}`,
-				{
-					headers: {
-						'content-type': 'application/json',
-						accept: 'application/json',
-						'Access-Control-Allow-Origin': '*',
-						Authorization: `Bearer ${token}`
-					}
-				}
-			)
-
-			console.log('RESP>>>>', resp)
-			console.log('RESP2>>>>', resp2)
-			if (resp.status === 200) {
-				setRecipesBook('external book')
-			}
-		} catch (error) {
-			console.log(error)
-		}
 	}
 
 	useEffect(() => {
@@ -141,7 +105,7 @@ function RecipesCard() {
 						id="recipesBook"
 						onChange={handleChange}
 						value={form.recipesBook}
-						autoComplete="on"
+						autoComplete="off"
 						defaultValue={'own book'}
 					>
 						<option value="own book">own book</option>
@@ -194,7 +158,10 @@ function RecipesCard() {
 										</button>
 									)}
 									{recipesBook === 'own book' ? (
-										<button className="recipe-btn" onClick={() => deleteRecipe({ id: recipe.id })}>
+										<button
+											className="recipe-btn"
+											onClick={() => deleteRecipe({ id: recipe.id, token: token, setRecipesBook })}
+										>
 											delete recipe
 										</button>
 									) : null}
