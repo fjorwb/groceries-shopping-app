@@ -19,10 +19,12 @@ import { editMenuItem, updateMenu } from '../services'
 
 import './MenuPlanningCal.css'
 import axios from 'axios'
+import { memo } from 'react'
 
 const DnDCalendar = withDragAndDrop(Calendar)
 
-export default function MenuPlanning() {
+export const MenuPlanningCal = memo(() => {
+	// export default function MenuPlanning() {
 	const auth = useSelector(state => state.auth.user)
 
 	const token = auth.accessToken
@@ -41,8 +43,9 @@ export default function MenuPlanning() {
 	})
 
 	const [myEvents, setMyEvents] = useState([])
+	const [dataMenu, setDataMenu] = useState({})
 
-	const getMenus = async () => {
+	const getMenus = useCallback(async () => {
 		try {
 			const resp = await axios('https://groceries-shopping.herokuapp.com/menus', {
 				headers: {
@@ -51,57 +54,62 @@ export default function MenuPlanning() {
 					Authorization: `Bearer ${token}`
 				}
 			})
-			return resp.data
+			// console.log(resp.data)
+			setDataMenu(resp.data)
 		} catch (error) {
 			console.log(error)
 		}
-	}
+	}, [token])
 
 	useEffect(() => {
-		getMenus(token).then(data => {
-			let startDate, endDate, day, month, year, date
+		setDataMenu(getMenus(token))
+	}, [getMenus, token])
 
-			const events = data.map(menu => {
-				date = menu.date
+	const eee = useMemo(() => {
+		let date, day, month, year, startDate, endDate
 
-				if (menu.meal === 'breakfast') {
-					day = new Date(date).getDate()
-					month = new Date(date).getMonth()
-					year = new Date(date).getFullYear()
-					startDate = new Date(year, month, day, 8)
-					endDate = new Date(year, month, day, 12)
-				}
-				if (menu.meal === 'lunch') {
-					day = new Date(date).getDate()
-					month = new Date(date).getMonth()
-					year = new Date(date).getFullYear()
-					startDate = new Date(year, month, day, 12)
-					endDate = new Date(year, month, day, 16)
-				}
-				if (menu.meal === 'dinner') {
-					let day = new Date(date).getDate()
-					let month = new Date(date).getMonth()
-					let year = new Date(date).getFullYear()
-					startDate = new Date(year, month, day, 16)
-					endDate = new Date(year, month, day, 20)
-				}
+		let events = Object.values(dataMenu).map(menu => {
+			date = menu.date
 
-				let start = new Date(startDate)
-				let end = new Date(endDate)
+			day = new Date(date).getDate()
+			month = new Date(date).getMonth()
+			year = new Date(date).getFullYear()
 
-				return {
-					id: menu.id,
-					recipe_id: menu.recipe_id,
-					meal: menu.meal,
-					title: `${menu.recipe_title}\nservings: ${menu.servings}`,
-					allDay: false,
-					start,
-					end
-				}
-			})
-			setMyEvents(events)
+			if (menu.meal === 'breakfast') {
+				startDate = new Date(year, month, day, 8)
+				endDate = new Date(year, month, day, 12)
+			}
+			if (menu.meal === 'lunch') {
+				startDate = new Date(year, month, day, 12)
+				endDate = new Date(year, month, day, 16)
+			}
+			if (menu.meal === 'dinner') {
+				startDate = new Date(year, month, day, 16)
+				endDate = new Date(year, month, day, 20)
+			}
+
+			let start = new Date(startDate)
+			let end = new Date(endDate)
+
+			// console.log('render')
+
+			return {
+				id: menu.id,
+				recipe_id: menu.recipe_id,
+				meal: menu.meal,
+				title: `${menu.recipe_title}\nservings: ${menu.servings}`,
+				allDay: false,
+				start,
+				end
+			}
 		})
-	})
+		// setMyEvents(events)
+		return events
+	}, [dataMenu])
+
+	useEffect(() => {
+		setMyEvents(eee)
+	}, [dataMenu, eee])
 
 	const moveEvent = useCallback(
 		({ event, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
@@ -135,12 +143,15 @@ export default function MenuPlanning() {
 				onEventDrop={moveEvent}
 				max={new Date(2022, 11, 10, 20, 0, 0)}
 				min={new Date(2020, 11, 10, 8, 0, 0)}
-				timeslots={3}
-				step={80}
+				timeslots={1}
+				step={240}
 				onSelectEvent={event =>
 					editMenuItem({ id: event.id, recipe_id: event.recipe_id, meal: event.meal })
 				}
 			/>
 		</>
 	)
-}
+	// }
+})
+
+export default MenuPlanningCal
