@@ -10,12 +10,13 @@ import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import { useSelector } from 'react-redux'
-// import axios from 'axios'
 
-// import editMenuItem from '../services/editMenuItem'
-// import getMenus from '../services/getMenus'
+import { Modal } from './Modal'
+import useModal from '../customHooks/useModal'
 
-import { editMenuItem, updateMenu } from '../services'
+import MenuPlanningCRUD from './MenuPlanningCRUD'
+
+import { updateMenu } from '../services'
 
 import './MenuPlanningCal.css'
 import axios from 'axios'
@@ -29,6 +30,8 @@ export const MenuPlanningCal = memo(() => {
 
 	const token = auth.accessToken
 	// const user_id = auth.id
+
+	const [isOpenMenuCrud, openMenuCrudModal, closeMenuCrudModal] = useModal(false)
 
 	const locales = {
 		'en-US': import('date-fns/locale/en-US')
@@ -44,6 +47,17 @@ export const MenuPlanningCal = memo(() => {
 
 	const [myEvents, setMyEvents] = useState([])
 	const [dataMenu, setDataMenu] = useState({})
+	const [menuCrud, setMenuCrud] = useState({})
+
+	const handleMenuCrud = event => {
+		// console.log(recipe_id)
+		// console.log(meal)
+		// console.log(title)
+
+		setMenuCrud({ id: event.id, token })
+
+		openMenuCrudModal()
+	}
 
 	const getMenus = useCallback(async () => {
 		try {
@@ -65,7 +79,7 @@ export const MenuPlanningCal = memo(() => {
 		setDataMenu(getMenus(token))
 	}, [getMenus, token])
 
-	const eee = useMemo(() => {
+	const changeMenuData = useMemo(() => {
 		let date, day, month, year, startDate, endDate
 
 		let events = Object.values(dataMenu).map(menu => {
@@ -108,8 +122,8 @@ export const MenuPlanningCal = memo(() => {
 	}, [dataMenu])
 
 	useEffect(() => {
-		setMyEvents(eee)
-	}, [dataMenu, eee])
+		setMyEvents(changeMenuData)
+	}, [dataMenu, changeMenuData])
 
 	const moveEvent = useCallback(
 		({ event, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
@@ -145,10 +159,12 @@ export const MenuPlanningCal = memo(() => {
 				min={new Date(2020, 11, 10, 8, 0, 0)}
 				timeslots={1}
 				step={240}
-				onSelectEvent={event =>
-					editMenuItem({ id: event.id, recipe_id: event.recipe_id, meal: event.meal })
-				}
+				onSelectEvent={event => handleMenuCrud(event)}
 			/>
+
+			<Modal isOpen={isOpenMenuCrud} closeModal={closeMenuCrudModal}>
+				<MenuPlanningCRUD menuCrud={menuCrud} />
+			</Modal>
 		</>
 	)
 	// }

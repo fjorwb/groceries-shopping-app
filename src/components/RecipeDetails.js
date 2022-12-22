@@ -104,13 +104,14 @@ function RecipeDetails({ extid, user_id, token, closeModal }) {
 		<div>
 			<div>
 				<div>
-					<h2 style={{ marginBottom: '1rem' }}>{title}</h2>
+					<h2 style={{ marginBottom: '1rem', fontSize: '1rem' }}>{title}</h2>
 					<div className="recipe-cont">
 						<img
 							src={`${image}`}
 							alt=""
 							style={{
-								width: '400px',
+								width: '300px',
+								height: '200px',
 								borderRadius: '15px'
 							}}
 						/>

@@ -59,6 +59,7 @@
 	border: none;
 	outline: none;
 	cursor: pointer;
+	font-size: 0.75rem;
 }
 
 .recipe-btn:hover {
@@ -109,6 +110,8 @@
 
 .recipe-ingredients {
 	text-align: left;
+	font-size: 0.75rem;
+	padding: 0 1rem;
 }
 .recipe-other {
 	text-align: justify;
@@ -122,7 +125,7 @@
 .recipe-cont {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-	grid-gap: 8rem;
+	grid-gap: 1rem;
 	align-items: top;
 	justify-content: left;
 	margin-bottom: 1rem;

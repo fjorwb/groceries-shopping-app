@@ -27,6 +27,15 @@
 
 .rbc-event {
 	background-color: var(--clr-contrast);
+	background: var(--clr-background);
+	padding: 0.015rem;
+
+	border: none;
+}
+
+.rbc-event-content {
+	background: var(--clr-contrast);
+	padding: 0.5rem;
 }
 
 .rbc-selected-cell {
