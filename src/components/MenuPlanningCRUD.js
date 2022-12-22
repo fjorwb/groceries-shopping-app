@@ -1,16 +1,15 @@
 import axios from 'axios'
 import { useEffect, useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { deleteMenuItem, editMenuItem } from '../services'
 
 import './MenuPlanningCRUD.css'
 
-function MenuPlanningCRUD({ menuCrud }) {
+function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpdated }) {
 	const { id, token } = menuCrud
 
 	const [menuItem, setMenuItem] = useState({})
 	const [servings, setServings] = useState(menuItem.servings || 0)
-
-	console.log(menuItem.date)
 
 	const { register, handleSubmit } = useForm()
 
@@ -28,7 +27,6 @@ function MenuPlanningCRUD({ menuCrud }) {
 	const handleChange = e => {
 		e.preventDefault()
 		const { name, value } = e.target
-		console.log(name, value)
 		setMenuItem({ ...menuItem, [name]: value })
 	}
 
@@ -39,27 +37,10 @@ function MenuPlanningCRUD({ menuCrud }) {
 			meal: menuItem.meal,
 			servings: servings
 		}
-		console.log(data)
 	}
-
-	const editMenuItem = () => {
-		console.log('edit menu item')
-		console.log(menuItem)
-	}
-	const deleteMenuItem = () => {
-		console.log('delete menu item')
-		console.log(menuItem)
-	}
-
-	// const handleSubmit = e => {
-	// 	e.preventDefault()
-	// 	const { name, value } = e.target
-
-	// 	// setMenuItem({ ...menuItem, [name]: value })
-	// 	console.log('submit')
-	// }
 
 	const getMenuItem = useCallback(async (id, token) => {
+		if (id === undefined || token === undefined) return
 		try {
 			const resp = await axios(`https://groceries-shopping.herokuapp.com/menus/${id}`, {
 				headers: {
@@ -68,10 +49,11 @@ function MenuPlanningCRUD({ menuCrud }) {
 					Authorization: `Bearer ${token}`
 				}
 			})
-			setMenuItem(resp.data)
+			let sss = { ...resp.data, date: resp.data.date.slice(0, 10) }
+			setMenuItem(sss)
 			return resp.data
 		} catch (error) {
-			console.log(error)
+			console.log(error.message)
 		}
 	}, [])
 
@@ -117,7 +99,7 @@ function MenuPlanningCRUD({ menuCrud }) {
 					id="meal"
 					value={menuItem.meal}
 					defaultValue={'lunch'}
-					onChange={handleChange}>
+					onChange={e => handleChange(e)}>
 					<option className="menuCRUD-option" value="breakfast">
 						breakfast
 					</option>
@@ -133,19 +115,39 @@ function MenuPlanningCRUD({ menuCrud }) {
 				</label>
 				<input
 					type="date"
+					required
+					pattern="\d{4}-\d{2}-\d{2}"
 					{...register('date')}
 					className="menuCRUD-input"
 					id="date"
 					name="date"
 					value={menuItem.date}
-					onChange={handleChange}
+					onChange={e => handleChange(e)}
 					// onChange={handleDateInput}
 				/>
 				<div className="menuCRUD-btn-container">
-					<button type="submit" className="menuCRUD-btn" onClick={editMenuItem}>
+					<button
+						type="submit"
+						className="menuCRUD-btn"
+						onClick={() =>
+							editMenuItem({
+								id: menuItem.id,
+								date: menuItem.date,
+								meal: menuItem.meal,
+								servings: servings,
+								token,
+								closeMenuCrudModal,
+								setIsUpdated
+							})
+						}>
 						edit
 					</button>
-					<button type="submit" className="menuCRUD-btn" onClick={deleteMenuItem}>
+					<button
+						type="submit"
+						className="menuCRUD-btn"
+						onClick={() =>
+							deleteMenuItem({ id: menuItem.id, token, setIsDeleted, closeMenuCrudModal })
+						}>
 						delete
 					</button>
 				</div>

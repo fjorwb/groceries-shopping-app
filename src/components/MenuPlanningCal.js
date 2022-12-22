@@ -48,6 +48,8 @@ export const MenuPlanningCal = memo(() => {
 	const [myEvents, setMyEvents] = useState([])
 	const [dataMenu, setDataMenu] = useState({})
 	const [menuCrud, setMenuCrud] = useState({})
+	const [isDeleted, setIsDeleted] = useState(false)
+	const [isUpdated, setIsUpdated] = useState(false)
 
 	const handleMenuCrud = event => {
 		// console.log(recipe_id)
@@ -77,7 +79,9 @@ export const MenuPlanningCal = memo(() => {
 
 	useEffect(() => {
 		setDataMenu(getMenus(token))
-	}, [getMenus, token])
+		setIsDeleted(false)
+		setIsUpdated(false)
+	}, [getMenus, token, isDeleted, isUpdated])
 
 	const changeMenuData = useMemo(() => {
 		let date, day, month, year, startDate, endDate
@@ -163,7 +167,12 @@ export const MenuPlanningCal = memo(() => {
 			/>
 
 			<Modal isOpen={isOpenMenuCrud} closeModal={closeMenuCrudModal}>
-				<MenuPlanningCRUD menuCrud={menuCrud} />
+				<MenuPlanningCRUD
+					menuCrud={menuCrud}
+					closeMenuCrudModal={closeMenuCrudModal}
+					setIsDeleted={setIsDeleted}
+					setIsUpdated={setIsUpdated}
+				/>
 			</Modal>
 		</>
 	)
