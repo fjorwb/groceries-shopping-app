@@ -106,8 +106,7 @@ function RecipesCard() {
 						onChange={handleChange}
 						value={form.recipesBook}
 						autoComplete="off"
-						defaultValue={'own book'}
-					>
+						defaultValue={'own book'}>
 						<option value="own book">own book</option>
 						<option value="external book">external book</option>
 					</select>
@@ -142,17 +141,18 @@ function RecipesCard() {
 						fetchData?.map(recipe => {
 							return (
 								<article className="recipe-card" key={recipe.id}>
-									<h1 className="recipe-title">{recipe.title}</h1>
-									<h2>{recipe.description}</h2>
-									<img src={`${recipe.image}`} className="recipe-img" alt="" />
+									<div className="recipe-img-container">
+										<img src={`${recipe.image}`} className="recipe-img" alt={recipe.title} />
+										<h2 className="recipe-title">{recipe.title}</h2>
+									</div>
+									{/* <h3>{recipe.description}</h3> */}
 									{recipesBook === 'own book' ? (
 										<h4 className="recipe-servings">servings: {recipe.servings}</h4>
 									) : null}
 									{recipesBook === 'own book' ? null : (
 										<button
 											className="recipe-btn"
-											onClick={() => handleExtermalId({ id: recipe.id })}
-										>
+											onClick={() => handleExtermalId({ id: recipe.id })}>
 											view recipe
 											{/* add to book */}
 										</button>
@@ -160,8 +160,7 @@ function RecipesCard() {
 									{recipesBook === 'own book' ? (
 										<button
 											className="recipe-btn"
-											onClick={() => deleteRecipe({ id: recipe.id, token: token, setRecipesBook })}
-										>
+											onClick={() => deleteRecipe({ id: recipe.id, token: token, setRecipesBook })}>
 											delete recipe
 										</button>
 									) : null}
