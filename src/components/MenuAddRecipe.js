@@ -29,6 +29,7 @@ function MenuAddRecipe({ recipe, user_id, token, closeMenuModal }) {
 			recipe_id: recipe.recipe.id,
 			recipe_title: recipe.recipe.title,
 			servings: servings,
+			factor: recipe.recipe.servings,
 			week,
 			user_id
 		}
