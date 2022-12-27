@@ -1,12 +1,4 @@
-// import axios from '../apis/axiosIns'
-// import useAxios from '../customHooks/useAxiosIns'
-
-// import useAxiosFunction from '../customHooks/useAxios'
-// import helpHttp from '../helpers/helpHttp'
-
 import axios from 'axios'
-
-// import useFetch from '../customHooks/useFetch'
 
 import { memo, useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -17,37 +9,12 @@ const CreateShoppingList = () => {
 	const auth = useSelector(state => state.auth)
 
 	const token = auth.user.accessToken
-	// const user_id = auth.user.id
 
 	const [dataRecipes, setDataRecipes] = useState({})
 	const [dataMenu, setDataMenu] = useState({})
 	const [dataIngredients, setDataIngredients] = useState({})
-	// const [xxx, setXxx] = useState({})
 
-	// get menu list for an user
-
-	// with helpHttp
-	// const getMenuList = () => {
-	// 	helpHttp()
-	// 		.get('https://groceries-shopping.herokuapp.com/menus', {
-	// 			headers: {
-	// 				'Content-Type': 'application/json',
-	// 				accept: 'application/json',
-	// 				Authorization: `Bearer ${token}`
-	// 			}
-	// 		})
-	// 		.then(res => {
-	// 			setDataMenu(res)
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err)
-	// 		})
-	// }
-	// useEffect(() => {
-	// 	getMenuList()
-	// }, [])
-
-	// with axios & useCallback
+	//get recipes list to calculate ingredients based on standard servings
 
 	const getRecipes = useCallback(async () => {
 		try {
@@ -67,7 +34,7 @@ const CreateShoppingList = () => {
 
 	useEffect(() => {
 		setDataRecipes(getRecipes())
-	}, [])
+	}, [getRecipes])
 
 	let arrRecipes = []
 
@@ -75,7 +42,7 @@ const CreateShoppingList = () => {
 		arrRecipes.push({ id: dataRecipes[key].id, servings: dataRecipes[key].servings })
 	}
 
-	// console.log('ARRAY RECIPES', arrRecipes)
+	//get menu list to calculate ingredients based on recipes planned for the week
 
 	const getMenuList = useCallback(async () => {
 		try {
@@ -95,9 +62,7 @@ const CreateShoppingList = () => {
 
 	useEffect(() => {
 		setDataMenu(getMenuList())
-	}, [])
-
-	console.log('DATA MENU ', dataMenu)
+	}, [getMenuList])
 
 	let arrMenuList = []
 
@@ -110,12 +75,6 @@ const CreateShoppingList = () => {
 			factorX: dataMenu[key].servings / dataMenu[key].factor
 		})
 	}
-
-	// console.log(
-	// 	'ARRAY MENU LIST',
-	// 	// arrMenuList
-	// 	arrMenuList.sort((a, b) => a.recipe - b.recipe)
-	// )
 
 	const menuListReduced = arrMenuList.reduce((acc, item) => {
 		const { recipe, idext, servings, factor, factorX } = item
@@ -132,13 +91,13 @@ const CreateShoppingList = () => {
 				}
 			}
 		} else {
-			acc = { ...acc, [recipe]: { recipe, servings, factor, factorX } }
+			acc = { ...acc, [recipe]: { recipe, idext, servings, factor, factorX } }
 		}
 
 		return acc
 	}, {})
 
-	console.log('MENU LIST REDUCED', menuListReduced)
+	//get ingredients list to calculate shopping list based on recipes planned for the week
 
 	const getIngredientsList = useCallback(async () => {
 		try {
@@ -158,21 +117,24 @@ const CreateShoppingList = () => {
 
 	useEffect(() => {
 		setDataMenu(getIngredientsList())
-	}, [])
-
-	console.log('DATA ING', dataIngredients)
+	}, [getIngredientsList])
 
 	let arrIngredientsList = []
 	let arr1 = []
 
 	for (let key in dataIngredients) {
-		arr1.push({ recipe: dataIngredients[key].id, ing: dataIngredients[key].ingredients })
+		arr1.push({
+			recipe: dataIngredients[key].id,
+			idext: dataIngredients[key].idext,
+			ing: dataIngredients[key].ingredients
+		})
 	}
 
 	for (let i = 0; i < arr1.length; i++) {
 		for (let j = 0; j < arr1[i].ing.length; j++) {
 			arrIngredientsList.push({
 				recipe: arr1[i].recipe,
+				idext_recipe: arr1[i].idext,
 				idext: arr1[i].ing[j].idext,
 				ing: arr1[i].ing[j].ingredient,
 				amount: arr1[i].ing[j].amount,
@@ -183,96 +145,84 @@ const CreateShoppingList = () => {
 
 	arrIngredientsList.sort((a, b) => a.idext - b.idext)
 
-	console.log('ARR ING', arrIngredientsList)
-
-	let arr2 = []
+	let arrIngredients = []
 
 	const arrMenuListReduced = Object.values(menuListReduced)
 
 	for (let i = 0; i < arrIngredientsList.length; i++) {
-		// console.log(arrIngredientsList[i].idext)
 		for (let j = 0; j < arrMenuListReduced.length; j++) {
-			console.log(arrMenuListReduced[j].idext)
-			if (arrIngredientsList[i].recipe === arrMenuListReduced[j].recipe) {
-				// console.log('CHECK', arrIngredientsList[i].recipe, arrMenuListReduced[j].recipe)
-				// arr2.push({
-				// 	idext: arrIngredientsList[i].idext,
-				// 	ing: arrIngredientsList[i].ing,
-				// 	amount: arrIngredientsList[i].amount * arrMenuListReduced[j].factorX,
-				// 	un: arrIngredientsList[i].un
-				// })
+			if (arrIngredientsList[i].idext_recipe === arrMenuListReduced[j].idext) {
+				let idext = arrIngredientsList[i].idext
+				let ing = arrIngredientsList[i].ing
+				let un = arrIngredientsList[i].un
+				let amount = arrIngredientsList[i].amount * arrMenuListReduced[j].factorX
+
+				arrIngredients.push({ idext, ing, amount, un })
 			}
 		}
 	}
 
-	console.log(arr2)
+	let finalIngredientsList = []
 
-	// let arrIngredients = []
+	arrIngredients.forEach((item, index) => {
+		if (arrIngredients[index + 1] && item.idext === arrIngredients[index + 1].idext) {
+			item.amount += arrIngredients[index + 1].amount
+			finalIngredientsList.push(item)
+		} else {
+			finalIngredientsList.push(item)
+		}
 
-	// for (let i = 0; i < arrIngredientsList.length; i++) {
-	// 	arrIngredients.push({
-	// 		idext: arrIngredientsList[i].idext,
-	// 		ing: arrIngredientsList[i].ingredient,
-	// 		amount: arrIngredientsList[i].amount,
-	// 		un: arrIngredientsList[i].unit
-	// 	})
-	// }
+		// if (arrIngredients[index + 1] && item.idext !== arrIngredients[index - 1].idext) {
+		// 	finalIngredientsList.push(item)
+		// }
+	})
 
-	// arrIngredients.sort((a, b) => a.idext - b.idext)
+	let ingredientsListReduce = []
 
-	// // console.log('ARRAY INGREDIENTS ', arrIngredients)
+	for (let i = 0; i < finalIngredientsList.length; i++) {
+		if (
+			finalIngredientsList[i + 1] &&
+			finalIngredientsList[i].idext === finalIngredientsList[i + 1].idext
+		) {
+			finalIngredientsList[i].amount += finalIngredientsList[i + 1].amount
+			ingredientsListReduce.push(finalIngredientsList[i])
+			i++
+		} else {
+			ingredientsListReduce.push(finalIngredientsList[i])
+		}
+	}
 
-	// let finalIngredientsList = []
+	ingredientsListReduce.sort((a, b) => {
+		const ax = a.ing
+		const bx = b.ing
 
-	// arrIngredients.forEach((item, index) => {
-	// 	if (arrIngredients[index + 1] && item.idext === arrIngredients[index + 1].idext) {
-	// 		item.amount += arrIngredients[index + 1].amount
-	// 		finalIngredientsList.push(item)
-	// 	} else {
-	// 		finalIngredientsList.push(item)
-	// 	}
-
-	// 	// if (arrIngredients[index + 1] && item.idext !== arrIngredients[index - 1].idext) {
-	// 	// 	finalIngredientsList.push(item)
-	// 	// }
-	// })
-
-	// console.log('FINAL', finalIngredientsList)
-
-	// let ingredientsListReduce = []
-
-	// for (let i = 0; i < finalIngredientsList.length; i++) {
-	// 	if (
-	// 		finalIngredientsList[i + 1] &&
-	// 		finalIngredientsList[i].idext === finalIngredientsList[i + 1].idext
-	// 	) {
-	// 		finalIngredientsList[i].amount += finalIngredientsList[i + 1].amount
-	// 		ingredientsListReduce.push(finalIngredientsList[i])
-	// 		i++
-	// 	} else {
-	// 		ingredientsListReduce.push(finalIngredientsList[i])
-	// 	}
-	// }
-
-	// console.log('INGREDIENTS LIST REDUCED', ingredientsListReduce)
+		if (ax < bx) {
+			return -1
+		}
+		if (ax > bx) {
+			return 1
+		}
+		return 0
+	})
 
 	return (
 		<div className="shopping-container">
-			<h1>Shopping List</h1>
-			{/* {ingredientsListReduce.map(menu => {
+			<h1 className="shopping-title">Shopping List</h1>
+			{ingredientsListReduce.map(menu => {
 				return (
-					<div>
-						<div key={menu.idext} className="shopping-list">
-							<p0 className="shopiping-p">{menu.idext}</p0>
-							<p1 className="shopiping-p">{menu.ing}</p1>
-							<p2 className="shopping-p">{menu.un}</p2>
-							<p3 className="shopping-p">{menu.amount}</p3>
-						</div>
-					</div>
+					<table className="table">
+						<tbody>
+							<tr className="table-row">
+								<td className="p1">{menu.ing.replace(/\b\w/g, l => l.toUpperCase())}</td>
+								<td className="p2">{menu.un}</td>
+								<td className="p3">{menu.amount}</td>
+							</tr>
+						</tbody>
+					</table>
 				)
-			})} */}
+			})}
 		</div>
 	)
 }
 
-export default CreateShoppingList
+export default memo(CreateShoppingList)

@@ -27,6 +27,7 @@ function MenuAddRecipe({ recipe, user_id, token, closeMenuModal }) {
 		data = {
 			...data,
 			recipe_id: recipe.recipe.id,
+			idext: recipe.recipe.idext,
 			recipe_title: recipe.recipe.title,
 			servings: servings,
 			factor: recipe.recipe.servings,
