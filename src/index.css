@@ -9,6 +9,10 @@
 	--fnt-menu: 1rem;
 	--fnt-fam: Arial;
 	/* --fnt-fam: Georgia, 'Times New Roman', Times, serif; */
+	width: 80%;
+	margin: auto;
+	background-color: #f3f0f0;
+	margin-top: 1rem;
 }
 
 body {
