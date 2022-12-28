@@ -22,7 +22,6 @@ function MenuAddRecipe({ recipe, user_id, token, closeMenuModal }) {
 	const { register, handleSubmit } = useForm()
 
 	const onSubmit = data => {
-		console.log(data)
 		const week = getWeekNumber(data.date)
 		data = {
 			...data,
