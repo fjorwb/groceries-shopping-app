@@ -12,9 +12,7 @@ export function Markets() {
 		<Suspense>
 			<Header />
 			<h1 className="markets-title">Markets</h1>
-			<div className="markets-container">
-				<Market />
-			</div>
+			<Market />
 		</Suspense>
 	)
 }
