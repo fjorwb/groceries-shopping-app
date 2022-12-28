@@ -28,6 +28,7 @@ function Market() {
 			})
 			// console.log(resp.data)
 			setDataMarkets(resp.data)
+			setDataSelected(resp.data[0])
 		} catch (error) {
 			console.log(error)
 		}
@@ -59,7 +60,7 @@ function Market() {
 
 	useEffect(() => {
 		setDataSelected(getMarket(id))
-	}, [getMarket, id, updated])
+	}, [getMarket, id])
 
 	return (
 		<div className="markets-container">

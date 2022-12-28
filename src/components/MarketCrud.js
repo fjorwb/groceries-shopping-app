@@ -2,8 +2,8 @@ import axios from 'axios'
 import { useState } from 'react'
 import './markets.css'
 
-function MarketCrud({ dataSelected, setUpdated, setId, getMarkets, token, user_id }) {
-	const [inputMarkets, setInputMarkets] = useState({ user_id: user_id })
+function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
+	const [inputMarkets, setInputMarkets] = useState({})
 
 	const handleChange = e => {
 		e.preventDefault()
@@ -85,6 +85,7 @@ function MarketCrud({ dataSelected, setUpdated, setId, getMarkets, token, user_i
 						value={inputMarkets.name ? inputMarkets.name : dataSelected.name}
 						defaultValue={dataSelected.name}
 						onChange={handleChange}
+						required
 					/>
 				</div>
 				<div className="markets-input">
@@ -97,6 +98,7 @@ function MarketCrud({ dataSelected, setUpdated, setId, getMarkets, token, user_i
 						value={inputMarkets.address ? inputMarkets.address : dataSelected.address}
 						defaultValue={dataSelected.address}
 						onChange={handleChange}
+						required
 					/>
 				</div>
 				<div className="markets-input">
@@ -109,6 +111,7 @@ function MarketCrud({ dataSelected, setUpdated, setId, getMarkets, token, user_i
 						value={inputMarkets.city ? inputMarkets.city : dataSelected.city}
 						defaultValue={dataSelected.city}
 						onChange={handleChange}
+						required
 					/>
 				</div>
 				<div className="markets-input">
@@ -121,6 +124,7 @@ function MarketCrud({ dataSelected, setUpdated, setId, getMarkets, token, user_i
 						value={inputMarkets.state ? inputMarkets.state : dataSelected.state}
 						defaultValue={dataSelected.state}
 						onChange={handleChange}
+						required
 					/>
 				</div>
 				<div className="markets-input">
@@ -133,6 +137,7 @@ function MarketCrud({ dataSelected, setUpdated, setId, getMarkets, token, user_i
 						value={inputMarkets.zip ? inputMarkets.zip : dataSelected.zip}
 						defaultValue={dataSelected.zip}
 						onChange={handleChange}
+						required
 					/>
 				</div>
 				<div className="markets-input">
@@ -145,6 +150,7 @@ function MarketCrud({ dataSelected, setUpdated, setId, getMarkets, token, user_i
 						value={inputMarkets.country ? inputMarkets.country : dataSelected.country}
 						defaultValue={dataSelected.country}
 						onChange={handleChange}
+						required
 					/>
 				</div>
 				<div className="markets-input">
@@ -157,6 +163,7 @@ function MarketCrud({ dataSelected, setUpdated, setId, getMarkets, token, user_i
 						value={inputMarkets.phone ? inputMarkets.phone : dataSelected.phone}
 						defaultValue={dataSelected.phone}
 						onChange={handleChange}
+						required
 					/>
 				</div>
 				<div className="markets-input">
@@ -169,6 +176,7 @@ function MarketCrud({ dataSelected, setUpdated, setId, getMarkets, token, user_i
 						value={inputMarkets.email ? inputMarkets.email : dataSelected.email}
 						defaultValue={dataSelected.email}
 						onChange={handleChange}
+						required
 					/>
 				</div>
 				<div className="markets-input">
@@ -181,6 +189,7 @@ function MarketCrud({ dataSelected, setUpdated, setId, getMarkets, token, user_i
 						value={inputMarkets.website ? inputMarkets.website : dataSelected.website}
 						defaultValue={dataSelected.website}
 						onChange={handleChange}
+						required
 					/>
 				</div>
 				<div className="markets-input">
@@ -194,6 +203,7 @@ function MarketCrud({ dataSelected, setUpdated, setId, getMarkets, token, user_i
 						defaultValue={dataSelected.password}
 						onChange={handleChange}
 						autoComplete="off"
+						required
 					/>
 				</div>
 				<div>
