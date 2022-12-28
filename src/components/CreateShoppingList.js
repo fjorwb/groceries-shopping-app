@@ -208,19 +208,19 @@ const CreateShoppingList = () => {
 	return (
 		<div className="shopping-container">
 			<h1 className="shopping-title">Shopping List</h1>
-			{ingredientsListReduce.map(menu => {
-				return (
-					<table className="table">
-						<tbody>
-							<tr className="table-row">
+			<table className="table">
+				<tbody>
+					{ingredientsListReduce.map((menu, index) => {
+						return (
+							<tr className="table-row" key={index}>
 								<td className="p1">{menu.ing.replace(/\b\w/g, l => l.toUpperCase())}</td>
 								<td className="p2">{menu.un}</td>
 								<td className="p3">{menu.amount}</td>
 							</tr>
-						</tbody>
-					</table>
-				)
-			})}
+						)
+					})}
+				</tbody>
+			</table>
 		</div>
 	)
 }

@@ -10,7 +10,6 @@ export function ShoppingList() {
 		<div>
 			<Suspense>
 				<Header />
-				<h1>Shopping list</h1>
 				<CreateShoppingList />
 			</Suspense>
 		</div>
