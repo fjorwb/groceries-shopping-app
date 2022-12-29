@@ -27,7 +27,20 @@ function Market() {
 				}
 			})
 			// console.log(resp.data)
-			setDataMarkets(resp.data)
+			setDataMarkets(
+				resp.data.sort((a, b) => {
+					const ax = a.name
+					const bx = b.name
+
+					if (ax < bx) {
+						return -1
+					}
+					if (ax > bx) {
+						return 1
+					}
+					return 0
+				})
+			)
 			setDataSelected(resp.data[0])
 		} catch (error) {
 			console.log(error)
@@ -37,7 +50,7 @@ function Market() {
 	useEffect(() => {
 		setDataMarkets(getMarkets())
 		setUpdated(false)
-	}, [getMarkets, updated])
+	}, [getMarkets, token, updated])
 
 	const getMarket = useCallback(
 		async id => {

@@ -1,5 +1,5 @@
-import axios from 'axios'
 import { useState } from 'react'
+import { addMarket, deleteMarket, updateMarket } from '../services'
 import './markets.css'
 
 function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
@@ -21,55 +21,38 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 	}
 
 	const handleAddMarket = () => {
-		addMarket(token)
-		getMarkets()
+		addMarket({ token, inputMarkets })
+		getMarkets(token)
 		setUpdated(true)
 		setInputMarkets({ user_id: user_id })
 	}
 
 	const handleDeleteMarket = () => {
-		deleteMarket(token)
+		deleteMarket({ token, dataSelected })
 		getMarkets()
 		setUpdated(true)
 		// setId('')
 		setInputMarkets({ user_id: user_id })
 	}
 
-	async function addMarket(token) {
-		try {
-			const resp = await axios.post(
-				'https://groceries-shopping.herokuapp.com/markets',
-				inputMarkets,
-				{
-					headers: {
-						'content-type': 'application/json',
-						accept: 'application/json',
-						Authorization: `Bearer ${token}`
-					}
-				}
-			)
-			console.log(resp)
-		} catch (error) {
-			console.log(error)
-		}
-	}
-
-	async function deleteMarket(token) {
-		try {
-			const resp = await axios.delete(
-				`https://groceries-shopping.herokuapp.com/markets/${dataSelected.id}`,
-				{
-					headers: {
-						'content-type': 'application/json',
-						accept: 'application/json',
-						Authorization: `Bearer ${token}`
-					}
-				}
-			)
-			console.log(resp)
-		} catch (error) {
-			console.log(error)
-		}
+	const handleUpdateMarket = () => {
+		setInputMarkets({
+			...inputMarkets,
+			name: dataSelected.name,
+			address: dataSelected.address,
+			city: dataSelected.city,
+			state: dataSelected.state,
+			zip: dataSelected.zip,
+			country: dataSelected.country,
+			phone: dataSelected.phone,
+			email: dataSelected.email,
+			website: dataSelected.website,
+			password: dataSelected.password
+		})
+		updateMarket({ token, inputMarkets, dataSelected })
+		getMarkets()
+		setUpdated(true)
+		setInputMarkets({ user_id: user_id })
 	}
 
 	return (
@@ -210,7 +193,7 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 					<button className="btn" onClick={handleAddMarket}>
 						add
 					</button>
-					<button className="btn" onClick={handleSubmit}>
+					<button className="btn" onClick={handleUpdateMarket}>
 						edit
 					</button>
 					<button className="btn" onClick={handleDeleteMarket}>
