@@ -17,7 +17,7 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 	const handleSubmit = e => {
 		e.preventDefault()
 
-		console.log('SUBMIT')
+		// console.log('SUBMIT')
 	}
 
 	const handleAddMarket = () => {

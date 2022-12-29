@@ -12,7 +12,7 @@ async function deleteMarket({ token, dataSelected }) {
 				}
 			}
 		)
-		console.log(resp)
+		return resp
 	} catch (error) {
 		console.log(error)
 	}

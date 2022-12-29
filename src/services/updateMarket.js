@@ -13,7 +13,6 @@ async function updateMarket({ token, dataSelected, inputMarkets }) {
 				}
 			}
 		)
-		console.log(resp)
 		return resp
 	} catch (error) {
 		console.log(error)

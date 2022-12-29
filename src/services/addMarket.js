@@ -13,7 +13,7 @@ async function addMarket({ token, inputMarkets }) {
 				}
 			}
 		)
-		console.log(resp)
+		return resp
 	} catch (error) {
 		console.log(error)
 	}
