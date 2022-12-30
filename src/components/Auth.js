@@ -62,7 +62,12 @@ export function Auth() {
 				<Modal isOpen={isOpenLogin} closeModal={closeLoginModal}>
 					<div>
 						<h3 className="auth.title">Login</h3>
-						<LoginForm data={data} setData={setData} url={'login'} />
+						<LoginForm
+							data={data}
+							setData={setData}
+							url={'login'}
+							closeLoginModal={closeLoginModal}
+						/>
 					</div>
 				</Modal>
 				<Modal isOpen={isOpenRegister} closeModal={closeRegisterModal}>

@@ -5,7 +5,7 @@ import './Form.css'
 import Loader from './Loader'
 import Message from './Message'
 
-export const LoginForm = ({ data, setData, url }) => {
+export const LoginForm = ({ data, setData, closeLoginModal, url }) => {
 	const initialForm = { email: '', password: '' }
 
 	const validationsForm = form => {
@@ -37,7 +37,8 @@ export const LoginForm = ({ data, setData, url }) => {
 		validationsForm,
 		url,
 		data,
-		setData
+		setData,
+		closeLoginModal
 	)
 
 	return (

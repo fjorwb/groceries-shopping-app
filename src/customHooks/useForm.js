@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { helpHttp } from '../helpers/helpHttp'
 
-export const useForm = (initialForm, validateForm, url, data, setData) => {
+export const useForm = (initialForm, validateForm, url, data, setData, closeLoginModal) => {
 	const [form, setForm] = useState(initialForm)
 	const [errors, setErrors] = useState({})
 	const [loading, setLoading] = useState(false)
@@ -43,7 +43,8 @@ export const useForm = (initialForm, validateForm, url, data, setData) => {
 					setResponse(true)
 					setTimeout(() => {
 						setResponse(false)
-					}, 5000)
+						closeLoginModal()
+					}, 1500)
 					setForm(initialForm)
 				})
 				.catch(err => {
