@@ -10,7 +10,6 @@ function MarketList({ dataMarkets, setId }) {
 			{Object.values(dataMarkets).map(market => {
 				return (
 					<div className="markets-list" key={market.id}>
-						{/* <p className="m1">{market.id} </p> */}
 						<p className="m2">{market.name}</p>
 						<button className="btn" onClick={() => handleSelected(market.id)}>
 							select

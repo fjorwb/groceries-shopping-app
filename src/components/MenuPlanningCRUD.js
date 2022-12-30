@@ -74,15 +74,6 @@ function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpd
 				<button className="menuCRUD-counter-btn" onClick={decrement}>
 					-
 				</button>
-				{/* <input
-						type="text"
-						{...register('servings')}
-						className="menuCRUD-counter"
-						id="servings"
-						name="servings"
-						value={servings}
-						onChange={handleChange}
-					/> */}
 				<p className="menuCRUD-counter servings">{servings}</p>
 				<button className="menuCRUD-counter-btn" onClick={increment}>
 					+
