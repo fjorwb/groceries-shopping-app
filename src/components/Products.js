@@ -16,7 +16,7 @@ function Product() {
 
 	const [dataProducts, setDataProducts] = React.useState({})
 
-	console.log(dataProducts)
+	// console.log(dataProducts)
 
 	const [isOpenAddProduct, openAddProductModal, closeAddProductModal] = useModal(false)
 	const [isOpenEditProduct, openEditProductModal, closeEditProductModal] = useModal(false)
@@ -56,13 +56,7 @@ function Product() {
 	// 	try {
 	// 		const resp = await axios.post(
 	// 			'https://groceries-shopping.herokuapp.com/products',
-	// 			{
-	// 				name: 'test',
-	// 				description: 'test',
-	// 				unit: 'test',
-	// 				presentation: 'test',
-	// 				market_id: 1
-	// 			},
+	// 	input,
 	// 			{
 	// 				headers: {
 	// 					'Content-Type': 'application/json',

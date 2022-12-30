@@ -3,7 +3,9 @@ import { addMarket, deleteMarket, updateMarket } from '../services'
 import './markets.css'
 
 function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
-	const [inputMarkets, setInputMarkets] = useState({})
+	const [inputMarkets, setInputMarkets] = useState({ user_id: user_id })
+
+	console.log(dataSelected)
 
 	const handleChange = e => {
 		e.preventDefault()
@@ -14,14 +16,10 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 		})
 	}
 
-	const handleSubmit = e => {
-		e.preventDefault()
-
-		// console.log('SUBMIT')
-	}
+	console.log(inputMarkets)
 
 	const handleAddMarket = () => {
-		addMarket({ token, inputMarkets })
+		addMarket({ token, inputMarkets, setInputMarkets })
 		getMarkets(token)
 		setUpdated(true)
 		setInputMarkets({ user_id: user_id })
@@ -29,7 +27,7 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 
 	const handleDeleteMarket = () => {
 		deleteMarket({ token, dataSelected })
-		getMarkets()
+		getMarkets(token)
 		setUpdated(true)
 		// setId('')
 		setInputMarkets({ user_id: user_id })
@@ -49,7 +47,7 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 			website: dataSelected.website,
 			password: dataSelected.password
 		})
-		updateMarket({ token, inputMarkets, dataSelected })
+		updateMarket({ token, inputMarkets, id: dataSelected.id })
 		getMarkets()
 		setUpdated(true)
 		setInputMarkets({ user_id: user_id })
@@ -57,7 +55,7 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 
 	return (
 		<div className="markets-crud-container">
-			<form className="markets-form" onSubmit={handleSubmit}>
+			<form className="markets-form">
 				<div className="markets-input">
 					<label htmlFor="name">market</label>
 					<input
@@ -66,8 +64,9 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 						name="name"
 						placeholder="market"
 						value={inputMarkets.name ? inputMarkets.name : dataSelected.name}
-						defaultValue={dataSelected.name}
-						onChange={handleChange}
+						// defaultValue={dataSelected.name}
+						onChange={e => handleChange(e)}
+						// autoComplete="off"
 						required
 					/>
 				</div>
@@ -79,8 +78,9 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 						name="address"
 						placeholder="address"
 						value={inputMarkets.address ? inputMarkets.address : dataSelected.address}
-						defaultValue={dataSelected.address}
-						onChange={handleChange}
+						// defaultValue={dataSelected.address}
+						onChange={e => handleChange(e)}
+						// autoComplete="off"
 						required
 					/>
 				</div>
@@ -92,8 +92,9 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 						name="city"
 						placeholder="city"
 						value={inputMarkets.city ? inputMarkets.city : dataSelected.city}
-						defaultValue={dataSelected.city}
-						onChange={handleChange}
+						// defaultValue={dataSelected.city}
+						onChange={e => handleChange(e)}
+						// autoComplete="off"
 						required
 					/>
 				</div>
@@ -105,8 +106,9 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 						name="state"
 						placeholder="state"
 						value={inputMarkets.state ? inputMarkets.state : dataSelected.state}
-						defaultValue={dataSelected.state}
-						onChange={handleChange}
+						// defaultValue={dataSelected.state}
+						onChange={e => handleChange(e)}
+						// autoComplete="off"
 						required
 					/>
 				</div>
@@ -118,8 +120,9 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 						name="zip"
 						placeholder="zip"
 						value={inputMarkets.zip ? inputMarkets.zip : dataSelected.zip}
-						defaultValue={dataSelected.zip}
-						onChange={handleChange}
+						// defaultValue={dataSelected.zip}
+						onChange={e => handleChange(e)}
+						// autoComplete="off"
 						required
 					/>
 				</div>
@@ -131,8 +134,9 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 						name="country"
 						placeholder="country"
 						value={inputMarkets.country ? inputMarkets.country : dataSelected.country}
-						defaultValue={dataSelected.country}
-						onChange={handleChange}
+						// defaultValue={dataSelected.country}
+						onChange={e => handleChange(e)}
+						// autoComplete="off"
 						required
 					/>
 				</div>
@@ -144,8 +148,9 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 						name="phone"
 						placeholder="phone"
 						value={inputMarkets.phone ? inputMarkets.phone : dataSelected.phone}
-						defaultValue={dataSelected.phone}
-						onChange={handleChange}
+						// defaultValue={dataSelected.phone}
+						onChange={e => handleChange(e)}
+						// autoComplete="off"
 						required
 					/>
 				</div>
@@ -157,8 +162,9 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 						name="email"
 						placeholder="email"
 						value={inputMarkets.email ? inputMarkets.email : dataSelected.email}
-						defaultValue={dataSelected.email}
-						onChange={handleChange}
+						// defaultValue={dataSelected.email}
+						onChange={e => handleChange(e)}
+						// autoComplete="off"
 						required
 					/>
 				</div>
@@ -170,8 +176,9 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 						name="website"
 						placeholder="website"
 						value={inputMarkets.website ? inputMarkets.website : dataSelected.website}
-						defaultValue={dataSelected.website}
-						onChange={handleChange}
+						// defaultValue={dataSelected.website}
+						onChange={e => handleChange(e)}
+						// autoComplete="off"
 						required
 					/>
 				</div>
@@ -183,22 +190,16 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 						name="password"
 						placeholder="password"
 						value={inputMarkets.password ? inputMarkets.password : dataSelected.password}
-						defaultValue={dataSelected.password}
-						onChange={handleChange}
-						autoComplete="off"
+						// defaultValue={dataSelected.password}
+						onChange={e => handleChange(e)}
+						// autoComplete="off"
 						required
 					/>
 				</div>
 				<div>
-					<button className="btn" onClick={handleAddMarket}>
-						add
-					</button>
-					<button className="btn" onClick={handleUpdateMarket}>
-						edit
-					</button>
-					<button className="btn" onClick={handleDeleteMarket}>
-						delete
-					</button>
+					<input type="button" className="btn" value="add" onClick={handleAddMarket} />
+					<input type="button" className="btn" value="edit" onClick={handleUpdateMarket} />
+					<input type="button" className="btn" value="delete" onClick={handleDeleteMarket} />
 				</div>
 			</form>
 		</div>

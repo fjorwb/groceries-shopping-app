@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-async function addMarket({ token, inputMarkets }) {
+async function addMarket({ token, inputMarkets, setInputMarkets }) {
 	try {
 		const resp = await axios.post(
 			'https://groceries-shopping.herokuapp.com/markets',
@@ -13,7 +13,7 @@ async function addMarket({ token, inputMarkets }) {
 				}
 			}
 		)
-		return resp
+		setInputMarkets(resp.data)
 	} catch (error) {
 		console.log(error)
 	}

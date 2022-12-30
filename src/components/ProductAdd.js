@@ -9,7 +9,7 @@ function AddProduct(closeAddProductModal) {
 	const [inputAddProduct, setInputAddProduct] = useState({})
 	const [categories, setCategories] = useState({})
 
-	console.log(inputAddProduct)
+	// console.log(categories)
 
 	const handleChange = e => {
 		e.preventDefault()
@@ -45,28 +45,28 @@ function AddProduct(closeAddProductModal) {
 		setCategories(getCategories())
 	}, [getCategories])
 
-	// const createProduct = useCallback(async () => {
-	// 	try {
-	// 		const resp = await axios.post(
-	// 			'https://groceries-shopping.herokuapp.com/products',
-	// 			inputAddProduct,
-	// 			{
-	// 				headers: {
-	// 					'content-type': 'application/json',
-	// 					accept: 'application/json',
-	// 					Authorization: `Bearer ${token}`
-	// 				}
-	// 			}
-	// 		)
-	// 		console.log(resp.data)
-	// 	} catch (error) {
-	// 		console.log(error)
-	// 	}
-	// }, [inputAddProduct, token])
+	const createProduct = useCallback(async () => {
+		try {
+			const resp = await axios.post(
+				'https://groceries-shopping.herokuapp.com/products',
+				inputAddProduct,
+				{
+					headers: {
+						'content-type': 'application/json',
+						accept: 'application/json',
+						Authorization: `Bearer ${token}`
+					}
+				}
+			)
+			console.log(resp.data)
+		} catch (error) {
+			console.log(error)
+		}
+	}, [inputAddProduct, token])
 
-	// useEffect(() => {
-	// 	createProduct()
-	// }, [createProduct])
+	useEffect(() => {
+		createProduct()
+	}, [createProduct])
 
 	return (
 		<div>

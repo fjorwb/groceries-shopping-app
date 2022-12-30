@@ -26,7 +26,7 @@ function Market() {
 					Authorization: `Bearer ${token}`
 				}
 			})
-			// console.log(resp.data)
+			console.log(resp.data)
 			setDataMarkets(
 				resp.data.sort((a, b) => {
 					const ax = a.name
@@ -62,7 +62,7 @@ function Market() {
 						Authorization: `Bearer ${token}`
 					}
 				})
-				// console.log(resp.data)
+				console.log(resp.data)
 				setDataSelected(resp.data)
 			} catch (error) {
 				console.log(error)
@@ -73,6 +73,7 @@ function Market() {
 
 	useEffect(() => {
 		setDataSelected(getMarket(id))
+		setUpdated(false)
 	}, [getMarket, id])
 
 	return (
@@ -80,7 +81,7 @@ function Market() {
 			<MarketList dataMarkets={dataMarkets} setId={setId} />
 			<MarketCrud
 				dataSelected={dataSelected}
-				setDataMarkets={setDataMarkets}
+				// setDataMarkets={setDataMarkets}
 				setUpdated={setUpdated}
 				setId={setId}
 				getMarkets={getMarkets}
