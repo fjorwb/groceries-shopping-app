@@ -2,11 +2,11 @@ import axios from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-function AddProduct(closeAddProductModal) {
+function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
 	const auth = useSelector(state => state.auth)
 	const token = auth.user.accessToken
 
-	const [inputAddProduct, setInputAddProduct] = useState({})
+	const [inputAddProduct, setInputAddProduct] = useState({ user_id: user_id })
 	const [categories, setCategories] = useState({})
 
 	// console.log(categories)
@@ -20,9 +20,13 @@ function AddProduct(closeAddProductModal) {
 		})
 	}
 
-	const handleSubmit = e => {
+	const handleAddProduct = e => {
 		e.preventDefault()
-		console.log(inputAddProduct)
+		// setInputAddProduct({ inputAddProduct })
+		createProduct()
+		setInputAddProduct({ user_id: user_id })
+		setIsUpdated(true)
+		closeAddProductModal()
 	}
 
 	const getCategories = useCallback(async () => {
@@ -31,10 +35,11 @@ function AddProduct(closeAddProductModal) {
 				headers: {
 					'content-type': 'application/json',
 					accept: 'application/json',
+					'cors-access-control': '*',
 					Authorization: `Bearer ${token}`
 				}
 			})
-			console.log(resp.data)
+			// console.log(resp.data)
 			setCategories(resp.data)
 		} catch (error) {
 			console.log(error)
@@ -45,7 +50,7 @@ function AddProduct(closeAddProductModal) {
 		setCategories(getCategories())
 	}, [getCategories])
 
-	const createProduct = useCallback(async () => {
+	const createProduct = async () => {
 		try {
 			const resp = await axios.post(
 				'https://groceries-shopping.herokuapp.com/products',
@@ -54,6 +59,7 @@ function AddProduct(closeAddProductModal) {
 					headers: {
 						'content-type': 'application/json',
 						accept: 'application/json',
+						'cors-access-control': '*',
 						Authorization: `Bearer ${token}`
 					}
 				}
@@ -62,16 +68,12 @@ function AddProduct(closeAddProductModal) {
 		} catch (error) {
 			console.log(error)
 		}
-	}, [inputAddProduct, token])
-
-	useEffect(() => {
-		createProduct()
-	}, [createProduct])
+	}
 
 	return (
 		<div>
 			<h1 className="products-title">AddProduct</h1>
-			<form className="products-form" onSubmit={handleSubmit}>
+			<form className="products-form">
 				<div className="products-input">
 					<label htmlFor="barcode">barcode</label>
 					<input
@@ -123,7 +125,19 @@ function AddProduct(closeAddProductModal) {
 						// placeholder="unit"
 					/>
 				</div>
-				{}
+				<div className="products-input">
+					<label htmlFor="presentation">presentation</label>
+					<input
+						className="product-p"
+						type="text"
+						name="presentation"
+						id="presentation"
+						onChange={handleChange}
+						defaultValue={inputAddProduct.presentation || ''}
+
+						// placeholder="unit"
+					/>
+				</div>
 				<div className="products-select">
 					<label htmlFor="category">category</label>
 					<select
@@ -146,7 +160,7 @@ function AddProduct(closeAddProductModal) {
 					<input
 						className="product-p"
 						type="text"
-						name="market"
+						name="market_id"
 						id="market"
 						onChange={handleChange}
 						defaultValue={inputAddProduct.market || ''}
@@ -167,9 +181,10 @@ function AddProduct(closeAddProductModal) {
 					/>
 				</div>
 			</form>
-			<button type="submit" className="btn products-btn" onClick={handleSubmit}>
+			<input type="button" value="add product" className="btn" onClick={handleAddProduct} />
+			{/* <button type="submit" className="btn products-btn" onClick={handleSubmit}>
 				Add Product
-			</button>
+			</button> */}
 		</div>
 	)
 }
