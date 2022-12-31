@@ -55,7 +55,7 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 
 	return (
 		<div className="markets-crud-container">
-			<form className="markets-form">
+			<div className="markets-form">
 				<div className="markets-input">
 					<label htmlFor="name">market</label>
 					<input
@@ -201,7 +201,7 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 					<input type="button" className="btn" value="edit" onClick={handleUpdateMarket} />
 					<input type="button" className="btn" value="delete" onClick={handleDeleteMarket} />
 				</div>
-			</form>
+			</div>
 		</div>
 	)
 }
