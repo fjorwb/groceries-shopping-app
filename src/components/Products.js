@@ -46,8 +46,9 @@ function Product() {
 
 	const handleEditId = (e, product) => {
 		e.preventDefault()
-		console.log(product.id)
 		setEditId(product.id)
+		getProducts({ url, token, setDataProducts, setSelectedProduct, setEditId })
+		getProduct({ url, token, setSelectedProduct, editId })
 		openEditProductModal()
 	}
 
@@ -56,12 +57,13 @@ function Product() {
 		// sortDataProducts(dataProducts)
 		getProduct({ url, token, setSelectedProduct, editId })
 		getCategories({ url, token, setProductCategories })
-	}, [editId, token, url])
-
-	useEffect(() => {
-		getProducts({ url, token, setDataProducts, setSelectedProduct, setEditId })
 		setIsUpdated(false)
-	}, [isUpdated, token, url])
+	}, [editId, token, url, isUpdated])
+
+	// useEffect(() => {
+	// 	getProducts({ url, token, setDataProducts, setSelectedProduct, setEditId })
+	// 	setIsUpdated(false)
+	// }, [isUpdated, token, url])
 
 	return (
 		<div>
@@ -87,7 +89,13 @@ function Product() {
 						</tr>
 						{Object.values(dataProducts).map(product => {
 							return (
-								<ProductReadItem key={product.id} product={product} handleEditId={handleEditId} />
+								<ProductReadItem
+									key={product.id}
+									product={product}
+									url={url}
+									token={token}
+									handleEditId={handleEditId}
+								/>
 								// <>
 								// 	{editId === product.id ? (
 								// 		<ProductEditItem
@@ -120,7 +128,8 @@ function Product() {
 					token={token}
 					closeAddProductModal={closeAddProductModal}
 					user_id={user_id}
-					// setIsUpdated={setIsUpdated}
+					productcategories={productcategories}
+					setIsUpdated={setIsUpdated}
 				/>
 			</Modal>
 			<Modal isOpen={isOpenEditProduct} closeModal={closeEditProductModal}>

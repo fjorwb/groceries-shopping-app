@@ -1,8 +1,15 @@
 import React, { memo } from 'react'
+import deleteProduct from '../services/deleteProduct'
 
 import './products.css'
 
-function ProductReadItem({ product, handleEditId }) {
+function ProductReadItem({ url, token, product, handleEditId, setIsUpdated }) {
+	const handleDelete = e => {
+		e.preventDefault()
+		deleteProduct({ url, token, id: product.id })
+		console.log('DELETE')
+	}
+
 	return (
 		<tr>
 			{/* <td>{product.id}</td> */}
@@ -18,7 +25,9 @@ function ProductReadItem({ product, handleEditId }) {
 				</button>
 			</td>
 			<td>
-				<button className="btn products-td-btn">delete</button>
+				<button className="btn products-td-btn" onClick={handleDelete}>
+					delete
+				</button>
 			</td>
 		</tr>
 	)

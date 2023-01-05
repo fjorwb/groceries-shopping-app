@@ -21,12 +21,12 @@ function EditProduct({
 	}
 
 	const [inputEditProduct, setInputEditProduct] = useState(initialForm)
-	const [categories, setCategories] = useState(productcategories)
+	// const [categories, setCategories] = useState(productcategories)
 
 	useEffect(() => {
 		setInputEditProduct(selectedProduct)
-		setCategories(productcategories)
-	}, [productcategories, selectedProduct])
+		// setCategories(productcategories)
+	}, [selectedProduct])
 
 	const handleChange = e => {
 		e.preventDefault()
@@ -41,7 +41,8 @@ function EditProduct({
 	const handleEditProduct = e => {
 		e.preventDefault()
 		// setInputAddProduct({ inputAddProduct })
-		editProduct({ url, token, id: editId, inputEditProduct })
+		console.log(inputEditProduct)
+		editProduct({ url, token, id: editId, inputEditProduct, setInputEditProduct, initialForm })
 		setInputEditProduct(initialForm)
 		setIsUpdated(true)
 		closeEditProductModal()
@@ -121,11 +122,11 @@ function EditProduct({
 						name="category"
 						id="category"
 						className="products-select"
-						defaultValue={categories.category}
+						defaultValue={productcategories.category}
 						onChange={e => handleChange(e)}>
-						{Object.values(categories).map(category => {
+						{Object.values(productcategories).map(category => {
 							return (
-								<option key={category.id} value={category.category}>
+								<option key={category.id} name="category" value={category.category}>
 									{category.category}
 								</option>
 							)

@@ -1,7 +1,16 @@
 import { useState } from 'react'
 // import { useSelector } from 'react-redux'
 
-function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
+import addProduct from '../services/addProduct'
+
+function AddProduct({
+	url,
+	token,
+	closeAddProductModal,
+	user_id,
+	productcategories,
+	setIsUpdated
+}) {
 	const [inputAddProduct, setInputAddProduct] = useState({ user_id: user_id })
 	// const [categories, setCategories] = useState({})
 
@@ -16,7 +25,8 @@ function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
 
 	const handleSubmit = e => {
 		e.preventDefault()
-		console.log(e.target)
+		addProduct({ url, token, inputAddProduct, setIsUpdated })
+		setIsUpdated(true)
 		closeAddProductModal()
 	}
 
@@ -36,7 +46,7 @@ function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
 						// placeholder="barcode"
 					/>
 				</div>
-				{/* <div className="products-input">
+				<div className="products-input">
 					<label htmlFor="name">name</label>
 					<input
 						className="product-p"
@@ -45,7 +55,6 @@ function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
 						id="name"
 						onChange={handleChange}
 						defaultValue={inputAddProduct.name || ''}
-
 						// placeholder="name"
 					/>
 				</div>
@@ -58,7 +67,6 @@ function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
 						id="description"
 						onChange={handleChange}
 						defaultValue={inputAddProduct.description || ''}
-
 						// placeholder="description"
 					/>
 				</div>
@@ -71,7 +79,6 @@ function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
 						id="descriptiuniton"
 						onChange={handleChange}
 						defaultValue={inputAddProduct.unit || ''}
-
 						// placeholder="unit"
 					/>
 				</div>
@@ -84,7 +91,6 @@ function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
 						id="presentation"
 						onChange={handleChange}
 						defaultValue={inputAddProduct.presentation || ''}
-
 						// placeholder="unit"
 					/>
 				</div>
@@ -94,11 +100,11 @@ function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
 						name="category"
 						id="category"
 						className="products-select"
-						defaultValue={categories.category}
+						// defaultValue={productcategories.category}
 						onChange={handleChange}>
-						{Object.values(categories).map(category => {
+						{Object.values(productcategories).map(category => {
 							return (
-								<option key={category.id} value={category.category}>
+								<option key={category.id} name="category" value={category.category}>
 									{category.category}
 								</option>
 							)
@@ -129,7 +135,7 @@ function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
 						defaultValue={inputAddProduct.price || ''}
 						// placeholder="price"
 					/>
-				</div> */}
+				</div>
 			</form>
 			{/* <input type="button" value="add product" className="btn" onClick={handleAddProduct} /> */}
 			<button type="submit" className="btn products-btn" onClick={handleSubmit}>
