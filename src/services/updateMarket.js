@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 async function updateMarket({ token, inputMarkets, id }) {
-	console.log('ID::::', id)
 	try {
 		const resp = await axios.put(
 			`https://groceries-shopping.herokuapp.com/markets/${id}`,

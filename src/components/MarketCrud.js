@@ -5,8 +5,6 @@ import './markets.css'
 function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 	const [inputMarkets, setInputMarkets] = useState({ user_id: user_id })
 
-	console.log(dataSelected)
-
 	const handleChange = e => {
 		e.preventDefault()
 		const { name, value } = e.target
@@ -15,8 +13,6 @@ function MarketCrud({ dataSelected, setUpdated, getMarkets, token, user_id }) {
 			[name]: value
 		})
 	}
-
-	console.log(inputMarkets)
 
 	const handleAddMarket = () => {
 		addMarket({ token, inputMarkets, setInputMarkets })

@@ -18,33 +18,65 @@ function Market() {
 	const [updated, setUpdated] = useState(false)
 
 	const getMarkets = useCallback(async () => {
-		try {
-			const resp = await axios('https://groceries-shopping.herokuapp.com/markets', {
+		await axios
+			.get('https://groceries-shopping.herokuapp.com/markets', {
 				headers: {
 					'Content-Type': 'application/json',
 					accept: 'application/json',
 					Authorization: `Bearer ${token}`
 				}
 			})
-			console.log(resp.data)
-			setDataMarkets(
-				resp.data.sort((a, b) => {
-					const ax = a.name
-					const bx = b.name
+			.then(resp => {
+				setDataMarkets(
+					resp.data.sort((a, b) => {
+						const ax = a.name
+						const bx = b.name
 
-					if (ax < bx) {
-						return -1
-					}
-					if (ax > bx) {
-						return 1
-					}
-					return 0
-				})
-			)
-			setDataSelected(resp.data[0])
-		} catch (error) {
-			console.log(error)
-		}
+						if (ax < bx) {
+							return -1
+						}
+						if (ax > bx) {
+							return 1
+						}
+						return 0
+					})
+				)
+				setDataSelected(resp.data[0])
+			})
+			.catch(error => {
+				console.log(error)
+			})
+
+		// try {
+		// 	const resp = await axios('https://groceries-shopping.herokuapp.com/markets', {
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 			accept: 'application/json',
+		// 			// 'cors-access-control': '*',
+		// 			'Access-Control-Allow-Origin': '*',
+		// 			// 'control-allow-origin': '*',
+		// 			Authorization: `Bearer ${token}`
+		// 		}
+		// 	})
+		// 	setDataMarkets(
+		// 		resp.data.sort((a, b) => {
+		// 			const ax = a.name
+		// 			const bx = b.name
+
+		// 			if (ax < bx) {
+		// 				return -1
+		// 			}
+		// 			if (ax > bx) {
+		// 				return 1
+		// 			}
+		// 			return 0
+		// 		})
+		// 	)
+		// 	setDataMarkets(resp.data)
+		// 	setDataSelected(resp.data[0])
+		// } catch (error) {
+		// 	console.log(error)
+		// }
 	}, [token])
 
 	useEffect(() => {
@@ -54,19 +86,37 @@ function Market() {
 
 	const getMarket = useCallback(
 		async id => {
-			try {
-				const resp = await axios(`https://groceries-shopping.herokuapp.com/markets/${id}`, {
+			await axios
+				.get(`https://groceries-shopping.herokuapp.com/markets/${id}`, {
 					headers: {
 						'Content-Type': 'application/json',
 						accept: 'application/json',
 						Authorization: `Bearer ${token}`
 					}
 				})
-				console.log(resp.data)
-				setDataSelected(resp.data)
-			} catch (error) {
-				console.log(error)
-			}
+				.then(resp => {
+					setDataSelected(resp.data)
+				})
+				.catch(error => {
+					console.log(error)
+				})
+
+			// try {
+			// 	const resp = await axios(`https://groceries-shopping.herokuapp.com/markets/${id}`, {
+			// 		headers: {
+			// 			'Content-Type': 'application/json',
+			// 			accept: 'application/json',
+			// 			Orign: '*',
+			// 			'Access-Control-Allow-Origin': '*',
+			// 			// 'cors-access-control': '*',
+			// 			// 'control-allow-origin': '*',
+			// 			Authorization: `Bearer ${token}`
+			// 		}
+			// 	})
+			// 	setDataSelected(resp.data)
+			// } catch (error) {
+			// 	console.log(error)
+			// }
 		},
 		[token]
 	)
