@@ -1,13 +1,16 @@
 import axios from 'axios'
 
-export async function addProduct({ url, token, inputAddProduct, setIsUpdated }) {
+export async function deleteProduct({ url, token, id, setIsUpdated }) {
 	await axios
-		.post(url + 'products', inputAddProduct, {
+		.delete(`${url}products/${id}`, {
 			headers: {
 				'Content-Type': 'application/json',
-				Accept: 'application/json',
+				accept: 'application/json',
 				Authorization: `Bearer ${token}`
 			}
+		})
+		.then(resp => {
+			console.log(resp)
 		})
 		.catch(error => {
 			console.log(error)
@@ -15,8 +18,6 @@ export async function addProduct({ url, token, inputAddProduct, setIsUpdated }) 
 		.finally(() => {
 			setIsUpdated(true)
 		})
-
-	return 'ok'
 }
 
-export default addProduct
+export default deleteProduct

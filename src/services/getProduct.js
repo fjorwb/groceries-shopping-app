@@ -5,8 +5,6 @@ export async function getProduct({ url, token, editId, setSelectedProduct }) {
 		return
 	}
 
-	console.log(`${url}products/${editId}`)
-
 	await axios
 		.get(`${url}products/${editId}`, {
 			headers: {

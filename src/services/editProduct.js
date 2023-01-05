@@ -1,9 +1,14 @@
 import axios from 'axios'
 
-export async function editProduct({ url, token, id, inputEditProduct }) {
-	console.log(id)
-	console.log(inputEditProduct)
-	console.log(`${url}products/${id}`)
+export async function editProduct({
+	url,
+	token,
+	id,
+	inputEditProduct,
+	setInputEditProduct,
+	initialForm
+}) {
+	console.log('INPUT EDIT PRODUCT', inputEditProduct)
 	await axios
 		.put(`${url}products/${id}`, inputEditProduct, {
 			headers: {
@@ -21,6 +26,7 @@ export async function editProduct({ url, token, id, inputEditProduct }) {
 		})
 		.finally(() => {
 			console.log('editProduct.js')
+			setInputEditProduct(initialForm)
 		})
 }
 
