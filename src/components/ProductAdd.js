@@ -1,15 +1,9 @@
-import axios from 'axios'
-import React, { useCallback, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useState } from 'react'
+// import { useSelector } from 'react-redux'
 
 function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
-	const auth = useSelector(state => state.auth)
-	const token = auth.user.accessToken
-
 	const [inputAddProduct, setInputAddProduct] = useState({ user_id: user_id })
-	const [categories, setCategories] = useState({})
-
-	// console.log(categories)
+	// const [categories, setCategories] = useState({})
 
 	const handleChange = e => {
 		e.preventDefault()
@@ -20,54 +14,10 @@ function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
 		})
 	}
 
-	const handleAddProduct = e => {
+	const handleSubmit = e => {
 		e.preventDefault()
-		// setInputAddProduct({ inputAddProduct })
-		createProduct()
-		setInputAddProduct({ user_id: user_id })
-		setIsUpdated(true)
+		console.log(e.target)
 		closeAddProductModal()
-	}
-
-	const getCategories = useCallback(async () => {
-		try {
-			const resp = await axios.get('https://groceries-shopping.herokuapp.com/productcategories', {
-				headers: {
-					'content-type': 'application/json',
-					accept: 'application/json',
-					'cors-access-control': '*',
-					Authorization: `Bearer ${token}`
-				}
-			})
-			// console.log(resp.data)
-			setCategories(resp.data)
-		} catch (error) {
-			console.log(error)
-		}
-	}, [token])
-
-	useEffect(() => {
-		setCategories(getCategories())
-	}, [getCategories])
-
-	const createProduct = async () => {
-		try {
-			const resp = await axios.post(
-				'https://groceries-shopping.herokuapp.com/products',
-				inputAddProduct,
-				{
-					headers: {
-						'content-type': 'application/json',
-						accept: 'application/json',
-						'cors-access-control': '*',
-						Authorization: `Bearer ${token}`
-					}
-				}
-			)
-			console.log(resp.data)
-		} catch (error) {
-			console.log(error)
-		}
 	}
 
 	return (
@@ -86,7 +36,7 @@ function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
 						// placeholder="barcode"
 					/>
 				</div>
-				<div className="products-input">
+				{/* <div className="products-input">
 					<label htmlFor="name">name</label>
 					<input
 						className="product-p"
@@ -179,12 +129,12 @@ function AddProduct({ closeAddProductModal, user_id, setIsUpdated }) {
 						defaultValue={inputAddProduct.price || ''}
 						// placeholder="price"
 					/>
-				</div>
+				</div> */}
 			</form>
-			<input type="button" value="add product" className="btn" onClick={handleAddProduct} />
-			{/* <button type="submit" className="btn products-btn" onClick={handleSubmit}>
+			{/* <input type="button" value="add product" className="btn" onClick={handleAddProduct} /> */}
+			<button type="submit" className="btn products-btn" onClick={handleSubmit}>
 				Add Product
-			</button> */}
+			</button>
 		</div>
 	)
 }

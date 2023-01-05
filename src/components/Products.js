@@ -1,84 +1,71 @@
-import axios from 'axios'
-import React, { useCallback, useEffect } from 'react'
+// import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import AddProduct from './ProductAdd'
 import EditProduct from './ProductEdit'
+
+import ProductReadItem from './ProductReadItem'
 
 import { Modal } from './Modal'
 import { useModal } from '../customHooks/useModal'
 
 import './products.css'
 
+import getProducts from '../services/getProducts'
+import getProduct from '../services/getProduct'
+import getCategories from '../services/getCategories'
+
 function Product() {
 	const auth = useSelector(state => state.auth)
 	const token = auth.user.accessToken
 	const user_id = auth.user.id
 
-	const [dataProducts, setDataProducts] = React.useState({})
-	const [isUpdated, setIsUpdated] = React.useState(false)
+	const url = useSelector(state => state.url.url)
 
-	// console.log(dataProducts)
+	const [dataProducts, setDataProducts] = useState({})
+	// const [sortedProducts, setSortedProducts] = useState(null)
+	const [selectedProduct, setSelectedProduct] = useState({})
+	const [productcategories, setProductCategories] = useState([])
+	const [editId, setEditId] = useState(null)
+	const [isUpdated, setIsUpdated] = useState(false)
+
+	// console.log('DATA PRODUCTS', dataProducts)
+	// console.log('SELECT', selectedProduct)
+	// console.log('CATEGORIES', productcategories)
+	// console.log('EDIT ID', editId)
+	// console.log(isUpdated)
 
 	const [isOpenAddProduct, openAddProductModal, closeAddProductModal] = useModal(false)
 	const [isOpenEditProduct, openEditProductModal, closeEditProductModal] = useModal(false)
 
-	const handle = () => {
-		console.log('handle')
-	}
-
-	const handleAddProduct = () => {
+	const handleAddProductModal = e => {
+		e.preventDefault()
 		openAddProductModal()
 	}
 
-	const handleEditProduct = () => {
-		console.log(dataProducts)
-		// openEditProductModal()
+	const handleEditId = (e, product) => {
+		e.preventDefault()
+		console.log(product.id)
+		setEditId(product.id)
+		openEditProductModal()
 	}
 
-	const getProducts = useCallback(async () => {
-		try {
-			const resp = await axios('https://groceries-shopping.herokuapp.com/products', {
-				headers: {
-					'Content-Type': 'application/json',
-					accept: 'application/json',
-					'cors-access-control': '*',
-					Authorization: `Bearer ${token}`
-				}
-			})
-			setDataProducts(resp.data)
-			// console.log(resp)
-		} catch (error) {
-			console.log(error)
-		}
-	}, [token])
+	useEffect(() => {
+		getProducts({ url, token, setDataProducts, setSelectedProduct, setEditId })
+		// sortDataProducts(dataProducts)
+		getProduct({ url, token, setSelectedProduct, editId })
+		getCategories({ url, token, setProductCategories })
+	}, [editId, token, url])
 
 	useEffect(() => {
-		setDataProducts(getProducts())
-	}, [getProducts, isUpdated])
-
-	// async function addProduct() {
-	// 	try {
-	// 		const resp = await axios.post(
-	// 			'https://groceries-shopping.herokuapp.com/products',
-	// 	input,
-	// 			{
-	// 				headers: {
-	// 					'Content-Type': 'application/json',
-	// 					accept: 'application/json',
-	// 					Authorization: `Bearer ${token}`
-	// 				}
-	// 			}
-	// 		)
-	// 		console.log(resp.data)
-	// 	} catch (error) {
-	// 		console.log(error)
-	// 	}
-	// }
+		getProducts({ url, token, setDataProducts, setSelectedProduct, setEditId })
+		setIsUpdated(false)
+	}, [isUpdated, token, url])
 
 	return (
 		<div>
-			<section>
+			<form>
 				<h1 className="products-title">Products</h1>
 				<table>
 					{/* <thead>
@@ -88,52 +75,64 @@ function Product() {
 					</thead> */}
 					<tbody className="product-container">
 						<tr>
+							{/* <td className="products-col-title">id</td> */}
 							<td className="products-col-title">product</td>
 							<td className="products-col-title">description</td>
 							<td className="products-col-title">unit</td>
-							<td className="products-col-title">presentation</td>
-							<td className="products-col-title">market_id</td>
-							<td className="products-col-title"></td>
+							<td className="products-col-title">pres</td>
+							<td className="products-col-title">category</td>
+							<td className="products-col-title">market id</td>
+							<td className="products-col-title">actions</td>
 							<td className="products-col-title"></td>
 						</tr>
-						{Object.values(dataProducts).map((product, index) => {
+						{Object.values(dataProducts).map(product => {
 							return (
-								<tr key={index}>
-									<td className="products-td1">{product.name}</td>
-									<td className="products-td2">{product.description}</td>
-									<td className="products-td3">{product.unit}</td>
-									<td className="products-td4">{product.presentation}</td>
-									<td className="products-td5">{product.market_id}</td>
-									<td>
-										<button className="btn products-td-btn" onClick={handleEditProduct}>
-											edit
-										</button>
-									</td>
-									<td>
-										<button className="btn products-td-btn" onClick={handle}>
-											delete
-										</button>
-									</td>
-								</tr>
+								<ProductReadItem key={product.id} product={product} handleEditId={handleEditId} />
+								// <>
+								// 	{editId === product.id ? (
+								// 		<ProductEditItem
+								// 			token={token}
+								// 			setEditId={setEditId}
+								// 			selectedProduct={selectedProduct}
+								// 			productcategories={productcategories}
+								// 		/>
+								// 	) : (
+								// 		<ProductReadItem
+								// 			key={product.id}
+								// 			product={product}
+								// 			handleEditId={handleEditId}
+								// 		/>
+								// 	)}
+								// </>
 							)
 						})}
 					</tbody>
 				</table>
-				<div>
-					<button className="btn products-btn" onClick={handleAddProduct}>
-						add product
-					</button>
-				</div>
-			</section>
+			</form>
+			<div>
+				<button className="btn products-btn" onClick={handleAddProductModal}>
+					add product
+				</button>
+			</div>
 			<Modal isOpen={isOpenAddProduct} closeModal={closeAddProductModal}>
 				<AddProduct
+					url={url}
+					token={token}
 					closeAddProductModal={closeAddProductModal}
 					user_id={user_id}
-					setIsUpdated={setIsUpdated}
+					// setIsUpdated={setIsUpdated}
 				/>
 			</Modal>
 			<Modal isOpen={isOpenEditProduct} closeModal={closeEditProductModal}>
-				<EditProduct />
+				<EditProduct
+					url={url}
+					token={token}
+					closeEditProductModal={closeEditProductModal}
+					editId={editId}
+					selectedProduct={selectedProduct}
+					productcategories={productcategories}
+					setIsUpdated={setIsUpdated}
+				/>
 			</Modal>
 		</div>
 	)
