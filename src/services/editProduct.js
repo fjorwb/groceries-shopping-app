@@ -6,7 +6,8 @@ export async function editProduct({
 	id,
 	inputEditProduct,
 	setInputEditProduct,
-	initialForm
+	initialForm,
+	setIsUpdated
 }) {
 	console.log('INPUT EDIT PRODUCT', inputEditProduct)
 	await axios
@@ -18,7 +19,7 @@ export async function editProduct({
 			}
 		})
 		.then(res => {
-			console.log(res)
+			// console.log(res)
 			console.log(res.data)
 		})
 		.catch(err => {
@@ -27,6 +28,7 @@ export async function editProduct({
 		.finally(() => {
 			console.log('editProduct.js')
 			setInputEditProduct(initialForm)
+			setIsUpdated(true)
 		})
 }
 

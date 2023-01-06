@@ -17,16 +17,17 @@ function EditProduct({
 		description: '',
 		unit: '',
 		presentation: '',
-		category: ''
+		category: ' '
 	}
 
 	const [inputEditProduct, setInputEditProduct] = useState(initialForm)
-	// const [categories, setCategories] = useState(productcategories)
+	const [categories, setCategories] = useState(productcategories)
 
 	useEffect(() => {
 		setInputEditProduct(selectedProduct)
-		// setCategories(productcategories)
-	}, [selectedProduct])
+		console.log(inputEditProduct.category)
+		setCategories(productcategories)
+	}, [inputEditProduct.category, productcategories, selectedProduct])
 
 	const handleChange = e => {
 		e.preventDefault()
@@ -41,8 +42,16 @@ function EditProduct({
 	const handleEditProduct = e => {
 		e.preventDefault()
 		// setInputAddProduct({ inputAddProduct })
-		console.log(inputEditProduct)
-		editProduct({ url, token, id: editId, inputEditProduct, setInputEditProduct, initialForm })
+		// console.log(inputEditProduct)
+		editProduct({
+			url,
+			token,
+			id: editId,
+			inputEditProduct,
+			setInputEditProduct,
+			initialForm,
+			setIsUpdated
+		})
 		setInputEditProduct(initialForm)
 		setIsUpdated(true)
 		closeEditProductModal()
@@ -122,15 +131,21 @@ function EditProduct({
 						name="category"
 						id="category"
 						className="products-select"
-						defaultValue={productcategories.category}
-						onChange={e => handleChange(e)}>
-						{Object.values(productcategories).map(category => {
-							return (
-								<option key={category.id} name="category" value={category.category}>
-									{category.category}
-								</option>
-							)
-						})}
+						defaultValue={inputEditProduct.category}
+						onChange={e => handleChange(e)}
+						autoComplete="off">
+						{Object.values(categories)
+							.sort((a, b) => a.category.localeCompare(b.category))
+							.map(category => {
+								return (
+									<option
+										key={category.id}
+										defaultValue={inputEditProduct.category}
+										value={category.category}>
+										{category.category}
+									</option>
+								)
+							})}
 					</select>
 				</div>
 				<div className="products-input">
