@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export async function deleteProduct ({ url, token, id, setIsUpdated }) {
+export const getMarkets = async ({ url, token, setDataMarkets, setDataSelected }) => {
   await axios
-    .delete(`${url}products/${id}`, {
+    .get(url + 'markets', {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
@@ -10,14 +10,15 @@ export async function deleteProduct ({ url, token, id, setIsUpdated }) {
       }
     })
     .then((resp) => {
-      console.log(resp)
+      setDataMarkets(resp.data)
+      setDataSelected(resp.data[0])
+
+      // console.log(resp.data)
+      // return resp.data
     })
     .catch((error) => {
       console.log(error)
     })
-    .finally(() => {
-      setIsUpdated(true)
-    })
 }
 
-export default deleteProduct
+export default getMarkets

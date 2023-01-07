@@ -16,63 +16,63 @@ import { Products } from './pages/products'
 import { ShoppingList } from './pages/shoppinglist'
 import { Checkout } from './pages/checkout'
 
-function App() {
-	const state = useSelector(state => state)
+function App () {
+  const state = useSelector((state) => state)
 
-	let isAllowed
-	if (state.auth.user !== null) {
-		isAllowed = true
-	} else {
-		isAllowed = false
-	}
+  let isAllowed
+  if (state.auth.user !== null) {
+    isAllowed = true
+  } else {
+    isAllowed = false
+  }
 
-	return (
-		// <Provider store={store}>
-		<Router>
-			<Routes>
-				<Route index path="/" element={<Home />} />
-				<Route element={<ProtectedRoute isAllowed={isAllowed} />}>
-					<Route path="/recipes" element={<Recipes />} />
-					<Route path="/menuplanning" element={<MenuPlanning />} />
-					<Route path="/markets" element={<Markets />} />
-					<Route path="/products" element={<Products />} />
-					<Route path="/shoppinglist" element={<ShoppingList />} />
-					<Route path="/checkout" element={<Checkout />} />
-				</Route>
-			</Routes>
-		</Router>
-		// </Provider>
-	)
+  return (
+    // <Provider store={store}>
+    <Router>
+      <Routes>
+        <Route index path='/' element={<Home />} />
+        <Route element={<ProtectedRoute isAllowed={isAllowed} />}>
+          <Route path='/recipes' element={<Recipes />} />
+          <Route path='/menuplanning' element={<MenuPlanning />} />
+          <Route path='/markets' element={<Markets />} />
+          <Route path='/products' element={<Products />} />
+          <Route path='/shoppinglist' element={<ShoppingList />} />
+          <Route path='/checkout' element={<Checkout />} />
+        </Route>
+      </Routes>
+    </Router>
+    // </Provider>
+  )
 }
 
-export function Navigation() {
-	return (
-		<nav>
-			<ul>
-				<li>
-					<Link to="/">Home</Link>
-				</li>
-				<li>
-					<Link to="/recipes">Recipes</Link>
-				</li>
-				<li>
-					<Link to="/menuplanning">Menu Planning</Link>
-				</li>
-				<li>
-					<Link to="/markets">Markets</Link>
-				</li>
-				<li>
-					<Link to="/products">Products</Link>
-				</li>
-				<li>
-					<Link to="/shoppinglist">Shopping List</Link>
-				</li>
-				<li>
-					<Link to="/checkout">Checkout</Link>
-				</li>
-			</ul>
-		</nav>
-	)
+export function Navigation () {
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link to='/'>Home</Link>
+        </li>
+        <li>
+          <Link to='/recipes'>Recipes</Link>
+        </li>
+        <li>
+          <Link to='/menuplanning'>Menu Planning</Link>
+        </li>
+        <li>
+          <Link to='/markets'>Markets</Link>
+        </li>
+        <li>
+          <Link to='/products'>Products</Link>
+        </li>
+        <li>
+          <Link to='/shoppinglist'>Shopping List</Link>
+        </li>
+        <li>
+          <Link to='/checkout'>Checkout</Link>
+        </li>
+      </ul>
+    </nav>
+  )
 }
 
 export default App

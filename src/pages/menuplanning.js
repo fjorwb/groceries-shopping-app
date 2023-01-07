@@ -5,14 +5,14 @@ import MenuPlanningCal from '../components/MenuPlanningCal'
 const Header = lazy(() => import('../components/Header'))
 // const MenuPlanningCal = lazy(() => import('../components/MenuPlanningCal'))
 
-export function MenuPlanning() {
-	return (
-		<div>
-			<Suspense>
-				<Header />
-				{/* <Footer /> */}
-			</Suspense>
-			<MenuPlanningCal />
-		</div>
-	)
+export function MenuPlanning () {
+  return (
+    <div>
+      <Suspense>
+        <Header />
+        {/* <Footer /> */}
+      </Suspense>
+      <MenuPlanningCal />
+    </div>
+  )
 }

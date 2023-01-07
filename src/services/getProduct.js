@@ -1,24 +1,24 @@
 import axios from 'axios'
 
-export async function getProduct({ url, token, editId, setSelectedProduct }) {
-	if (editId === null) {
-		return
-	}
+export async function getProduct ({ url, token, editId, setSelectedProduct }) {
+  if (editId === null) {
+    return
+  }
 
-	await axios
-		.get(`${url}products/${editId}`, {
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				Authorization: `Bearer ${token}`
-			}
-		})
-		.then(resp => {
-			setSelectedProduct(resp.data)
-		})
-		.catch(error => {
-			console.log(error)
-		})
+  await axios
+    .get(`${url}products/${editId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then((resp) => {
+      setSelectedProduct(resp.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 export default getProduct

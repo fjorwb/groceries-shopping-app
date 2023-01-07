@@ -7,12 +7,12 @@ import '../components/markets.css'
 
 const Header = lazy(() => import('../components/Header'))
 
-export function Markets() {
-	return (
-		<Suspense>
-			<Header />
-			<h1 className="markets-title">Markets</h1>
-			<Market />
-		</Suspense>
-	)
+export function Markets () {
+  return (
+    <Suspense>
+      <Header />
+      <h1 className='markets-title'>Markets</h1>
+      <Market />
+    </Suspense>
+  )
 }

@@ -1,61 +1,61 @@
 .login-form {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	margin: 1rem;
-	padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  padding: 0.5rem;
 }
 
 .login-form-inner {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
 
-	padding: 0.5rem;
-	/* margin: 0 auto; */
-	/* background-color: blueviolet; */
-	justify-content: center;
+  padding: 0.5rem;
+  /* margin: 0 auto; */
+  /* background-color: blueviolet; */
+  justify-content: center;
 }
 
 .login-form-inner-1 {
-	border-radius: 5px;
-	background: var(--clr-contrast);
-	justify-content: center;
-	/* padding: 1rem 0; */
-	margin: 0 1rem;
+  border-radius: 5px;
+  background: var(--clr-contrast);
+  justify-content: center;
+  /* padding: 1rem 0; */
+  margin: 0 1rem;
 }
 
 .login-form-inner-2 {
-	border-radius: 5px;
-	/* background: var(--clr-contrast); */
-	justify-content: center;
-	/* padding: 1rem 0; */
+  border-radius: 5px;
+  /* background: var(--clr-contrast); */
+  justify-content: center;
+  /* padding: 1rem 0; */
 }
 
 .login-input {
-	width: 100%;
-	padding: 0.5rem 0.75rem;
-	margin: 0.25rem;
-	border: 1px solid var(--clr-font);
-	border-radius: 5px;
-	font-size: 12px;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem;
+  border: 1px solid var(--clr-font);
+  border-radius: 5px;
+  font-size: 12px;
 }
 
 .login-button {
-	width: 50%;
-	padding: 0.5rem;
-	margin: 0.05rem;
-	border: 1px solid var(--clr-font);
-	border-radius: 5px;
-	background: var(--clr-contrast);
-	color: var(--clr-font-contrast);
+  width: 50%;
+  padding: 0.5rem;
+  margin: 0.05rem;
+  border: 1px solid var(--clr-font);
+  border-radius: 5px;
+  background: var(--clr-contrast);
+  color: var(--clr-font-contrast);
 }
 
 .login-title {
-	font-size: 1.5rem;
-	color: var(--clr-font);
-	text-align: center;
+  font-size: 1.5rem;
+  color: var(--clr-font);
+  text-align: center;
 }

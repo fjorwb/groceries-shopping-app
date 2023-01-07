@@ -1,145 +1,87 @@
-import axios from 'axios'
-import React, { useCallback, useEffect, useState } from 'react'
+/* eslint-disable no-tabs */
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable camelcase */
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
+import getMarkets from '../services/getMarkets'
+import getMarket from '../services/getMarket'
+
 import MarketCrud from './MarketCrud'
+import MarketAdd from './MarketAdd'
 import MarketList from './MarketList'
 
 import './markets.css'
 
-function Market() {
-	const auth = useSelector(state => state.auth)
-	const token = auth.user.accessToken
-	const user_id = auth.user.id
+function Market () {
+  const state = useSelector((state) => state)
+  const token = state.auth.user.accessToken
+  const user_id = state.auth.user.id
 
-	const [dataMarkets, setDataMarkets] = useState({})
-	const [dataSelected, setDataSelected] = useState({})
-	const [id, setId] = useState('')
-	const [updated, setUpdated] = useState(false)
+  const url = state.url.url
 
-	const getMarkets = useCallback(async () => {
-		await axios
-			.get('https://groceries-shopping.herokuapp.com/markets', {
-				headers: {
-					'Content-Type': 'application/json',
-					accept: 'application/json',
-					Authorization: `Bearer ${token}`
-				}
-			})
-			.then(resp => {
-				setDataMarkets(
-					resp.data.sort((a, b) => {
-						const ax = a.name
-						const bx = b.name
+  const [dataMarkets, setDataMarkets] = useState({})
+  const [dataSelected, setDataSelected] = useState({})
+  const [id, setId] = useState(1)
+  const [updated, setUpdated] = useState(false)
+  const [marketForm, setMarketForm] = useState(false)
 
-						if (ax < bx) {
-							return -1
-						}
-						if (ax > bx) {
-							return 1
-						}
-						return 0
-					})
-				)
-				setDataSelected(resp.data[0])
-			})
-			.catch(error => {
-				console.log(error)
-			})
+  // console.log(dataSelected)
 
-		// try {
-		// 	const resp = await axios('https://groceries-shopping.herokuapp.com/markets', {
-		// 		headers: {
-		// 			'Content-Type': 'application/json',
-		// 			accept: 'application/json',
-		// 			// 'cors-access-control': '*',
-		// 			'Access-Control-Allow-Origin': '*',
-		// 			// 'control-allow-origin': '*',
-		// 			Authorization: `Bearer ${token}`
-		// 		}
-		// 	})
-		// 	setDataMarkets(
-		// 		resp.data.sort((a, b) => {
-		// 			const ax = a.name
-		// 			const bx = b.name
+  useEffect(() => {
+    // console.log('markets!')
+    getMarkets({ url, token, setDataMarkets, setDataSelected })
+    setUpdated(false)
+  }, [token, url, updated])
 
-		// 			if (ax < bx) {
-		// 				return -1
-		// 			}
-		// 			if (ax > bx) {
-		// 				return 1
-		// 			}
-		// 			return 0
-		// 		})
-		// 	)
-		// 	setDataMarkets(resp.data)
-		// 	setDataSelected(resp.data[0])
-		// } catch (error) {
-		// 	console.log(error)
-		// }
-	}, [token])
+  useEffect(() => {
+    // console.log(id)
+    // console.log('market')
+    getMarket({ url, token, id, setDataSelected })
+    // setUpdated(false)
+  }, [id, token, url])
 
-	useEffect(() => {
-		setDataMarkets(getMarkets())
-		setUpdated(false)
-	}, [getMarkets, token, updated])
+  useEffect(() => {
+    if (updated) {
+      console.log(id)
+      // console.log('update')
+      getMarkets({ url, token, setDataMarkets, setDataSelected })
+      getMarket({ url, token, id, setDataSelected })
+      setUpdated(false)
+    }
+  }, [id, token, updated, url])
 
-	const getMarket = useCallback(
-		async id => {
-			await axios
-				.get(`https://groceries-shopping.herokuapp.com/markets/${id}`, {
-					headers: {
-						'Content-Type': 'application/json',
-						accept: 'application/json',
-						Authorization: `Bearer ${token}`
-					}
-				})
-				.then(resp => {
-					setDataSelected(resp.data)
-				})
-				.catch(error => {
-					console.log(error)
-				})
+  return (
+    <div className='markets-container'>
+      <MarketList
+        dataMarkets={dataMarkets}
+        getMarket={getMarket}
+        url={url}
+        token={token}
+        setDataSelected={setDataSelected}
+        setId={setId}
+        setUpdated={setUpdated}
+      />
 
-			// try {
-			// 	const resp = await axios(`https://groceries-shopping.herokuapp.com/markets/${id}`, {
-			// 		headers: {
-			// 			'Content-Type': 'application/json',
-			// 			accept: 'application/json',
-			// 			Orign: '*',
-			// 			'Access-Control-Allow-Origin': '*',
-			// 			// 'cors-access-control': '*',
-			// 			// 'control-allow-origin': '*',
-			// 			Authorization: `Bearer ${token}`
-			// 		}
-			// 	})
-			// 	setDataSelected(resp.data)
-			// } catch (error) {
-			// 	console.log(error)
-			// }
-		},
-		[token]
-	)
-
-	useEffect(() => {
-		setDataSelected(getMarket(id))
-		setUpdated(false)
-	}, [getMarket, id])
-
-	return (
-		<div className="markets-container">
-			<MarketList dataMarkets={dataMarkets} setId={setId} />
-			<MarketCrud
-				dataSelected={dataSelected}
-				// setDataMarkets={setDataMarkets}
-				setUpdated={setUpdated}
-				setId={setId}
-				getMarkets={getMarkets}
-				token={token}
-				user_id={user_id}
-			/>
-		</div>
-	)
+      {marketForm
+        ? (
+        <MarketAdd setMarketForm={setMarketForm} setUpdated={setUpdated} />
+          )
+        : (
+        <MarketCrud
+          marketForm={marketForm}
+          setMarketForm={setMarketForm}
+          id={id}
+          url={url}
+          token={token}
+          dataSelected={dataSelected}
+          setUpdated={setUpdated}
+          setId={setId}
+          user_id={user_id}
+        />
+          )}
+    </div>
+  )
 }
 
 export default Market

@@ -1,53 +1,53 @@
 .rbc-calendar {
-	background: var(--clr-background);
-	color: var(--clr-font);
+  background: var(--clr-background);
+  color: var(--clr-font);
 }
 
 .rbc-current-time-indicator {
-	display: none;
+  display: none;
 }
 .rbc-row {
-	display: flex;
-	min-height: fit-content;
-	line-height: 1rem;
-	z-index: 10;
+  display: flex;
+  min-height: fit-content;
+  line-height: 1rem;
+  z-index: 10;
 }
 
 .rbc-header {
-	display: flex;
-	justify-content: center;
-	background: var(--clr-contrast);
-	color: var(--clr-font-contrast);
-	min-height: 2rem;
+  display: flex;
+  justify-content: center;
+  background: var(--clr-contrast);
+  color: var(--clr-font-contrast);
+  min-height: 2rem;
 }
 
 .rbc-label {
-	display: none;
+  display: none;
 }
 
 .rbc-event {
-	background-color: var(--clr-contrast);
-	background: var(--clr-background);
-	padding: 0.015rem;
+  background-color: var(--clr-contrast);
+  background: var(--clr-background);
+  padding: 0.015rem;
 
-	border: none;
+  border: none;
 }
 
 .rbc-event-content {
-	background: var(--clr-contrast);
-	padding: 0.5rem;
+  background: var(--clr-contrast);
+  padding: 0.5rem;
 }
 
 .rbc-selected-cell {
-	background-color: var(--clr-font-contrast);
-	justify-content: center;
-	align-items: center;
+  background-color: var(--clr-font-contrast);
+  justify-content: center;
+  align-items: center;
 }
 
 .rbc-event-label {
-	display: none;
+  display: none;
 }
 
 .rbc-event-content {
-	font-size: 12px;
+  font-size: 12px;
 }
