@@ -1,6 +1,7 @@
+/* eslint-disable space-before-function-paren */
 import './markets.css'
 
-export function MarketList ({
+export function MarketList({
   url,
   token,
   dataMarkets,
@@ -12,7 +13,7 @@ export function MarketList ({
   const handleSelected = (id) => {
     setId(Number(id))
     setDataSelected(getMarket({ url, token, id, setDataSelected }))
-    console.log(id)
+    // console.log(id)
     // setUpdated(true)
     // console.log(dataMarkets)
   }

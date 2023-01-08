@@ -1,6 +1,7 @@
+/* eslint-disable space-before-function-paren */
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { deleteMarket, updateMarket } from '../services'
 import './markets.css'
 
@@ -18,7 +19,7 @@ import './markets.css'
 // password: ''
 // }
 
-function MarketCrud ({
+function MarketCrud({
   setMarketForm,
   dataSelected,
   setUpdated,
@@ -28,8 +29,8 @@ function MarketCrud ({
   user_id,
   id
 }) {
-  console.log(id)
-  console.log(dataSelected)
+  // console.log(id)
+  // console.log(dataSelected)
 
   const [inputMarkets, setInputMarkets] = useState({ user_id })
   // const [isAdded, setIsAdded] = useState(false)
@@ -89,7 +90,17 @@ function MarketCrud ({
   // isAdded = false
   // }, [isAdded])
 
-  function handleChange (e) {
+  const formRef = useRef()
+
+  function resetForm() {
+    formRef.current.reset()
+  }
+
+  useEffect(() => {
+    resetForm()
+  }, [])
+
+  function handleChange(e) {
     e.preventDefault()
     const { name, value } = e.target
     // console.log(inputMarkets)
@@ -145,6 +156,7 @@ function MarketCrud ({
       <form
         name='formCRUD'
         className='markets-form'
+        ref={formRef}
         autoComplete='off'
         style={{ background: 'yellow' }}
       >

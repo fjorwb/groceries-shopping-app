@@ -1,3 +1,5 @@
+/* eslint-disable multiline-ternary */
+/* eslint-disable space-before-function-paren */
 /* eslint-disable no-tabs */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable camelcase */
@@ -13,7 +15,7 @@ import MarketList from './MarketList'
 
 import './markets.css'
 
-function Market () {
+function Market() {
   const state = useSelector((state) => state)
   const token = state.auth.user.accessToken
   const user_id = state.auth.user.id
@@ -63,11 +65,15 @@ function Market () {
         setUpdated={setUpdated}
       />
 
-      {marketForm
-        ? (
-        <MarketAdd setMarketForm={setMarketForm} setUpdated={setUpdated} />
-          )
-        : (
+      {marketForm ? (
+        <MarketAdd
+          url={url}
+          token={token}
+          setMarketForm={setMarketForm}
+          setUpdated={setUpdated}
+          user_id={user_id}
+        />
+      ) : (
         <MarketCrud
           marketForm={marketForm}
           setMarketForm={setMarketForm}
@@ -79,7 +85,7 @@ function Market () {
           setId={setId}
           user_id={user_id}
         />
-          )}
+      )}
     </div>
   )
 }

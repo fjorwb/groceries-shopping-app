@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable space-before-function-paren */
 import { useEffect, useState } from 'react'
-// import { addMarket } from '../services'
+import { addMarket } from '../services'
 import './markets.css'
 
 const initialInputMarkets = {
@@ -30,7 +30,7 @@ function MarketAdd({
   id,
   setDataSelected
 }) {
-  // console.log(dataSelected)
+  // console.log(user_id)
 
   const [inputMarkets, setInputMarkets] = useState({ user_id })
   // const [isAdded, setIsAdded] = useState(false)
@@ -87,6 +87,12 @@ function MarketAdd({
   // }
   // }, [isAdded])
 
+  // const formRef = useRef()
+
+  // function resetForm() {
+  //   formRef.current.reset()
+  // }
+
   const handleChange = (e) => {
     e.preventDefault()
     const { name, value } = e.target
@@ -100,14 +106,18 @@ function MarketAdd({
 
   const handleAddMarket = (e) => {
     e.preventDefault()
+    console.log(inputMarkets)
     setMarketForm(false)
-    // setInputMarkets({
-    // ...inputMarkets,
-    // user_id: user_id
-    // })
-    // addMarket({ url, token, inputMarkets, setUpdated })
+    setInputMarkets({
+      ...inputMarkets,
+      user_id
+    })
+    console.log(inputMarkets)
+    console.log(url, token, inputMarkets, setUpdated)
+    addMarket({ url, token, inputMarkets, setUpdated })
+    // resetForm()
     // setIsAdded(true)
-    // setInputMarkets({ user_id: user_id })
+    setInputMarkets({ user_id })
   }
 
   const handleDeleteMarket = () => {

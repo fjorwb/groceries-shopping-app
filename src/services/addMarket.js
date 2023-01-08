@@ -1,6 +1,7 @@
+/* eslint-disable space-before-function-paren */
 import axios from 'axios'
 
-async function addMarket ({ url, token, inputMarkets, setUpdated }) {
+async function addMarket({ url, token, inputMarkets, setUpdated }) {
   console.log(url + 'markets')
   console.log(inputMarkets)
   await axios
