@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import styles from '../styles/styles.module.css'
 import logo from '../images/logo.png'
 
 import { Link } from 'react-router-dom'
 
-export function Navbar () {
+export function Navbar() {
   return (
     <div className={styles.navbarcontainer}>
       <div>

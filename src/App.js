@@ -1,4 +1,4 @@
-import React from 'react'
+/* eslint-disable space-before-function-paren */
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
@@ -16,7 +16,7 @@ import { Products } from './pages/products'
 import { ShoppingList } from './pages/shoppinglist'
 import { Checkout } from './pages/checkout'
 
-function App () {
+function App() {
   const state = useSelector((state) => state)
 
   let isAllowed
@@ -45,7 +45,7 @@ function App () {
   )
 }
 
-export function Navigation () {
+export function Navigation() {
   return (
     <nav>
       <ul>

@@ -2,9 +2,13 @@
 
 import axios from 'axios'
 
-export async function getMenus({ url, token, setDataMenu }) {
+export async function getIngredients({ url, token, setDataIngredients }) {
+  console.log(url)
+  console.log(token)
+  console.log(setDataIngredients)
+
   await axios
-    .get(`${url}menus`, {
+    .get(`${url}ingredients`, {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
@@ -12,11 +16,12 @@ export async function getMenus({ url, token, setDataMenu }) {
       }
     })
     .then((resp) => {
-      setDataMenu(resp.data)
+      console.log(resp.data)
+      setDataIngredients(resp.data)
     })
     .catch((error) => {
       console.log(error)
     })
 }
 
-export default getMenus
+export default getIngredients

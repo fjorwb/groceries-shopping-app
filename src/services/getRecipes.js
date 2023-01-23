@@ -1,8 +1,11 @@
+/* eslint-disable camelcase */
 import axios from 'axios'
 
-export const getMarkets = async ({ url, token, setDataMarkets, setDataSelected }) => {
+/* eslint-disable space-before-function-paren */
+async function getRecipes({ url, token, setDataRecipe }) {
   await axios
-    .get(url + 'markets', {
+
+    .get(`${url}recipes`, {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
@@ -10,15 +13,11 @@ export const getMarkets = async ({ url, token, setDataMarkets, setDataSelected }
       }
     })
     .then((resp) => {
-      setDataMarkets(resp.data)
-      setDataSelected(resp.data[0])
-
-      // console.log(resp.data)
-      return resp.data
+      setDataRecipe(resp.data)
     })
     .catch((error) => {
       console.log(error)
     })
 }
 
-export default getMarkets
+export default getRecipes

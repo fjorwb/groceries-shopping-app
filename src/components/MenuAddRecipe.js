@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable space-before-function-paren */
 /* eslint-disable camelcase */
 import { useEffect, useState } from 'react'
@@ -9,7 +10,7 @@ import { addToMenu } from '../services'
 
 import './MenuAddRecipe.css'
 
-function MenuAddRecipe({ recipe, user_id, token, closeMenuModal }) {
+function MenuAddRecipe({ recipe, user_id, url, token, closeMenuModal }) {
   const serves = recipe && recipe.recipe.servings
 
   const [servings, setServings] = useState(serves)
@@ -25,6 +26,7 @@ function MenuAddRecipe({ recipe, user_id, token, closeMenuModal }) {
 
   const onSubmit = (data) => {
     const week = getWeekNumber(data.date)
+    console.log(data.date)
     data = {
       ...data,
       recipe_id: recipe.recipe.id,
@@ -36,7 +38,7 @@ function MenuAddRecipe({ recipe, user_id, token, closeMenuModal }) {
       user_id
     }
     closeMenuModal()
-    addToMenu(data, token)
+    addToMenu(data, url, token)
   }
 
   return (

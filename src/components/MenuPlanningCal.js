@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useMemo, useState, memo } from 'react'
+import { useCallback, useEffect, useMemo, useState, memo } from 'react'
 
 import { Calendar, Views, dateFnsLocalizer } from 'react-big-calendar'
 
@@ -23,10 +23,12 @@ const DnDCalendar = withDragAndDrop(Calendar)
 
 export const MenuPlanningCal = memo(() => {
   // export default function MenuPlanning() {
-  const auth = useSelector((state) => state.auth.user)
+  const state = useSelector((state) => state)
 
-  const token = auth.accessToken
+  const token = state.auth.user.accessToken
   // const user_id = auth.id
+
+  const url = state.url.url
 
   const [isOpenMenuCrud, openMenuCrudModal, closeMenuCrudModal] = useModal(false)
 
@@ -53,14 +55,14 @@ export const MenuPlanningCal = memo(() => {
     // console.log(meal)
     // console.log(title)
 
-    setMenuCrud({ id: event.id, token })
+    setMenuCrud({ id: event.id, url, token })
 
     openMenuCrudModal()
   }
 
   const getMenus = useCallback(async () => {
     try {
-      const resp = await axios('https://groceries-shopping.herokuapp.com/menus', {
+      const resp = await axios(`${url}menus`, {
         headers: {
           'Content-Type': 'application/json',
           accept: 'application/json',
@@ -72,7 +74,7 @@ export const MenuPlanningCal = memo(() => {
     } catch (error) {
       console.log(error)
     }
-  }, [token])
+  }, [token, url])
 
   useEffect(() => {
     setDataMenu(getMenus(token))
@@ -84,11 +86,18 @@ export const MenuPlanningCal = memo(() => {
     let date, day, month, year, startDate, endDate
 
     const events = Object.values(dataMenu).map((menu) => {
+      if (menu.user_id !== state.auth.user.id) {
+        return null
+      }
+      // console.log(menu)
+
       date = menu.date
 
-      day = new Date(date).getDate()
+      day = new Date(date).getDate() + 1
       month = new Date(date).getMonth()
       year = new Date(date).getFullYear()
+
+      // console.log(day, month, year)
 
       if (menu.meal === 'breakfast') {
         startDate = new Date(year, month, day, 8)
@@ -120,7 +129,7 @@ export const MenuPlanningCal = memo(() => {
     })
     // setMyEvents(events)
     return events
-  }, [dataMenu])
+  }, [dataMenu, state.auth.user.id])
 
   useEffect(() => {
     setMyEvents(changeMenuData)
@@ -139,9 +148,9 @@ export const MenuPlanningCal = memo(() => {
         return [...filtered, { ...existing, start, end, allDay }]
       })
 
-      updateMenu(event.id, start, event.meal, token)
+      updateMenu(event.id, start, event.meal, url, token)
     },
-    [token]
+    [token, url]
   )
 
   const defaultDate = useMemo(() => new Date(), [])
@@ -156,7 +165,7 @@ export const MenuPlanningCal = memo(() => {
         views={{ month: true, week: true }}
         style={{ height: 400, margin: '50px' }}
         onEventDrop={moveEvent}
-        max={new Date(2022, 11, 10, 20, 0, 0)}
+        max={new Date(2100, 11, 10, 20, 0, 0)}
         min={new Date(2020, 11, 10, 8, 0, 0)}
         timeslots={1}
         step={240}

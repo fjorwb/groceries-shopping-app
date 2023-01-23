@@ -1,8 +1,9 @@
+/* eslint-disable space-before-function-paren */
 import axios from 'axios'
 
-export async function addToMenu (data, token) {
+export async function addToMenu(data, url, token) {
   try {
-    const resp = await axios('https://groceries-shopping.herokuapp.com/menus', {
+    const resp = await axios(`${url}menus`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

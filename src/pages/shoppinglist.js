@@ -5,7 +5,7 @@ import CreateShoppingList from '../components/CreateShoppingList'
 
 const Header = lazy(() => import('../components/Header'))
 
-export function ShoppingList () {
+export function ShoppingList() {
   return (
     <div>
       <Suspense>

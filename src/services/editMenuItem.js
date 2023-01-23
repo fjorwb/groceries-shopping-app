@@ -1,10 +1,12 @@
+/* eslint-disable space-before-function-paren */
 import axios from 'axios'
 
-export async function editMenuItem ({
+export async function editMenuItem({
   id,
   date,
   meal,
   servings,
+  url,
   token,
   closeMenuCrudModal,
   setIsUpdated
@@ -27,7 +29,7 @@ export async function editMenuItem ({
   }
 
   await axios.put(
-    `https://groceries-shopping.herokuapp.com/menus/${id}`,
+    `${url}menus/${id}`,
     {
       date: dat,
       meal,

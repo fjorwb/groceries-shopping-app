@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable space-before-function-paren */
 import axios from 'axios'
 import { useEffect, useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -5,8 +7,8 @@ import { deleteMenuItem, editMenuItem } from '../services'
 
 import './MenuPlanningCRUD.css'
 
-function MenuPlanningCRUD ({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpdated }) {
-  const { id, token } = menuCrud
+function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpdated }) {
+  const { id, url, token } = menuCrud
 
   const [menuItem, setMenuItem] = useState({})
   const [servings, setServings] = useState(menuItem.servings || 0)
@@ -39,23 +41,26 @@ function MenuPlanningCRUD ({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUp
     }
   }
 
-  const getMenuItem = useCallback(async (id, token) => {
-    if (id === undefined || token === undefined) return
-    try {
-      const resp = await axios(`https://groceries-shopping.herokuapp.com/menus/${id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          accept: 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      })
-      const sss = { ...resp.data, date: resp.data.date.slice(0, 10) }
-      setMenuItem(sss)
-      return resp.data
-    } catch (error) {
-      console.log(error.message)
-    }
-  }, [])
+  const getMenuItem = useCallback(
+    async (id, token) => {
+      if (id === undefined || token === undefined) return
+      try {
+        const resp = await axios(`${url}menus/${id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            accept: 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        })
+        const sss = { ...resp.data, date: resp.data.date.slice(0, 10) }
+        setMenuItem(sss)
+        return resp.data
+      } catch (error) {
+        console.log(error.message)
+      }
+    },
+    [url]
+  )
 
   useEffect(() => {
     setMenuItem(getMenuItem(id, token))
@@ -126,6 +131,7 @@ function MenuPlanningCRUD ({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUp
                 date: menuItem.date,
                 meal: menuItem.meal,
                 servings,
+                url,
                 token,
                 closeMenuCrudModal,
                 setIsUpdated
@@ -138,7 +144,7 @@ function MenuPlanningCRUD ({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUp
             type='submit'
             className='menuCRUD-btn'
             onClick={() =>
-              deleteMenuItem({ id: menuItem.id, token, setIsDeleted, closeMenuCrudModal })
+              deleteMenuItem({ id: menuItem.id, url, token, setIsDeleted, closeMenuCrudModal })
             }
           >
             delete

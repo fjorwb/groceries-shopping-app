@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
 /* eslint-disable space-before-function-paren */
 import { useEffect, useState } from 'react'

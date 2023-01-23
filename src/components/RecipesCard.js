@@ -2,6 +2,7 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable camelcase */
 // import axios from 'axios'
+
 import React, { useEffect, useState, lazy, Suspense } from 'react'
 import { useSelector } from 'react-redux'
 import { useFetch } from '../customHooks/useFetch'
@@ -15,15 +16,16 @@ import './RecipesCard.css'
 
 import RecipeDetails from './RecipeDetails'
 import deleteRecipe from '../services/deleteRecipe'
-// import MenuAddRecipe from './MenuAddRecipe'
 
 const MenuAddRecipe = lazy(() => import('./MenuAddRecipe'))
 
 function RecipesCard() {
-  const auth = useSelector((state) => state.auth.user)
+  const state = useSelector((state) => state)
 
-  const token = auth.accessToken
-  const user_id = auth.id
+  const token = state.auth.user.accessToken
+  const user_id = state.auth.user.id
+
+  const url = state.url.url
 
   const [recipeName, setRecipeName] = useState('')
   const [cuisine, setCuisine] = useState('')
@@ -31,7 +33,7 @@ function RecipesCard() {
   const [recipesBook, setRecipesBook] = useState('external book')
   const [extid, setExtid] = useState(null)
   const [recipe, setRecipe] = useState()
-  const [url, setUrl] = useState('recipes')
+  const [urlRecipe, setRecipeUrl] = useState('recipes')
 
   const [isOpen, openModal, closeModal] = useModal(false)
   const [isOpenMenu, openMenuModal, closeMenuModal] = useModal(false)
@@ -72,30 +74,30 @@ function RecipesCard() {
   useEffect(() => {
     if (recipesBook === 'own book') {
       // url = `recipes`
-      setUrl('recipes')
+      setRecipeUrl('recipes')
     } else if (recipesBook === 'external book') {
       switch (recipeName && cuisine) {
         case recipeName && cuisine:
           // url = `recipes/recipes?recipe=${recipeName}&cuisine=${cuisine}`
-          setUrl(`recipes/recipes?recipe=${recipeName}&cuisine=${cuisine}`)
+          setRecipeUrl(`recipes/recipes?recipe=${recipeName}&cuisine=${cuisine}`)
           break
         case recipeName:
           // url = `recipes/recipes?recipe=${recipeName}`
-          setUrl(`recipes/recipes?recipe=${recipeName}`)
+          setRecipeUrl(`recipes/recipes?recipe=${recipeName}`)
           break
         case cuisine:
           // url = `recipes/recipes?cuisine=${cuisine}`
-          setUrl(`recipes/recipes?cuisine=${cuisine}`)
+          setRecipeUrl(`recipes/recipes?cuisine=${cuisine}`)
           break
         default:
           // url = `recipes/${user_id}`
-          setUrl(`recipes/${user_id}`)
+          setRecipeUrl(`recipes/${user_id}`)
           break
       }
     }
   }, [url, recipesBook, recipeName, cuisine, user_id])
 
-  const { fetchData, loading } = useFetch(url, token)
+  const { fetchData, loading } = useFetch(urlRecipe, token)
 
   return (
     <div>
@@ -163,7 +165,7 @@ function RecipesCard() {
                   {recipesBook === 'own book' ? (
                     <button
                       className='recipe-btn'
-                      onClick={() => deleteRecipe({ id: recipe.id, token, setRecipesBook })}
+                      onClick={() => deleteRecipe({ id: recipe.id, url, token, setRecipesBook })}
                     >
                       delete recipe
                     </button>
@@ -194,6 +196,7 @@ function RecipesCard() {
             recipe={recipe}
             // serves={recipe.recipe.servings}
             user_id={user_id}
+            url={url}
             token={token}
             closeMenuModal={closeMenuModal}
           />

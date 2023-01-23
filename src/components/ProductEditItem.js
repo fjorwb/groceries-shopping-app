@@ -1,6 +1,4 @@
-/* eslint-disable no-tabs */
-/* eslint-disable space-before-function-paren */
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import './products.css'
 

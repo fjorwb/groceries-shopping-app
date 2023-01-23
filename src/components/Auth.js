@@ -1,4 +1,7 @@
-import React, { useState, useEffect, lazy } from 'react'
+/* eslint-disable multiline-ternary */
+/* eslint-disable space-before-function-paren */
+/* eslint-disable indent */
+import { useState, useEffect, lazy } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { login, logout } from '../actions/authActions'
 
@@ -12,7 +15,7 @@ const Modal = lazy(() => import('./Modal'))
 const LoginForm = lazy(() => import('./LoginForm'))
 const RegisterForm = lazy(() => import('./RegisterForm'))
 
-export function Auth () {
+export function Auth() {
   const state = useSelector((state) => state)
 
   const { auth } = state
@@ -40,21 +43,19 @@ export function Auth () {
     <div>
       <div className='auth-container'>
         <div>
-          {!isLogedIn
-            ? (
+          {!isLogedIn ? (
             <div>
               <button onClick={openLoginModal} className='auth-btn'>
                 login
               </button>
             </div>
-              )
-            : (
+          ) : (
             <div>
               <button onClick={() => setData(null)} className='auth-btn'>
                 logout
               </button>
             </div>
-              )}
+          )}
         </div>
         <span>|</span>
         <button onClick={openRegisterModal} className='auth-btn'>

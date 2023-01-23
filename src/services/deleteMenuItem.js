@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export const deleteMenuItem = async ({ id, token, setIsDeleted, closeMenuCrudModal }) => {
-  await axios.delete(`https://groceries-shopping.herokuapp.com/menus/${id}`, {
+export const deleteMenuItem = async ({ id, url, token, setIsDeleted, closeMenuCrudModal }) => {
+  await axios.delete(`${url}menus/${id}`, {
     headers: {
       'Content-Type': 'application/json',
       accept: 'application/json',

@@ -31,7 +31,6 @@ function Market() {
   // console.log(dataSelected)
 
   useEffect(() => {
-    // console.log('markets!')
     getMarkets({ url, token, setDataMarkets, setDataSelected })
     setUpdated(false)
   }, [token, url, updated])

@@ -1,4 +1,4 @@
-import getMenusX from './getMenus'
+import getMenus from './getMenus'
 import editMenuItem from './editMenuItem'
 import updateMenu from './updateMenu'
 import addToMenu from './addToMenu'
@@ -8,7 +8,7 @@ import deleteMarket from './deleteMarket'
 import updateMarket from './updateMarket'
 
 export {
-  getMenusX,
+  getMenus,
   editMenuItem,
   updateMenu,
   addToMenu,

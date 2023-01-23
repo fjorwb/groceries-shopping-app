@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable space-before-function-paren */
 import './Modal.css'
 
-export function Modal ({ children, isOpen, closeModal }) {
+export function Modal({ isOpen, closeModal }) {
   const handleModalClick = (e) => e.stopPropagation()
   return (
     <div>
@@ -9,7 +11,6 @@ export function Modal ({ children, isOpen, closeModal }) {
           <button className='modal-close' onClick={closeModal}>
             X
           </button>
-          {children}
         </div>
       </article>
     </div>

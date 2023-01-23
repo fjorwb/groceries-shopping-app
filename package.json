@@ -1,63 +1,43 @@
 {
-	"name": "groceries-shopping",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@reduxjs/toolkit": "^1.9.0",
-		"@testing-library/jest-dom": "^5.16.5",
-		"@testing-library/react": "^13.4.0",
-		"@testing-library/user-event": "^14.4.3",
-		"axios": "^1.2.0",
-		"date-fns": "^2.29.3",
-		"eslint-config-react-app": "^7.0.1",
-		"framer-motion": "^7.10.2",
-		"moment": "^2.29.4",
-		"react": "^18.2.0",
-		"react-big-calendar": "^1.5.2",
-		"react-dom": "^18.2.0",
-		"react-hook-form": "^7.40.0",
-		"react-redux": "^8.0.5",
-		"react-router-dom": "^6.4.3",
-		"react-scripts": "^5.0.1",
-		"serve": "^14.1.2",
-		"web-vitals": "^2.1.4"
-	},
-	"scripts": {
-		"start": "serve -s build",
-		"dev": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
-		"lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
-		"format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	},
-	"devDependencies": {
-		"eslint": "^8.31.0",
-		"eslint-config-standard": "^17.0.0",
-		"eslint-plugin-import": "^2.26.0",
-		"eslint-plugin-n": "^15.6.0",
-		"eslint-plugin-promise": "^6.1.1",
-		"eslint-plugin-react": "^7.31.11",
-		"prettier": "2.8.2",
-		"standard": "^17.0.0"
-	}
+  "name": "groceries-shopping",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "1.9.0",
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "13.4.0",
+    "@testing-library/user-event": "14.4.3",
+    "axios": "1.2.0",
+    "date-fns": "2.29.3",
+    "framer-motion": "7.10.2",
+    "moment": "2.29.4",
+    "react": "18.2.0",
+    "react-big-calendar": "1.5.2",
+    "react-dom": "18.2.0",
+    "react-hook-form": "7.40.0",
+    "react-redux": "8.0.5",
+    "react-router-dom": "6.4.3",
+    "react-scripts": "5.0.1",
+    "serve": "14.1.2",
+    "web-vitals": "2.1.4"
+  },
+  "scripts": {
+    "start": "serve -s build",
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

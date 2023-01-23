@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable space-before-function-paren */
 import './markets.css'
 
@@ -20,7 +21,7 @@ export function MarketList({
 
   return (
     <div className='markets-list-container'>
-      <h1>MARKETS</h1>
+      <h1>MARKETS 😀</h1>
       {Object.values(dataMarkets)
         .sort((a, b) => a.name.localeCompare(b.name))
         .map((market) => {

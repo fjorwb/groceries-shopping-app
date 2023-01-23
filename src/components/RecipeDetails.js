@@ -1,5 +1,5 @@
-/* eslint-disable camelcase */
-/* eslint-disable space-before-function-paren */
+import React from 'react'
+
 import axios from 'axios'
 import { useFetch } from '../customHooks/useFetch'
 
@@ -42,7 +42,8 @@ function RecipeDetails({ extid, user_id, token, closeModal }) {
   async function addRecipe() {
     try {
       const resp = await axios.post(
-        'https://groceries-shopping.herokuapp.com/recipes',
+        // 'https://groceries-shopping.herokuapp.com/recipes',
+        'http://localhost:5000/recipes',
         {
           idext: idext || '',
           title: title || '',
@@ -68,12 +69,14 @@ function RecipeDetails({ extid, user_id, token, closeModal }) {
   async function addIngredients() {
     try {
       const resp = await axios.post(
-        'https://groceries-shopping.herokuapp.com/ingredients',
+        'http://localhost:5000/ingredients',
+        // 'https://groceries-shopping.herokuapp.com/ingredients',
         {
           idext: idext || '',
           ingredients: ingredients || '',
           servings: servings || '',
-          instructions: instructions || ''
+          instructions: instructions || '',
+          user_id
         },
         {
           headers: {
@@ -122,7 +125,9 @@ function RecipeDetails({ extid, user_id, token, closeModal }) {
               {ingredients?.map((ingredient, index) => {
                 return (
                   <div key={index}>
-                    <h4>{ingredient.ingredient}</h4>
+                    <h4>
+                      {ingredient.ingredient} / {ingredient.unit} / {ingredient.amount}
+                    </h4>
                   </div>
                 )
               })}

@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 // eslint-disable-next-line space-before-function-paren
-export async function updateMenu(id, date, meal, token) {
+export async function updateMenu(id, date, meal, url, token) {
+  console.log(date)
   if (date.getHours() < 12) {
     meal = 'breakfast'
   }
@@ -14,7 +15,8 @@ export async function updateMenu(id, date, meal, token) {
 
   try {
     const resp = await axios.put(
-      `https://groceries-shopping.herokuapp.com/menus/${id}`,
+      // `https://groceries-shopping.herokuapp.com/menus/${id}`,
+      `${url}menus/${id}`,
       { date, meal },
       {
         headers: {

@@ -1,11 +1,12 @@
+/* eslint-disable space-before-function-paren */
 import axios from 'axios'
 
-export async function deleteRecipe ({ id, token, setRecipesBook }) {
+export async function deleteRecipe({ id, url, token, setRecipesBook }) {
   console.log(id)
   console.log(token)
 
   try {
-    const resp = await axios.delete(`https://groceries-shopping.herokuapp.com/recipes/${id}`, {
+    const resp = await axios.delete(`${url}recipes/${id}`, {
       headers: {
         'content-type': 'application/json',
         accept: 'application/json',
@@ -14,7 +15,7 @@ export async function deleteRecipe ({ id, token, setRecipesBook }) {
       }
     })
 
-    const resp2 = await axios.delete(`https://groceries-shopping.herokuapp.com/ingredients/${id}`, {
+    const resp2 = await axios.delete(`${url}ingredients/${id}`, {
       headers: {
         'content-type': 'application/json',
         accept: 'application/json',

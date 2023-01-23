@@ -1,6 +1,4 @@
-/* eslint-disable camelcase */
-/* eslint-disable space-before-function-paren */
-import { useState } from 'react'
+import React, { useState } from 'react'
 // import { useSelector } from 'react-redux'
 
 import addProduct from '../services/addProduct'

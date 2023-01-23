@@ -153,13 +153,7 @@ function MarketCrud({
   return (
     <div className='markets-crud-container'>
       <h1>EDIT / DELETE</h1>
-      <form
-        name='formCRUD'
-        className='markets-form'
-        ref={formRef}
-        autoComplete='off'
-        style={{ background: 'yellow' }}
-      >
+      <form name='formCRUD' className='markets-form' ref={formRef} autoComplete='off'>
         <div className='markets-input'>
           <label htmlFor='nameA'>market</label>
           <input

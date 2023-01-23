@@ -1,7 +1,8 @@
+/* eslint-disable space-before-function-paren */
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export function useFetch (url, token) {
+export function useFetch(url, token) {
   const [fetchData, setFetchData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -15,7 +16,8 @@ export function useFetch (url, token) {
 
     setLoading(true)
     axios
-      .get(`https://groceries-shopping.herokuapp.com/${url}`, {
+      // .get(`https://groceries-shopping.herokuapp.com/${url}`, {
+      .get(`http://localhost:5000/${url}`, {
         headers: {
           'content-type': 'application/json',
           accept: 'application/json',

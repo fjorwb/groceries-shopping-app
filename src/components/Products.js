@@ -1,6 +1,5 @@
-/* eslint-disable camelcase */
-/* eslint-disable space-before-function-paren */
-// import axios from 'axios'
+import React from 'react'
+
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
