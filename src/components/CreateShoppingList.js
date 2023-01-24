@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import getRecipes from '../services/getRecipes'
 import getMenus from '../services/getMenus'
 import getIngredients from '../services/getIngredients'
+import addShoppingList from '../services/addShoppingList'
 
 import './createShoppingList.css'
 
@@ -11,58 +12,38 @@ const CreateShoppingList = () => {
   const state = useSelector((state) => state)
 
   const token = state.auth.user.accessToken
+  const user_id = state.auth.user.id
 
   const url = state.url.url
 
-  const [dataRecipes, setDataRecipes] = useState({})
-  const [dataMenu, setDataMenu] = useState({})
-  const [dataIngredients, setDataIngredients] = useState({})
+  const [dataRecipes, setDataRecipes] = useState(null)
+  const [dataMenu, setDataMenu] = useState()
+  const [dataIngredients, setDataIngredients] = useState()
+  const [dataShoppingList, setDataShoppingList] = useState()
+
+  console.log(dataRecipes)
 
   // get recipes list to calculate ingredients based on standard servings
 
-  // const getRecipes = useCallback(async () => {
-  //   try {
-  //     const resp = await axios('https://groceries-shopping.herokuapp.com/recipes', {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         accept: 'application/json',
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     })
-  //     // console.log('RECIPES', resp.data)
-  //     setDataRecipes(resp.data)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }, [token])
-
   useEffect(() => {
-    getRecipes({ url, token, setDataRecipes })
+    getRecipes({ url, token, dataRecipes, setDataRecipes })
+    // console.log(dataRecipes)
   }, [token, url])
 
-  const arrRecipes = []
+  // const arrRecipes = []
 
-  for (const key in dataRecipes) {
-    arrRecipes.push({ id: dataRecipes[key].id, servings: dataRecipes[key].servings })
-  }
+  // for (const key in dataRecipes) {
+  //   arrRecipes.push({ id: dataRecipes[key].id, servings: dataRecipes[key].servings })
+  // }
+
+  // console.log(dataRecipes)
+
+  // const arrRecipes = dataRecipes.map((item) => {
+  //   return { id: item.id, servings: item.servings }
+  // })
+  // console.log(arrRecipes)
 
   // get menu list to calculate ingredients based on recipes planned for the week
-
-  // const getMenuList = useCallback(async () => {
-  //   try {
-  //     const resp = await axios('https://groceries-shopping.herokuapp.com/menus', {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         accept: 'application/json',
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     })
-  //     // console.log(resp.data)
-  //     setDataMenu(resp.data)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }, [token])
 
   useEffect(() => {
     getMenus({ url, token, setDataMenu })
@@ -101,7 +82,7 @@ const CreateShoppingList = () => {
     return acc
   }, {})
 
-  console.log(menuListReduced)
+  // console.log(menuListReduced)
 
   // get ingredients list to calculate shopping list based on recipes planned for the week
 
@@ -109,7 +90,7 @@ const CreateShoppingList = () => {
     getIngredients({ url, token, setDataIngredients })
   }, [token, url])
 
-  console.log(dataIngredients)
+  // console.log(dataIngredients)
 
   useEffect(() => {
     setDataMenu(getIngredients({ url, token, setDataIngredients }))
@@ -158,7 +139,7 @@ const CreateShoppingList = () => {
     }
   }
 
-  console.log(arrIngredients)
+  // console.log(arrIngredients)
 
   // const finalIngredientsList = []
 
@@ -175,7 +156,7 @@ const CreateShoppingList = () => {
   // })
 
   const arrIngredientesSort = arrIngredients.sort((a, b) => a.idext - b.idext)
-  console.log(arrIngredientesSort)
+  // console.log(arrIngredientesSort)
 
   const ingredientsListReduce = []
 
@@ -193,7 +174,7 @@ const CreateShoppingList = () => {
     }
   }
 
-  console.log(ingredientsListReduce)
+  // console.log(ingredientsListReduce)
 
   ingredientsListReduce.sort((a, b) => {
     const ax = a.ing
@@ -208,7 +189,17 @@ const CreateShoppingList = () => {
     return 0
   })
 
-  console.log(ingredientsListReduce)
+  // console.log(ingredientsListReduce)
+
+  const data = {
+    shop_list: ingredientsListReduce,
+    user_id: user_id
+  }
+  // console.log(data)
+
+  useEffect(() => {
+    addShoppingList({ url, token, data })
+  }, [data])
 
   return (
     <div className='shopping-container'>
