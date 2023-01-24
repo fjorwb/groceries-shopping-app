@@ -1,9 +1,7 @@
 import axios from 'axios'
 
-async function getRecipes({ url, token, dataRecipes, setDataRecipes }) {
-  if (!dataRecipes) return
-
-  await axios(`${url}recipes`, {
+export const getShoppingList = async ({ url, token, setDataShoppingList }) => {
+  await axios(url + 'shoppinglists', {
     headers: {
       'Content-Type': 'application/json',
       accept: 'application/json',
@@ -11,11 +9,12 @@ async function getRecipes({ url, token, dataRecipes, setDataRecipes }) {
     }
   })
     .then((resp) => {
-      setDataRecipes(resp.data)
+      console.log(resp.data)
+      setDataShoppingList(resp.data)
     })
     .catch((error) => {
       console.log(error)
     })
 }
 
-export default getRecipes
+export default getShoppingList

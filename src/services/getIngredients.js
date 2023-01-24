@@ -3,9 +3,9 @@
 import axios from 'axios'
 
 export async function getIngredients({ url, token, setDataIngredients }) {
-  console.log(url)
-  console.log(token)
-  console.log(setDataIngredients)
+  // console.log(url)
+  // console.log(token)
+  // console.log(setDataIngredients)
 
   await axios
     .get(`${url}ingredients`, {
@@ -16,7 +16,7 @@ export async function getIngredients({ url, token, setDataIngredients }) {
       }
     })
     .then((resp) => {
-      console.log(resp.data)
+      // console.log(resp.data)
       setDataIngredients(resp.data)
     })
     .catch((error) => {
