@@ -10,9 +10,9 @@ export async function addToMenu(data, url, token) {
         accept: 'application/json',
         Authorization: `Bearer ${token}`
       },
-      data: JSON.stringify(data)
+      data
     })
-    console.log(resp)
+    // console.log(resp)
   } catch (error) {
     console.log(error)
   }
