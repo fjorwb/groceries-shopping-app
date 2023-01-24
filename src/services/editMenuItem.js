@@ -14,7 +14,7 @@ export async function editMenuItem({
   let dat = new Date(date)
   dat = dat.setHours(0)
   dat = new Date(dat)
-  const day = dat.getDate() + 1
+  const day = dat.getDate()
   dat.setDate(day)
   dat = new Date(dat)
 

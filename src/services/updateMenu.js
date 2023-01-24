@@ -15,7 +15,6 @@ export async function updateMenu(id, date, meal, url, token) {
 
   try {
     const resp = await axios.put(
-      // `https://groceries-shopping.herokuapp.com/menus/${id}`,
       `${url}menus/${id}`,
       { date, meal },
       {

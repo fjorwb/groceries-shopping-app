@@ -5,7 +5,7 @@ import { useEffect, useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { deleteMenuItem, editMenuItem } from '../services'
 
-import './MenuPlanningCRUD.css'
+import '../styles/MenuPlanningCRUD.css'
 
 function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpdated }) {
   const { id, url, token } = menuCrud
