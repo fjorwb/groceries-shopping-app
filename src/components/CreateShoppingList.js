@@ -1,12 +1,17 @@
 import React, { memo, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
+import getWeekNumber from '../helpers/calcWeekNumber'
+
 import getRecipes from '../services/getRecipes'
 import getMenus from '../services/getMenus'
 import getIngredients from '../services/getIngredients'
+import { getShoppingListId } from '../services/getShoppingListId'
 import addShoppingList from '../services/addShoppingList'
 
 import './createShoppingList.css'
+import getShoppingList from '../services/getShoppingList'
+import { updateShoppingList } from '../services/updateShoppingList'
 
 const CreateShoppingList = () => {
   const state = useSelector((state) => state)
@@ -19,9 +24,10 @@ const CreateShoppingList = () => {
   const [dataRecipes, setDataRecipes] = useState(null)
   const [dataMenu, setDataMenu] = useState()
   const [dataIngredients, setDataIngredients] = useState()
-  const [dataShoppingList, setDataShoppingList] = useState()
+  const [isShoppingList, setIsShoppingList] = useState(false)
+  // const [dataShoppingList, setDataShoppingList] = useState()
 
-  console.log(dataRecipes)
+  // console.log(dataRecipes)
 
   // get recipes list to calculate ingredients based on standard servings
 
@@ -49,6 +55,8 @@ const CreateShoppingList = () => {
     getMenus({ url, token, setDataMenu })
   }, [token, url])
 
+  console.log('DATA MENU', dataMenu)
+
   const arrMenuList = []
 
   for (const key in dataMenu) {
@@ -60,6 +68,8 @@ const CreateShoppingList = () => {
       factorX: dataMenu[key].servings / dataMenu[key].factor
     })
   }
+
+  console.log('ARR MENU LIST', arrMenuList)
 
   const menuListReduced = arrMenuList.reduce((acc, item) => {
     const { recipe, idext, servings, factor, factorX } = item
@@ -82,7 +92,7 @@ const CreateShoppingList = () => {
     return acc
   }, {})
 
-  // console.log(menuListReduced)
+  console.log(menuListReduced)
 
   // get ingredients list to calculate shopping list based on recipes planned for the week
 
@@ -191,14 +201,33 @@ const CreateShoppingList = () => {
 
   // console.log(ingredientsListReduce)
 
+  let week = getWeekNumber(new Date())
+  let year = new Date().getFullYear()
+  console.log(week)
+  if (week < 10) {
+    week = '0' + week.toString()
+  }
+  const shop_list_id = `W${week}${year}`
+  console.log(shop_list_id)
+
   const data = {
+    shop_list_id,
     shop_list: ingredientsListReduce,
     user_id: user_id
   }
   // console.log(data)
 
   useEffect(() => {
-    addShoppingList({ url, token, data })
+    getShoppingListId({ url, token, shop_list_id, setIsShoppingList })
+    console.log(isShoppingList)
+
+    if (!isShoppingList) {
+      updateShoppingList({ url, token, data })
+      setIsShoppingList(false)
+    } else {
+      console.log('ADD')
+      addShoppingList({ url, token, data })
+    }
   }, [data])
 
   return (
