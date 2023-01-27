@@ -1,5 +1,7 @@
 /* eslint-disable space-before-function-paren */
-import { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
+
+import PropTypes from 'prop-types'
 
 import editProduct from '../services/editProduct'
 
@@ -176,6 +178,16 @@ function EditProduct({
       </button> */}
     </div>
   )
+}
+
+EditProduct.propTypes = {
+  url: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
+  closeEditProductModal: PropTypes.func.isRequired,
+  editId: PropTypes.number.isRequired,
+  selectedProduct: PropTypes.object.isRequired,
+  productcategories: PropTypes.object.isRequired,
+  setIsUpdated: PropTypes.func.isRequired
 }
 
 export default memo(EditProduct)

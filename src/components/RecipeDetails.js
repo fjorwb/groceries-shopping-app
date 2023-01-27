@@ -1,5 +1,7 @@
 import React from 'react'
 
+import PropTypes from 'prop-types'
+
 import axios from 'axios'
 import { useFetch } from '../customHooks/useFetch'
 
@@ -146,6 +148,16 @@ function RecipeDetails({ extid, user_id, token, closeModal }) {
       {loading && <Loader />}
     </div>
   )
+}
+
+RecipeDetails.propTypes = {
+  extid: PropTypes.object,
+  user_id: PropTypes.string,
+  token: PropTypes.string,
+  closeModal: PropTypes.function,
+  id: PropTypes.string,
+  idext: PropTypes.string,
+  url: PropTypes.string
 }
 
 export default RecipeDetails

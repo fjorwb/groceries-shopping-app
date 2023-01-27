@@ -1,7 +1,7 @@
 /* eslint-disable space-before-function-paren */
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
-import { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { deleteMarket, updateMarket } from '../services'
 import './markets.css'
 

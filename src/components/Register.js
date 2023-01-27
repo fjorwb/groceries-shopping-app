@@ -1,5 +1,7 @@
 import React from 'react'
 
+import PropTypes from 'prop-types'
+
 import './Modal.css'
 
 export function Register({ children, isOpen, closeModal }) {
@@ -16,6 +18,12 @@ export function Register({ children, isOpen, closeModal }) {
       </article>
     </div>
   )
+}
+
+Register.propTypes = {
+  children: PropTypes.node.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired
 }
 
 export default Register

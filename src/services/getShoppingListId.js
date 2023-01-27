@@ -21,7 +21,6 @@ import axios from 'axios'
 // }
 
 export const getShoppingListId = async ({ url, token, shop_list_id, setIsShoppingList }) => {
-  console.log(`${url}shoppinglists/shoplistid/${shop_list_id}`)
   try {
     const resp = await axios(`${url}shoppinglists/shoplistid/${shop_list_id}`, {
       headers: {

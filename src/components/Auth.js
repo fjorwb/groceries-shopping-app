@@ -1,7 +1,7 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable space-before-function-paren */
 /* eslint-disable indent */
-import { useState, useEffect, lazy } from 'react'
+import React, { useState, useEffect, lazy } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { login, logout } from '../actions/authActions'
 

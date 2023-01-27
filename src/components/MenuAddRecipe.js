@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable space-before-function-paren */
 /* eslint-disable camelcase */
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import getWeekNumber from '../helpers/calcWeekNumber'
 // import useFetch from '../customHooks/useFetch'
@@ -26,7 +26,6 @@ function MenuAddRecipe({ recipe, user_id, url, token, closeMenuModal }) {
 
   const onSubmit = (data) => {
     const week = getWeekNumber(data.date)
-    console.log(data.date)
     data = {
       ...data,
       recipe_id: recipe.recipe.id,

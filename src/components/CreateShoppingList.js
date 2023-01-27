@@ -10,7 +10,7 @@ import { getShoppingListId } from '../services/getShoppingListId'
 import addShoppingList from '../services/addShoppingList'
 
 import './createShoppingList.css'
-import getShoppingList from '../services/getShoppingList'
+// import getShoppingList from '../services/getShoppingList'
 import { updateShoppingList } from '../services/updateShoppingList'
 
 const CreateShoppingList = () => {
@@ -55,7 +55,7 @@ const CreateShoppingList = () => {
     getMenus({ url, token, setDataMenu })
   }, [token, url])
 
-  console.log('DATA MENU', dataMenu)
+  // console.log('DATA MENU', dataMenu)
 
   const arrMenuList = []
 
@@ -69,7 +69,7 @@ const CreateShoppingList = () => {
     })
   }
 
-  console.log('ARR MENU LIST', arrMenuList)
+  // console.log('ARR MENU LIST', arrMenuList)
 
   const menuListReduced = arrMenuList.reduce((acc, item) => {
     const { recipe, idext, servings, factor, factorX } = item
@@ -92,7 +92,7 @@ const CreateShoppingList = () => {
     return acc
   }, {})
 
-  console.log(menuListReduced)
+  // console.log(menuListReduced)
 
   // get ingredients list to calculate shopping list based on recipes planned for the week
 
@@ -203,12 +203,12 @@ const CreateShoppingList = () => {
 
   let week = getWeekNumber(new Date())
   let year = new Date().getFullYear()
-  console.log(week)
+  // console.log(week)
   if (week < 10) {
     week = '0' + week.toString()
   }
   const shop_list_id = `W${week}${year}`
-  console.log(shop_list_id)
+  // console.log(shop_list_id)
 
   const data = {
     shop_list_id,
@@ -219,13 +219,14 @@ const CreateShoppingList = () => {
 
   useEffect(() => {
     getShoppingListId({ url, token, shop_list_id, setIsShoppingList })
-    console.log(isShoppingList)
+    // console.log(isShoppingList)
 
-    if (!isShoppingList) {
+    if (isShoppingList) {
+      // console.log('UPDATE')
       updateShoppingList({ url, token, data })
       setIsShoppingList(false)
     } else {
-      console.log('ADD')
+      // console.log('ADD')
       addShoppingList({ url, token, data })
     }
   }, [data])

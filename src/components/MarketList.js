@@ -1,16 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable space-before-function-paren */
+import React from 'react'
 import './markets.css'
 
-export function MarketList({
-  url,
-  token,
-  dataMarkets,
-  setId,
-  setUpdated,
-  setDataSelected,
-  getMarket
-}) {
+export function MarketList({ url, token, dataMarkets, setId, setDataSelected, getMarket }) {
   const handleSelected = (id) => {
     setId(Number(id))
     setDataSelected(getMarket({ url, token, id, setDataSelected }))

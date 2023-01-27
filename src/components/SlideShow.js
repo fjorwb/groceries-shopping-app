@@ -7,7 +7,7 @@ import './stylescarousel.css'
 
 import images from '../imagesmock'
 
-export function SlideShow () {
+export function SlideShow() {
   const [width, setWidth] = useState(0)
   const carousel = useRef()
 
@@ -18,7 +18,7 @@ export function SlideShow () {
   return (
     <motion.div ref={carousel} className='carousel' whileTap={{ cursor: 'grabbing' }}>
       <motion.div drag='x' dragConstraints={{ right: 0, left: -width }} className='carousel-inner'>
-        {images.map((image, index) => {
+        {images.map((image) => {
           return (
             <motion.div className='carousel-item' key={image}>
               <img src={image} alt='' />

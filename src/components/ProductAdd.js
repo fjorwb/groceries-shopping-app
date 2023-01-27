@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+
+import PropTypes from 'prop-types'
+
 // import { useSelector } from 'react-redux'
 
 import addProduct from '../services/addProduct'
@@ -25,7 +28,8 @@ function AddProduct({
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    addProduct({ url, token, inputAddProduct, setIsUpdated })
+    // addProduct({ url, token, inputAddProduct, setIsUpdated })
+    addProduct({ url, token, inputAddProduct })
     setIsUpdated(true)
     closeAddProductModal()
   }
@@ -136,6 +140,15 @@ function AddProduct({
       </button>
     </div>
   )
+}
+
+AddProduct.propTypes = {
+  url: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
+  closeAddProductModal: PropTypes.func.isRequired,
+  user_id: PropTypes.number.isRequired,
+  productcategories: PropTypes.object.isRequired,
+  setIsUpdated: PropTypes.func.isRequired
 }
 
 export default AddProduct

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export async function addProduct ({ url, token, inputAddProduct, setIsUpdated }) {
+export async function addProduct({ url, token, inputAddProduct }) {
   await axios
     .post(url + 'products', inputAddProduct, {
       headers: {
@@ -10,11 +10,12 @@ export async function addProduct ({ url, token, inputAddProduct, setIsUpdated })
       }
     })
     .catch((error) => {
+      console.log('ERRXXX')
       console.log(error)
     })
-    .finally(() => {
-      setIsUpdated(true)
-    })
+  // .finally(() => {
+  //   setIsUpdated(true)
+  // })
 
   return 'ok'
 }

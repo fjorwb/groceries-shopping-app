@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable space-before-function-paren */
+import React from 'react'
+
 import './Modal.css'
 
 export function Modal({ isOpen, closeModal }) {

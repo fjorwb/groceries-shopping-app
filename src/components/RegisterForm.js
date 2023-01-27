@@ -1,4 +1,7 @@
 import React from 'react'
+
+import PropTypes from 'prop-types'
+
 import { useForm } from '../customHooks/useForm'
 
 import './Form.css'
@@ -276,6 +279,12 @@ export const RegisterForm = ({ data, setData, url }) => {
       {response && <Message message='data sent successfully' bgColor='#198754' />}
     </div>
   )
+}
+
+RegisterForm.propTypes = {
+  data: PropTypes.object.isRequired,
+  setData: PropTypes.func.isRequired,
+  url: PropTypes.string.isRequired
 }
 
 export default RegisterForm

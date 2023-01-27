@@ -3,7 +3,7 @@
 
 import axios from 'axios'
 
-function ShoppingListIngredients({ token, url, dataIngredients, setDataIngredients, user_id }) {
+function ShoppingListIngredients({ token, url, dataIngredients, setDataIngredients }) {
   const getIngredientsList = async () => {
     try {
       const resp = await axios(`${url}ingredients`, {

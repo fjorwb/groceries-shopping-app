@@ -3,7 +3,7 @@ const urlInitialStore = {
   url: 'http://localhost:5000/'
 }
 
-export const urlReducer = (state = urlInitialStore, action) => {
+export const urlReducer = (state = urlInitialStore) => {
   return state
 }
 

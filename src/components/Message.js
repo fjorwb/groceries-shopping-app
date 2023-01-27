@@ -1,12 +1,13 @@
 import React from 'react'
 
+import PropTypes from 'prop-types'
+
 export const Message = ({ message, bgColor }) => {
   const styles = {
     padding: '1rem',
     marginTop: '1rem',
     marginBottom: '1rem',
     textAlign: 'center',
-    // fontWeight: 'bold',
     backgroundColor: bgColor,
     color: '#FFFFFF',
     width: '100%',
@@ -18,6 +19,11 @@ export const Message = ({ message, bgColor }) => {
       <p>{message}</p>
     </div>
   )
+}
+
+Message.propTypes = {
+  message: PropTypes.string,
+  bgColor: PropTypes.string
 }
 
 export default Message

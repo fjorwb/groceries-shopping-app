@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 
+import PropTypes from 'prop-types'
+
 import './products.css'
 
-function ProductEditItem({ setEditId, selectedProduct, productCategories }) {
+function ProductEditItem({ setEditId, selectedProduct }) {
   const [editProduct, setEditProduct] = useState({})
   const [formEditProduct, setFormEditProduct] = useState({})
 
@@ -104,6 +106,12 @@ function ProductEditItem({ setEditId, selectedProduct, productCategories }) {
       </td>
     </tr>
   )
+}
+
+ProductEditItem.propTypes = {
+  setEditId: PropTypes.func.isRequired,
+  selectedProduct: PropTypes.object.isRequired,
+  productCategories: PropTypes.array.isRequired
 }
 
 export default ProductEditItem

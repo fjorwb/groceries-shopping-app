@@ -1,9 +1,12 @@
-import { memo } from 'react'
+import React, { memo } from 'react'
+
+import PropTypes from 'prop-types'
+
 import deleteProduct from '../services/deleteProduct'
 
 import './products.css'
 
-function ProductReadItem ({ url, token, product, handleEditId, setIsUpdated }) {
+function ProductReadItem({ url, token, product, handleEditId }) {
   const handleDelete = (e) => {
     e.preventDefault()
     deleteProduct({ url, token, id: product.id })
@@ -30,6 +33,14 @@ function ProductReadItem ({ url, token, product, handleEditId, setIsUpdated }) {
       </td>
     </tr>
   )
+}
+
+ProductReadItem.propTypes = {
+  url: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
+  product: PropTypes.object.isRequired,
+  handleEditId: PropTypes.func.isRequired,
+  setIsUpdated: PropTypes.func.isRequired
 }
 
 export default memo(ProductReadItem)

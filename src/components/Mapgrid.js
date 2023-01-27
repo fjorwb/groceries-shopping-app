@@ -1,4 +1,6 @@
-function Mapgrid () {
+import React from 'react'
+
+function Mapgrid() {
   return <div>Mapgrid</div>
 }
 

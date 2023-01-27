@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
 /* eslint-disable space-before-function-paren */
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { addMarket } from '../services'
 import './markets.css'
 
@@ -19,18 +19,7 @@ const initialInputMarkets = {
   password: ''
 }
 
-function MarketAdd({
-  setMarketForm,
-  dataSelected,
-  setUpdated,
-  getMarkets,
-  getMarket,
-  url,
-  token,
-  user_id,
-  id,
-  setDataSelected
-}) {
+function MarketAdd({ setMarketForm, dataSelected, setUpdated, url, token, user_id }) {
   // console.log(user_id)
 
   const [inputMarkets, setInputMarkets] = useState({ user_id })

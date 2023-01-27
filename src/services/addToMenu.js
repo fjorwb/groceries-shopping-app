@@ -12,7 +12,7 @@ export async function addToMenu(data, url, token) {
       },
       data
     })
-    // console.log(resp)
+    console.log(resp)
   } catch (error) {
     console.log(error)
   }

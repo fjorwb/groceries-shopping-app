@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, memo } from 'react'
+import React, { useCallback, useEffect, useMemo, useState, memo } from 'react'
 
 import { Calendar, Views, dateFnsLocalizer } from 'react-big-calendar'
 
@@ -22,7 +22,6 @@ import axios from 'axios'
 const DnDCalendar = withDragAndDrop(Calendar)
 
 export const MenuPlanningCal = memo(() => {
-  // export default function MenuPlanning() {
   const state = useSelector((state) => state)
 
   const token = state.auth.user.accessToken
