@@ -1,5 +1,5 @@
 /* eslint-disable space-before-function-paren */
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useState, useRef } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -23,14 +23,21 @@ function EditProduct({
     category: ' '
   }
 
-  const [inputEditProduct, setInputEditProduct] = useState(initialForm)
-  const [categories, setCategories] = useState(productcategories)
+  console.log(selectedProduct)
+
+  const [inputEditProduct, setInputEditProduct] = useState({})
+  const [categories, setCategories] = useState({})
+
+  // useEffect(() => {
+  //   setInputEditProduct(selectedProduct)
+  // }, [inputEditProduct])
 
   useEffect(() => {
     setInputEditProduct(selectedProduct)
     console.log(inputEditProduct.category)
     setCategories(productcategories)
-  }, [inputEditProduct.category, productcategories, selectedProduct])
+    // }, [inputEditProduct.category, productcategories, selectedProduct])
+  }, [selectedProduct])
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -60,10 +67,20 @@ function EditProduct({
     closeEditProductModal()
   }
 
+  const formRef = useRef()
+
+  function resetForm() {
+    formRef.current.reset()
+  }
+
+  useEffect(() => {
+    resetForm()
+  }, [editId])
+
   return (
     <div>
       <h1 className='products-title'>Edit Product</h1>
-      <form className='products-form'>
+      <form className='products-form' ref={formRef}>
         <div className='products-input'>
           <label htmlFor='barcode'>barcode</label>
           <input
@@ -144,7 +161,7 @@ function EditProduct({
               })}
           </select>
         </div>
-        <div className='products-input'>
+        {/* <div className='products-input'>
           <label htmlFor='market'>market</label>
           <input
             className='product-p'
@@ -154,7 +171,7 @@ function EditProduct({
             onChange={(e) => handleChange(e)}
             defaultValue={inputEditProduct.market || ''}
           />
-        </div>
+        </div> */}
         <div className='products-input'>
           <label htmlFor='price'>price</label>
           <input
@@ -184,9 +201,9 @@ EditProduct.propTypes = {
   url: PropTypes.string.isRequired,
   token: PropTypes.string.isRequired,
   closeEditProductModal: PropTypes.func.isRequired,
-  editId: PropTypes.number.isRequired,
-  selectedProduct: PropTypes.object.isRequired,
-  productcategories: PropTypes.object.isRequired,
+  editId: PropTypes.number,
+  selectedProduct: PropTypes.object,
+  productcategories: PropTypes.array.isRequired,
   setIsUpdated: PropTypes.func.isRequired
 }
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export async function deleteProduct ({ url, token, id, setIsUpdated }) {
+export async function deleteProduct({ url, token, id }) {
   await axios
     .delete(`${url}products/${id}`, {
       headers: {
@@ -14,9 +14,6 @@ export async function deleteProduct ({ url, token, id, setIsUpdated }) {
     })
     .catch((error) => {
       console.log(error)
-    })
-    .finally(() => {
-      setIsUpdated(true)
     })
 }
 

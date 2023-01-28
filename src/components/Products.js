@@ -70,12 +70,14 @@ function Product() {
           <tbody className='product-container'>
             <tr>
               {/* <td className="products-col-title">id</td> */}
+              <td className='products-col-title'>idext</td>
               <td className='products-col-title'>product</td>
-              <td className='products-col-title'>description</td>
-              <td className='products-col-title'>unit</td>
+              {/* <td className='products-col-title'>description</td> */}
               <td className='products-col-title'>pres</td>
+              <td className='products-col-title'>unit</td>
+              <td className='products-col-title'>price</td>
               <td className='products-col-title'>category</td>
-              <td className='products-col-title'>market id</td>
+              {/* <td className='products-col-title'>market id</td> */}
               <td className='products-col-title'>actions</td>
               <td className='products-col-title' />
             </tr>

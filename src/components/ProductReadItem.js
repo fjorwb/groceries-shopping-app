@@ -15,12 +15,14 @@ function ProductReadItem({ url, token, product, handleEditId }) {
 
   return (
     <tr>
+      <td>{product.extid}</td>
       <td>{product.name}</td>
-      <td>{product.description}</td>
-      <td className='products-td-center'>{product.unit}</td>
+      {/* <td>{product.description}</td> */}
       <td className='products-td-center'>{product.presentation}</td>
+      <td className='products-td-center'>{product.unit}</td>
+      <td className='products-td-center'>{product.price}</td>
       <td>{product.category}</td>
-      <td className='products-td-center'>{product.market_id}</td>
+      {/* <td className='products-td-center'>{product.market_id}</td> */}
       <td>
         <button className='btn products-td-btn' onClick={(e) => handleEditId(e, product)}>
           edit
@@ -36,11 +38,11 @@ function ProductReadItem({ url, token, product, handleEditId }) {
 }
 
 ProductReadItem.propTypes = {
-  url: PropTypes.string.isRequired,
-  token: PropTypes.string.isRequired,
-  product: PropTypes.object.isRequired,
-  handleEditId: PropTypes.func.isRequired,
-  setIsUpdated: PropTypes.func.isRequired
+  url: PropTypes.string,
+  token: PropTypes.string,
+  product: PropTypes.object,
+  handleEditId: PropTypes.func,
+  setIsUpdated: PropTypes.func
 }
 
 export default memo(ProductReadItem)

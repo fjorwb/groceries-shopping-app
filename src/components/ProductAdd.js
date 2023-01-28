@@ -147,7 +147,7 @@ AddProduct.propTypes = {
   token: PropTypes.string.isRequired,
   closeAddProductModal: PropTypes.func.isRequired,
   user_id: PropTypes.number.isRequired,
-  productcategories: PropTypes.object.isRequired,
+  productcategories: PropTypes.array.isRequired,
   setIsUpdated: PropTypes.func.isRequired
 }
 

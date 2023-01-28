@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import getMarkets from '../services/getMarkets'
 import getShoppingList from '../services/getShoppingList'
-import addProduct from '../services/addProduct'
+// import addProduct from '../services/addProduct'
 
 export const MakeMockData = () => {
   const state = useSelector((state) => state)
@@ -14,6 +14,8 @@ export const MakeMockData = () => {
 
   const [dataMarkets, setDataMarkets] = useState(null)
   const [dataShoppingList, setDataShoppingList] = useState(null)
+
+  console.log(dataShoppingList)
 
   const addProductsSL = (mkts, shop, user, url, token, arr) => {
     for (let i = 0; i < mkts.length; i++) {
@@ -32,7 +34,7 @@ export const MakeMockData = () => {
         // addProduct({ url, token, inputAddProduct })
         arr.push({
           id: mkts[i].id,
-          extid: shop[j].extid,
+          extid: shop[j].idext,
           name: mkts[i].name,
           shop_list_id: shop[j].ing,
           amount: shop[j].amount
@@ -77,21 +79,22 @@ export const MakeMockData = () => {
 
   console.log(arrZZZ)
 
-  for (const item in arrZZZ) {
-    addProduct({
-      url,
-      token,
-      inputAddProduct: {
-        barcode: 'XOXO',
-        name: arrZZZ[item].shop_list_id,
-        unit: 'mock',
-        market_id: arrZZZ[item].id,
-        description: 'mock',
-        presentation: 'mock',
-        user_id: user_id
-      }
-    })
-  }
+  // for (const item in arrZZZ) {
+  //   addProduct({
+  //     url,
+  //     token,
+  //     inputAddProduct: {
+  //       barcode: 'XOXO',
+  //       extid: arrZZZ[item].extid,
+  //       name: arrZZZ[item].shop_list_id,
+  //       unit: 'mock',
+  //       market_id: arrZZZ[item].id,
+  //       description: 'mock',
+  //       presentation: 'mock',
+  //       user_id: user_id
+  //     }
+  //   })
+  // }
 
   return (
     <div>

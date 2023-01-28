@@ -8,6 +8,7 @@ import getMenus from '../services/getMenus'
 import getIngredients from '../services/getIngredients'
 import { getShoppingListId } from '../services/getShoppingListId'
 import addShoppingList from '../services/addShoppingList'
+import addProduct from '../services/addProduct'
 
 import './createShoppingList.css'
 // import getShoppingList from '../services/getShoppingList'
@@ -143,8 +144,9 @@ const CreateShoppingList = () => {
         const ing = arrIngredientsList[i].ing
         const un = arrIngredientsList[i].un
         const amount = arrIngredientsList[i].amount * arrMenuListReduced[j].factorX
+        const price = 0
 
-        arrIngredients.push({ idext, ing, amount, un })
+        arrIngredients.push({ idext, ing, un, amount, price })
       }
     }
   }
@@ -199,7 +201,7 @@ const CreateShoppingList = () => {
     return 0
   })
 
-  // console.log(ingredientsListReduce)
+  console.log(ingredientsListReduce)
 
   let week = getWeekNumber(new Date())
   let year = new Date().getFullYear()
@@ -231,6 +233,26 @@ const CreateShoppingList = () => {
     }
   }, [data])
 
+  useEffect(() => {
+    for (let i = 0; i < ingredientsListReduce.length; i++) {
+      addProduct({
+        url,
+        token,
+        inputAddProduct: {
+          barcode: 'XOXO',
+          extid: ingredientsListReduce[i].idext,
+          name: ingredientsListReduce[i].ing,
+          unit: ingredientsListReduce[i].un,
+          price: ingredientsListReduce[i].price,
+          // market_id: ingredientsListReduce[i].id,
+          description: 'mock',
+          presentation: 'mock',
+          user_id: user_id
+        }
+      })
+    }
+  }, [])
+
   return (
     <div className='shopping-container'>
       <h1 className='shopping-title'>Shopping List</h1>
@@ -242,6 +264,7 @@ const CreateShoppingList = () => {
                 <td className='p1'>{menu.ing.replace(/\b\w/g, (l) => l.toUpperCase())}</td>
                 <td className='p2'>{menu.un}</td>
                 <td className='p3'>{menu.amount}</td>
+                <td className='p4'>{menu.price}</td>
               </tr>
             )
           })}
