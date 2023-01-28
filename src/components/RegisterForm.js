@@ -282,7 +282,7 @@ export const RegisterForm = ({ data, setData, url }) => {
 }
 
 RegisterForm.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.object,
   setData: PropTypes.func.isRequired,
   url: PropTypes.string.isRequired
 }

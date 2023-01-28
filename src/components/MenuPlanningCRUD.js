@@ -39,6 +39,7 @@ function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpd
       meal: menuItem.meal,
       servings
     }
+    console.log(data)
   }
 
   const getMenuItem = useCallback(

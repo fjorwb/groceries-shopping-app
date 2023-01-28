@@ -21,7 +21,7 @@ import axios from 'axios'
 
 const DnDCalendar = withDragAndDrop(Calendar)
 
-export const MenuPlanningCal = memo(() => {
+export const MenuPlanningCal = () => {
   const state = useSelector((state) => state)
 
   const token = state.auth.user.accessToken
@@ -182,6 +182,6 @@ export const MenuPlanningCal = memo(() => {
     </>
   )
   // }
-})
+}
 
-export default MenuPlanningCal
+export default memo(MenuPlanningCal)

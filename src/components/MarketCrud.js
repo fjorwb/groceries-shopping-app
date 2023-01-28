@@ -1,7 +1,9 @@
 /* eslint-disable space-before-function-paren */
 /* eslint-disable camelcase */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState, useRef } from 'react'
+
+import PropTypes from 'prop-types'
+
 import { deleteMarket, updateMarket } from '../services'
 import './markets.css'
 
@@ -272,6 +274,20 @@ function MarketCrud({
       </form>
     </div>
   )
+}
+
+MarketCrud.propTypes = {
+  url: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
+  user_id: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+  dataSelected: PropTypes.object.isRequired,
+  setMarketForm: PropTypes.func.isRequired,
+  setUpdated: PropTypes.func.isRequired,
+  nameA: PropTypes.string.isRequired,
+  addressA: PropTypes.string.isRequired,
+  cityA: PropTypes.string.isRequired,
+  stateA: PropTypes.string.isRequired
 }
 
 export default MarketCrud
