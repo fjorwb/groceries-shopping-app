@@ -23,7 +23,7 @@ function EditProduct({
     category: ' '
   }
 
-  console.log(selectedProduct)
+  console.log('SELECTED PRODUCT', selectedProduct)
 
   const [inputEditProduct, setInputEditProduct] = useState({})
   const [categories, setCategories] = useState({})
@@ -33,7 +33,7 @@ function EditProduct({
   // }, [inputEditProduct])
 
   useEffect(() => {
-    setInputEditProduct(selectedProduct)
+    setInputEditProduct(selectedProduct || initialForm)
     console.log(inputEditProduct.category)
     setCategories(productcategories)
     // }, [inputEditProduct.category, productcategories, selectedProduct])
@@ -153,7 +153,7 @@ function EditProduct({
                   <option
                     key={category.id}
                     defaultValue={inputEditProduct.category}
-                    value={category.category}
+                    // value={category.category}
                   >
                     {category.category}
                   </option>

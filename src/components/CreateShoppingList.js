@@ -8,13 +8,14 @@ import getMenus from '../services/getMenus'
 import getIngredients from '../services/getIngredients'
 import { getShoppingListId } from '../services/getShoppingListId'
 import addShoppingList from '../services/addShoppingList'
+import updateShoppingList from '../services/updateShoppingList'
+import deleteShoppingListById from '../services/deleteShoppingListId'
 import addProduct from '../services/addProduct'
 
 import './createShoppingList.css'
 // import getShoppingList from '../services/getShoppingList'
-import { updateShoppingList } from '../services/updateShoppingList'
 
-const CreateShoppingList = () => {
+export const CreateShoppingList = () => {
   const state = useSelector((state) => state)
 
   const token = state.auth.user.accessToken
@@ -201,7 +202,7 @@ const CreateShoppingList = () => {
     return 0
   })
 
-  console.log(ingredientsListReduce)
+  // console.log(ingredientsListReduce)
 
   let week = getWeekNumber(new Date())
   let year = new Date().getFullYear()
@@ -220,8 +221,11 @@ const CreateShoppingList = () => {
   // console.log(data)
 
   useEffect(() => {
-    getShoppingListId({ url, token, shop_list_id, setIsShoppingList })
-    // console.log(isShoppingList)
+    deleteShoppingListById({ url, token, shop_list_id })
+
+    if (isShoppingList) {
+      getShoppingListId({ url, token, shop_list_id, setIsShoppingList })
+    }
 
     if (isShoppingList) {
       // console.log('UPDATE')
@@ -234,6 +238,7 @@ const CreateShoppingList = () => {
   }, [data])
 
   useEffect(() => {
+    console.log(ingredientsListReduce)
     for (let i = 0; i < ingredientsListReduce.length; i++) {
       addProduct({
         url,
@@ -251,7 +256,7 @@ const CreateShoppingList = () => {
         }
       })
     }
-  }, [])
+  }, [ingredientsListReduce])
 
   return (
     <div className='shopping-container'>

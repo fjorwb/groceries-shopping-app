@@ -12,7 +12,7 @@ export async function getProducts({ url, token, setDataProducts, setSelectedProd
     .then((resp) => {
       const sort = resp.data.sort((a, b) => a.name.localeCompare(b.name))
       setDataProducts(sort)
-      setSelectedProduct(sort[0])
+      setSelectedProduct ? setSelectedProduct(sort[0]) : 'a'
     })
     .catch((error) => {
       console.log(error)

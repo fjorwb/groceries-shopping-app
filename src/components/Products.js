@@ -55,7 +55,7 @@ function Product() {
 
   useEffect(() => {
     getProducts({ url, token, setDataProducts, setSelectedProduct, setEditId })
-    console.log('DATA PRODUCTS', dataProducts)
+    // console.log('DATA PRODUCTS', dataProducts)
     // sortDataProducts(dataProducts)
     getProduct({ url, token, setSelectedProduct, editId })
     getCategories({ url, token, setProductCategories })

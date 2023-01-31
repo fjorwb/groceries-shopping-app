@@ -17,7 +17,7 @@ export const addShoppingList = async ({ url, token, data }) => {
       console.log(resp.data)
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error.response.data.message)
     })
 }
 

@@ -284,10 +284,16 @@ MarketCrud.propTypes = {
   dataSelected: PropTypes.object.isRequired,
   setMarketForm: PropTypes.func.isRequired,
   setUpdated: PropTypes.func.isRequired,
-  nameA: PropTypes.string.isRequired,
-  addressA: PropTypes.string.isRequired,
-  cityA: PropTypes.string.isRequired,
-  stateA: PropTypes.string.isRequired
+  nameA: PropTypes.string,
+  addressA: PropTypes.string,
+  cityA: PropTypes.string,
+  stateA: PropTypes.string,
+  zipA: PropTypes.string,
+  countryA: PropTypes.string,
+  phoneA: PropTypes.string,
+  emailA: PropTypes.string,
+  websiteA: PropTypes.string,
+  passwordA: PropTypes.string
 }
 
 export default MarketCrud

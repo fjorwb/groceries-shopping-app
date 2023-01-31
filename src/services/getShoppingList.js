@@ -9,7 +9,7 @@ export const getShoppingList = async ({ url, token, setDataShoppingList }) => {
     }
   })
     .then((resp) => {
-      console.log(resp.data)
+      // console.log(resp.data)
       setDataShoppingList(resp.data)
     })
     .catch((error) => {

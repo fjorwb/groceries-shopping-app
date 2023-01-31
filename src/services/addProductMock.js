@@ -1,8 +1,9 @@
 import axios from 'axios'
 
-export const updateShoppingList = async ({ url, token, data }) => {
+export const addProductMock = async ({ url, token, inputAddProduct }) => {
+  // console.log(inputAddProduct)
   await axios
-    .put(`${url}shoppinglists/${data.shop_list_id}`, data, {
+    .post(url + 'productmocks', inputAddProduct, {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
@@ -10,11 +11,12 @@ export const updateShoppingList = async ({ url, token, data }) => {
       }
     })
     .then((resp) => {
+      // console.log(resp)
       return resp.data
     })
     .catch((error) => {
-      console.log(error)
+      return error.response.data.message
     })
 }
 
-export default updateShoppingList
+export default addProductMock

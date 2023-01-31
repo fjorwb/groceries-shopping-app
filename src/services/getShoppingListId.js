@@ -21,18 +21,20 @@ import axios from 'axios'
 // }
 
 export const getShoppingListId = async ({ url, token, shop_list_id, setIsShoppingList }) => {
-  try {
-    const resp = await axios(`${url}shoppinglists/shoplistid/${shop_list_id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        accept: 'application/json',
-        Authorization: `Bearer ${token}`
-      }
+  await axios(`${url}shoppinglist/shoplistid/${shop_list_id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      accept: 'application/json',
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then((resp) => {
+      console.log('QQQQQQQQQQQQ')
+      console.log(resp.data)
+      setIsShoppingList(true)
+      return resp.data.shop_list_id
     })
-
-    console.log('RESPONSE', resp.data)
-    setIsShoppingList(true)
-  } catch (error) {
-    console.log(error.response.data.message)
-  }
+    .catch((error) => {
+      console.log(error.response.data.message)
+    })
 }
