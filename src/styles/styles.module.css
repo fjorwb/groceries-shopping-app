@@ -40,8 +40,7 @@ h1 {
 .maincontainer {
   width: 90%;
   margin: auto;
-
-  min-height: 70vh;
+  min-height: 90vh;
 }
 
 .navbarcontainer,
