@@ -11,6 +11,7 @@ import addShoppingList from '../services/addShoppingList'
 import updateShoppingList from '../services/updateShoppingList'
 import deleteShoppingListById from '../services/deleteShoppingListId'
 import addProduct from '../services/addProduct'
+// import ingredientsListReduce from '../helpers/addProductFromShoppingList.js'
 
 import './createShoppingList.css'
 // import getShoppingList from '../services/getShoppingList'
@@ -238,6 +239,8 @@ export const CreateShoppingList = () => {
   }, [data])
 
   useEffect(() => {
+    // ingredientsListReduce({ url, token, user_id, ingredientsListReduce })
+
     console.log(ingredientsListReduce)
     for (let i = 0; i < ingredientsListReduce.length; i++) {
       addProduct({

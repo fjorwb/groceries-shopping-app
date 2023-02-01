@@ -114,9 +114,9 @@ export const MakeMockData = () => {
 
   return (
     <div>
-      <h1 className='checkout-title'>Checkout</h1>
       <div className='checkout-container'>
         <table className='table checkout-table'>
+          <h1 className='checkout-title'>Checkout</h1>
           <tbody>
             <tr className='table-header'>
               <td>no</td>
