@@ -52,7 +52,12 @@ p0 {
   padding-left: 1rem;
 }
 
+.p2 {
+  width: 25%;
+  text-align: center;
+}
+
 .p3 {
   width: 10%;
-  text-align: right;
+  text-align: center;
 }

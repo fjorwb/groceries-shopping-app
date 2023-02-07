@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export async function editProduct ({
+export async function editProduct({
   url,
   token,
   id,
@@ -26,7 +26,7 @@ export async function editProduct ({
       console.log(err)
     })
     .finally(() => {
-      console.log('editProduct.js')
+      // console.log('editProduct.js')
       setInputEditProduct(initialForm)
       setIsUpdated(true)
     })

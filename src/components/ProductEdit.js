@@ -23,7 +23,7 @@ function EditProduct({
     category: ' '
   }
 
-  console.log('SELECTED PRODUCT', selectedProduct)
+  // console.log('SELECTED PRODUCT', selectedProduct)
 
   const [inputEditProduct, setInputEditProduct] = useState({})
   const [categories, setCategories] = useState({})
@@ -33,8 +33,8 @@ function EditProduct({
   // }, [inputEditProduct])
 
   useEffect(() => {
-    setInputEditProduct(selectedProduct || initialForm)
-    console.log(inputEditProduct.category)
+    setInputEditProduct(selectedProduct ?? initialForm)
+    // console.log(inputEditProduct.category)
     setCategories(productcategories)
     // }, [inputEditProduct.category, productcategories, selectedProduct])
   }, [selectedProduct])
@@ -89,7 +89,7 @@ function EditProduct({
             name='barcode'
             id='barcode'
             onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.barcode || ''}
+            defaultValue={inputEditProduct.barcode ?? ''}
           />
         </div>
         <div className='products-input'>
@@ -100,7 +100,7 @@ function EditProduct({
             name='name'
             id='name'
             onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.name || ''}
+            defaultValue={inputEditProduct.name ?? ''}
           />
         </div>
         <div className='products-input'>
@@ -111,7 +111,7 @@ function EditProduct({
             name='description'
             id='description'
             onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.description || ''}
+            defaultValue={inputEditProduct.description ?? ''}
           />
         </div>
         <div className='products-input'>
@@ -122,7 +122,7 @@ function EditProduct({
             name='unit'
             id='descriptiuniton'
             onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.unit || ''}
+            defaultValue={inputEditProduct.unit ?? ''}
           />
         </div>
         <div className='products-input'>
@@ -133,7 +133,7 @@ function EditProduct({
             name='presentation'
             id='presentation'
             onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.presentation || ''}
+            defaultValue={inputEditProduct.presentation ?? ''}
           />
         </div>
         <div className='products-select'>
@@ -154,6 +154,7 @@ function EditProduct({
                     key={category.id}
                     defaultValue={inputEditProduct.category}
                     // value={category.category}
+                    className='products-option'
                   >
                     {category.category}
                   </option>
@@ -169,7 +170,7 @@ function EditProduct({
             name='market_id'
             id='market'
             onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.market || ''}
+            defaultValue={inputEditProduct.market ?? ''}
           />
         </div> */}
         <div className='products-input'>
@@ -180,7 +181,7 @@ function EditProduct({
             name='price'
             id='price'
             onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.price || ''}
+            defaultValue={inputEditProduct.price ?? ''}
           />
         </div>
       </form>

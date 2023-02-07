@@ -18,11 +18,11 @@ import getProduct from '../services/getProduct'
 import getCategories from '../services/getCategories'
 
 function Product() {
-  const auth = useSelector((state) => state.auth)
-  const token = auth.user.accessToken
-  const user_id = auth.user.id
+  const state = useSelector((state) => state)
+  const token = state.auth.user.accessToken
+  const user_id = state.auth.user.id
 
-  const url = useSelector((state) => state.url.url)
+  const url = state.url.url
 
   const [dataProducts, setDataProducts] = useState({})
   // const [sortedProducts, setSortedProducts] = useState(null)
@@ -30,6 +30,8 @@ function Product() {
   const [productcategories, setProductCategories] = useState([])
   const [editId, setEditId] = useState(null)
   const [isUpdated, setIsUpdated] = useState(false)
+  const [search, setSearch] = useState('')
+  const [checkPrice, setCheckPrice] = useState(false)
 
   // console.log('DATA PRODUCTS', dataProducts)
   // console.log('SELECT', selectedProduct)
@@ -50,8 +52,30 @@ function Product() {
     setEditId(product.id)
     getProducts({ url, token, setDataProducts, setSelectedProduct, setEditId })
     getProduct({ url, token, setSelectedProduct, editId })
+    setIsUpdated(true)
     openEditProductModal()
   }
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    setSearch(e.target.value.toLowerCase())
+  }
+
+  // console.log('SEARCH', search)
+
+  const handleCheckPrice = (e) => {
+    e.preventDefault()
+    console.log(e.target.value)
+    // e.target.value === true ? setCheckPrice(false) : setCheckPrice(true)
+    setCheckPrice((checkPrice) => !checkPrice)
+  }
+
+  const handleCleanSearchBar = (e) => {
+    e.preventDefault()
+    setSearch('')
+  }
+
+  // console.log(checkPrice)
 
   useEffect(() => {
     getProducts({ url, token, setDataProducts, setSelectedProduct, setEditId })
@@ -66,6 +90,42 @@ function Product() {
     <div>
       <form>
         <h1 className='products-title'>Products</h1>
+        <div className='products-bar'>
+          <label htmlFor='search'>search</label>
+          <input
+            type='text'
+            id='search '
+            value={search}
+            className='products-search-input'
+            onChange={(e) => handleSearch(e)}
+          />
+          <button className='btn products-btn' value='X' onClick={handleCleanSearchBar}>
+            X
+          </button>
+          {/* <label htmlFor='checkPrice'>check product price</label> */}
+          {/* <input
+          type='checkbox'
+          id='checkPrice'
+          className='products-checkbox'
+          value={checkPrice}
+          // value={true}
+          onChange={(e) => handleCheckPrice(e)}
+        /> */}
+          <div>
+            <button className='btn products-btn' onClick={handleAddProductModal}>
+              add product
+            </button>
+          </div>
+
+          <button
+            type='button'
+            className='btn products-btn-check'
+            value={checkPrice}
+            onClick={(e) => handleCheckPrice(e)}
+          >
+            {checkPrice === false ? 'check prices = 0' : 'finish check'}
+          </button>
+        </div>
         <table>
           <tbody className='product-container'>
             <tr>
@@ -81,7 +141,14 @@ function Product() {
               <td className='products-col-title'>actions</td>
               <td className='products-col-title' />
             </tr>
-            {Object.values(dataProducts).map((product) => {
+            {(checkPrice === true
+              ? Object.values(dataProducts)
+                  .filter((item) => item.price == 0)
+                  .filter((item) => item.name.toLowerCase().includes(search))
+              : Object.values(dataProducts).filter((item) =>
+                  item.name.toLowerCase().includes(search)
+                )
+            ).map((product) => {
               return (
                 <ProductReadItem
                   key={product.id}
@@ -100,6 +167,7 @@ function Product() {
           add product
         </button>
       </div>
+
       <Modal isOpen={isOpenAddProduct} closeModal={closeAddProductModal}>
         <AddProduct
           url={url}

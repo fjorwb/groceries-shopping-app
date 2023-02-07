@@ -266,13 +266,19 @@ export const CreateShoppingList = () => {
       <h1 className='shopping-title'>Shopping List</h1>
       <table className='table'>
         <tbody>
+          <tr>
+            <td className='p1'>product</td>
+            <td className='p2'>unit</td>
+            <td className='p3'>quantity</td>
+          </tr>
+
           {ingredientsListReduce.map((menu, index) => {
             return (
               <tr className='table-row' key={index}>
                 <td className='p1'>{menu.ing.replace(/\b\w/g, (l) => l.toUpperCase())}</td>
                 <td className='p2'>{menu.un}</td>
                 <td className='p3'>{menu.amount}</td>
-                <td className='p4'>{menu.price}</td>
+                {/* <td className='p4'>{menu.price}</td> */}
               </tr>
             )
           })}

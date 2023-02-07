@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 import addProduct from '../services/addProduct'
 
-function AddProduct({
+export function AddProduct({
   url,
   token,
   closeAddProductModal,
@@ -14,8 +14,20 @@ function AddProduct({
   productcategories,
   setIsUpdated
 }) {
-  const [inputAddProduct, setInputAddProduct] = useState({ user_id })
+  let id = 0
+  // console.log(id)
+  id = Date.now()
+  // console.log(id)
+
+  const [inputAddProduct, setInputAddProduct] = useState({
+    user_id,
+    extid: (id / 1000).toFixed(0),
+    price: 0,
+    market_id: 0
+  })
   // const [categories, setCategories] = useState({})
+
+  // console.log(inputAddProduct)
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -26,18 +38,40 @@ function AddProduct({
     })
   }
 
+  const handleValue = (e) => {
+    e.preventDefault()
+    const { name, value } = e.target
+    setInputAddProduct({
+      ...inputAddProduct,
+      [name]: Number(value)
+    })
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    // addProduct({ url, token, inputAddProduct, setIsUpdated })
+    // console.log(inputAddProduct)
+    console.log(url)
+    console.log(token)
+    console.log('ADD PRODUCT', inputAddProduct)
     addProduct({ url, token, inputAddProduct })
     setIsUpdated(true)
     closeAddProductModal()
   }
 
+  const formRef = useRef()
+
+  function resetForm() {
+    formRef.current.reset()
+  }
+
+  useEffect(() => {
+    resetForm()
+  }, [id])
+
   return (
     <div>
       <h1 className='products-title'>AddProduct</h1>
-      <form className='products-form'>
+      <form className='products-form' ref={formRef}>
         <div className='products-input'>
           <label htmlFor='barcode'>barcode</label>
           <input
@@ -47,6 +81,17 @@ function AddProduct({
             id='barcode'
             onChange={handleChange}
             defaultValue={inputAddProduct.barcode || ''}
+          />
+        </div>
+        <div className='products-input'>
+          <label htmlFor='extid'>extid</label>
+          <input
+            className='product-p'
+            type='text'
+            name='extid'
+            id='extid'
+            onChange={handleValue}
+            defaultValue={inputAddProduct.extid || 0}
           />
         </div>
         <div className='products-input'>
@@ -77,7 +122,7 @@ function AddProduct({
             className='product-p'
             type='text'
             name='unit'
-            id='descriptiuniton'
+            id='unit'
             onChange={handleChange}
             defaultValue={inputAddProduct.unit || ''}
           />
@@ -102,37 +147,39 @@ function AddProduct({
             // defaultValue={productcategories.category}
             onChange={handleChange}
           >
-            {Object.values(productcategories).map((category) => {
-              return (
-                <option key={category.id} name='category' value={category.category}>
-                  {category.category}
-                </option>
-              )
-            })}
+            {Object.values(productcategories)
+              .sort((a, b) => a.category.localeCompare(b.category))
+              .map((category) => {
+                return (
+                  <option key={category.id} name='category' value={category.category}>
+                    {category.category}
+                  </option>
+                )
+              })}
           </select>
         </div>
-        <div className='products-input'>
-          <label htmlFor='market'>market</label>
-          <input
-            className='product-p'
-            type='text'
-            name='market_id'
-            id='market'
-            onChange={handleChange}
-            defaultValue={inputAddProduct.market || ''}
-          />
-        </div>
-        <div className='products-input'>
+        {/* <div className='products-input'>
           <label htmlFor='price'>price</label>
           <input
             className='product-p'
             type='text'
             name='price'
             id='price'
-            onChange={handleChange}
-            defaultValue={inputAddProduct.price || ''}
+            onChange={handleValue}
+            defaultValue={0}
           />
-        </div>
+        </div> */}
+        {/* <div className='products-input'>
+          <label htmlFor='market'>market</label>
+          <input
+            className='product-p'
+            type='text'
+            name='market_id'
+            id='market'
+            onChange={handleValue}
+            defaultValue={0}
+          />
+        </div> */}
       </form>
       {/* <input type="button" value="add product" className="btn" onClick={handleAddProduct} /> */}
       <button type='submit' className='btn products-btn' onClick={handleSubmit}>
@@ -143,12 +190,13 @@ function AddProduct({
 }
 
 AddProduct.propTypes = {
-  url: PropTypes.string.isRequired,
-  token: PropTypes.string.isRequired,
-  closeAddProductModal: PropTypes.func.isRequired,
-  user_id: PropTypes.number.isRequired,
-  productcategories: PropTypes.array.isRequired,
-  setIsUpdated: PropTypes.func.isRequired
+  url: PropTypes.string,
+  token: PropTypes.string,
+  closeAddProductModal: PropTypes.func,
+  user_id: PropTypes.number,
+  productcategories: PropTypes.array,
+  setIsUpdated: PropTypes.func,
+  id: PropTypes.number
 }
 
 export default AddProduct
