@@ -15,9 +15,7 @@ export function AddProduct({
   setIsUpdated
 }) {
   let id = 0
-  // console.log(id)
   id = Date.now()
-  // console.log(id)
 
   const [inputAddProduct, setInputAddProduct] = useState({
     user_id,
@@ -38,7 +36,7 @@ export function AddProduct({
     })
   }
 
-  const handleValue = (e) => {
+  const handleValueInput = (e) => {
     e.preventDefault()
     const { name, value } = e.target
     setInputAddProduct({
@@ -90,7 +88,7 @@ export function AddProduct({
             type='text'
             name='extid'
             id='extid'
-            onChange={handleValue}
+            onChange={handleValueInput}
             defaultValue={inputAddProduct.extid || 0}
           />
         </div>
@@ -165,7 +163,7 @@ export function AddProduct({
             type='text'
             name='price'
             id='price'
-            onChange={handleValue}
+            onChange={handleValueInput}
             defaultValue={0}
           />
         </div> */}
@@ -176,7 +174,7 @@ export function AddProduct({
             type='text'
             name='market_id'
             id='market'
-            onChange={handleValue}
+            onChange={handleValueInput}
             defaultValue={0}
           />
         </div> */}

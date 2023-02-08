@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export async function getProducts({ url, token, setDataProducts, setSelectedProduct }) {
+export async function getProducts({ url, token, setDataProducts }) {
   await axios
     .get(url + 'products', {
       headers: {
@@ -12,7 +12,7 @@ export async function getProducts({ url, token, setDataProducts, setSelectedProd
     .then((resp) => {
       const sort = resp.data.sort((a, b) => a.name.localeCompare(b.name))
       setDataProducts(sort)
-      setSelectedProduct ? setSelectedProduct(sort[0]) : 'a'
+      // setSelectedProduct ? setSelectedProduct(resp.data[0]) : ' '
     })
     .catch((error) => {
       console.log(error)

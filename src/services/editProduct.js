@@ -9,7 +9,7 @@ export async function editProduct({
   initialForm,
   setIsUpdated
 }) {
-  console.log('INPUT EDIT PRODUCT', inputEditProduct)
+  // console.log('INPUT EDIT PRODUCT', inputEditProduct)
   await axios
     .put(`${url}products/${id}`, inputEditProduct, {
       headers: {

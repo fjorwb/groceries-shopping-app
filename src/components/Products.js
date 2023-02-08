@@ -78,7 +78,9 @@ function Product() {
   // console.log(checkPrice)
 
   useEffect(() => {
-    getProducts({ url, token, setDataProducts, setSelectedProduct, setEditId })
+    setDataProducts(getProducts({ url, token, setDataProducts }))
+
+    // getProducts({ url, token, setDataProducts, setSelectedProduct, setEditId })
     // console.log('DATA PRODUCTS', dataProducts)
     // sortDataProducts(dataProducts)
     getProduct({ url, token, setSelectedProduct, editId })
@@ -91,7 +93,9 @@ function Product() {
       <form>
         <h1 className='products-title'>Products</h1>
         <div className='products-bar'>
-          <label htmlFor='search'>search</label>
+          <label htmlFor='search' className='products-search-label'>
+            search
+          </label>
           <input
             type='text'
             id='search '
@@ -102,15 +106,6 @@ function Product() {
           <button className='btn products-btn' value='X' onClick={handleCleanSearchBar}>
             X
           </button>
-          {/* <label htmlFor='checkPrice'>check product price</label> */}
-          {/* <input
-          type='checkbox'
-          id='checkPrice'
-          className='products-checkbox'
-          value={checkPrice}
-          // value={true}
-          onChange={(e) => handleCheckPrice(e)}
-        /> */}
           <div>
             <button className='btn products-btn' onClick={handleAddProductModal}>
               add product
@@ -156,6 +151,7 @@ function Product() {
                   url={url}
                   token={token}
                   handleEditId={handleEditId}
+                  setIsUpdated={setIsUpdated}
                 />
               )
             })}

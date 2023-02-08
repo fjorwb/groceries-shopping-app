@@ -42,7 +42,6 @@ function EditProduct({
   const handleChange = (e) => {
     e.preventDefault()
     const { name, value } = e.target
-    console.log(name, value)
     setInputEditProduct({
       ...inputEditProduct,
       [name]: value
@@ -162,17 +161,6 @@ function EditProduct({
               })}
           </select>
         </div>
-        {/* <div className='products-input'>
-          <label htmlFor='market'>market</label>
-          <input
-            className='product-p'
-            type='text'
-            name='market_id'
-            id='market'
-            onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.market ?? ''}
-          />
-        </div> */}
         <div className='products-input'>
           <label htmlFor='price'>price</label>
           <input
@@ -191,9 +179,6 @@ function EditProduct({
         className='btn'
         onClick={(e) => handleEditProduct(e)}
       />
-      {/* <button type='submit' className='btn products-btn' onClick={handleSubmit}>
-        Edit Product
-      </button> */}
     </div>
   )
 }

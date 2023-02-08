@@ -6,10 +6,11 @@ import deleteProduct from '../services/deleteProduct'
 
 import './products.css'
 
-function ProductReadItem({ url, token, product, handleEditId }) {
+function ProductReadItem({ url, token, product, handleEditId, setIsUpdated }) {
   const handleDelete = (e) => {
     e.preventDefault()
     deleteProduct({ url, token, id: product.id })
+    setIsUpdated(true)
     console.log('DELETE')
   }
 
