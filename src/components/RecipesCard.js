@@ -99,7 +99,12 @@ function RecipesCard () {
     }
   }, [ url, recipesBook, recipeName, cuisine, user_id ] )
 
-  const { fetchData, loading } = useFetch( urlRecipe, token )
+  const urlX = `${ url }${ urlRecipe }`
+
+  const { fetchData, loading } = useFetch( urlX, token )
+
+  console.log( 'URL/recipe card', url )
+
 
   return (
     <div>
@@ -196,7 +201,7 @@ function RecipesCard () {
 
       { extid !== null ? (
         <Modal isOpen={ isOpen } closeModal={ closeModal }>
-          <RecipeDetails extid={ extid } user_id={ user_id } token={ token } closeModal={ closeModal } />
+          <RecipeDetails extid={ extid } url={ url } user_id={ user_id } token={ token } closeModal={ closeModal } />
         </Modal>
       ) : null }
 
