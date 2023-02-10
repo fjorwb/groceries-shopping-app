@@ -4,7 +4,6 @@ import axios from 'axios'
 
 export function useFetch ( url, token ) {
 
-  console.log( url )
   const [ fetchData, setFetchData ] = useState( null )
   const [ loading, setLoading ] = useState( false )
   const [ error, setError ] = useState( null )
