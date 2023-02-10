@@ -1,4 +1,5 @@
-.MenuAddRecipe-container {
+.MenuAddRecipe-container,
+.MenuViewRecipe-container {
   display: flex;
   flex-direction: column;
   align-items: center;

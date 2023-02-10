@@ -1,10 +1,6 @@
-/* eslint-disable space-before-function-paren */
-/* eslint-disable multiline-ternary */
-/* eslint-disable camelcase */
-// import axios from 'axios'
-
 import React, { useEffect, useState, lazy, Suspense } from 'react'
 import { useSelector } from 'react-redux'
+
 import { useFetch } from '../customHooks/useFetch'
 
 import { Modal } from './Modal'
@@ -17,98 +13,104 @@ import './RecipesCard.css'
 import RecipeDetails from './RecipeDetails'
 import deleteRecipe from '../services/deleteRecipe'
 
-const MenuAddRecipe = lazy(() => import('./MenuAddRecipe'))
+const MenuAddRecipe = lazy( () => import( './MenuAddRecipe' ) )
+const RecipeView = lazy( () => import( './RecipeView' ) )
 
-function RecipesCard() {
-  const state = useSelector((state) => state)
+function RecipesCard () {
+  const state = useSelector( ( state ) => state )
 
   const token = state.auth.user.accessToken
   const user_id = state.auth.user.id
 
   const url = state.url.url
 
-  const [recipeName, setRecipeName] = useState('')
-  const [cuisine, setCuisine] = useState('')
-  const [form, setForm] = useState('')
-  const [recipesBook, setRecipesBook] = useState('external book')
-  const [extid, setExtid] = useState(null)
-  const [recipe, setRecipe] = useState()
-  const [urlRecipe, setRecipeUrl] = useState('recipes')
+  const [ recipeName, setRecipeName ] = useState( '' )
+  const [ cuisine, setCuisine ] = useState( '' )
+  const [ form, setForm ] = useState( '' )
+  const [ recipesBook, setRecipesBook ] = useState( 'external book' )
+  const [ extid, setExtid ] = useState( null )
+  const [ recipe, setRecipe ] = useState()
+  const [ urlRecipe, setRecipeUrl ] = useState( 'recipes' )
 
-  const [isOpen, openModal, closeModal] = useModal(false)
-  const [isOpenMenu, openMenuModal, closeMenuModal] = useModal(false)
+  const [ isOpen, openModal, closeModal ] = useModal( false )
+  const [ isOpenMenu, openMenuModal, closeMenuModal ] = useModal( false )
+  const [ isOpenView, openViewModal, closeViewModal ] = useModal( false )
 
-  const handleChange = (e) => {
+  const handleChange = ( e ) => {
     e.preventDefault()
     const { name, value } = e.target
-    setForm({
+    setForm( {
       ...form,
-      [name]: value
-    })
+      [ name ]: value
+    } )
   }
 
-  const handleSearch = (e) => {
+  const handleSearch = ( e ) => {
     e.preventDefault()
-    setRecipeName(form.recipeName)
-    setCuisine(form.cuisine)
-    setRecipesBook(form.recipesBook)
-    setForm({
+    setRecipeName( form.recipeName )
+    setCuisine( form.cuisine )
+    setRecipesBook( form.recipesBook )
+    setForm( {
       recipeName: '',
       cuisine: '',
       recipesBook: 'own book'
-    })
+    } )
   }
 
-  const handleExtermalId = (id) => {
-    setExtid(id)
+  const handleExtermalId = ( id ) => {
+    setExtid( id )
     openModal()
   }
 
-  const handleAddToMenu = (recipe) => {
-    setRecipe(recipe)
-    // setExtMenuId(recipe.id)
-    // console.log(extMenuId)
+  const handleViewRecipe = ( e, id ) => {
+    e.preventDefault()
+    setExtid( id.id )
+    openViewModal()
+  }
+
+  const handleAddToMenu = ( recipe ) => {
+    setRecipe( recipe )
     openMenuModal()
   }
 
-  useEffect(() => {
-    if (recipesBook === 'own book') {
+  useEffect( () => {
+    if ( recipesBook === 'own book' ) {
       // url = `recipes`
-      setRecipeUrl('recipes')
-    } else if (recipesBook === 'external book') {
-      switch (recipeName && cuisine) {
+      setRecipeUrl( 'recipes' )
+    } else if ( recipesBook === 'external book' ) {
+      switch ( recipeName && cuisine ) {
         case recipeName && cuisine:
           // url = `recipes/recipes?recipe=${recipeName}&cuisine=${cuisine}`
-          setRecipeUrl(`recipes/recipes?recipe=${recipeName}&cuisine=${cuisine}`)
+          setRecipeUrl( `recipes/recipes?recipe=${ recipeName }&cuisine=${ cuisine }` )
           break
         case recipeName:
           // url = `recipes/recipes?recipe=${recipeName}`
-          setRecipeUrl(`recipes/recipes?recipe=${recipeName}`)
+          setRecipeUrl( `recipes/recipes?recipe=${ recipeName }` )
           break
         case cuisine:
           // url = `recipes/recipes?cuisine=${cuisine}`
-          setRecipeUrl(`recipes/recipes?cuisine=${cuisine}`)
+          setRecipeUrl( `recipes/recipes?cuisine=${ cuisine }` )
           break
         default:
           // url = `recipes/${user_id}`
-          setRecipeUrl(`recipes/${user_id}`)
+          setRecipeUrl( `recipes/${ user_id }` )
           break
       }
     }
-  }, [url, recipesBook, recipeName, cuisine, user_id])
+  }, [ url, recipesBook, recipeName, cuisine, user_id ] )
 
-  const { fetchData, loading } = useFetch(urlRecipe, token)
+  const { fetchData, loading } = useFetch( urlRecipe, token )
 
   return (
     <div>
       <section>
-        <form onSubmit={handleSearch} className='recipe-form'>
+        <form onSubmit={ handleSearch } className='recipe-form'>
           <select
             className='recipe-select'
             name='recipesBook'
             id='recipesBook'
-            onChange={handleChange}
-            value={form.recipesBook}
+            onChange={ handleChange }
+            value={ form.recipesBook }
             autoComplete='off'
             defaultValue='own book'
           >
@@ -119,8 +121,8 @@ function RecipesCard() {
             className='recipe-input'
             type='text'
             name='recipeName'
-            value={form.recipeName}
-            onChange={handleChange}
+            value={ form.recipeName }
+            onChange={ handleChange }
             placeholder='ingredients or recipe name'
             autoComplete='on'
           />
@@ -128,80 +130,101 @@ function RecipesCard() {
             className='recipe-input'
             type='text'
             name='cuisine'
-            value={form.cuisine}
-            onChange={handleChange}
+            value={ form.cuisine }
+            onChange={ handleChange }
             placeholder='cuisine'
             autoComplete='on'
           />
-          <button className='recipe-btn' onClick={handleSearch}>
+          <button className='recipe-btn' onClick={ handleSearch }>
             search
           </button>
         </form>
-        <div>{loading && <Loader />}</div>
+        <div>{ loading && <Loader /> }</div>
         <div className='recipe-container'>
-          {fetchData?.length === 0 ? (
+          { fetchData?.length === 0 ? (
             <h1 className='recipe-message'>no recipes found</h1>
           ) : (
-            fetchData?.map((recipe) => {
+            fetchData?.map( ( recipe ) => {
               return (
-                <article className='recipe-card' key={recipe.id}>
+                <article className='recipe-card' key={ recipe.id }>
                   <div className='recipe-img-container'>
-                    <img src={`${recipe.image}`} className='recipe-img' alt={recipe.title} />
-                    <h2 className='recipe-title'>{recipe.title}</h2>
+                    <img src={ `${ recipe.image }` } className='recipe-img' alt={ recipe.title } />
+                    <div>
+                      <h2 className='recipe-title'>{ recipe.title }</h2>
+                      { recipesBook === 'own book' ? (
+                        <h4 className='recipe-servings'>servings: { recipe.servings }</h4>
+                      ) : null }
+                    </div>
                   </div>
-                  {/* <h3>{recipe.description}</h3> */}
-                  {recipesBook === 'own book' ? (
-                    <h4 className='recipe-servings'>servings: {recipe.servings}</h4>
-                  ) : null}
-                  {recipesBook === 'own book' ? null : (
-                    <button
-                      className='recipe-btn'
-                      onClick={() => handleExtermalId({ id: recipe.id })}
-                    >
-                      view recipe
-                      {/* add to book */}
-                    </button>
-                  )}
-                  {recipesBook === 'own book' ? (
-                    <button
-                      className='recipe-btn'
-                      onClick={() => deleteRecipe({ id: recipe.id, url, token, setRecipesBook })}
-                    >
-                      delete recipe
-                    </button>
-                  ) : null}
-                  {recipesBook === 'own book' ? (
-                    <button className='recipe-btn' onClick={() => handleAddToMenu({ recipe })}>
-                      add to menu
-                    </button>
-                  ) : null}
+                  <div className='recipe-buttons'>
+                    { recipesBook === 'own book' ? (
+                      <button
+                        className='recipe-btn'
+                        onClick={ ( e ) => handleViewRecipe( e, { id: recipe.idext } ) }
+                      >
+                        view
+                      </button>
+                    ) : (
+                      <button
+                        className='recipe-btn ext-btn'
+                        onClick={ () => handleExtermalId( { id: recipe.id } ) }
+                      >
+                        view
+                      </button>
+                    ) }
+
+                    { recipesBook === 'own book' ? (
+                      <button
+                        className='recipe-btn'
+                        onClick={ () => deleteRecipe( { id: recipe.id, url, token, setRecipesBook } ) }
+                      >
+                        delete
+                      </button>
+                    ) : null }
+                    { recipesBook === 'own book' ? (
+                      <button className='recipe-btn' onClick={ () => handleAddToMenu( { recipe } ) }>
+                        add to menu
+                      </button>
+                    ) : null }
+                  </div>
                 </article>
               )
-            })
-          )}
+            } )
+          ) }
         </div>
       </section>
 
-      {extid !== null ? (
-        <Modal isOpen={isOpen} closeModal={closeModal}>
-          {/* <h1>Modal</h1> */}
-          <RecipeDetails extid={extid} user_id={user_id} token={token} closeModal={closeModal} />
+      { extid !== null ? (
+        <Modal isOpen={ isOpen } closeModal={ closeModal }>
+          <RecipeDetails extid={ extid } user_id={ user_id } token={ token } closeModal={ closeModal } />
         </Modal>
-      ) : null}
+      ) : null }
 
-      <Modal isOpen={isOpenMenu} closeModal={closeMenuModal}>
-        {/* <h1>Modal</h1> */}
+      <Modal isOpen={ isOpenMenu } closeModal={ closeMenuModal }>
         <Suspense>
           <MenuAddRecipe
-            recipe={recipe}
+            recipe={ recipe }
             // serves={recipe.recipe.servings}
-            user_id={user_id}
-            url={url}
-            token={token}
-            closeMenuModal={closeMenuModal}
+            user_id={ user_id }
+            url={ url }
+            token={ token }
+            closeMenuModal={ closeMenuModal }
           />
         </Suspense>
       </Modal>
+      { extid !== null ? (
+        <Modal isOpen={ isOpenView } closeModal={ closeViewModal }>
+          <Suspense>
+            <RecipeView
+              id={ extid }
+              user_id={ user_id }
+              url={ url }
+              token={ token }
+              closeViewModal={ closeViewModal }
+            />
+          </Suspense>
+        </Modal>
+      ) : null }
     </div>
   )
 }

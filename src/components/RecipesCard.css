@@ -51,11 +51,20 @@
   margin-top: 0.5rem;
 }
 
+.recipe-buttons {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: space-evenly;
+  /* margin: 0.5rem; */
+}
+
 .recipe-btn {
   width: fit-content;
   /* margin: 0.5rem; */
   padding: 0.5rem;
   margin-top: 0.5rem;
+  margin-left: 0.5rem;
   border-radius: 5px;
   background-color: var(--clr-contrast);
   color: var(--clr-font-contrast);
@@ -65,8 +74,13 @@
   font-size: 0.75rem;
 }
 
-.recipe-btn:hover {
+.recipe-btn:hover,
+.ext-btn:hover {
   background-color: var(--clr-contrast-hover);
+}
+
+.ext-btn {
+  text-align: right;
 }
 
 .recipe-input {
