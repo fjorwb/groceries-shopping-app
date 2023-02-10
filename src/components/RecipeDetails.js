@@ -14,8 +14,6 @@ function RecipeDetails ( { extid, user_id, url, token, closeModal } ) {
   // audio.play()
   // }
 
-  console.log( 'URL/recipe detail', url )
-
   const id = extid.id
   const idext = id
 

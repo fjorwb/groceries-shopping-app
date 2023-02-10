@@ -103,9 +103,6 @@ function RecipesCard () {
 
   const { fetchData, loading } = useFetch( urlX, token )
 
-  console.log( 'URL/recipe card', url )
-
-
   return (
     <div>
       <section>
