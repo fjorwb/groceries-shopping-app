@@ -4,10 +4,10 @@ import { CheckoutX } from '../components/Checkout'
 
 // import styles from '../styles/styles.module.css'
 
-export function Checkout() {
+export function CheckoutPage () {
   return (
     <div>
-      {/* <h1>Checkout</h1> */}
+      {/* <h1>Checkout</h1> */ }
       <Header />
       <CheckoutX />
     </div>

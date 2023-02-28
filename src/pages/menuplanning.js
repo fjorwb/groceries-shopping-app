@@ -2,15 +2,15 @@ import React, { lazy, Suspense } from 'react'
 import MenuPlanningCal from '../components/MenuPlanningCal'
 
 // import Footer from '../components/Footer'
-const Header = lazy(() => import('../components/Header'))
+const Header = lazy( () => import( '../components/Header' ) )
 // const MenuPlanningCal = lazy(() => import('../components/MenuPlanningCal'))
 
-export function MenuPlanning() {
+export function MenuPlanningPage () {
   return (
     <div>
       <Suspense>
         <Header />
-        {/* <Footer /> */}
+        {/* <Footer /> */ }
       </Suspense>
       <MenuPlanningCal />
     </div>

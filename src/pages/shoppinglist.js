@@ -3,9 +3,9 @@ import CreateShoppingList from '../components/CreateShoppingList'
 
 // import styles from '../styles/styles.module.css'
 
-const Header = lazy(() => import('../components/Header'))
+const Header = lazy( () => import( '../components/Header' ) )
 
-export function ShoppingList() {
+export function ShoppingListPage () {
   return (
     <div>
       <Suspense>

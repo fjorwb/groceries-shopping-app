@@ -5,9 +5,9 @@ import Market from '../components/Markets'
 
 import '../components/markets.css'
 
-const Header = lazy(() => import('../components/Header'))
+const Header = lazy( () => import( '../components/Header' ) )
 
-export function Markets() {
+export function MarketsPage () {
   return (
     <Suspense>
       <Header />
