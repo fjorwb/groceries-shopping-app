@@ -8,7 +8,7 @@ import getRecipe from '../services/getRecipe'
 // import useFetch from '../customHooks/useFetch'
 
 const RecipeView = ( { id, url, token, closeViewModal } ) => {
-  const extid = id
+  const extid = 582897
 
   const [ recipe, setRecipe ] = useState( {} )
   const [ ingredients, setIngredients ] = useState( [] )

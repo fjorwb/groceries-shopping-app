@@ -3,6 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import axios from 'axios'
+
 import { useFetch } from '../customHooks/useFetch'
 
 import Loader from './Loader'
@@ -13,6 +14,8 @@ function RecipeDetails ( { extid, user_id, url, token, closeModal } ) {
   // function AudioClick() {
   // audio.play()
   // }
+
+  console.log( 'extid', extid )
 
   const id = extid.id
   const idext = id
