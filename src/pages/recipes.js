@@ -2,15 +2,15 @@ import React, { lazy, Suspense } from 'react'
 
 import '../components/RecipesCard.css'
 
-const Header = lazy(() => import('../components/Header'))
-const RecipesCard = lazy(() => import('../components/RecipesCard'))
+const Header = lazy( () => import( '../components/Header' ) )
+const Recipes = lazy( () => import( '../components/Recipes' ) )
 
-export function Recipes() {
+export function RecipesPage () {
   return (
     <div>
       <Suspense>
         <Header />
-        <RecipesCard />
+        <Recipes />
       </Suspense>
     </div>
   )

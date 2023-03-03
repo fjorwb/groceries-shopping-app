@@ -34,7 +34,7 @@ export function useFetch ( url, token ) {
       .finally( () => {
         setLoading( false )
       } )
-  }, [ Bearer, url ] )
+  }, [ url, token ] )
 
   return { fetchData, loading, error }
 }
