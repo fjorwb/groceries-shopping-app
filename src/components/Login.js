@@ -1,30 +1,22 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable space-before-function-paren */
 import React from 'react'
 
-import styles from '../styles.module.css'
+import './Modal.css'
 
-export function Login() {
-	return (
-		<div className={styles.logincontainer}>
-			<div className={styles.loginlist}>
-				<a href="/login" className={styles.login}>
-					login
-				</a>
-				<p>|</p>
-				<a href="/register" className={styles.login}>
-					join
-				</a>
-			</div>
-
-			{/* <a href="#" className="login">Login</a>
-				<p>|</p>
-				<a href="#" className='join'>Join</a> */}
-			{/* <ul className={styles.loginlist}>
-				<li>login</li>
-				<li>|</li>
-				<li>join</li>
-			</ul> */}
-		</div>
-	)
+export function Modal({ isOpen, closeModal }) {
+  const handleModalClick = (e) => e.stopPropagation()
+  return (
+    <div>
+      <article className={`modal ${isOpen && 'is-open'}`} onClick={closeModal}>
+        <div className='modal-container' onClick={handleModalClick}>
+          <button className='modal-close' onClick={closeModal}>
+            X
+          </button>
+        </div>
+      </article>
+    </div>
+  )
 }
 
-export default Login
+export default Modal

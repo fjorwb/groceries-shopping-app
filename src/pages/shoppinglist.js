@@ -1,17 +1,17 @@
-import React from 'react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import React, { lazy, Suspense } from 'react'
+import CreateShoppingList from '../components/CreateShoppingList'
 
-import styles from '../styles.module.css'
+// import styles from '../styles/styles.module.css'
 
-export function ShoppingList() {
-	return (
-		<div>
-			<h1>Shopping List</h1>
-			<Header />
-			<div className={styles.maincontainer}></div>
+const Header = lazy( () => import( '../components/Header' ) )
 
-			<Footer />
-		</div>
-	)
+export function ShoppingListPage () {
+  return (
+    <div>
+      <Suspense>
+        <Header />
+        <CreateShoppingList />
+      </Suspense>
+    </div>
+  )
 }

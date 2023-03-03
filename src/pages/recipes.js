@@ -1,17 +1,17 @@
-import React from 'react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import React, { lazy, Suspense } from 'react'
 
-import styles from '../styles.module.css'
+import '../components/RecipesCard.css'
 
-export function Recipes() {
-	return (
-		<div>
-			<h1>Recipes</h1>
-			<Header />
-			<div className={styles.maincontainer}></div>
+const Header = lazy( () => import( '../components/Header' ) )
+const Recipes = lazy( () => import( '../components/Recipes' ) )
 
-			<Footer />
-		</div>
-	)
+export function RecipesPage () {
+  return (
+    <div>
+      <Suspense>
+        <Header />
+        <Recipes />
+      </Suspense>
+    </div>
+  )
 }

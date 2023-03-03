@@ -1,0 +1,25 @@
+.auth-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.auth-btn {
+  color: var(--clr-font);
+  border: none;
+  margin: 0 1rem;
+  font-size: var(--fnt-menu);
+  cursor: pointer;
+}
+
+.auth-btn:hover {
+  border-bottom: 4px solid var(--clr-contrast);
+  cursor: pointer;
+}
+
+.auth-title {
+  margin-top: 2rem;
+  background: yellow;
+}

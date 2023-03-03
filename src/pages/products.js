@@ -1,17 +1,15 @@
-import React from 'react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import React, { lazy, Suspense } from 'react'
+import Product from '../components/Products'
 
-import styles from '../styles.module.css'
+const Header = lazy( () => import( '../components/Header' ) )
 
-export function Products() {
-	return (
-		<div>
-			<h1>Products</h1>
-			<Header />
-			<div className={styles.maincontainer}></div>
-
-			<Footer />
-		</div>
-	)
+export function ProductsPage () {
+  return (
+    <div>
+      <Suspense>
+        <Header />
+        <Product />
+      </Suspense>
+    </div>
+  )
 }

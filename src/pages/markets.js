@@ -1,17 +1,18 @@
-import React from 'react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import React, { lazy, Suspense } from 'react'
+import Market from '../components/Markets'
 
-import styles from '../styles.module.css'
+// import styles from '../styles/styles.module.css'
 
-export function Markets() {
-	return (
-		<div>
-			<h1>Markets</h1>
-			<Header />
-			<div className={styles.maincontainer}></div>
+import '../components/markets.css'
 
-			<Footer />
-		</div>
-	)
+const Header = lazy( () => import( '../components/Header' ) )
+
+export function MarketsPage () {
+  return (
+    <Suspense>
+      <Header />
+      <h1 className='markets-title'>Markets</h1>
+      <Market />
+    </Suspense>
+  )
 }

@@ -1,22 +1,30 @@
 :root {
-	--clr-font: #070b7a;
-	--clr-font-contrast: #ffffff;
-	--clr-grid: #707070;
-	--clr-contrast: #2596be;
-	--clr-background: #fff;
+  --clr-font: #070b7a;
+  --clr-font-contrast: #ffffff;
+  --clr-grid: #707070;
+  --clr-contrast: #2596be;
+  --clr-background: #fff;
+  --clr-contrast-hover: #1d7a9f;
 
-	--fnt-menu: 1rem;
+  --fnt-menu: 1rem;
+  --fnt-fam: -apple-system, sans-serif;
+  font-weight: 600;
+  width: 80%;
+  margin: auto;
+  background-color: #f4f4f4;
+  margin-top: 1rem;
 }
 
 body {
-	margin: 0;
-	font-family: Georgia, 'Times New Roman', Times, serif;
-	/* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: var(--fnt-fam);
+  /* Georgia, 'Times New Roman', Times, serif; */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
