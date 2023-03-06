@@ -7,7 +7,7 @@ function Recipes () {
 
   const [ recipeBook, setRecipeBook ] = useState( 'own book' )
   const [ urlRecipe, setUrlRecipe ] = useState( 'http://localhost:5000/recipes' )
-  const [ extid, setExtid ] = useState( null )
+  const [ extid, setExtid ] = useState( '' )
 
   return (
     <div>
