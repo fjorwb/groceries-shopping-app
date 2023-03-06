@@ -75,8 +75,8 @@ RecipeView.propTypes = {
   user_id: PropTypes.number,
   url: PropTypes.string,
   token: PropTypes.string,
-  closeViewModal: PropTypes.func
-  //   loading: PropTypes.bool
+  closeViewModal: PropTypes.func,
+  loading: PropTypes.bool
 }
 
 export default RecipeView
