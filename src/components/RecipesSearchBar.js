@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-// import { useSelector } from 'react-redux'
 
 import PropTypes from 'prop-types'
 
@@ -11,7 +10,6 @@ export function RecipesSearchBar ( { setRecipeBook, setUrlRecipe } ) {
   const [ form, setForm ] = useState( {} )
 
   const state = useSelector( ( state ) => state )
-
   const url = state.url.url
 
   const handleChange = ( e ) => {
@@ -23,16 +21,11 @@ export function RecipesSearchBar ( { setRecipeBook, setUrlRecipe } ) {
     } )
   }
 
-  const handleSearch = ( e ) => {
+  const handleSubmitSearch = ( e ) => {
     e.preventDefault()
     setRecipeBook( form.recipesBook )
     setUrlRecipe( getRecipesUrl( url, form ) )
     resetForm()
-    setForm( {
-      recipeName: '',
-      cuisine: '',
-      recipesBook: 'own book'
-    } )
   }
 
   const formRef = useRef()
@@ -44,7 +37,7 @@ export function RecipesSearchBar ( { setRecipeBook, setUrlRecipe } ) {
   return (
     <div>
       <form
-        onSubmit={ handleSearch }
+        onSubmit={ handleSubmitSearch }
         className='recipe-form'
         ref={ formRef }
       >
@@ -56,19 +49,31 @@ export function RecipesSearchBar ( { setRecipeBook, setUrlRecipe } ) {
           onClick={ handleChange }
           required
         >
-          <option value=''>select book</option>
+          <option value='' hidden >select book</option>
           <option value='own book'>own book</option>
           <option value='external book'>external book</option>
         </select>
 
-        <input
-          className='recipe-input'
-          type='text'
-          name='recipeName'
-          onChange={ handleChange }
-          placeholder='ingredients or recipe name'
-          autoComplete='on'
-        />
+        { form.recipesBook === 'own book' ? (
+          <input
+            className='recipe-input'
+            type='text'
+            name='recipeName'
+            onChange={ handleChange }
+            placeholder='ingredients or recipe name'
+            autoComplete='on'
+          /> )
+          : (
+            <input
+              className='recipe-input'
+              type='text'
+              name='recipeName'
+              onChange={ handleChange }
+              placeholder='ingredients or recipe name'
+              autoComplete='on'
+              required
+            /> )
+        }
         <input
           className='recipe-input'
           type='text'

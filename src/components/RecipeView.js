@@ -7,8 +7,9 @@ import Loader from './Loader'
 import getRecipe from '../services/getRecipe'
 // import useFetch from '../customHooks/useFetch'
 
+import './RecipeView.css'
+
 const RecipeView = ( { id, url, token, closeViewModal } ) => {
-  const extid = 582897
 
   const [ recipe, setRecipe ] = useState( {} )
   const [ ingredients, setIngredients ] = useState( [] )
@@ -16,57 +17,57 @@ const RecipeView = ( { id, url, token, closeViewModal } ) => {
 
   useEffect( () => {
     setLoading( true )
-    getRecipe( { id: extid, url, token, setRecipe } )
-    setIngredients( recipe?.ingredients )
+    getRecipe( { id, url, token, setRecipe } )
+    setIngredients( recipe.ingredients )
     setLoading( false )
-  }, [ id, url, token ] )
+  }, [ id ] )
 
   const handleCloseView = () => {
+
     closeViewModal()
   }
 
   return (
-    <div>
-      <div>{ loading && <Loader /> }</div>
-      <div>
-        <div>
-          <h2 style={ { marginTop: '1.5rem', marginBottom: '1rem', fontSize: '1rem' } }>
-            { recipe?.title }
-          </h2>
-          <div className='recipe-cont'>
+    <>
+      { loading && <Loader /> }
+      <div className='recipe-view-container'>
+        <h2 className='recipe-view-title'>
+          { recipe?.title }
+        </h2>
+        <div className='recipe-view-subcontainer'>
+          <div className='recipe-view-img-container'>
             <img
-              src={ `${ recipe?.image }` }
+              src={ `${ recipe.image }` }
               alt='recipe image'
-              style={ {
-                width: '300px',
-                height: '200px',
-                borderRadius: '15px'
-              } }
+              loading='lazy'
+              width={ 300 }
+              height={ 300 }
+              className='recipe-view-img'
             />
-            <div className='recipe-ingredients'>
-              <h4 style={ { textDecoration: 'underline', marginBottom: '.5rem' } }>ingredients:</h4>
-              { ingredients?.map( ( ingredient, index ) => {
-                return (
-                  <div key={ index }>
-                    <h4>
-                      { ingredient.ingredient } / { ingredient.unit } / { ingredient.amount }
-                    </h4>
-                  </div>
-                )
-              } ) }
-              <h3 className='recipe-servings'>servings: { recipe?.servings }</h3>
-            </div>
           </div>
-          <div className='recipe-other'>
-            <h5>instructions:</h5>
-            <h5>{ recipe?.instructions }</h5>
+          <div className='recipe-view-ingredients'>
+            <h4 style={ { textDecoration: 'underline', marginBottom: '.5rem' } }>ingredients:</h4>
+            { ingredients?.map( ( ingredient, index ) => {
+              return (
+                <div key={ index }>
+                  <h4>
+                    { ingredient.ingredient } / { ingredient.unit } / { ingredient.amount }
+                  </h4>
+                </div>
+              )
+            } ) }
+            <h3 className='recipe-servings'>servings: { recipe?.servings }</h3>
           </div>
         </div>
-        <button className='recipe-btn' onClick={ handleCloseView }>
+        <div className='recipe-view-instructions'>
+          <h5>instructions:</h5>
+          <h5>{ recipe?.instructions }</h5>
+        </div>
+        <button className='recipe-view-btn btn' onClick={ handleCloseView }>
           close view
         </button>
       </div>
-    </div>
+    </>
   )
 }
 
