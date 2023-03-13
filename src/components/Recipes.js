@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { lazy, useState } from 'react'
+
+import { useSelector } from 'react-redux'
 
 // const SearchRecipeBar = lazy( () => import( './RecipesSearchBar' ) )
-// const RecipesCard = lazy( () => import( './RecipesCard' ) )
+const RecipesCard = lazy( () => import( './RecipesCard' ) )
 
 import SearchRecipeBar from './RecipesSearchBar'
-import RecipesCard from './RecipesCard'
+// import RecipesCard from './RecipesCard'
 
 function Recipes () {
+  const url = useSelector( state => state.url.url )
 
   const [ recipeBook, setRecipeBook ] = useState( 'own book' )
-  const [ urlRecipe, setUrlRecipe ] = useState( 'http://localhost:5000/recipes' )
+  const [ urlRecipe, setUrlRecipe ] = useState( `${ url }recipes` )
 
   return (
     <div>

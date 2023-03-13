@@ -14,6 +14,7 @@ import './RecipesCard.css'
 
 // import RecipeDetails from './RecipeDetails'
 import RecipeDet from './RecipeDet'
+import MenuAddRecipe from './MenuAddRecipe'
 // import deleteRecipe from '../services/deleteRecipe'
 
 // const MenuAddRecipe = lazy( () => import( './MenuAddRecipe' ) )
@@ -28,23 +29,23 @@ function RecipesCard ( { recipeBook, urlRecipe } ) {
     const user_id = state.auth.user.id
 
     const [ extid, setExtid ] = useState( null )
-    // const [ recipe, setRecipe ] = useState()
+    const [ recipe, setRecipe ] = useState()
 
 
     const url = useSelector( ( state ) => state.url.url )
 
     const [ isOpenView, openViewModal, closeViewModal ] = useModal( false )
-    // const [ isOpenMenu, openMenuModal, closeMenuModal ] = useModal( false )
+    const [ isOpenMenu, openMenuModal, closeMenuModal ] = useModal( false )
 
     const handleViewRecipe = ( id ) => {
         setExtid( id.id )
         openViewModal()
     }
 
-    // const handleAddToMenu = ( recipe ) => {
-    //     setRecipe( recipe )
-    //     openMenuModal()
-    // }
+    const handleAddToMenu = ( recipe ) => {
+        setRecipe( recipe )
+        openMenuModal()
+    }
 
     const { fetchData, loading, error } = useFetch( urlRecipe, token )
 
@@ -60,7 +61,7 @@ function RecipesCard ( { recipeBook, urlRecipe } ) {
                 ) : (
                     fetchData?.map( ( recipe ) => (
                         <div key={ recipe.id } >
-                            <RecipeDet recipe={ recipe } fetchData={ fetchData } recipeBook={ recipeBook } handleViewRecipe={ handleViewRecipe } />
+                            <RecipeDet recipe={ recipe } fetchData={ fetchData } recipeBook={ recipeBook } handleViewRecipe={ handleViewRecipe } handleAddToMenu={ handleAddToMenu } />
                         </div>
                     ) )
                 ) }
@@ -76,18 +77,16 @@ function RecipesCard ( { recipeBook, urlRecipe } ) {
                 />
             </Modal>
 
-            {/* <Modal isOpen={ isOpenMenu } closeModal={ closeMenuModal }>
-                <Suspense>
-                    <MenuAddRecipe
-                        recipe={ recipe }
-                        // serves={recipe.recipe.servings}
-                        user_id={ user_id }
-                        url={ url }
-                        token={ token }
-                        closeMenuModal={ closeMenuModal }
-                    />
-                </Suspense>
-            </Modal> */}
+            { <Modal isOpen={ isOpenMenu } closeModal={ closeMenuModal }>
+                <MenuAddRecipe
+                    recipe={ recipe }
+                    // serves={recipe.recipe.servings}
+                    user_id={ user_id }
+                    url={ url }
+                    token={ token }
+                    closeMenuModal={ closeMenuModal }
+                />
+            </Modal> }
 
 
 
