@@ -40,8 +40,6 @@ const RecipeView = ( { id, url, token, closeViewModal } ) => {
 
     text.replaceAll( '.)', '). ' ).replaceAll( ( 'Instructions' || 'instructions' ), '' ).split( '.' ).map( ( word ) => { arr.push( word ) } )
 
-    // arr.forEach( ( word ) => console.log( word ) )
-
     return arr.filter( ( word ) => word !== 'Instructions' )
   }
 
