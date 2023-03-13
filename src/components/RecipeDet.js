@@ -45,12 +45,21 @@ export const RecipeDet = ( { recipe, recipeBook, handleViewRecipe } ) => {
                         </div>
 
                     ) : (
-                        <button
-                            className='recipe-btn ext-btn'
-                            onClick={ () => handleViewRecipe( { id: recipe.id } ) }
-                        >
-                            view
-                        </button>
+                        <div>
+
+                            <button
+                                className='recipe-btn ext-btn'
+                                onClick={ () => handleViewRecipe( { id: recipe.id } ) }
+                            >
+                                view
+                            </button>
+                            <button
+                                className='recipe-btn ext-btn'
+                                onClick={ () => handleViewRecipe( { id: recipe.id } ) }
+                            >
+                                add to book
+                            </button>
+                        </div>
                     )
                 }
             </div>
