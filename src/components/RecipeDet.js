@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import './RecipesCard.css'
 
 
-export const RecipeDet = ( { recipe, recipeBook, handleViewRecipe, handleAddToMenu } ) => {
+export const RecipeDet = ( { recipe, recipeBook, handleViewRecipe, handleAddToMenu, handleAddToBook } ) => {
 
     return (
 
@@ -55,7 +55,7 @@ export const RecipeDet = ( { recipe, recipeBook, handleViewRecipe, handleAddToMe
                             </button>
                             <button
                                 className='recipe-btn ext-btn'
-                                onClick={ () => handleViewRecipe( { id: recipe.id } ) }
+                                onClick={ () => handleAddToBook( { recipe } ) }
                             >
                                 add to book
                             </button>
@@ -72,8 +72,8 @@ RecipeDet.propTypes = {
     recipeBook: PropTypes.string,
     handleViewRecipe: PropTypes.func,
     handleExtermalId: PropTypes.func,
-    handleAddToMenu: PropTypes.func
-
+    handleAddToMenu: PropTypes.func,
+    handleAddToBook: PropTypes.func
 }
 
 export default RecipeDet

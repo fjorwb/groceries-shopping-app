@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export const getRecipe = async ( { url, token, id, setRecipe } ) => {
+
   await axios
     .get( `${ url }recipes/recipes/${ id }`, {
       headers: {
