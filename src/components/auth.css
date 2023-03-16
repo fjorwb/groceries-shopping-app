@@ -23,3 +23,8 @@
   margin-top: 2rem;
   background: yellow;
 }
+
+.join-btn {
+  display: flex;
+  flex-direction: row;
+}

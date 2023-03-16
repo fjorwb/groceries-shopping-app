@@ -13,20 +13,20 @@ export const RecipeAdd = ( { recipe, url, token, user_id, closeAddRecipeModal } 
     const [ dataRecipe, setDataRecipe ] = useState( {} )
     const [ dataIngredient, setDataIngredient ] = useState( {} )
 
-    console.log( 'User Id', user_id )
+    // console.log( 'User Id', user_id )
 
-    useEffect( () => {
-        console.log( recipe )
-        console.log( recipeToBook )
-    }, [ recipe ] );
+    // useEffect( () => {
+    //     console.log( recipe )
+    //     console.log( recipeToBook )
+    // }, [ recipe ] );
 
-    console.log( dataRecipe )
-    console.log( dataIngredient )
+    // console.log( dataRecipe )
+    // console.log( dataIngredient )
 
     // const style = { background: 'red', color: 'yellow', margin: 0, padding: '0.5rem 0' }
 
     useEffect( () => {
-        getRecipe( { url, token, id: recipe.recipe.id, setRecipe: setRecipeToBook } )
+        getRecipe( { url, token, id: recipe?.recipe.id, setRecipe: setRecipeToBook } )
     }, [ recipe ] )
 
     function addToBook () {
