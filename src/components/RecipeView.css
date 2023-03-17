@@ -1,7 +1,6 @@
 .recipe-view-container {
-  /* display: flex;
-  flex-direction: column; */
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 700px));
 }
 
 .recipe-view-subcontainer {
@@ -42,15 +41,17 @@
   background-color: yellow;
   border: none;
   cursor: auto;
-  /* color: var(--clr-font); */
 }
 
 .recipe-view-img-container {
   width: 100%;
+  /* height: auto; */
   justify-self: center;
 }
 
 .recipe-view.img {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   border-radius: 10px;
   margin-bottom: 1rem;
 }
