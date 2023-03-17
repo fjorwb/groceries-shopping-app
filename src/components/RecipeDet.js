@@ -5,7 +5,9 @@ import PropTypes from 'prop-types'
 import './RecipesCard.css'
 
 
-export const RecipeDet = ( { recipe, recipeBook, handleViewRecipe, handleAddToMenu, handleAddToBook } ) => {
+export const RecipeDet = ( { recipe, recipeBook, handleViewRecipe, handleAddToMenu, handleAddToBook, handleDeleteRecipe } ) => {
+
+    console.log( recipe )
 
     return (
 
@@ -31,7 +33,7 @@ export const RecipeDet = ( { recipe, recipeBook, handleViewRecipe, handleAddToMe
                             </button>
                             <button
                                 className='recipe-btn'
-                            // onClick={ () => deleteRecipe( { id: recipe.id, url, token, setRecipeBook } ) }
+                                onClick={ () => handleDeleteRecipe( { recipe } ) }
                             >
                                 delete
                             </button>
@@ -73,7 +75,11 @@ RecipeDet.propTypes = {
     handleViewRecipe: PropTypes.func,
     handleExtermalId: PropTypes.func,
     handleAddToMenu: PropTypes.func,
-    handleAddToBook: PropTypes.func
+    handleAddToBook: PropTypes.func,
+    handleDeleteRecipe: PropTypes.func,
+    setRecipeBook: PropTypes.func,
+    url: PropTypes.string,
+    token: PropTypes.string
 }
 
 export default RecipeDet

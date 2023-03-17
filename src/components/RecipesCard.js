@@ -23,8 +23,9 @@ import RecipeAdd from './RecipeAdd'
 // const RecipeView = lazy( () => import( './RecipeView' ) )
 
 import RecipeView from './RecipeView'
+import { RecipeDelete } from './RecipeDelete'
 
-function RecipesCard ( { recipeBook, urlRecipe } ) {
+function RecipesCard ( { recipeBook, urlRecipe, setRecipeBook } ) {
 
     const state = useSelector( ( state ) => state )
     const token = state.auth.user.accessToken
@@ -38,6 +39,7 @@ function RecipesCard ( { recipeBook, urlRecipe } ) {
     const [ isOpenView, openViewModal, closeViewModal ] = useModal( false )
     const [ isOpenMenu, openMenuModal, closeMenuModal ] = useModal( false )
     const [ isOpenAddRecipe, openAddRecipeModal, closeAddRecipeModal ] = useModal( false )
+    const [ isOpenDeleteRecipe, openDeleteRecipeModal, closeDeleteRecipeModal ] = useModal( false )
 
     const handleViewRecipe = ( id ) => {
         setExtid( id.id )
@@ -55,8 +57,17 @@ function RecipesCard ( { recipeBook, urlRecipe } ) {
 
     }
 
-    const { fetchData, loading, error } = useFetch( urlRecipe, token )
+    const handleDeleteRecipe = ( recipe ) => {
+        setRecipe( recipe )
+        // deleteRecipe( { id: id.id, url, token } )
+        openDeleteRecipeModal()
+        setRecipeBook( 'own book' )
+    }
+
+
     // console.log( fetchData )
+    const { fetchData, loading, error } = useFetch( urlRecipe, token )
+
 
     return (
         <section>
@@ -70,7 +81,7 @@ function RecipesCard ( { recipeBook, urlRecipe } ) {
                 ) : (
                     fetchData?.map( ( recipe ) => (
                         <div key={ recipe.id } >
-                            <RecipeDet recipe={ recipe } fetchData={ fetchData } recipeBook={ recipeBook } handleViewRecipe={ handleViewRecipe } handleAddToMenu={ handleAddToMenu } handleAddToBook={ handleAddToBook } />
+                            <RecipeDet recipe={ recipe } fetchData={ fetchData } recipeBook={ recipeBook } handleViewRecipe={ handleViewRecipe } handleAddToMenu={ handleAddToMenu } handleAddToBook={ handleAddToBook } handleDeleteRecipe={ handleDeleteRecipe } setRecipeBook={ setRecipeBook } url={ url } token={ token } />
                         </div>
                     ) )
                 ) }
@@ -89,7 +100,7 @@ function RecipesCard ( { recipeBook, urlRecipe } ) {
             { <Modal isOpen={ isOpenMenu } closeModal={ closeMenuModal }>
                 <MenuAddRecipe
                     recipe={ recipe }
-                    serves={ recipe?.recipe.servings }
+                    // serves={ recipe?.recipe.servings }
                     user_id={ user_id }
                     url={ url }
                     token={ token }
@@ -105,6 +116,16 @@ function RecipesCard ( { recipeBook, urlRecipe } ) {
                     token={ token }
                     closeAddRecipeModal={ closeAddRecipeModal }
                     setRecipe={ setRecipe }
+                />
+            </Modal> }
+
+            { <Modal isOpen={ isOpenDeleteRecipe } closeModal={ closeDeleteRecipeModal }>
+                <RecipeDelete
+                    recipe={ recipe }
+                    url={ url }
+                    token={ token }
+                    setRecipeBook={ setRecipeBook }
+                    closeDeleteRecipeModal={ closeDeleteRecipeModal }
                 />
             </Modal> }
 
