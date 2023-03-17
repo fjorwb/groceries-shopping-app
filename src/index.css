@@ -28,3 +28,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+/* @media screen and (min-width: 1400px) {
+  .container {
+    width: 50%;
+    margin: auto;
+  }
+} */
