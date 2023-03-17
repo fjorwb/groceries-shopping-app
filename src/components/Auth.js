@@ -45,9 +45,8 @@ export function Auth () {
             </div>
           ) : (
             <div className='logout-container'>
-              <p className='p-user'>Hello, { auth.user.firstname }</p>
               <button onClick={ () => setData( null ) } className='auth-btn' style={ { fontWeight: '500' } }>
-                { `/ logout` }
+                { `Hello, ${ auth.user.firstname } / logout?` }
               </button>
             </div>
           ) }

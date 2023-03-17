@@ -34,16 +34,13 @@ h1 {
 .logo {
   width: 100px;
   height: 100px;
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 
 .maincontainer {
-  width: 100%;
+  width: 90%;
   margin: auto;
   min-height: 90vh;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 1px 1px 1px 1px rgba(191, 189, 189, 0.2);
 }
 
 .navbarcontainer,
@@ -85,49 +82,19 @@ button {
   color: var(--clr-font);
 }
 
-@media screen and (min-width: 1400px) {
-  .header {
-    width: 100%;
-  }
-  .maincontainer {
-    width: 80%;
-  }
-  .footer {
-    width: 100%;
-  }
+/* .login-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 }
 
-@media screen and (min-width: 1600px) {
-  /* .header {
-    width: 100%;
-  } */
-  .maincontainer {
-    width: 70%;
-  }
-  /* .footer {
-    width: 100%;
-  } */
+.login {
+	padding: 0.5rem;
+	font-size: var(--fnt-menu);
 }
 
-@media screen and (min-width: 2000px) {
-  /* .header {
-    width: 100%;
-  } */
-  .maincontainer {
-    width: 60%;
-  }
-  /* .footer {
-    width: 100%;
-  } */
-}
-@media screen and (min-width: 3000px) {
-  /* .header {
-    width: 100%;
-  } */
-  .maincontainer {
-    width: 50%;
-  }
-  /* .footer {
-    width: 100%;
-  } */
-}
+.login:hover {
+	border-bottom: 4px solid var(--clr-contrast);
+	cursor: pointer;
+} */
