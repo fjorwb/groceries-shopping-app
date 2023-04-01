@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react'
-import MenuPlanningCal from '../components/MenuPlanningCal'
+import MenuPlanningCalendar from '../components/MenuPlanningCalendar'
 
 // import Footer from '../components/Footer'
 const Header = lazy( () => import( '../components/Header' ) )
@@ -12,7 +12,7 @@ export function MenuPlanningPage () {
         <Header />
         {/* <Footer /> */ }
       </Suspense>
-      <MenuPlanningCal />
+      <MenuPlanningCalendar />
     </div>
   )
 }
