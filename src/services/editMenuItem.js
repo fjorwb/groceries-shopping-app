@@ -1,7 +1,7 @@
 /* eslint-disable space-before-function-paren */
 import axios from 'axios'
 
-export async function editMenuItem({
+export async function editMenuItem ( {
   id,
   date,
   meal,
@@ -10,26 +10,33 @@ export async function editMenuItem({
   token,
   closeMenuCrudModal,
   setIsUpdated
-}) {
-  let dat = new Date(date)
-  dat = dat.setHours(0)
-  dat = new Date(dat)
-  const day = dat.getDate()
-  dat.setDate(day)
-  dat = new Date(dat)
+} ) {
+  let yy = date.slice( 0, 4 )
+  let mm = date.slice( 5, 7 )
+  let dd = date.slice( 8, 10 )
 
-  if (meal === 'breakfast') {
-    dat.setHours(8)
+  let dat = new Date( yy, mm - 1, dd )
+
+  dat = dat.setHours( 0 )
+  dat = new Date( dat )
+  const day = dat.getDate()
+  dat.setDate( day )
+  dat = new Date( dat )
+
+  if ( meal === 'breakfast' ) {
+    dat.setHours( 8 )
   }
-  if (meal === 'lunch') {
-    dat.setHours(12)
+  if ( meal === 'lunch' ) {
+    dat.setHours( 12 )
   }
-  if (meal === 'dinner') {
-    dat.setHours(16)
+  if ( meal === 'dinner' ) {
+    dat.setHours( 16 )
   }
+
+  console.log( dat )
 
   await axios.put(
-    `${url}menus/${id}`,
+    `${ url }menus/${ id }`,
     {
       date: dat,
       meal,
@@ -39,11 +46,11 @@ export async function editMenuItem({
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${ token }`
       }
     }
   )
-  setIsUpdated(true)
+  setIsUpdated( true )
   closeMenuCrudModal()
 }
 

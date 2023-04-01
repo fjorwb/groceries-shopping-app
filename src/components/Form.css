@@ -22,6 +22,8 @@
 .form-big {
   display: flex;
   flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
   justify-content: center;
   align-items: top;
@@ -74,14 +76,19 @@
 
 .personal-data {
   padding: 2rem 0;
-
-  width: 40%;
   border: 1px solid var(--clr-contrast);
 }
 
 .address-data {
   padding: 2rem 0;
-
-  width: 40%;
   border: 1px solid var(--clr-contrast);
+}
+
+.logout-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin-right: 1rem;
 }

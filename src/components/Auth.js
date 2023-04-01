@@ -44,17 +44,24 @@ export function Auth () {
               </button>
             </div>
           ) : (
-            <div>
-              <button onClick={ () => setData( null ) } className='auth-btn'>
-                logout
+            <div className='logout-container'>
+              <button onClick={ () => setData( null ) } className='auth-btn' style={ { fontWeight: '500' } }>
+                { `Hello, ${ auth.user.firstname } / logout?` }
               </button>
             </div>
           ) }
         </div>
-        <span>|</span>
-        <button onClick={ openRegisterModal } className='auth-btn'>
-          join
-        </button>
+        { !isLogedIn
+          ? (
+            <div className='join-btn'>
+              <span> | </span>
+              <button onClick={ openRegisterModal } className='auth-btn'>
+                join
+              </button>
+            </div>
+
+          )
+          : null }
 
         <Modal isOpen={ isOpenLogin } closeModal={ closeLoginModal }>
           <div>

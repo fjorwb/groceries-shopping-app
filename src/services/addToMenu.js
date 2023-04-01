@@ -1,20 +1,19 @@
-/* eslint-disable space-before-function-paren */
 import axios from 'axios'
 
-export async function addToMenu(data, url, token) {
+export async function addToMenu ( data, url, token ) {
   try {
-    const resp = await axios(`${url}menus`, {
+    const resp = await axios( `${ url }menus`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${ token }`
       },
       data
-    })
-    console.log(resp)
-  } catch (error) {
-    console.log(error)
+    } )
+    console.log( resp.data )
+  } catch ( error ) {
+    console.log( error )
   }
 }
 
