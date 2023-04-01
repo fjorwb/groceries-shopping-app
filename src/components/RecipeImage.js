@@ -10,7 +10,6 @@ const RecipeImage = ( { image } ) => {
                 src={ `${ image }` }
                 alt="recipe image"
                 className="recipe-view-img"
-            // onError={onImageError}
             />
         </div>
     );

@@ -22,8 +22,8 @@ const RecipeView = ( { id, url, token, closeViewModal } ) => {
 
   useEffect( () => {
     setLoading( true )
+    if ( id === null ) return
     getRecipe( { id, url, token, setRecipe } )
-    // setRecipe( {} )
     setTimeout( () => {
       setLoading( false )
     }, 1000 )
@@ -44,7 +44,6 @@ const RecipeView = ( { id, url, token, closeViewModal } ) => {
   }
 
   const text = separateInstructions( recipe.instructions || '' )
-
 
   return (
     <section>

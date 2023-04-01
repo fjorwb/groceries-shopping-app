@@ -15,27 +15,31 @@ import './RecipesCard.css'
 // import RecipeDetails from './RecipeDetails'
 import RecipeDet from './RecipeDet'
 import MenuAddRecipe from './MenuAddRecipe'
+import RecipeAdd from './RecipeAdd'
+
 // import deleteRecipe from '../services/deleteRecipe'
 
 // const MenuAddRecipe = lazy( () => import( './MenuAddRecipe' ) )
 // const RecipeView = lazy( () => import( './RecipeView' ) )
 
 import RecipeView from './RecipeView'
+import { RecipeDelete } from './RecipeDelete'
 
-function RecipesCard ( { recipeBook, urlRecipe } ) {
+function RecipesCard ( { recipeBook, urlRecipe, setRecipeBook } ) {
 
     const state = useSelector( ( state ) => state )
     const token = state.auth.user.accessToken
     const user_id = state.auth.user.id
 
     const [ extid, setExtid ] = useState( null )
-    const [ recipe, setRecipe ] = useState()
-
+    const [ recipe, setRecipe ] = useState( null )
 
     const url = useSelector( ( state ) => state.url.url )
 
     const [ isOpenView, openViewModal, closeViewModal ] = useModal( false )
     const [ isOpenMenu, openMenuModal, closeMenuModal ] = useModal( false )
+    const [ isOpenAddRecipe, openAddRecipeModal, closeAddRecipeModal ] = useModal( false )
+    const [ isOpenDeleteRecipe, openDeleteRecipeModal, closeDeleteRecipeModal ] = useModal( false )
 
     const handleViewRecipe = ( id ) => {
         setExtid( id.id )
@@ -47,7 +51,23 @@ function RecipesCard ( { recipeBook, urlRecipe } ) {
         openMenuModal()
     }
 
+    const handleAddToBook = ( recipe ) => {
+        setRecipe( recipe )
+        openAddRecipeModal()
+
+    }
+
+    const handleDeleteRecipe = ( recipe ) => {
+        setRecipe( recipe )
+        // deleteRecipe( { id: id.id, url, token } )
+        openDeleteRecipeModal()
+        setRecipeBook( 'own book' )
+    }
+
+
+    // console.log( fetchData )
     const { fetchData, loading, error } = useFetch( urlRecipe, token )
+
 
     return (
         <section>
@@ -61,7 +81,7 @@ function RecipesCard ( { recipeBook, urlRecipe } ) {
                 ) : (
                     fetchData?.map( ( recipe ) => (
                         <div key={ recipe.id } >
-                            <RecipeDet recipe={ recipe } fetchData={ fetchData } recipeBook={ recipeBook } handleViewRecipe={ handleViewRecipe } handleAddToMenu={ handleAddToMenu } />
+                            <RecipeDet recipe={ recipe } fetchData={ fetchData } recipeBook={ recipeBook } handleViewRecipe={ handleViewRecipe } handleAddToMenu={ handleAddToMenu } handleAddToBook={ handleAddToBook } handleDeleteRecipe={ handleDeleteRecipe } setRecipeBook={ setRecipeBook } url={ url } token={ token } />
                         </div>
                     ) )
                 ) }
@@ -80,13 +100,35 @@ function RecipesCard ( { recipeBook, urlRecipe } ) {
             { <Modal isOpen={ isOpenMenu } closeModal={ closeMenuModal }>
                 <MenuAddRecipe
                     recipe={ recipe }
-                    // serves={recipe.recipe.servings}
+                    // serves={ recipe?.recipe.servings }
                     user_id={ user_id }
                     url={ url }
                     token={ token }
                     closeMenuModal={ closeMenuModal }
                 />
             </Modal> }
+
+            { <Modal isOpen={ isOpenAddRecipe } closeModal={ closeAddRecipeModal }>
+                <RecipeAdd
+                    recipe={ recipe }
+                    user_id={ user_id }
+                    url={ url }
+                    token={ token }
+                    closeAddRecipeModal={ closeAddRecipeModal }
+                    setRecipe={ setRecipe }
+                />
+            </Modal> }
+
+            { <Modal isOpen={ isOpenDeleteRecipe } closeModal={ closeDeleteRecipeModal }>
+                <RecipeDelete
+                    recipe={ recipe }
+                    url={ url }
+                    token={ token }
+                    setRecipeBook={ setRecipeBook }
+                    closeDeleteRecipeModal={ closeDeleteRecipeModal }
+                />
+            </Modal> }
+
 
 
 

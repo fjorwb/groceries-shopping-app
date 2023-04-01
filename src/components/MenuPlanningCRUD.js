@@ -1,102 +1,91 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable space-before-function-paren */
 import axios from 'axios'
-import React, { useEffect, useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+
+import PropTypes from 'prop-types'
+
 import { useForm } from 'react-hook-form'
 import { deleteMenuItem, editMenuItem } from '../services'
 
 import '../styles/MenuPlanningCRUD.css'
 
-function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpdated }) {
+function MenuPlanningCRUD ( { menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpdated } ) {
   const { id, url, token } = menuCrud
 
-  const [menuItem, setMenuItem] = useState({})
-  const [servings, setServings] = useState(menuItem.servings || 0)
+  const [ menuItem, setMenuItem ] = useState( {} )
+  const [ servings, setServings ] = useState( menuItem.servings || 0 )
 
   const { register, handleSubmit } = useForm()
 
-  // console.log(id)
-  // console.log(token)
+  const incrementServings = () => { setServings( servings + 1 ) }
+  const decrementServings = () => { setServings( servings - 1 ) }
 
-  const increment = () => {
-    setServings(servings + 1)
-  }
-
-  const decrement = () => {
-    setServings(servings - 1)
-  }
-
-  const handleChange = (e) => {
+  const handleChange = ( e ) => {
     e.preventDefault()
     const { name, value } = e.target
-    setMenuItem({ ...menuItem, [name]: value })
+    setMenuItem( { ...menuItem, [ name ]: value } )
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = ( data ) => {
     data = {
       ...data,
       date: menuItem.date,
       meal: menuItem.meal,
       servings
     }
-    console.log(data)
+    console.log( data )
   }
 
   const getMenuItem = useCallback(
-    async (id, token) => {
-      if (id === undefined || token === undefined) return
+    async ( id, token ) => {
+      if ( id === undefined || token === undefined ) return
       try {
-        const resp = await axios(`${url}menus/${id}`, {
+        const resp = await axios( `${ url }menus/${ id }`, {
           headers: {
             'Content-Type': 'application/json',
             accept: 'application/json',
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${ token }`
           }
-        })
-        const sss = { ...resp.data, date: resp.data.date.slice(0, 10) }
-        setMenuItem(sss)
-        return resp.data
-      } catch (error) {
-        console.log(error.message)
+        } )
+        const sss = { ...resp.data, date: resp.data.date.slice( 0, 10 ) }
+        setMenuItem( sss )
+      } catch ( error ) {
+        console.log( error.message )
       }
     },
-    [url]
+    [ url ]
   )
 
-  useEffect(() => {
-    setMenuItem(getMenuItem(id, token))
-  }, [getMenuItem, id, token])
-
-  // console.log(menuItem)
+  useEffect( () => {
+    setMenuItem( getMenuItem( id, token, url ) )
+  }, [ getMenuItem, id, token ] )
 
   return (
     <div className='menuCRUD-container'>
-      <p className='menuCRUD-title'>{menuItem.recipe_title}</p>
-      {/* <form className="menuCRUD-form"> */}
+      <p className='menuCRUD-title'>{ menuItem.recipe_title }</p>
       <label htmlFor='servings' className='menuCRUD-label'>
         servings
       </label>
       <div className='menuCRUD-counter-container'>
-        <button className='menuCRUD-counter-btn' onClick={decrement}>
+        <button className='menuCRUD-counter-btn' onClick={ decrementServings }>
           -
         </button>
-        <p className='menuCRUD-counter servings'>{servings}</p>
-        <button className='menuCRUD-counter-btn' onClick={increment}>
+        <p className='menuCRUD-counter servings'>{ servings }</p>
+        <button className='menuCRUD-counter-btn' onClick={ incrementServings }>
           +
         </button>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className='menuCRUD-form'>
+      <form onSubmit={ handleSubmit( onSubmit ) } className='menuCRUD-form'>
         <label htmlFor='meal' className='menuCRUD-label'>
           meal
         </label>
         <select
-          {...register('meal')}
+          { ...register( 'meal' ) }
           className='menuCRUD-select'
           name='meal'
           id='meal'
-          value={menuItem.meal}
+          value={ menuItem.meal }
           defaultValue='lunch'
-          onChange={(e) => handleChange(e)}
+          onChange={ ( e ) => handleChange( e ) }
         >
           <option className='menuCRUD-option' value='breakfast'>
             breakfast
@@ -115,19 +104,19 @@ function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpd
           type='date'
           required
           pattern='\d{4}-\d{2}-\d{2}'
-          {...register('date')}
+          { ...register( 'date' ) }
           className='menuCRUD-input'
           id='date'
           name='date'
-          value={menuItem.date}
-          onChange={(e) => handleChange(e)}
+          value={ menuItem.date }
+          onChange={ ( e ) => handleChange( e ) }
         />
         <div className='menuCRUD-btn-container'>
           <button
             type='submit'
             className='menuCRUD-btn'
-            onClick={() =>
-              editMenuItem({
+            onClick={ () =>
+              editMenuItem( {
                 id: menuItem.id,
                 date: menuItem.date,
                 meal: menuItem.meal,
@@ -136,7 +125,7 @@ function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpd
                 token,
                 closeMenuCrudModal,
                 setIsUpdated
-              })
+              } )
             }
           >
             edit
@@ -144,8 +133,8 @@ function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpd
           <button
             type='submit'
             className='menuCRUD-btn'
-            onClick={() =>
-              deleteMenuItem({ id: menuItem.id, url, token, setIsDeleted, closeMenuCrudModal })
+            onClick={ () =>
+              deleteMenuItem( { id: menuItem.id, url, token, setIsDeleted, closeMenuCrudModal } )
             }
           >
             delete
@@ -154,6 +143,13 @@ function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpd
       </form>
     </div>
   )
+}
+
+MenuPlanningCRUD.propTypes = {
+  menuCrud: PropTypes.object,
+  closeMenuCrudModal: PropTypes.func,
+  setIsDeleted: PropTypes.func,
+  setIsUpdated: PropTypes.func
 }
 
 export default MenuPlanningCRUD
