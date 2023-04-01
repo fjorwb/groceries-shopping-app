@@ -43,17 +43,20 @@ export const RecipeAdd = ( { recipe, url, token, user_id, closeAddRecipeModal } 
             setDataRecipe
         } )
 
-        addIngredient( {
-            url, token, data: {
-                idext: recipe.recipe.id,
-                ingredients: recipeToBook.ingredients || 'no ingredients',
-                servings: recipeToBook.servings,
-                instructions: recipeToBook.instructions,
-                user_id
+        addIngredient(
+            {
+                url, token, data: {
+                    idext: recipe.recipe.id,
+                    ingredients: recipeToBook.ingredients || 'no ingredients',
+                    servings: recipeToBook.servings,
+                    instructions: recipeToBook.instructions,
+                    user_id
+                }
             },
             setDataIngredient
-        } )
+        )
         setRecipeToBook( {} )
+        closeAddRecipeModal()
     }
 
     return (
