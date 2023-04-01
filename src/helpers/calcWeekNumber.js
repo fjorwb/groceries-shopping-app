@@ -1,8 +1,7 @@
-import moment from 'moment'
+import getWeek from 'date-fns/getWeek'
 
-function getWeekNumber (d) {
-  const dd = new Date(d)
-  const week = moment(dd).week()
+function getWeekNumber ( d ) {
+  const week = getWeek( d )
   return week
 }
 
