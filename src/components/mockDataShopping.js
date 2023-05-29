@@ -11,7 +11,7 @@ import createDataProductMock from '../helpers/createDataProductMock'
 import calcTotalShoppingList from '../helpers/calcTotalShoppingList'
 import calcMinProductByMarket from '../helpers/calcMinProductByMarket'
 
-import '../components/createShoppingList.css'
+import '../components/ShoppingList.css'
 import '../components/createMockShopping.css'
 
 export const MakeMockData = () => {
@@ -35,14 +35,16 @@ export const MakeMockData = () => {
     getProductMock({ url, token, setDataProductMock })
   }, [])
 
+  //! Shopping list data
+
   let shopList = null
 
   if (!dataMarkets || !dataShoppingList) return
 
   shopList = Object.entries(dataShoppingList[0])[2][1]
-  // console.log('SHOP LIST', shopList)
+  console.log('SHOP LIST', shopList)
 
-  let arrZZZ = []
+  const arrZZZ = []
   addProductsShoppingList(dataMarkets, shopList, user_id, url, token, arrZZZ)
   // console.log('ARRZZZ', arrZZZ)
 
@@ -104,7 +106,7 @@ export const MakeMockData = () => {
     return acc + cur
   }, 0)
 
-  console.log('TOTAL OPTIMIZED', totalOptimazed)
+  // console.log( 'TOTAL OPTIMIZED', totalOptimazed )
 
   console.log(
     'DIFERENCE...',
