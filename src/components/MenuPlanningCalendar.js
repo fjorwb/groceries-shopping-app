@@ -43,8 +43,6 @@ export const MenuPlanningCal = () => {
     locales
   } )
 
-  console.log( localizer )
-
   const [ myEvents, setMyEvents ] = useState( [] )
   const [ dataMenu, setDataMenu ] = useState( {} )
   const [ menuCrud, setMenuCrud ] = useState( {} )

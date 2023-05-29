@@ -1,7 +1,5 @@
 import React, { lazy, Suspense } from 'react'
-import CreateShoppingList from '../components/CreateShoppingList'
-
-// import styles from '../styles/styles.module.css'
+import ShoppingList from '../components/ShoppingList'
 
 const Header = lazy( () => import( '../components/Header' ) )
 
@@ -10,7 +8,7 @@ export function ShoppingListPage () {
     <div>
       <Suspense>
         <Header />
-        <CreateShoppingList />
+        <ShoppingList />
       </Suspense>
     </div>
   )
