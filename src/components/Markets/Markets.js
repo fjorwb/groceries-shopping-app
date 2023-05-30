@@ -6,8 +6,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import getMarkets from '../services/getMarkets'
-import getMarket from '../services/getMarket'
+import getMarkets from '../../services/getMarkets'
+import getMarket from '../../services/getMarket'
 
 import MarketCrud from './MarketCrud'
 import MarketAdd from './MarketAdd'

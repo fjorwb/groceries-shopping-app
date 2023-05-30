@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 
 import PropTypes from 'prop-types'
 
-import { deleteMarket, updateMarket } from '../services'
+import { deleteMarket, updateMarket } from '../../services'
 import './markets.css'
 
 // const initialInputMarkets = {

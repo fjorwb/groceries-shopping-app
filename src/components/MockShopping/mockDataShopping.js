@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import getMarkets from '../services/getMarkets'
-import getShoppingList from '../services/getShoppingList'
-import getProducts from '../services/getProducts'
-import getProductMock from '../services/getProductMock'
-import addProductsShoppingList from '../services/addProductShoppingList'
+import getMarkets from '../../services/getMarkets'
+import getShoppingList from '../../services/getShoppingList'
+import getProducts from '../../services/getProducts'
+import getProductMock from '../../services/getProductMock'
+import addProductsShoppingList from '../../services/addProductShoppingList'
 
-import createDataProductMock from '../helpers/createDataProductMock'
-import calcTotalShoppingList from '../helpers/calcTotalShoppingList'
-import calcMinProductByMarket from '../helpers/calcMinProductByMarket'
+import createDataProductMock from '../../helpers/createDataProductMock'
+import calcTotalShoppingList from '../../helpers/calcTotalShoppingList'
+import calcMinProductByMarket from '../../helpers/calcMinProductByMarket'
 
-import '../components/ShoppingList.css'
-import '../components/createMockShopping.css'
+import '../ShoppingLists/ShoppingList.css'
+import './createMockShopping.css'
 
 export const MakeMockData = () => {
   const state = useSelector((state) => state)

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 // import { useSelector } from 'react-redux'
 
-import addProduct from '../services/addProduct'
+import addProduct from '../../services/addProduct'
 
 export function AddProduct({
   url,

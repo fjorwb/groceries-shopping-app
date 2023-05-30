@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { useForm } from '../customHooks/useForm'
+import { useForm } from '../../customHooks/useForm'
 
-import './Form.css'
-import Loader from './Loader'
-import Message from './Message'
+import '../Forms/Form.css'
+import Loader from '../Loader'
+import Message from '../Message'
 
 export const LoginForm = ({ data, setData, closeLoginModal, url }) => {
   const initialForm = { email: '', password: '' }

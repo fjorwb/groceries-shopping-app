@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable space-before-function-paren */
 import React, { useEffect, useState } from 'react'
-import { addMarket } from '../services'
+import { addMarket } from '../../services'
 import './markets.css'
 
 const initialInputMarkets = {

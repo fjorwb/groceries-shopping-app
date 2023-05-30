@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 
 import PropTypes from 'prop-types'
 
-import deleteProduct from '../services/deleteProduct'
+import deleteProduct from '../../services/deleteProduct'
 
 import './products.css'
 

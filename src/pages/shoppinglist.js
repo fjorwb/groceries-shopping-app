@@ -1,9 +1,9 @@
 import React, { lazy, Suspense } from 'react'
-import ShoppingList from '../components/ShoppingList'
+import ShoppingList from '../components/ShoppingLists/ShoppingList'
 
-const Header = lazy( () => import( '../components/Header' ) )
+const Header = lazy(() => import('../components/Home/Header'))
 
-export function ShoppingListPage () {
+export function ShoppingListPage() {
   return (
     <div>
       <Suspense>

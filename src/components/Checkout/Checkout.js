@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MakeMockData from './mockDataShopping'
+import MakeMockData from '../MockShopping/mockDataShopping'
 
 export function CheckoutX() {
   return (

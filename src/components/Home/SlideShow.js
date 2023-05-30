@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 
 import './stylescarousel.css'
 
-import images from '../imagesmock'
+import images from '../../imagesmock'
 
 export function SlideShow() {
   const [width, setWidth] = useState(0)

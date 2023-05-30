@@ -8,23 +8,23 @@ import { useFetch } from '../customHooks/useFetch'
 
 import Loader from './Loader'
 
-function RecipeDetails ( { extid, user_id, url, token, closeModal } ) {
+function RecipeDetails({ extid, user_id, url, token, closeModal }) {
   // let audio = new Audio('https://www.soundjay.com/button/sounds/button-3.mp3')
 
   // function AudioClick() {
   // audio.play()
   // }
 
-  console.log( 'extid', extid )
+  // console.log( 'extid', extid )
 
   const id = extid.id
   const idext = id
 
-  const urlY = `${ url }recipes/recipes/${ id }`
+  const urlY = `${url}recipes/recipes/${id}`
 
-  const Bearer = `Bearer ${ token }`
+  const Bearer = `Bearer ${token}`
 
-  const { fetchData: data, loading } = useFetch( urlY, token )
+  const { fetchData: data, loading } = useFetch(urlY, token)
 
   let recipes
   let ingredients
@@ -33,18 +33,18 @@ function RecipeDetails ( { extid, user_id, url, token, closeModal } ) {
   let title
   let image
 
-  if ( data ) {
-    recipes = Object.values( data )
-    ingredients = recipes[ 0 ]
-    servings = recipes[ 1 ]
-    instructions = recipes[ 2 ]
-    title = recipes[ 3 ]
-    image = recipes[ 4 ]
+  if (data) {
+    recipes = Object.values(data)
+    ingredients = recipes[0]
+    servings = recipes[1]
+    instructions = recipes[2]
+    title = recipes[3]
+    image = recipes[4]
   }
 
   // console.log(ingredients)
 
-  async function addRecipe () {
+  async function addRecipe() {
     try {
       const resp = await axios.post(
         // 'https://groceries-shopping.herokuapp.com/recipes',
@@ -65,13 +65,13 @@ function RecipeDetails ( { extid, user_id, url, token, closeModal } ) {
           }
         }
       )
-      console.log( resp )
-    } catch ( error ) {
-      console.log( error )
+      // console.log( resp )
+    } catch (error) {
+      console.log(error)
     }
   }
 
-  async function addIngredients () {
+  async function addIngredients() {
     try {
       const resp = await axios.post(
         'http://localhost:5000/ingredients',
@@ -91,64 +91,64 @@ function RecipeDetails ( { extid, user_id, url, token, closeModal } ) {
           }
         }
       )
-      console.log( resp )
-    } catch ( error ) {
-      console.log( error )
+      // console.log( resp )
+    } catch (error) {
+      console.log(error)
     }
   }
 
-  const addToBook = ( e ) => {
+  const addToBook = (e) => {
     e.preventDefault()
     // AudioClick()
-    Promise.all( [ addRecipe(), addIngredients() ] )
-      .then( () => {
+    Promise.all([addRecipe(), addIngredients()])
+      .then(() => {
         closeModal()
-        console.log( 'done' )
-      } )
-      .catch( ( error ) => {
-        console.log( error )
-      } )
+        console.log('done')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   return (
     <div>
       <div>
         <div>
-          <h2 style={ { marginBottom: '1rem', fontSize: '1rem' } }>{ title }</h2>
+          <h2 style={{ marginBottom: '1rem', fontSize: '1rem' }}>{title}</h2>
           <div className='recipe-cont'>
             <img
-              src={ `${ image }` }
+              src={`${image}`}
               alt=''
-              style={ {
+              style={{
                 width: '300px',
                 height: '200px',
                 borderRadius: '15px'
-              } }
+              }}
             />
             <div className='recipe-ingredients'>
-              <h4 style={ { textDecoration: 'underline', marginBottom: '.5rem' } }>ingredients:</h4>
-              { ingredients?.map( ( ingredient, index ) => {
+              <h4 style={{ textDecoration: 'underline', marginBottom: '.5rem' }}>ingredients:</h4>
+              {ingredients?.map((ingredient, index) => {
                 return (
-                  <div key={ index }>
+                  <div key={index}>
                     <h4>
-                      { ingredient.ingredient } / { ingredient.unit } / { ingredient.amount }
+                      {ingredient.ingredient} / {ingredient.unit} / {ingredient.amount}
                     </h4>
                   </div>
                 )
-              } ) }
-              <h3 className='recipe-servings'>servings: { servings }</h3>
-              <button className='recipe-btn' onClick={ addToBook }>
+              })}
+              <h3 className='recipe-servings'>servings: {servings}</h3>
+              <button className='recipe-btn' onClick={addToBook}>
                 add to book
               </button>
             </div>
           </div>
           <div className='recipe-other'>
             <h5>instructions:</h5>
-            <h5>{ instructions }</h5>
+            <h5>{instructions}</h5>
           </div>
         </div>
       </div>
-      { loading && <Loader /> }
+      {loading && <Loader />}
     </div>
   )
 }

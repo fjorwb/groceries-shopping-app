@@ -8,14 +8,14 @@ import EditProduct from './ProductEdit'
 
 import ProductReadItem from './ProductReadItem'
 
-import { Modal } from './Modal'
-import { useModal } from '../customHooks/useModal'
+import { Modal } from '../Modal'
+import { useModal } from '../../customHooks/useModal'
 
 import './products.css'
 
-import getProducts from '../services/getProducts'
-import getProduct from '../services/getProduct'
-import getCategories from '../services/getCategories'
+import getProducts from '../../services/getProducts'
+import getProduct from '../../services/getProduct'
+import getCategories from '../../services/getCategories'
 
 function Product() {
   const state = useSelector((state) => state)

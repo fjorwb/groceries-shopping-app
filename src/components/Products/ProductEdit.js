@@ -3,7 +3,7 @@ import React, { memo, useEffect, useState, useRef } from 'react'
 
 import PropTypes from 'prop-types'
 
-import editProduct from '../services/editProduct'
+import editProduct from '../../services/editProduct'
 
 function EditProduct({
   url,
