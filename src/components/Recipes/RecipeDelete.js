@@ -2,22 +2,14 @@ import React, { useState } from 'react'
 
 import PropTypes from 'prop-types'
 
-// import deleteRecipe from "../services/deleteRecipe"
+import deleteRecipe from '../../services/deleteRecipe'
 
-export const RecipeDelete = ({ recipe, url, token, closeDeleteRecipeModal }) => {
-  console.log(recipe)
-  console.log(url)
-  console.log(token)
-
-  // const [ recipeToBook, setRecipeToBook ] = useState( {} )
-  // const [ dataRecipe, setDataRecipe ] = useState( {} )
-  // const [ dataIngredient, setDataIngredient ] = useState( {} )
-
+export const RecipeDelete = ({ recipe, url, token, setRecipeBook, closeDeleteRecipeModal }) => {
   const [delRecipe, setDelRecipe] = useState(true)
-  // console.log( delRecipe )
 
   function deleteFromBook() {
     setDelRecipe(true)
+    deleteRecipe({ url, token, id: recipe.recipe.idext, setRecipeBook })
     console.log('delete recipe')
     // setTimeout( () => {
     //     setDelRecipe( false )
@@ -55,6 +47,7 @@ RecipeDelete.propTypes = {
   recipe: PropTypes.object,
   url: PropTypes.string,
   token: PropTypes.string,
+  setRecipeBook: PropTypes.func,
   closeDeleteRecipeModal: PropTypes.func
 }
 
