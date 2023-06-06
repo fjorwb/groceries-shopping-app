@@ -18,10 +18,10 @@ import { ShoppingListPage } from './pages/shoppinglist'
 import { CheckoutPage } from './pages/checkout'
 
 function App () {
-  const state = useSelector( ( state ) => state )
+  const state = useSelector((state) => state)
 
   let isAllowed
-  if ( state.auth.user !== null ) {
+  if (state.auth.user !== null) {
     isAllowed = true
   } else {
     isAllowed = false

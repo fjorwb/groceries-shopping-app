@@ -7,7 +7,7 @@ import './stylescarousel.css'
 
 import images from '../../imagesmock'
 
-export function SlideShow() {
+export function SlideShow () {
   const [width, setWidth] = useState(0)
   const carousel = useRef()
 

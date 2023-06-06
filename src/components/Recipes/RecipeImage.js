@@ -1,22 +1,21 @@
+import React from 'react'
 
-import React from "react";
+import PropTypes from 'prop-types'
 
-import PropTypes from "prop-types";
-
-const RecipeImage = ( { image } ) => {
-    return (
+const RecipeImage = ({ image }) => {
+  return (
         <div className="recipe-view-img-container">
             <img
-                src={ `${ image }` }
+                src={ `${image}` }
                 alt="recipe image"
                 className="recipe-view-img"
             />
         </div>
-    );
+  )
 }
 
 RecipeImage.propTypes = {
-    image: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired
 }
 
-export default RecipeImage;
+export default RecipeImage

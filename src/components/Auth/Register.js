@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import './Modal.css'
 
-export function Register({ children, isOpen, closeModal }) {
+export function Register ({ children, isOpen, closeModal }) {
   const handleModalClick = (e) => e.stopPropagation()
   return (
     <div>

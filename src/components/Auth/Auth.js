@@ -11,7 +11,7 @@ const Modal = lazy(() => import('../Modal'))
 const LoginForm = lazy(() => import('./LoginForm'))
 const RegisterForm = lazy(() => import('./RegisterForm'))
 
-export function Auth() {
+export function Auth () {
   const state = useSelector((state) => state)
 
   const { auth } = state
@@ -37,13 +37,15 @@ export function Auth() {
     <div>
       <div className='auth-container'>
         <div>
-          {!isLogedIn ? (
+          {!isLogedIn
+            ? (
             <div>
               <button onClick={openLoginModal} className='auth-btn'>
                 login
               </button>
             </div>
-          ) : (
+              )
+            : (
             <div className='logout-container'>
               <button
                 onClick={() => setData(null)}
@@ -53,16 +55,18 @@ export function Auth() {
                 {`Hello, ${auth.user.firstname} / logout?`}
               </button>
             </div>
-          )}
+              )}
         </div>
-        {!isLogedIn ? (
+        {!isLogedIn
+          ? (
           <div className='join-btn'>
             <span> | </span>
             <button onClick={openRegisterModal} className='auth-btn'>
               join
             </button>
           </div>
-        ) : null}
+            )
+          : null}
 
         <Modal isOpen={isOpenLogin} closeModal={closeLoginModal}>
           <div>

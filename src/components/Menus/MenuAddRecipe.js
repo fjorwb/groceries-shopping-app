@@ -10,7 +10,7 @@ import { addToMenu } from '../../services'
 
 import './MenuAddRecipe.css'
 
-function MenuAddRecipe({ recipe, user_id, url, token, closeMenuModal }) {
+function MenuAddRecipe ({ recipe, user_id, url, token, closeMenuModal }) {
   const serves = recipe && recipe.recipe.servings
 
   const [servings, setServings] = useState(serves)

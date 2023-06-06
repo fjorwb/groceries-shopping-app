@@ -6,7 +6,7 @@ const Header = lazy(() => import('../components/Home/Header'))
 export function ShoppingListPage() {
   return (
     <div>
-      <Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
         <Header />
         <ShoppingList />
       </Suspense>

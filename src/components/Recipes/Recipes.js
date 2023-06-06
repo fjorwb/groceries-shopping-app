@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import SearchRecipeBar from './RecipesSearchBar'
 import RecipesCard from './RecipesCard'
 
-function Recipes() {
+function Recipes () {
   const url = useSelector((state) => state.url.url)
 
   const [recipeBook, setRecipeBook] = useState('own book')

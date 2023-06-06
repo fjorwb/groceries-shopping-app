@@ -7,7 +7,7 @@ import '../components/Markets/markets.css'
 
 const Header = lazy(() => import('../components/Home/Header'))
 
-export function MarketsPage() {
+export function MarketsPage () {
   return (
     <Suspense>
       <Header />

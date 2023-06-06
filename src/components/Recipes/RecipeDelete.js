@@ -7,7 +7,7 @@ import deleteRecipe from '../../services/deleteRecipe'
 export const RecipeDelete = ({ recipe, url, token, setRecipeBook, closeDeleteRecipeModal }) => {
   const [delRecipe, setDelRecipe] = useState(true)
 
-  function deleteFromBook() {
+  function deleteFromBook () {
     setDelRecipe(true)
     deleteRecipe({ url, token, id: recipe.recipe.idext, setRecipeBook })
     console.log('delete recipe')

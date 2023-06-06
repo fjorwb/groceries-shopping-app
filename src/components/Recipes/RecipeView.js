@@ -35,12 +35,13 @@ const RecipeView = ({ id, url, token, closeViewModal }) => {
   const separateInstructions = (text) => {
     // const re = /(\d+)\.+(\D+)/
 
-    let arr = []
+    const arr = []
 
     text
       .replaceAll('.)', '). ')
       .replaceAll('Instructions' || 'instructions', '')
       .split('.')
+      // eslint-disable-next-line array-callback-return
       .map((word) => {
         arr.push(word)
       })

@@ -5,7 +5,7 @@ import React, { lazy, Suspense } from 'react'
 const Header = lazy(() => import('../components/Home/Header'))
 const Recipes = lazy(() => import('../components/Recipes/Recipes'))
 
-export function RecipesPage() {
+export function RecipesPage () {
   return (
     <div>
       <Suspense>

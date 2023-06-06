@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-async function getRecipes({ url, token, dataRecipes, setDataRecipes }) {
+async function getRecipes ({ url, token, dataRecipes, setDataRecipes }) {
   if (!dataRecipes) return
 
   await axios(`${url}recipes`, {

@@ -2,7 +2,7 @@ import React from 'react'
 
 import MakeMockData from '../MockShopping/mockDataShopping'
 
-export function CheckoutX() {
+export function CheckoutX () {
   return (
     <div>
       <MakeMockData />

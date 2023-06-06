@@ -203,7 +203,7 @@ export const ShoppingList = () => {
   console.log(ingredientsListReduce)
 
   let week = getWeekNumber(new Date())
-  let year = new Date().getFullYear()
+  const year = new Date().getFullYear()
   // console.log(week)
   if (week < 10) {
     week = '0' + week.toString()
@@ -253,7 +253,7 @@ export const ShoppingList = () => {
           // market_id: ingredientsListReduce[i].id,
           description: 'mock',
           presentation: 'mock',
-          user_id: user_id
+          user_id
         }
       })
     }

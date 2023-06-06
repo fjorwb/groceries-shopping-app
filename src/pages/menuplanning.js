@@ -5,7 +5,7 @@ import MenuPlanningCalendar from '../components/Menus/MenuPlanningCalendar'
 const Header = lazy(() => import('../components/Home/Header'))
 // const MenuPlanningCal = lazy(() => import('../components/MenuPlanningCal'))
 
-export function MenuPlanningPage() {
+export function MenuPlanningPage () {
   return (
     <div>
       <Suspense>

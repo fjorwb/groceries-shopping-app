@@ -1,7 +1,7 @@
 import deleteProductMock from '../services/deleteProductMock'
 import addProductMock from '../services/addProductMock'
 
-export function createDataProductMock({ url, token, arrZZZ, user_id }) {
+export function createDataProductMock ({ url, token, arrZZZ, user_id }) {
   deleteProductMock({ url, token })
 
   for (const item in arrZZZ) {
@@ -13,7 +13,7 @@ export function createDataProductMock({ url, token, arrZZZ, user_id }) {
       barcode: 'XOXO',
       presentation: 'mock',
       unit: 'mock',
-      user_id: user_id
+      user_id
     }
     addProductMock({
       url,

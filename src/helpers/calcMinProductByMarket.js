@@ -1,11 +1,11 @@
-export function calcMinProductByMarket({ arrTotal1 }) {
-  let arrMKT = []
+export function calcMinProductByMarket ({ arrTotal1 }) {
+  const arrMKT = []
 
   for (let i = 0; i < arrTotal1.length; i++) {
-    let extid = arrTotal1[i].extid
+    const extid = arrTotal1[i].extid
     const existInMkt = (elem) => elem.extid === extid
 
-    let ndx2 = arrMKT.findIndex(existInMkt)
+    const ndx2 = arrMKT.findIndex(existInMkt)
 
     if (ndx2 === -1) {
       arrMKT.push({

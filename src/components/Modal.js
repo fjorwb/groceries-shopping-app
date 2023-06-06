@@ -6,7 +6,7 @@ import './Modal.css'
 
 import close from '../icons/close.png'
 
-export function Modal({ children, isOpen, closeModal }) {
+export function Modal ({ children, isOpen, closeModal }) {
   const handleModalClick = (e) => e.stopPropagation()
   return (
     <div>

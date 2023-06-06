@@ -22,11 +22,14 @@ export const RecipeDet = ({
           <h2>{recipe.title}</h2>
         </div>
       </div>
-      {recipeBook === 'own book' ? (
+      {recipeBook === 'own book'
+        ? (
         <h5 className='recipe-servings'>servings: {recipe.servings}</h5>
-      ) : null}
+          )
+        : null}
       <div className='recipe-buttons'>
-        {recipeBook === 'own book' ? (
+        {recipeBook === 'own book'
+          ? (
           <div>
             <button className='recipe-btn' onClick={() => handleViewRecipe({ id: recipe.idext })}>
               view
@@ -38,7 +41,8 @@ export const RecipeDet = ({
               add to menu
             </button>
           </div>
-        ) : (
+            )
+          : (
           <div>
             <button
               className='recipe-btn ext-btn'
@@ -50,7 +54,7 @@ export const RecipeDet = ({
               add to book
             </button>
           </div>
-        )}
+            )}
       </div>
     </article>
   )

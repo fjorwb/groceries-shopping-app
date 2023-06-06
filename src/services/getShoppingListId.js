@@ -20,23 +20,23 @@ import axios from 'axios'
 //     })
 // }
 
-export const getShoppingListId = async ( { url, token, shop_list_id, setIsShoppingList } ) => {
-  await axios( `${ url }shoppinglist/shoplistid/${ shop_list_id }`, {
+export const getShoppingListId = async ({ url, token, shop_list_id, setIsShoppingList }) => {
+  await axios(`${url}shoppinglist/shoplistid/${shop_list_id}`, {
     headers: {
       'Content-Type': 'application/json',
       accept: 'application/json',
-      Authorization: `Bearer ${ token }`
+      Authorization: `Bearer ${token}`
     }
-  } )
-    .then( ( resp ) => {
-      console.log( 'QQQQQQQQQQQQ' )
-      console.log( resp.data )
-      setIsShoppingList( true )
+  })
+    .then((resp) => {
+      console.log('QQQQQQQQQQQQ')
+      console.log(resp.data)
+      setIsShoppingList(true)
       return resp.data.shop_list_id
-    } )
-    .catch( ( error ) => {
-      console.log( error.response.data.message )
-    } )
+    })
+    .catch((error) => {
+      console.log(error.response.data.message)
+    })
 }
 
 export default getShoppingListId

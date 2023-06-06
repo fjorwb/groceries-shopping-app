@@ -27,7 +27,7 @@ export const RecipeAdd = ({ recipe, url, token, user_id, closeAddRecipeModal }) 
     getRecipe({ url, token, id: recipe?.recipe.id, setRecipe: setRecipeToBook })
   }, [recipe])
 
-  function addToBook() {
+  function addToBook () {
     addRecipe({
       url,
       token,

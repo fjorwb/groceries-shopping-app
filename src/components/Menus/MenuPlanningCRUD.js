@@ -8,7 +8,7 @@ import { deleteMenuItem, editMenuItem } from '../../services'
 
 import '../../styles/MenuPlanningCRUD.css'
 
-function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpdated }) {
+function MenuPlanningCRUD ({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpdated }) {
   const { id, url, token } = menuCrud
 
   const [menuItem, setMenuItem] = useState({})

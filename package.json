@@ -11,7 +11,7 @@
     "date-fns": "2.29.3",
     "framer-motion": "7.10.2",
     "react": "18.2.0",
-    "react-big-calendar": "1.5.2",
+    "react-big-calendar": "1.6.9",
     "react-dom": "18.2.0",
     "react-hook-form": "7.40.0",
     "react-redux": "8.0.5",
@@ -43,6 +43,13 @@
   },
   "devDependencies": {
     "eslint": "8.32.0",
-    "eslint-plugin-react": "^7.32.1"
+    "eslint-plugin-react": "^7.32.1",
+    "standard": "^17.1.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "standard"
+    ]
   }
 }

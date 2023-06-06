@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useFetch } from '../customHooks/useFetch'
 
 import Loader from './Loader'
+import addRecipe from '../../services/addRecipe'
 
 function RecipeDetails({ extid, user_id, url, token, closeModal }) {
   // let audio = new Audio('https://www.soundjay.com/button/sounds/button-3.mp3')
@@ -44,32 +45,34 @@ function RecipeDetails({ extid, user_id, url, token, closeModal }) {
 
   // console.log(ingredients)
 
-  async function addRecipe() {
-    try {
-      const resp = await axios.post(
-        // 'https://groceries-shopping.herokuapp.com/recipes',
-        'http://localhost:5000/recipes',
-        {
-          idext: idext || '',
-          title: title || '',
-          image: image || '',
-          instructions: instructions || '',
-          servings: servings || '',
-          user_id
-        },
-        {
-          headers: {
-            // 'content-type': 'application/json',
-            accept: 'application/json',
-            Authorization: Bearer
-          }
-        }
-      )
-      // console.log( resp )
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  addRecipe({ url, token, data, setDataRecipe: () => {} }
+
+  // async function addRecipe() {
+  //   try {
+  //     const resp = await axios.post(
+  //       // 'https://groceries-shopping.herokuapp.com/recipes',
+  //       'http://localhost:5000/recipes',
+  //       {
+  //         idext: idext || '',
+  //         title: title || '',
+  //         image: image || '',
+  //         instructions: instructions || '',
+  //         servings: servings || '',
+  //         user_id
+  //       },
+  //       {
+  //         headers: {
+  //           // 'content-type': 'application/json',
+  //           accept: 'application/json',
+  //           Authorization: Bearer
+  //         }
+  //       }
+  //     )
+  //     // console.log( resp )
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   async function addIngredients() {
     try {

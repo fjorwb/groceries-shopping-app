@@ -25,7 +25,7 @@ import RecipeAdd from './RecipeAdd'
 import RecipeView from './RecipeView'
 import { RecipeDelete } from './RecipeDelete'
 
-function RecipesCard({ recipeBook, urlRecipe, setRecipeBook }) {
+function RecipesCard ({ recipeBook, urlRecipe, setRecipeBook }) {
   const state = useSelector((state) => state)
   const token = state.auth.user.accessToken
   const user_id = state.auth.user.id
@@ -73,10 +73,12 @@ function RecipesCard({ recipeBook, urlRecipe, setRecipeBook }) {
       {loading && <Loader />}
 
       <div className='recipe-container'>
-        {fetchData?.length === 0 ? (
+        {fetchData?.length === 0
+          ? (
           <h1 className='recipe-message'>no recipes found</h1>
-        ) : (
-          fetchData?.map((recipe) => (
+            )
+          : (
+              fetchData?.map((recipe) => (
             <div key={recipe.id}>
               <RecipeDet
                 recipe={recipe}
@@ -91,8 +93,8 @@ function RecipesCard({ recipeBook, urlRecipe, setRecipeBook }) {
                 token={token}
               />
             </div>
-          ))
-        )}
+              ))
+            )}
       </div>
 
       <Modal isOpen={isOpenView} closeModal={closeViewModal}>

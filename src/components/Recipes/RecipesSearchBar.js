@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { getRecipesUrl } from '../../services/getRecipesUrl'
 
-export function RecipesSearchBar({ setRecipeBook, setUrlRecipe }) {
+export function RecipesSearchBar ({ setRecipeBook, setUrlRecipe }) {
   const [form, setForm] = useState({})
 
   const state = useSelector((state) => state)
@@ -47,7 +47,8 @@ export function RecipesSearchBar({ setRecipeBook, setUrlRecipe }) {
           <option value='external book'>external book</option>
         </select>
 
-        {form.recipesBook === 'own book' ? (
+        {form.recipesBook === 'own book'
+          ? (
           <input
             className='recipe-input'
             type='text'
@@ -56,7 +57,8 @@ export function RecipesSearchBar({ setRecipeBook, setUrlRecipe }) {
             placeholder='ingredients or recipe name'
             autoComplete='on'
           />
-        ) : (
+            )
+          : (
           <input
             className='recipe-input'
             type='text'
@@ -66,7 +68,7 @@ export function RecipesSearchBar({ setRecipeBook, setUrlRecipe }) {
             autoComplete='on'
             required
           />
-        )}
+            )}
         <input
           className='recipe-input'
           type='text'

@@ -1,6 +1,6 @@
 import addProduct from '../services/addProduct'
 
-export function addProductFromShoppingList({ url, token, user_id, ingredientsListReduce }) {
+export function addProductFromShoppingList ({ url, token, user_id, ingredientsListReduce }) {
   console.log(ingredientsListReduce)
   for (let i = 0; i < ingredientsListReduce.length; i++) {
     addProduct({
@@ -15,7 +15,7 @@ export function addProductFromShoppingList({ url, token, user_id, ingredientsLis
         // market_id: ingredientsListReduce[i].id,
         description: 'mock',
         presentation: 'mock',
-        user_id: user_id
+        user_id
       }
     })
   }

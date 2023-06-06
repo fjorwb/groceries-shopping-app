@@ -4,7 +4,7 @@ import { CheckoutX } from '../components/Checkout/Checkout'
 
 // import styles from '../styles/styles.module.css'
 
-export function CheckoutPage() {
+export function CheckoutPage () {
   return (
     <div>
       {/* <h1>Checkout</h1> */}
