@@ -6,10 +6,10 @@ export async function editProduct({
   id,
   inputEditProduct,
   setInputEditProduct,
-  initialForm,
-  setIsUpdated
+  initialForm
+  // setIsUpdated
 }) {
-  // console.log('INPUT EDIT PRODUCT', inputEditProduct)
+  console.log('INPUT EDIT PRODUCT', inputEditProduct)
   await axios
     .put(`${url}products/${id}`, inputEditProduct, {
       headers: {
@@ -28,7 +28,7 @@ export async function editProduct({
     .finally(() => {
       // console.log('editProduct.js')
       setInputEditProduct(initialForm)
-      setIsUpdated(true)
+      // setIsUpdated(true)
     })
 }
 

@@ -1,19 +1,15 @@
-/* eslint-disable space-before-function-paren */
 import React, { memo, useEffect, useState, useRef } from 'react'
 
 import PropTypes from 'prop-types'
 
-import editProduct from '../../services/editProduct'
+import style from './Product.module.css'
 
-function EditProduct({
-  url,
-  token,
-  closeEditProductModal,
-  editId,
-  selectedProduct,
-  productcategories,
-  setIsUpdated
-}) {
+import editProduct from '../../services/editProduct'
+import getCategories from '../../services/getCategories'
+
+import { useSelector } from 'react-redux'
+
+function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) {
   const initialForm = {
     barcode: '',
     name: '',
@@ -23,33 +19,49 @@ function EditProduct({
     category: ' '
   }
 
-  // console.log('SELECTED PRODUCT', selectedProduct)
-
-  const [inputEditProduct, setInputEditProduct] = useState({})
+  const [inputEditProduct, setInputEditProduct] = useState(initialForm)
   const [categories, setCategories] = useState({})
 
-  // useEffect(() => {
-  //   setInputEditProduct(selectedProduct)
-  // }, [inputEditProduct])
+  console.log(inputEditProduct)
+  console.log(inputEditProduct.barcode)
+  console.log(inputEditProduct.name)
+
+  const state = useSelector((state) => state)
+  const token = state.auth.user.accessToken
+  const url = state.url.url
 
   useEffect(() => {
-    setInputEditProduct(selectedProduct ?? initialForm)
-    // console.log(inputEditProduct.category)
-    setCategories(productcategories)
-    // }, [inputEditProduct.category, productcategories, selectedProduct])
-  }, [selectedProduct])
+    if (editId === '') {
+      setInputEditProduct(initialForm)
+      return
+    }
+
+    const dataProducts = products.filter((product) => {
+      return product.id === Number(editId)
+    })
+    setInputEditProduct(dataProducts[0])
+  }, [editId])
+
+  useEffect(() => {
+    getCategories({ url, token, setCategories })
+  }, [])
 
   const handleChange = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     const { name, value } = e.target
+    console.log(name, value)
     setInputEditProduct({
       ...inputEditProduct,
       [name]: value
     })
+    console.log(inputEditProduct)
   }
 
-  const handleEditProduct = (e) => {
-    e.preventDefault()
+  const handleEditProduct = () => {
+    // e.preventDefault()
+    // console.log(e.target.value)
+    console.log(inputEditProduct)
+
     // setInputAddProduct({ inputAddProduct })
     // console.log(inputEditProduct)
     editProduct({
@@ -58,10 +70,11 @@ function EditProduct({
       id: editId,
       inputEditProduct,
       setInputEditProduct,
-      initialForm,
-      setIsUpdated
+      initialForm
     })
-    setInputEditProduct(initialForm)
+
+    console.log(inputEditProduct)
+    // setInputEditProduct(initialForm)
     setIsUpdated(true)
     closeEditProductModal()
   }
@@ -78,23 +91,23 @@ function EditProduct({
 
   return (
     <div>
-      <h1 className='products-title'>Edit Product</h1>
-      <form className='products-form' ref={formRef}>
-        <div className='products-input'>
+      <h1 className={style.productsFormTitle}>Edit Product</h1>
+      <form className={style.productForm} ref={formRef}>
+        <div className={style.productsFormInput}>
           <label htmlFor='barcode'>barcode</label>
           <input
-            className='product-p'
+            className={style.productFormInput}
             type='text'
             name='barcode'
             id='barcode'
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
             defaultValue={inputEditProduct.barcode ?? ''}
           />
         </div>
-        <div className='products-input'>
+        <div className={style.productsFormInput}>
           <label htmlFor='name'>name</label>
           <input
-            className='product-p'
+            className={style.productFormInput}
             type='text'
             name='name'
             id='name'
@@ -102,10 +115,10 @@ function EditProduct({
             defaultValue={inputEditProduct.name ?? ''}
           />
         </div>
-        <div className='products-input'>
+        <div className={style.productsFormInput}>
           <label htmlFor='description'>description</label>
           <input
-            className='product-p'
+            className={style.productFormInput}
             type='text'
             name='description'
             id='description'
@@ -113,10 +126,10 @@ function EditProduct({
             defaultValue={inputEditProduct.description ?? ''}
           />
         </div>
-        <div className='products-input'>
+        <div className={style.productsFormInput}>
           <label htmlFor='unit'>unit</label>
           <input
-            className='product-p'
+            className={style.productFormInput}
             type='text'
             name='unit'
             id='descriptiuniton'
@@ -124,10 +137,10 @@ function EditProduct({
             defaultValue={inputEditProduct.unit ?? ''}
           />
         </div>
-        <div className='products-input'>
+        <div className={style.productsFormInput}>
           <label htmlFor='presentation'>presentation</label>
           <input
-            className='product-p'
+            className={style.productFormInput}
             type='text'
             name='presentation'
             id='presentation'
@@ -135,12 +148,12 @@ function EditProduct({
             defaultValue={inputEditProduct.presentation ?? ''}
           />
         </div>
-        <div className='products-select'>
+        <div className={style.productSelect}>
           <label htmlFor='category'>category</label>
           <select
             name='category'
             id='category'
-            className='products-select'
+            className={style.productCategory}
             defaultValue={inputEditProduct.category}
             onChange={(e) => handleChange(e)}
             autoComplete='off'
@@ -153,7 +166,7 @@ function EditProduct({
                     key={category.id}
                     defaultValue={inputEditProduct.category}
                     // value={category.category}
-                    className='products-option'
+                    className={style.productSelectOption}
                   >
                     {category.category}
                   </option>
@@ -161,10 +174,10 @@ function EditProduct({
               })}
           </select>
         </div>
-        <div className='products-input'>
+        <div className={style.productsFormInput}>
           <label htmlFor='price'>price</label>
           <input
-            className='product-p'
+            className={style.productFormInput}
             type='text'
             name='price'
             id='price'
@@ -173,12 +186,7 @@ function EditProduct({
           />
         </div>
       </form>
-      <input
-        type='button'
-        value='edit product'
-        className='btn'
-        onClick={(e) => handleEditProduct(e)}
-      />
+      <input type='button' value='edit product' className='btn' onClick={handleEditProduct} />
     </div>
   )
 }
@@ -187,9 +195,10 @@ EditProduct.propTypes = {
   url: PropTypes.string.isRequired,
   token: PropTypes.string.isRequired,
   closeEditProductModal: PropTypes.func.isRequired,
+  products: PropTypes.array.isRequired,
   editId: PropTypes.number,
   selectedProduct: PropTypes.object,
-  productcategories: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
   setIsUpdated: PropTypes.func.isRequired
 }
 

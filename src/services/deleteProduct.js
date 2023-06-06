@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export async function deleteProduct({ url, token, id }) {
+export async function deleteProduct ({ url, token, id }) {
   await axios
     .delete(`${url}products/${id}`, {
       headers: {

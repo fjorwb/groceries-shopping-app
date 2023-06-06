@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export async function addProduct({ url, token, inputAddProduct }) {
+export async function addProduct ({ url, token, inputAddProduct }) {
   console.log('INPUT ADD PRODUCT', inputAddProduct)
   await axios
     .post(`${url}products`, inputAddProduct, {
