@@ -13,8 +13,8 @@ import { useSelector } from 'react-redux'
 function ProductList({ products, setIsUpdated }) {
   const [id, setId] = useState('')
 
-  const ppp = useSelector((state) => state.products)
-  console.log(ppp)
+  const productsState = useSelector((state) => state.products.products)
+  console.log(productsState)
 
   const [isOpenEditProduct, openEditProductModal, closeEditProductModal] = useModal(false)
   const [isOpenDeleteProduct, openDeleteProductModal, closeDeleteProductModal] = useModal(false)
@@ -81,7 +81,7 @@ function ProductList({ products, setIsUpdated }) {
 }
 
 ProductList.propTypes = {
-  products: PropTypes.object.isRequired,
+  products: PropTypes.array.isRequired,
   setIsUpdated: PropTypes.func.isRequired
 }
 

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -19,12 +19,8 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
     category: ' '
   }
 
-  const [inputEditProduct, setInputEditProduct] = useState(initialForm)
+  const [inputEditProduct, setInputEditProduct] = useState({})
   const [categories, setCategories] = useState({})
-
-  console.log(inputEditProduct)
-  console.log(inputEditProduct.barcode)
-  console.log(inputEditProduct.name)
 
   const state = useSelector((state) => state)
   const token = state.auth.user.accessToken
@@ -47,23 +43,18 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
   }, [])
 
   const handleChange = (e) => {
-    // e.preventDefault()
+    e.preventDefault()
     const { name, value } = e.target
-    console.log(name, value)
     setInputEditProduct({
       ...inputEditProduct,
       [name]: value
     })
-    console.log(inputEditProduct)
   }
 
-  const handleEditProduct = () => {
+  const handleEditProduct = (e) => {
     // e.preventDefault()
-    // console.log(e.target.value)
     console.log(inputEditProduct)
 
-    // setInputAddProduct({ inputAddProduct })
-    // console.log(inputEditProduct)
     editProduct({
       url,
       token,
@@ -94,62 +85,74 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
       <h1 className={style.productsFormTitle}>Edit Product</h1>
       <form className={style.productForm} ref={formRef}>
         <div className={style.productsFormInput}>
-          <label htmlFor='barcode'>barcode</label>
+          <label htmlFor='barcode' className={style.label}>
+            barcode
+          </label>
           <input
             className={style.productFormInput}
             type='text'
             name='barcode'
             id='barcode'
             onChange={handleChange}
-            defaultValue={inputEditProduct.barcode ?? ''}
+            defaultValue={inputEditProduct.barcode}
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='name'>name</label>
+          <label htmlFor='name' className={style.label}>
+            name
+          </label>
           <input
             className={style.productFormInput}
             type='text'
             name='name'
             id='name'
             onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.name ?? ''}
+            defaultValue={inputEditProduct.name}
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='description'>description</label>
+          <label htmlFor='description' className={style.label}>
+            description
+          </label>
           <input
             className={style.productFormInput}
             type='text'
             name='description'
             id='description'
             onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.description ?? ''}
+            defaultValue={inputEditProduct.description}
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='unit'>unit</label>
+          <label htmlFor='unit' className={style.label}>
+            unit
+          </label>
           <input
             className={style.productFormInput}
             type='text'
             name='unit'
             id='descriptiuniton'
             onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.unit ?? ''}
+            defaultValue={inputEditProduct.unit}
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='presentation'>presentation</label>
+          <label htmlFor='presentation' className={style.label}>
+            presentation
+          </label>
           <input
             className={style.productFormInput}
             type='text'
             name='presentation'
             id='presentation'
             onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.presentation ?? ''}
+            defaultValue={inputEditProduct.presentation}
           />
         </div>
         <div className={style.productSelect}>
-          <label htmlFor='category'>category</label>
+          <label htmlFor='category' className={style.label}>
+            category
+          </label>
           <select
             name='category'
             id='category'
@@ -175,14 +178,16 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
           </select>
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='price'>price</label>
+          <label htmlFor='price' className={style.label}>
+            price
+          </label>
           <input
             className={style.productFormInput}
             type='text'
             name='price'
             id='price'
             onChange={(e) => handleChange(e)}
-            defaultValue={inputEditProduct.price ?? ''}
+            defaultValue={inputEditProduct.price}
           />
         </div>
       </form>
@@ -192,14 +197,14 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
 }
 
 EditProduct.propTypes = {
-  url: PropTypes.string.isRequired,
-  token: PropTypes.string.isRequired,
+  // url: PropTypes.string.isRequired,
+  // token: PropTypes.string.isRequired,
   closeEditProductModal: PropTypes.func.isRequired,
   products: PropTypes.array.isRequired,
-  editId: PropTypes.number,
+  editId: PropTypes.string,
   selectedProduct: PropTypes.object,
-  categories: PropTypes.array.isRequired,
+  categories: PropTypes.array,
   setIsUpdated: PropTypes.func.isRequired
 }
 
-export default memo(EditProduct)
+export default EditProduct

@@ -8,8 +8,11 @@ import { useSelector } from 'react-redux'
 import SearchRecipeBar from './RecipesSearchBar'
 import RecipesCard from './RecipesCard'
 
-function Recipes () {
+function Recipes() {
   const url = useSelector((state) => state.url.url)
+
+  const product = useSelector((state) => state.products.products)
+  console.log('RECIPES', product)
 
   const [recipeBook, setRecipeBook] = useState('own book')
   const [urlRecipe, setUrlRecipe] = useState(`${url}recipes`)
