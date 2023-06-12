@@ -24,7 +24,8 @@
     padding: 0.5rem;
     border-radius: 5px;
     border: 1px solid #ccc;
-    font-family: var(--font-family);
+    /* font-family: var(--fnt-fam); */
+    font-family: inherit;
 }
 
 .btn {
@@ -34,6 +35,7 @@
     border-radius: 5px;
     background: var(--clr-contrast);
     color: var(--clr-font-contrast);
+    font-family: inherit;
 }
 
 .list {
@@ -42,9 +44,9 @@
 
 .searchBar p,
 .buttons p {
-    background: var(--clr-contrast);
+    /* background: var(--clr-contrast); */
     color: var(--clr-font);
-    padding: 10px;
+    padding: 1rem;
 }
 
 table {
@@ -65,6 +67,10 @@ th {
     text-align: left;
 }
 
+td {
+    border-bottom: 1px solid rgb(214, 214, 243);
+}
+
 .columnName {
     font-weight: 700;
     padding: 1.5rem 0;
@@ -81,6 +87,8 @@ th {
     justify-content: center;
     align-items: center;
     padding: 0.5rem 3rem;
+    /* font-family: var(--fnt-fam); */
+    font-family: inherit;
 }
 
 .productsFormTitle {
@@ -94,10 +102,11 @@ th {
 }
 
 .productsFormInput {
-    /* width: 100%; */
     display: flex;
     text-align: left;
-    /* margin-bottom: 1rem; */
+    align-items: baseline;
+    /* font-family: var(--fnt-fam); */
+    font-family: inherit;
 }
 
 .productFormInput {
@@ -107,42 +116,55 @@ th {
     margin-left: 1rem;
     border: 1px solid var(--clr-contrast);
     padding: 0.5rem;
+    font-size: 1rem;
 }
 
 .productCategory {
-    padding: .75rem;
-    /* background: var(--clr-contrast); */
-    /* color: var(--clr-font-contrast); */
+    padding: .45rem .85rem;
+    font-family: inherit;
+    font-size: 1rem;
 }
 
 .productSelect {
-    /* width: 100%; */
     text-align: left;
-    /* font-size: 1rem; */
     margin-bottom: 1rem;
     margin-top: 0.5rem;
-    /* margin-right: 1rem; */
-    /* padding: 0.5 0rem; */
-}
-
-.productSelect:focus {
-    background: var(--clr-contrast);
-    color: var(--clr-font-contrast);
-    /* font-size: 0.85rem; */
-    padding: 0.25rem 0;
-    line-height: 1rem;
 }
 
 .productSelectOption {
     width: 100%;
     text-align: left;
     font-size: 0.85rem;
-    /* margin-bottom: 0.75rem; */
-    /* margin-top: 0.5rem; */
-    /* padding: 0.25rem; */
+    color: var(--clr-font);
+    font-size: .85rem;
 }
 
-.label {
+.productSelectOption:hover {
+    background: var(--clr-contrast);
+    color: var(--clr-font-contrast);
+    padding: 0.25rem 0;
+}
+
+.btnModal {
+    background: var(--clr-contrast);
+    color: var(--clr-font-contrast);
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--clr-font);
+    margin-top: 1rem;
+    font-family: inherit;
+}
+
+.extid {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: var(--clr-font);
+    font-size: 1rem;
+    background: yellow;
+}
+
+.labels {
     margin-right: 1rem;
-    /* padding: 0.5rem; */
+    background: yellow;
 }

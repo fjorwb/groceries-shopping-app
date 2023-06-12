@@ -8,13 +8,13 @@ import Modal from '../Modal'
 import useModal from '../../customHooks/useModal'
 
 import EditProduct from './ProductEdit'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 function ProductList({ products, setIsUpdated }) {
   const [id, setId] = useState('')
 
-  const productsState = useSelector((state) => state.products.products)
-  console.log(productsState)
+  // const productsState = useSelector((state) => state.products.products)
+  // console.log(productsState)
 
   const [isOpenEditProduct, openEditProductModal, closeEditProductModal] = useModal(false)
   const [isOpenDeleteProduct, openDeleteProductModal, closeDeleteProductModal] = useModal(false)
@@ -55,12 +55,16 @@ function ProductList({ products, setIsUpdated }) {
                 <td>{product.unit}</td>
                 <td>{product.price}</td>
                 <td>{product.category}</td>
-                <button className={style.btn} value={product.id} onClick={handleEdit}>
-                  edit
-                </button>
-                <button className={style.btn} value={product.id} onClick={handleDelete}>
-                  delete
-                </button>
+                <td>
+                  <button className={style.btn} value={product.id} onClick={handleEdit}>
+                    edit
+                  </button>
+                </td>
+                <td>
+                  <button className={style.btn} value={product.id} onClick={handleDelete}>
+                    delete
+                  </button>
+                </td>
               </tr>
             )
           })}

@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from 'react'
+
 import Products from '../components/Products/Products'
 
 const Header = lazy(() => import('../components/Home/Header'))

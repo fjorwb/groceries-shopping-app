@@ -52,9 +52,7 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
   }
 
   const handleEditProduct = (e) => {
-    // e.preventDefault()
-    console.log(inputEditProduct)
-
+    e.preventDefault()
     editProduct({
       url,
       token,
@@ -63,9 +61,6 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
       setInputEditProduct,
       initialForm
     })
-
-    console.log(inputEditProduct)
-    // setInputEditProduct(initialForm)
     setIsUpdated(true)
     closeEditProductModal()
   }
@@ -83,82 +78,83 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
   return (
     <div>
       <h1 className={style.productsFormTitle}>Edit Product</h1>
-      <form className={style.productForm} ref={formRef}>
+      <form name='productEditForm' className={style.productForm} ref={formRef}>
         <div className={style.productsFormInput}>
-          <label htmlFor='barcode' className={style.label}>
+          <label htmlFor='editForm_barcode' className={style.labels}>
             barcode
           </label>
           <input
             className={style.productFormInput}
             type='text'
             name='barcode'
-            id='barcode'
+            id='editForm_barcode'
             onChange={handleChange}
             defaultValue={inputEditProduct.barcode}
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='name' className={style.label}>
+          <label htmlFor='editForm_name' className={style.labels}>
             name
           </label>
           <input
             className={style.productFormInput}
             type='text'
             name='name'
-            id='name'
+            id='editForm_name'
             onChange={(e) => handleChange(e)}
             defaultValue={inputEditProduct.name}
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='description' className={style.label}>
+          <label htmlFor='editForm_description' className={style.labels}>
             description
           </label>
           <input
             className={style.productFormInput}
             type='text'
             name='description'
-            id='description'
+            id='editForm_description'
             onChange={(e) => handleChange(e)}
             defaultValue={inputEditProduct.description}
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='unit' className={style.label}>
+          <label htmlFor='editForm_unit' className={style.labels}>
             unit
           </label>
           <input
             className={style.productFormInput}
             type='text'
             name='unit'
-            id='descriptiuniton'
+            id='editForm_descriptiuniton'
             onChange={(e) => handleChange(e)}
             defaultValue={inputEditProduct.unit}
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='presentation' className={style.label}>
+          <label htmlFor='editForm_presentation' className={style.labels}>
             presentation
           </label>
           <input
             className={style.productFormInput}
             type='text'
             name='presentation'
-            id='presentation'
+            id='editForm_presentation'
             onChange={(e) => handleChange(e)}
             defaultValue={inputEditProduct.presentation}
           />
         </div>
         <div className={style.productSelect}>
-          <label htmlFor='category' className={style.label}>
+          <label htmlFor='editForm_category' className={style.labels}>
             category
           </label>
           <select
             name='category'
-            id='category'
+            id='editForm_category'
             className={style.productCategory}
             defaultValue={inputEditProduct.category}
             onChange={(e) => handleChange(e)}
+            // onMouseOver={changeOptionColor}
             autoComplete='off'
           >
             {Object.values(categories)
@@ -167,6 +163,7 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
                 return (
                   <option
                     key={category.id}
+                    onChange={(e) => handleChange(e)}
                     defaultValue={inputEditProduct.category}
                     // value={category.category}
                     className={style.productSelectOption}
@@ -178,20 +175,25 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
           </select>
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='price' className={style.label}>
+          <label htmlFor='editForm_price' className={style.labels}>
             price
           </label>
           <input
             className={style.productFormInput}
             type='text'
             name='price'
-            id='price'
+            id='editForm_price'
             onChange={(e) => handleChange(e)}
             defaultValue={inputEditProduct.price}
           />
         </div>
       </form>
-      <input type='button' value='edit product' className='btn' onClick={handleEditProduct} />
+      <input
+        type='button'
+        value='edit product'
+        className={style.btnModal}
+        onClick={handleEditProduct}
+      />
     </div>
   )
 }

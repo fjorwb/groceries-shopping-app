@@ -37,7 +37,7 @@
   padding: 0.5rem;
   border-radius: 5px;
   border: 1px solid #ccc;
-  font-family: var(--font-family);
+  font-family: var(--fnt-fam);
 }
 
 .form-input:focus {

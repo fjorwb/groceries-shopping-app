@@ -4,14 +4,13 @@ import PropTypes from 'prop-types'
 
 import style from './Product.module.css'
 
-function ProductSearch({ search, setSearch, setIsUpdated }) {
+function ProductSearch({ setSearch, setIsUpdated }) {
   const [inputSearch, setInputSearch] = useState()
 
   function handleChange(e) {
     e.preventDefault()
     setInputSearch(e.target.value)
     setSearch(e.target.value)
-    // setIsUpdated(true)
   }
 
   function handleCleanSearch(e) {
@@ -29,9 +28,6 @@ function ProductSearch({ search, setSearch, setIsUpdated }) {
         value={inputSearch}
         onChange={handleChange}
       />
-      {/* <button className={style.btn} onClick={handleSearch}>
-        search
-      </button> */}
       <button className={style.btn} onClick={handleCleanSearch}>
         clear
       </button>
@@ -40,7 +36,6 @@ function ProductSearch({ search, setSearch, setIsUpdated }) {
 }
 
 ProductSearch.propTypes = {
-  search: PropTypes.string.isRequired,
   setSearch: PropTypes.func.isRequired,
   setIsUpdated: PropTypes.func.isRequired
 }

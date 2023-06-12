@@ -5,6 +5,8 @@
   gap: 2rem;
   margin-top: 1rem;
   font-family: 'Roboto', sans-serif;
+  /* font-family: var(--fnt-fam); */
+  background: red;
 }
 
 .checkout-title {

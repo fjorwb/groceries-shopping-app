@@ -1,9 +1,10 @@
 import axios from 'axios'
 
-export async function addProduct ({ url, token, inputAddProduct }) {
-  console.log('INPUT ADD PRODUCT', inputAddProduct)
+export async function addProduct({ url, token, data }) {
+  console.log('INPUT ADD PRODUCT', data)
+
   await axios
-    .post(`${url}products`, inputAddProduct, {
+    .post(`${url}products`, data, {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',

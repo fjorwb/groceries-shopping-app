@@ -8,7 +8,12 @@ export const store = configureStore({
     auth: authReducer,
     url: urlReducer,
     products: productsReducer
-  }
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false
+    })
 })
 
 export default store

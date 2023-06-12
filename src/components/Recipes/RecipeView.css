@@ -24,7 +24,7 @@
 .recipe-view-instructions-container {
   text-align: justify;
   color: var(--clr-font);
-  font-family: var(--font-family);
+  font-family: var(--fnt-fam);
   line-height: 1.4rem;
   background-color: aliceblue;
   padding: 0.5rem 1rem;

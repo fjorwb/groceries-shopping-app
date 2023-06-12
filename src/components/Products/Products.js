@@ -14,28 +14,27 @@ function Products() {
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
   const [search, setSearch] = useState('')
-  const [isUpdated, setIsUpdated] = useState(true)
-
-  // console.log(search)
-  // console.log(isUpdated)
+  const [isUpdated, setIsUpdated] = useState(false)
 
   const state = useSelector((state) => state)
   const token = state.auth.user.accessToken
   const url = state.url.url
 
-  const productsState = useSelector((state) => state.products.products)
-  console.log(productsState)
-
   const dispatch = useDispatch()
+
+  // useEffect(() => {
+  //   getProducts({ url, token }).then((res) => {
+  //     setProducts(res)
+  //   })
+  //   dispatch(getProductsAction(products))
+  // }, [])
 
   useEffect(() => {
     getProducts({ url, token }).then((res) => {
       setProducts(res)
     })
-    console.log(products)
-    console.log(productsState)
     dispatch(getProductsAction(products))
-  }, [])
+  }, [isUpdated])
 
   useEffect(() => {
     getProducts({ url, token }).then((res) => {
@@ -58,19 +57,19 @@ function Products() {
 
   return (
     <div className={style.container}>
-      <div className={style.bar}>
-        <ProductSearchBar search={search} setSearch={setSearch} setIsUpdated={setIsUpdated} />
+      <section className={style.bar}>
+        <ProductSearchBar setSearch={setSearch} setIsUpdated={setIsUpdated} />
         {/* <ProductSearchBar /> */}
-        <ProductBarOptions />
-      </div>
-      <div className={style.list}>
+        <ProductBarOptions setIsUpdated={setIsUpdated} />
+      </section>
+      <section className={style.list}>
         {/* <ProductList setIsUpdated={setIsUpdated} /> */}
         <ProductList
           products={search === '' ? products : filteredProducts}
           setIsUpdated={setIsUpdated}
         />
         {/* <ProductList products={products} /> */}
-      </div>
+      </section>
     </div>
   )
 }
