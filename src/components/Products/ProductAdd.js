@@ -15,7 +15,6 @@ function generateId() {
 
 export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
   const [inputAddProduct, setInputAddProduct] = useState({})
-  // const [productAddForm, setProductAddForm] = useState({})
   const [categories, setCategories] = useState([])
 
   const state = useSelector((state) => state)
@@ -35,11 +34,9 @@ export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
     unit: '',
     presentation: '',
     category: '',
-    price: 0,
+    price: 0.0,
     market_id: 0
   }
-
-  // console.log(initialInputData)
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -54,10 +51,9 @@ export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
     e.preventDefault()
     if (inputAddProduct.name === '') return
 
-    // console.log('ADD PRODUCT', inputAddProduct)
     addProduct({ url, token, data: inputAddProduct })
-    setInputAddProduct(initialForm)
     setIsUpdated(true)
+    setInputAddProduct(initialForm)
     resetForm()
     closeAddProductModal()
   }
@@ -71,97 +67,106 @@ export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
 
   function resetForm() {
     formRef.current.reset()
-    // setInputAddProduct(initialInputData)
   }
+
+  useEffect(() => {
+    resetForm()
+  }, [])
 
   return (
     <div>
       <h1 className={style.productsFormTitle}>AddProduct</h1>
       <form name='productAddForm' className={style.productForm} ref={formRef}>
-        {/* <form name='productAddForm' className={style.productForm} ref={formRef}> */}
         <div className={style.productsFormInput}>
-          <label htmlFor='addForm_barcode' className={style.labels}>
+          <label htmlFor='extid' className={style.labels}>
+            extid
+          </label>
+          <span name='extid' id='extid' className={style.extid}>
+            {inputAddProduct.extid}
+          </span>
+        </div>
+
+        <div className={style.productsFormInput}>
+          <label htmlFor='barcode' className={style.labels}>
             barcode
           </label>
           <input
             className={style.productFormInput}
             type='text'
-            id='addForm_barcode'
+            id='barcode'
             name='barcode'
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
             defaultValue={inputAddProduct.barcode || ''}
           />
         </div>
-        {/* <div className={style.productsFormInput}>
-          <label htmlFor='addForm_extid' className={style.labels}>
-            extid
-          </label>
-          <p name='extid' className={style.extid}>
-            {inputAddProduct.extid}
-          </p>
-        </div> */}
         <div className={style.productsFormInput}>
-          <label htmlFor='addForm_name' className={style.labels}>
+          <label htmlFor='name' className={style.labels}>
             name
           </label>
           <input
             className={style.productFormInput}
             type='text'
-            id='addForm_name'
+            id='name'
             name='name'
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
             defaultValue={inputAddProduct.name || ''}
+            required
+            autoComplete='on'
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='addForm_description' className={style.labels}>
+          <label htmlFor='description' className={style.labels}>
             description
           </label>
           <input
             className={style.productFormInput}
             type='text'
-            id='addForm_description'
+            id='description'
             name='description'
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
             defaultValue={inputAddProduct.description || ''}
+            required
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='addForm_presentation' className={style.labels}>
+          <label htmlFor='presentation' className={style.labels}>
             presentation
           </label>
           <input
             className={style.productFormInput}
             type='text'
-            id='addForm_presentation'
+            id='presentation'
             name='presentation'
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
             defaultValue={inputAddProduct.presentation || ''}
+            required
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='addForm_unit' className={style.labels}>
+          <label htmlFor='unit' className={style.labels}>
             unit
           </label>
           <input
             className={style.productFormInput}
             type='text'
-            id='addForm_unit'
+            id='unit'
             name='unit'
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
             defaultValue={inputAddProduct.unit || ''}
+            required
           />
         </div>
-        <div className={style.productSelect}>
-          <label htmlFor='addForm_category' className={style.labels}>
+        <div className={style.productsFormInput}>
+          <label htmlFor='category' className={style.labels}>
             category
           </label>
           <select
-            id='addForm_category'
+            id='category'
             name='category'
             className={style.productCategory}
             defaultValue={inputAddProduct.category}
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
+            required
           >
             {categories
               .sort((a, b) => a.category.localeCompare(b.category))
@@ -180,25 +185,15 @@ export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
           </select>
         </div>
       </form>
-      {/* <input
-        type='button'
-        value='add product'
-        className={style.btnModal}
-        onClick={handleAddProduct}
-      /> */}
-      <button type='submit' className='style.btnModal' onClick={handleAddProduct}>
-        add Product
+      <button type='submit' className={style.btnModal} onClick={handleAddProduct}>
+        add product
       </button>
     </div>
   )
 }
 
 ProductAdd.propTypes = {
-  //   url: PropTypes.string,
-  //   token: PropTypes.string,
   closeAddProductModal: PropTypes.func,
-  //   user_id: PropTypes.number,
-  //   productcategories: PropTypes.array,
   setIsUpdated: PropTypes.func,
   id: PropTypes.number
 }

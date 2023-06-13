@@ -1,22 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import PropTypes from 'prop-types'
 
 import style from './Product.module.css'
 
-function ProductSearch({ setSearch, setIsUpdated }) {
-  const [inputSearch, setInputSearch] = useState()
-
+function ProductSearch({ search, setSearch, setIsUpdated }) {
   function handleChange(e) {
     e.preventDefault()
-    setInputSearch(e.target.value)
     setSearch(e.target.value)
   }
 
   function handleCleanSearch(e) {
     e.preventDefault()
     setSearch('')
-    setInputSearch('')
     setIsUpdated(true)
   }
 
@@ -25,8 +21,8 @@ function ProductSearch({ setSearch, setIsUpdated }) {
       <input
         type='text'
         className={style.searchInput}
-        value={inputSearch}
-        onChange={handleChange}
+        value={search}
+        onChange={(e) => handleChange(e)}
       />
       <button className={style.btn} onClick={handleCleanSearch}>
         clear
@@ -36,6 +32,7 @@ function ProductSearch({ setSearch, setIsUpdated }) {
 }
 
 ProductSearch.propTypes = {
+  search: PropTypes.string.isRequired,
   setSearch: PropTypes.func.isRequired,
   setIsUpdated: PropTypes.func.isRequired
 }

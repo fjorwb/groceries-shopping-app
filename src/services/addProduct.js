@@ -1,9 +1,7 @@
 import axios from 'axios'
 
 export async function addProduct({ url, token, data }) {
-  console.log('INPUT ADD PRODUCT', data)
-
-  await axios
+  const product = await axios
     .post(`${url}products`, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -12,16 +10,18 @@ export async function addProduct({ url, token, data }) {
       }
     })
     .then((resp) => {
-      console.log('RESXXX')
+      // console.log('RESXXX')
       console.log(resp)
     })
     .catch((error) => {
-      console.log('ERRXXX')
-      console.log(error)
+      // console.log('ERRXXX')
+      console.log(error.response.data)
     })
     .finally(() => {
       console.log('addProduct.js')
     })
+
+  return product
 }
 
 export default addProduct

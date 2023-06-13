@@ -9,20 +9,27 @@ import useModal from '../../customHooks/useModal'
 
 import ProductAdd from './ProductAdd'
 
-function ProductBarOptions({ setIsUpdated }) {
+function ProductBarOptions({ checkZero, setCheckZero, setIsUpdated }) {
   const [isOpenAddProduct, openAddProductModal, closeAddProductModal] = useModal(false)
 
   function handleAddProduct(e) {
     e.preventDefault()
     openAddProductModal()
-    console.log('ADD PRODUCT OPTIONS')
   }
+
+  function handleCheckZero(e) {
+    e.preventDefault()
+    // console.log('check Zero')
+    // console.log(checkZero)
+    setCheckZero(!checkZero)
+  }
+
   return (
     <div className={style.searchBar}>
       <button type='text' className={style.btn} onClick={handleAddProduct}>
         addProduct
       </button>
-      <button type='text' className={style.btn}>
+      <button type='text' className={style.btn} onClick={handleCheckZero}>
         checkPrice
       </button>
       <Modal isOpen={isOpenAddProduct} closeModal={closeAddProductModal}>
@@ -33,6 +40,8 @@ function ProductBarOptions({ setIsUpdated }) {
 }
 
 ProductBarOptions.propTypes = {
+  checkZero: PropTypes.bool.isRequired,
+  setCheckZero: PropTypes.func.isRequired,
   setIsUpdated: PropTypes.func.isRequired
 }
 

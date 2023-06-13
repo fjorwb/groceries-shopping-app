@@ -15,6 +15,9 @@ function Products() {
   const [filteredProducts, setFilteredProducts] = useState([])
   const [search, setSearch] = useState('')
   const [isUpdated, setIsUpdated] = useState(false)
+  const [checkZero, setCheckZero] = useState(false)
+
+  console.log(checkZero)
 
   const state = useSelector((state) => state)
   const token = state.auth.user.accessToken
@@ -58,17 +61,19 @@ function Products() {
   return (
     <div className={style.container}>
       <section className={style.bar}>
-        <ProductSearchBar setSearch={setSearch} setIsUpdated={setIsUpdated} />
-        {/* <ProductSearchBar /> */}
-        <ProductBarOptions setIsUpdated={setIsUpdated} />
+        <ProductSearchBar search={search} setSearch={setSearch} setIsUpdated={setIsUpdated} />
+        <ProductBarOptions
+          checkZero={checkZero}
+          setCheckZero={setCheckZero}
+          setIsUpdated={setIsUpdated}
+        />
       </section>
       <section className={style.list}>
-        {/* <ProductList setIsUpdated={setIsUpdated} /> */}
         <ProductList
           products={search === '' ? products : filteredProducts}
           setIsUpdated={setIsUpdated}
+          checkZero={checkZero}
         />
-        {/* <ProductList products={products} /> */}
       </section>
     </div>
   )

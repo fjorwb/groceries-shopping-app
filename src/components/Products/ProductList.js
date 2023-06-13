@@ -8,16 +8,26 @@ import Modal from '../Modal'
 import useModal from '../../customHooks/useModal'
 
 import EditProduct from './ProductEdit'
+import DeleteProduct from './ProductDelete'
+
 // import { useSelector } from 'react-redux'
 
 function ProductList({ products, setIsUpdated }) {
   const [id, setId] = useState('')
+  // const [zeroProducts, setZeroProducts] = useState([])
 
   // const productsState = useSelector((state) => state.products.products)
   // console.log(productsState)
 
   const [isOpenEditProduct, openEditProductModal, closeEditProductModal] = useModal(false)
   const [isOpenDeleteProduct, openDeleteProductModal, closeDeleteProductModal] = useModal(false)
+
+  // useEffect(() => {
+  //   const filteredZero = products.filter((product) => {
+  //     return product.price === 0
+  //   })
+  //   setZeroProducts(filteredZero)
+  // }, [checkZero])
 
   function handleEdit(e) {
     e.preventDefault()
@@ -29,7 +39,6 @@ function ProductList({ products, setIsUpdated }) {
     e.preventDefault()
     setId(e.target.value)
     openDeleteProductModal()
-    console.log(e.target.value)
   }
 
   return (
@@ -51,7 +60,7 @@ function ProductList({ products, setIsUpdated }) {
               <tr key={product.id}>
                 <td>{product.extid}</td>
                 <td>{product.name}</td>
-                <td>{product.description}</td>
+                <td>{product.presentation}</td>
                 <td>{product.unit}</td>
                 <td>{product.price}</td>
                 <td>{product.category}</td>
@@ -79,7 +88,13 @@ function ProductList({ products, setIsUpdated }) {
           closeEditProductModal={closeEditProductModal}
         />
       </Modal>
-      <Modal isOpen={isOpenDeleteProduct} closeModal={closeDeleteProductModal}></Modal>
+      <Modal isOpen={isOpenDeleteProduct} closeModal={closeDeleteProductModal}>
+        <DeleteProduct
+          deleteId={id}
+          setIsUpdated={setIsUpdated}
+          closeDeleteProductModal={closeDeleteProductModal}
+        />
+      </Modal>
     </div>
   )
 }
