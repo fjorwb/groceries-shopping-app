@@ -16,6 +16,7 @@ module.exports = {
     'space-before-function-paren': 'off',
     camelcase: 'off',
     'object-curly-spacing': 'off',
-    eqeqeq: 'off'
+    eqeqeq: 'off',
+    'multiline-ternary': 0
   }
 }
