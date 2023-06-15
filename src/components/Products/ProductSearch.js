@@ -12,8 +12,8 @@ function ProductSearch({ search, setSearch, setIsUpdated }) {
 
   function handleCleanSearch(e) {
     e.preventDefault()
-    setSearch('')
-    setIsUpdated(true)
+    setSearch(() => '')
+    setIsUpdated(() => true)
   }
 
   return (

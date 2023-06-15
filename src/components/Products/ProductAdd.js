@@ -52,14 +52,14 @@ export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
     if (inputAddProduct.name === '') return
 
     addProduct({ url, token, data: inputAddProduct })
-    setIsUpdated(true)
-    setInputAddProduct(initialForm)
+    setIsUpdated((isUpdated) => !isUpdated)
+    setInputAddProduct(() => initialForm)
     resetForm()
     closeAddProductModal()
   }
 
   useEffect(() => {
-    setInputAddProduct(initialForm)
+    setInputAddProduct(() => initialForm)
     getCategories({ url, token, setCategories })
   }, [])
 

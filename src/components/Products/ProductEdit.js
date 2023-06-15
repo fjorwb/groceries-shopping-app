@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -16,7 +16,8 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
     description: '',
     unit: '',
     presentation: '',
-    category: ' '
+    category: ' ',
+    price: 0.0
   }
 
   const [inputEditProduct, setInputEditProduct] = useState({})
@@ -28,14 +29,15 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
 
   useEffect(() => {
     if (editId === '') {
-      setInputEditProduct(initialForm)
+      setInputEditProduct(() => initialForm)
       return
     }
 
     const dataProducts = products.filter((product) => {
       return product.id === Number(editId)
     })
-    setInputEditProduct(dataProducts[0])
+
+    setInputEditProduct(() => dataProducts[0])
   }, [editId])
 
   useEffect(() => {
@@ -45,25 +47,42 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
   const handleChange = (e) => {
     e.preventDefault()
     const { name, value } = e.target
+    console.log(name, value)
     setInputEditProduct({
       ...inputEditProduct,
       [name]: value
     })
   }
 
-  const handleEditProduct = (e) => {
+  const handleEditProduct = useCallback((e) => {
     e.preventDefault()
+    console.log(inputEditProduct)
     editProduct({
       url,
       token,
       id: editId,
       inputEditProduct
-      // setInputEditProduct,
-      // initialForm
     })
-    setIsUpdated(true)
+
+    setIsUpdated((isUpdated) => !isUpdated)
+    // console.trace()
     closeEditProductModal()
-  }
+  })
+
+  // const handleEditProduct = (e) => {
+  //   e.preventDefault()
+  //   console.log(inputEditProduct)
+  //   editProduct({
+  //     url,
+  //     token,
+  //     id: editId,
+  //     inputEditProduct
+  //   })
+
+  //   setIsUpdated(true)
+  //   // console.trace()
+  //   closeEditProductModal()
+  // }
 
   const formRef = useRef()
 
@@ -177,16 +196,24 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
             name='price'
             id='price'
             onChange={handleChange}
+            // defaultValue={
+            //   isNaN(inputEditProduct.price)
+            //     ? inputEditProduct.price
+            //     : Number(inputEditProduct.price).toFixed(2)
+            // }
             defaultValue={inputEditProduct.price}
           />
         </div>
       </form>
-      <input
+      {/* <input
         type='button'
         value='edit product'
         className={style.btnModal}
         onClick={handleEditProduct}
-      />
+      /> */}
+      <button type='submit' className={style.btnModal} onClick={handleEditProduct}>
+        edit product
+      </button>
     </div>
   )
 }
@@ -195,7 +222,6 @@ EditProduct.propTypes = {
   closeEditProductModal: PropTypes.func.isRequired,
   products: PropTypes.array.isRequired,
   editId: PropTypes.string,
-  selectedProduct: PropTypes.object,
   categories: PropTypes.array,
   setIsUpdated: PropTypes.func.isRequired
 }

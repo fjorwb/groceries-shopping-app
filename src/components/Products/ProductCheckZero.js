@@ -10,9 +10,7 @@ import useModal from '../../customHooks/useModal'
 import EditProduct from './ProductEdit'
 import DeleteProduct from './ProductDelete'
 
-// import { useSelector } from 'react-redux'
-
-function ProductList({ products, setIsUpdated }) {
+function ProductCheckZero({ products, setIsUpdated }) {
   const [id, setId] = useState('')
 
   // const productsState = useSelector((state) => state.products.products)
@@ -22,7 +20,7 @@ function ProductList({ products, setIsUpdated }) {
   const [isOpenDeleteProduct, openDeleteProductModal, closeDeleteProductModal] = useModal(false)
 
   function handleEdit(e) {
-    // e.preventDefault()
+    e.preventDefault()
     setId(e.target.value)
     openEditProductModal()
   }
@@ -47,7 +45,7 @@ function ProductList({ products, setIsUpdated }) {
             <th> </th>
             <th> </th>
           </tr>
-          {products?.map((product) => {
+          {products.map((product) => {
             return (
               <tr key={product.id}>
                 <td>{product.extid}</td>
@@ -91,9 +89,9 @@ function ProductList({ products, setIsUpdated }) {
   )
 }
 
-ProductList.propTypes = {
+ProductCheckZero.propTypes = {
   products: PropTypes.array.isRequired,
   setIsUpdated: PropTypes.func.isRequired
 }
 
-export default ProductList
+export default ProductCheckZero

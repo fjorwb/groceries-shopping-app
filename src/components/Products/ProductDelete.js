@@ -17,7 +17,7 @@ function DeleteProduct({ deleteId, closeDeleteProductModal, setIsUpdated }) {
   function handleDeleteProduct(e) {
     e.preventDefault()
     const changeState = true
-    setConfirmDelete(changeState)
+    setConfirmDelete(() => changeState)
     console.log(confirmDelete)
 
     if (!confirmDelete) return
@@ -29,8 +29,8 @@ function DeleteProduct({ deleteId, closeDeleteProductModal, setIsUpdated }) {
       .catch((err) => console.log(err))
 
     if (confirmDelete) {
-      setConfirmDelete(false)
-      setIsUpdated(true)
+      setConfirmDelete(() => false)
+      setIsUpdated((isUpdated) => !isUpdated)
     }
 
     closeDeleteProductModal()

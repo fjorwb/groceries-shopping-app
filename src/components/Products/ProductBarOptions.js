@@ -19,9 +19,9 @@ function ProductBarOptions({ checkZero, setCheckZero, setIsUpdated }) {
 
   function handleCheckZero(e) {
     e.preventDefault()
-    // console.log('check Zero')
-    // console.log(checkZero)
-    setCheckZero(!checkZero)
+    // const change = !checkZero
+    setCheckZero((checkero) => !checkZero)
+    setIsUpdated((isUpdated) => !isUpdated)
   }
 
   return (
