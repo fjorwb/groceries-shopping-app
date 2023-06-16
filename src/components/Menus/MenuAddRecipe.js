@@ -4,13 +4,13 @@ import { useForm } from 'react-hook-form'
 import PropTypes from 'prop-types'
 
 import getWeekNumber from '../../helpers/calcWeekNumber'
-// import useFetch from '../customHooks/useFetch'
 
 import { addToMenu } from '../../services'
 
 import './MenuAddRecipe.css'
+import { parseISO } from 'date-fns'
 
-function MenuAddRecipe ({ recipe, user_id, url, token, closeMenuModal }) {
+function MenuAddRecipe({ recipe, user_id, url, token, closeMenuModal }) {
   const serves = recipe && recipe.recipe.servings
 
   const [servings, setServings] = useState(serves)
@@ -25,7 +25,7 @@ function MenuAddRecipe ({ recipe, user_id, url, token, closeMenuModal }) {
   const { register, handleSubmit } = useForm()
 
   const onSubmit = (data) => {
-    const week = getWeekNumber(data.date)
+    const week = getWeekNumber(parseISO(data.date))
     data = {
       ...data,
       recipe_id: recipe.recipe.id,
@@ -43,7 +43,6 @@ function MenuAddRecipe ({ recipe, user_id, url, token, closeMenuModal }) {
 
   return (
     <div>
-      {/* <h1>Menu Modal</h1> */}
       <h3>{recipe?.recipe.title}</h3>
       <h4>servings</h4>
 
@@ -57,7 +56,6 @@ function MenuAddRecipe ({ recipe, user_id, url, token, closeMenuModal }) {
         </button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* <form onSubmit={handleSubmit(onSubmit)}> */}
         <article className='MenuAddRecipe-container'>
           <input type='date' {...register('date')} className='MenuAddRecipe-cal' />
 

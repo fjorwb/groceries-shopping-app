@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
 
+import parseISO from 'date-fns/parseISO'
+
 import PropTypes from 'prop-types'
 
 import { useForm } from 'react-hook-form'
@@ -122,7 +124,7 @@ function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpd
             onClick={() =>
               editMenuItem({
                 id: menuItem.id,
-                date: menuItem.date,
+                date: parseISO(menuItem.date),
                 meal: menuItem.meal,
                 servings,
                 url,
