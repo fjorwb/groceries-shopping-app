@@ -4,13 +4,8 @@ import { memo, useEffect } from 'react'
 import getRecipes from '../services/getRecipes'
 
 function ShoppingListRecipes({ token, url, dataRecipe, setDataRecipe, arrRecipe, setArrRecipe }) {
-  //   const [data, setData] = useState({})
-
-  // Recipes
-  //        get data from recipes table
-
   useEffect(() => {
-    setDataRecipe(getRecipes({ url, token, setDataRecipe }))
+    setDataRecipe(getRecipes({ url, token, setDataRecipe })) // CHECK
   }, [setDataRecipe, token, url])
 
   //        extract id and servings from dataRecipe

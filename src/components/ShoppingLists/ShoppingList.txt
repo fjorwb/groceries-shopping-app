@@ -8,14 +8,10 @@ import getMenus from '../../services/getMenus'
 import getIngredients from '../../services/getIngredients'
 import getShoppingListId from '../../services/getShoppingListId'
 import addShoppingList from '../../services/addShoppingList'
-// import updateShoppingList from '../../services/updateShoppingList'
+import updateShoppingList from '../../services/updateShoppingList'
 import deleteShoppingListById from '../../services/deleteShoppingListId'
 import addProduct from '../../services/addProduct'
-
-import getProduct from '../../services/getProduct'
 // import ingredientsListReduce from '../helpers/addProductFromShoppingList.js'
-
-// import checkNewProduct from '../../helpers/checkNewProduct'
 
 import './ShoppingList.css'
 // import getShoppingList from '../services/getShoppingList'
@@ -32,42 +28,32 @@ export const ShoppingList = () => {
   const [dataIngredients, setDataIngredients] = useState()
   const [isShoppingList, setIsShoppingList] = useState(false)
 
-  // const [newProduct, setNewProduct] = useState([])
-
   // --> get recipes list to calculate ingredients based on standard servings
-
   useEffect(() => {
-    const recipe = async () => {
-      try {
-        const recipes = await getRecipes({ url, token })
-        setDataRecipes(() => recipes)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    recipe()
+    getRecipes({ url, token, dataRecipes, setDataRecipes })
+    console.log(dataRecipes)
   }, [token, url])
 
-  const arrRecipes = []
+  console.log(dataRecipes)
+
+  let arrRecipes = []
+
   for (const key in dataRecipes) {
     arrRecipes.push({ id: dataRecipes[key].id, servings: dataRecipes[key].servings })
   }
 
+  arrRecipes = dataRecipes?.map((item) => {
+    return { id: item.id, servings: item.servings }
+  })
+  console.log(arrRecipes)
+
   // --> get menu list to calculate ingredients based on recipes planned for the week
 
   useEffect(() => {
-    const menu = async () => {
-      try {
-        const menus = await getMenus({ url, token })
-        setDataMenu(() => menus)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    menu()
+    getMenus({ url, token, setDataMenu })
   }, [token, url])
 
-  // console.log('DATA MENU!!!!!', dataMenu)
+  console.log('DATA MENU', dataMenu)
 
   const arrMenuList = []
 
@@ -81,7 +67,7 @@ export const ShoppingList = () => {
     })
   }
 
-  // console.log('ARR MENU LIST', arrMenuList)
+  console.log('ARR MENU LIST', arrMenuList)
 
   const menuListReduced = arrMenuList.reduce((acc, item) => {
     const { recipe, idext, servings, factor, factorX } = item
@@ -102,28 +88,20 @@ export const ShoppingList = () => {
     }
 
     return acc
-  }, [])
+  }, {})
 
-  // console.log('MENU LIST REDUCED', menuListReduced)
+  console.log(menuListReduced)
 
   // --> get ingredients list to calculate shopping list based on recipes planned for the week
 
   useEffect(() => {
-    const ingredient = async () => {
-      try {
-        const ingredients = await getIngredients({ url, token })
-        setDataIngredients(() => ingredients)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    ingredient()
+    getIngredients({ url, token, setDataIngredients })
   }, [token, url])
 
-  // console.log('DATA INGREDIENTS!!!', dataIngredients)
+  console.log(dataIngredients)
 
   useEffect(() => {
-    setDataMenu(getIngredients({ url, token }))
+    setDataMenu(getIngredients({ url, token, setDataIngredients }))
   }, [token, url])
 
   const arr1 = []
@@ -170,7 +148,7 @@ export const ShoppingList = () => {
     }
   }
 
-  // console.log(arrIngredients)
+  console.log(arrIngredients)
 
   // const finalIngredientsList = []
 
@@ -205,7 +183,7 @@ export const ShoppingList = () => {
     }
   }
 
-  // console.log(ingredientsListReduce)
+  console.log(ingredientsListReduce)
 
   ingredientsListReduce.sort((a, b) => {
     const ax = a.ing
@@ -220,120 +198,64 @@ export const ShoppingList = () => {
     return 0
   })
 
-  console.log('ING LIST REDUCED', ingredientsListReduce)
+  console.log(ingredientsListReduce)
 
-  const today = Date.now()
-  // console.log(today)
-
-  let week = getWeekNumber(today)
+  let week = getWeekNumber(new Date())
   const year = new Date().getFullYear()
   // console.log(week)
   if (week < 10) {
     week = '0' + week.toString()
   }
   const shop_list_id = `W${week}${year}`
-  console.log(shop_list_id)
+  // console.log(shop_list_id)
 
   const data = {
     shop_list_id,
     shop_list: ingredientsListReduce,
     user_id
   }
-  // console.log(data)
+  console.log(data)
 
   useEffect(() => {
-    const getShopList = async () => {
-      try {
-        const data = await getShoppingListId({ url, token, id: shop_list_id })
-        // console.log('SHOPLISTID INSIDE', data)
-        if (data) {
-          setIsShoppingList(() => true)
-        } else {
-          setIsShoppingList(() => false)
-        }
-      } catch (error) {
-        console.log(error)
-      }
-      return data
-    }
-    getShopList()
-    console.log('IS SL', isShoppingList)
+    deleteShoppingListById({ url, token, shop_list_id })
 
-    console.log('SHOPPING LIST ID', isShoppingList)
-
-    const deleteShopList = async () => {
-      try {
-        const data = await deleteShoppingListById({ url, token, shop_list_id })
-        // data && setIsShoppingList(() => false)
-        console.log(data)
-      } catch (error) {
-        console.log(error)
-      }
+    if (!isShoppingList) {
+      console.log('GET')
+      getShoppingListId({ url, token, shop_list_id, setIsShoppingList })
     }
 
-    if (!isShoppingList) deleteShopList()
-
-    const addShopList = async () => {
-      try {
-        const data1 = await addShoppingList({ url, token, data })
-        data1 && setIsShoppingList(() => true)
-      } catch (error) {
-        console.log(error)
-      }
+    if (isShoppingList) {
+      console.log('UPDATE')
+      updateShoppingList({ url, token, data })
+      setIsShoppingList(false)
+    } else {
+      // console.log('ADD')
+      addShoppingList({ url, token, data })
     }
-
-    if (!isShoppingList) addShopList()
-  }, [shop_list_id])
+  }, [data])
 
   useEffect(() => {
     // ingredientsListReduce({ url, token, user_id, ingredientsListReduce })
 
     // console.log( ingredientsListReduce )
     for (let i = 0; i < ingredientsListReduce.length; i++) {
-      const extid = ingredientsListReduce[i].idext
-      console.log('extid!!!', extid)
-
-      const newP = async () => {
-        try {
-          const data = await getProduct({ url, token, extid })
-          console.log('DATA', data)
-          if (data !== 'exist') {
-            console.log('@@@@', data)
-            console.log(ingredientsListReduce[i])
-            addProduct({
-              url,
-              token,
-              xdata: {
-                barcode: 'XOXO',
-                extid: ingredientsListReduce[i].idext,
-                name: ingredientsListReduce[i].ing,
-                unit: ingredientsListReduce[i].un,
-                price: ingredientsListReduce[i].price,
-                market_id: 0,
-                description: 'mock',
-                presentation: 'mock',
-                category: '',
-                user_id
-              }
-            })
-
-            // setNewProduct((prev) => [...prev, data])
-          }
-        } catch (error) {
-          console.log(error)
+      addProduct({
+        url,
+        token,
+        inputAddProduct: {
+          barcode: 'XOXO',
+          extid: ingredientsListReduce[i].idext,
+          name: ingredientsListReduce[i].ing,
+          unit: ingredientsListReduce[i].un,
+          price: ingredientsListReduce[i].price,
+          // market_id: ingredientsListReduce[i].id,
+          description: 'mock',
+          presentation: 'mock',
+          user_id
         }
-      }
-
-      newP()
-      // console.log(newProduct)
-
-      // console.log('NEW PRODUCT', newProduct)
-
-      // const data = getProduct({ url, token, extid })
-
-      // console.log('DATAAAAAAAA', data)
+      })
     }
-  }, [isShoppingList])
+  }, [ingredientsListReduce])
 
   return (
     <div className='shopping-container'>
