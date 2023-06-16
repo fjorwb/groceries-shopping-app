@@ -1,7 +1,6 @@
-/* eslint-disable space-before-function-paren */
 import axios from 'axios'
 
-export async function editMenuItem ({
+export async function editMenuItem({
   id,
   date,
   meal,
@@ -11,11 +10,7 @@ export async function editMenuItem ({
   closeMenuCrudModal,
   setIsUpdated
 }) {
-  const yy = date.slice(0, 4)
-  const mm = date.slice(5, 7)
-  const dd = date.slice(8, 10)
-
-  let dat = new Date(yy, mm - 1, dd)
+  let dat = new Date(date)
 
   dat = dat.setHours(0)
   dat = new Date(dat)

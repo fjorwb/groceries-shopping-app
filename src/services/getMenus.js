@@ -1,9 +1,7 @@
-/* eslint-disable space-before-function-paren */
-
 import axios from 'axios'
 
-export async function getMenus({ url, token, setDataMenu }) {
-  await axios
+export async function getMenus({ url, token }) {
+  const data = await axios
     .get(`${url}menus`, {
       headers: {
         'Content-Type': 'application/json',
@@ -12,11 +10,13 @@ export async function getMenus({ url, token, setDataMenu }) {
       }
     })
     .then((resp) => {
-      setDataMenu(resp.data)
+      // console.log(resp.data)
+      return resp.data
     })
     .catch((error) => {
       console.log(error)
     })
+  return data
 }
 
 export default getMenus

@@ -1,12 +1,8 @@
 import axios from 'axios'
 
-export async function getProduct ({ url, token, editId, setSelectedProduct }) {
-  if (editId === null) {
-    return
-  }
-
-  await axios
-    .get(`${url}products/${editId}`, {
+export async function getProduct({ url, token, extid }) {
+  const data = await axios
+    .get(`${url}products/extid/${extid}`, {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -14,11 +10,17 @@ export async function getProduct ({ url, token, editId, setSelectedProduct }) {
       }
     })
     .then((resp) => {
-      setSelectedProduct(resp.data)
+      console.log('99999999999', resp.data)
+      return 'exist'
     })
     .catch((error) => {
-      console.log(error)
+      if (error.response?.data.message === 'product not found') {
+        console.log('not exist')
+        return extid
+      }
     })
+  console.log(data)
+  return data
 }
 
 export default getProduct

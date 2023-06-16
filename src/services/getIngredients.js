@@ -1,13 +1,7 @@
-/* eslint-disable space-before-function-paren */
-
 import axios from 'axios'
 
-export async function getIngredients({ url, token, setDataIngredients }) {
-  // console.log(url)
-  // console.log(token)
-  // console.log(setDataIngredients)
-
-  await axios
+export async function getIngredients({ url, token }) {
+  const data = await axios
     .get(`${url}ingredients`, {
       headers: {
         'Content-Type': 'application/json',
@@ -16,12 +10,12 @@ export async function getIngredients({ url, token, setDataIngredients }) {
       }
     })
     .then((resp) => {
-      // console.log(resp.data)
-      setDataIngredients(resp.data)
+      return resp.data
     })
     .catch((error) => {
       console.log(error)
     })
+  return data
 }
 
 export default getIngredients
