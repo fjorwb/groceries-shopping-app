@@ -1,6 +1,8 @@
-export const addProductsShoppingList = (mkts, shop, user, url, token, arr) => {
-  for (let i = 0; i < mkts.length; i++) {
-    for (let j = 0; j < shop.length; j++) {
+export default function addProductsFromShoppingList({ mkts, shop }) {
+  const arr = []
+
+  for (let i = 0; i < mkts?.length; i++) {
+    for (let j = 0; j < shop?.length; j++) {
       arr.push({
         id: mkts[i].id,
         extid: shop[j].idext,
@@ -10,7 +12,6 @@ export const addProductsShoppingList = (mkts, shop, user, url, token, arr) => {
       })
     }
   }
-  // console.log('addProductSL')
+  console.log('addPFSL', arr)
+  return arr
 }
-
-export default addProductsShoppingList

@@ -1,40 +1,58 @@
-.checkout-container {
+.checkoutContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   gap: 2rem;
   margin-top: 1rem;
   font-family: 'Roboto', sans-serif;
   /* font-family: var(--fnt-fam); */
-  background: red;
+  /* background: rgb(215, 167, 167); */
 }
 
-.checkout-title {
-  font-size: 1rem;
+.checkoutBody {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  gap: 1rem;
+}
+
+td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #d5d1d1;
+  font-weight: 400;
+}
+
+.checkoutTitle {
+  font-size: 1.25rem;
   font-weight: 600;
-  margin: 0.5rem 0;
+  margin: 0.25rem 0;
   background: none;
   text-decoration: underline;
 }
 
-.checkout-table {
+.checkoutTable {
+  width: -moz-fit-content;
   width: fit-content;
   border: 1px solid var(--clr-contrast);
-  border-collapse: collapse;
-  padding: 0;
+  /* border-collapse: collapse; */
+  padding: 0 1rem rem;
   margin: 0;
+  border-radius: 5px;
+  padding: 0.8rem;
+  background: azure;
 }
 
-.checkout-analysis {
+.checkoutAnalysis {
   width: fit-content;
   border: 1px solid var(--clr-contrast);
   border-radius: 5px;
   padding: 5px 20px;
   height: fit-content;
   /* background-color: lightcyan; */
+  padding-bottom: 1rem;
 }
 
-.checkout-markets {
+.checkoutMarkets {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -49,7 +67,7 @@
   box-shadow: 3px 2px lightsteelblue, 0.19em 0.14em 0 var(--clr-contrast);
 }
 
-.checkout-market {
+.checkoutMarket {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -60,11 +78,11 @@
   background-color: white;
 }
 
-.checkout-market h3 {
+.checkoutMarket h3 {
   margin: 0.25rem 0;
 }
 
-.checkout-totals {
+.checkoutTotals {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -79,7 +97,7 @@
   box-shadow: 3px 2px lightsteelblue, 0.19em 0.14em 0;
 }
 
-.checkout-titles {
+.checkoutTitles {
   margin: 1rem 0;
 }
 
@@ -93,10 +111,12 @@
   margin: 1rem;
 }
 
-.checkout-btn {
+.checkoutBtn {
   background-color: orange;
-  padding: 0.5rem;
+  padding: 0.75rem;
   font-weight: 700;
   margin: 0;
   margin-top: 1rem;
+  border-radius: 5px;
+  box-shadow: 3px 2px lightsteelblue, 0.19em 0.14em 0;
 }

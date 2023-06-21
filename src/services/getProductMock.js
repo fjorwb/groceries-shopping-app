@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export const getProductMock = async ({ url, token, setDataProductMock }) => {
-  await axios
-    .get(url + 'productmocks', {
+export const getProductMock = async ({ url, token }) => {
+  const data = await axios
+    .get(`${url}productmocks`, {
       headers: {
         'content-type': 'application/json',
         accept: 'application/json',
@@ -11,11 +11,13 @@ export const getProductMock = async ({ url, token, setDataProductMock }) => {
     })
     .then((resp) => {
       //   console.log(resp.data)
-      setDataProductMock(resp.data)
+      // setDataProductMock(resp.data)
+      return resp.data
     })
     .catch((error) => {
       console.log(error)
     })
+  return data
 }
 
 export default getProductMock

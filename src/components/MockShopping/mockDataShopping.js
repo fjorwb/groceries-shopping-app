@@ -5,14 +5,18 @@ import getMarkets from '../../services/getMarkets'
 import getShoppingList from '../../services/getShoppingList'
 import getProducts from '../../services/getProducts'
 import getProductMock from '../../services/getProductMock'
-import addProductsShoppingList from '../../services/addProductShoppingList'
+import addProductsFromShoppingList from '../../services/addProductShoppingList'
 
 import createDataProductMock from '../../helpers/createDataProductMock'
 import calcTotalShoppingList from '../../helpers/calcTotalShoppingList'
 import calcMinProductByMarket from '../../helpers/calcMinProductByMarket'
+import createArrayFromShoppingList from '../../helpers/createArrayFromShoppingList'
+import updateProductMockPrices from '../../helpers/updateProductMockPrices'
+import calcTotal from '../../helpers/calcTotalProductMock'
 
-import '../ShoppingLists/ShoppingList.css'
-import './createMockShopping.css'
+// import '../ShoppingLists/ShoppingList.css'
+import style from './createMockShopping.module.css'
+// import axios from 'axios'
 
 export const MakeMockData = () => {
   const state = useSelector((state) => state)
@@ -26,71 +30,96 @@ export const MakeMockData = () => {
   const [dataProducts, setDataProducts] = useState(null)
   const [dataProductMock, setDataProductMock] = useState([])
 
-  // console.log(dataShoppingList)
+  //! Load data from products, markets, shoppingList & productMock
 
   useEffect(() => {
-    getMarkets({ url, token, setDataMarkets })
-    getShoppingList({ url, token, setDataShoppingList })
-    getProducts({ url, token, setDataProducts })
-    getProductMock({ url, token, setDataProductMock })
-  }, [])
-
-  //! Shopping list data
-
-  let shopList = null
-
-  if (!dataMarkets || !dataShoppingList) return
-
-  shopList = Object.entries(dataShoppingList[0])[2][1]
-  console.log('SHOP LIST', shopList)
-
-  const arrZZZ = []
-  addProductsShoppingList(dataMarkets, shopList, user_id, url, token, arrZZZ)
-  // console.log('ARRZZZ', arrZZZ)
-
-  createDataProductMock({ url, token, user_id, arrZZZ })
-  // const cdpm = useMemo(() => createDataProductMock({ url, token, user_id, arrZZZ }), [])
-  // console.log(cdpm)
-
-  for (let i = 0; i < dataProductMock?.length; i++) {
-    for (let j = 0; j < dataProducts?.length; j++) {
-      if (dataProductMock[i].idext === dataProducts[j].extid) {
-        dataProductMock[i].price = dataProducts[j].price
+    const market = async () => {
+      try {
+        const data = await getMarkets({ url, token })
+        setDataMarkets(data)
+      } catch (error) {
+        console.log(error)
       }
     }
-  }
+    market()
 
+    const shoppingList = async () => {
+      try {
+        const data = await getShoppingList({ url, token })
+        setDataShoppingList(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    shoppingList()
+
+    const products = async () => {
+      try {
+        const data = await getProducts({ url, token })
+        setDataProducts(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    products()
+
+    const productMock = async () => {
+      try {
+        const data = await getProductMock({ url, token })
+        setDataProductMock(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    productMock()
+
+    // getMarkets({ url, token, setDataMarkets })
+    // getShoppingList({ url, token, setDataShoppingList })
+    // getProducts({ url, token, setDataProducts })
+    // getProductMock({ url, token, setDataProductMock })
+  }, [])
+
+  // console.log('DATA MARKETS', dataMarkets)
+  // console.log('DATA SHOPPING LIST', dataShoppingList)
+  // console.log('DATA PRODUCTS', dataProducts)
+  // console.log('DATA PRODUCT MOCK', dataProductMock)
+
+  //! Shopping list data
+  const shopList = createArrayFromShoppingList({ dataMarkets, dataShoppingList })
+
+  //! create ProductMock array  (from markets & shoppingList)
+  if (!dataMarkets || !shopList) return
+
+  const productMockArray = addProductsFromShoppingList({
+    mkts: dataMarkets,
+    shop: shopList
+  })
+
+  //! create ProductMock data in DB (from ProductMock array)
+  createDataProductMock({ url, token, user_id, productMockArray })
+
+  //! Update productMock prices with product prices (from products)
+  updateProductMockPrices(dataProductMock, dataProducts)
+
+  //! Calculate total shoppingList by product
   const arrTotal = calcTotalShoppingList({ dataProductMock })
 
-  const arrTotal1 = arrTotal.sort((a, b) => a.product.localeCompare(b.product))
+  //! Calculate Minimun by Market
+  if (arrTotal.length === 0) return
 
-  // console.log('ARR TOTAL', arrTotal1)
+  const arrMKT = calcMinProductByMarket({ arrTotal })
 
-  const arrMKT = calcMinProductByMarket({ arrTotal1 })
+  //! Calculate total by Market
 
-  const arrTotalReduce = arrTotal.reduce((acc, cur) => {
-    if (acc[cur.market_id]) {
-      acc[cur.market_id] += Number(cur.total)
-    } else {
-      acc[cur.market_id] = Number(cur.total)
-    }
-    return acc
-  }, {})
+  const arrTotalReduce = calcTotal({ arrTotal })
 
-  console.log('ARR TOTAL REDUCE', arrTotalReduce)
-
-  // let totalMin = []
-
-  // const arrTotalMin = Object.values(arrTotalReduce).map((total) => {
-
-  // })
+  //! Calculate total minimum
   const totalMin = Object.values(arrTotalReduce).reduce((acc, total) => {
     if (acc === null || total < acc) return total
     return acc
   }, null)
 
-  console.log('TOTAL MIN', totalMin)
-
+  //! Calculate total optimized
   const arrTotalReduce2 = arrMKT.reduce((acc, cur) => {
     if (acc[cur.market_id]) {
       acc[cur.market_id] += Number(cur.total)
@@ -100,85 +129,88 @@ export const MakeMockData = () => {
     return acc
   }, {})
 
-  // console.log('ARR TOTAL REDUCE OPTIMIZED', arrTotalReduce2)
-
   const totalOptimazed = Object.values(arrTotalReduce2).reduce((acc, cur) => {
     return acc + cur
   }, 0)
 
-  // console.log( 'TOTAL OPTIMIZED', totalOptimazed )
-
-  console.log(
-    'DIFERENCE...',
-    totalMin - totalOptimazed,
-    ((totalMin - totalOptimazed) / totalMin) * 100
-  )
+  //! Calculate difference between total minimun & total optimized
+  const difference = ((totalMin - totalOptimazed) / 100).toFixed(2)
+  const differencePercent = (((totalMin - totalOptimazed) / totalMin) * 100).toFixed(2)
 
   return (
-    <div>
-      <div className='checkout-container'>
-        <table className='table checkout-table'>
-          <h1 className='checkout-title'>Checkout</h1>
-          <tbody>
-            <tr className='table-header'>
-              <td>no</td>
-              {/* <td>id</td> */}
-              <td>name</td>
-              <td>un</td>
-              <td>quantity</td>
-              <td>price</td>
-              <td>Total</td>
-            </tr>
-            {dataProductMock
-              .sort((a, b) => a.name.localeCompare(b.name))
-              .map((menu, index) => {
+    <section>
+      <div className={style.checkoutContainer}>
+        <div>
+          <h1 className={style.checkoutTitle}>Checkout</h1>
+        </div>
+        <div className={style.checkoutBody}>
+          <table className={style.checkoutTable}>
+            {/* <table className={style.table checkoutTable}> */}
+            <tbody>
+              <tr className={style.tableHeader}>
+                <th>no</th>
+                {/* <td>id</td> */}
+                <th>name</th>
+                <th>un</th>
+                <th>quantity</th>
+                <th>price</th>
+                <th>Total</th>
+              </tr>
+              {dataProductMock
+                ?.sort((a, b) => a.name.localeCompare(b.name))
+                .map((menu, index) => {
+                  return (
+                    <tr className={style.tableRow} key={index}>
+                      <td className={style.p1}>{index + 1}</td>
+                      {/* <td className={style.p1}>{menu.idext}</td> */}
+                      <td className={style.p1}>
+                        {menu.name.replace(/\b\w/g, (l) => l.toUpperCase())}
+                      </td>
+                      <td className={style.p2}>{menu.unit}</td>
+                      <td className={style.p3}>{menu.amount}</td>
+                      <td className={style.p4}>{(menu.price / 100).toFixed(2)}</td>
+                      <td className={style.p5}>{(menu.total / 100).toFixed(2)}</td>
+                    </tr>
+                  )
+                })}
+            </tbody>
+          </table>
+          <div className={style.checkoutAnalysis}>
+            <h4 className={style.checkoutTitle}>Optimization</h4>
+            <div className={style.checkoutMarkets}>
+              <h4 className={style.checkoutTitles}>Total by Market</h4>
+              {Object.values(arrTotalReduce).map((total, index) => {
                 return (
-                  <tr className='table-row' key={index}>
-                    <td className='p1'>{index + 1}</td>
-                    {/* <td className='p1'>{menu.idext}</td> */}
-                    <td className='p1'>{menu.name.replace(/\b\w/g, (l) => l.toUpperCase())}</td>
-                    <td className='p2'>{menu.unit}</td>
-                    <td className='p3'>{menu.amount}</td>
-                    <td className='p4'>{menu.price}</td>
-                    <td className='p5'>{menu.total}</td>
-                  </tr>
+                  <div className={style.checkoutMarket} key={index}>
+                    <h3>{index}</h3>
+                    <h3>{(total / 100).toFixed(2)}</h3>
+                  </div>
                 )
               })}
-          </tbody>
-        </table>
-        <div className='checkout-analysis'>
-          <h4 className='checkout-title'>Optimization</h4>
-          <div className='checkout-markets'>
-            <h4 className='checkout-titles'>Total by Market</h4>
-            {Object.values(arrTotalReduce).map((total, index) => {
-              return (
-                <div className='checkout-market' key={index}>
-                  <h3>{index}</h3>
-                  <h3>{total.toFixed(2)}</h3>
-                </div>
-              )
-            })}
+            </div>
+            <div>
+              <h4 className={style.checkoutTitles}>Minimun</h4>
+              <h4 className={style.checkoutTitles}>by Market</h4>
+              <h3 className={style.checkoutTotals}>{Number(totalMin / 100).toFixed(2)}</h3>
+            </div>
+            <div>
+              <h4 className={style.checkoutTitles}>Total Optimized</h4>
+              <h3 className={style.checkoutTotals}>{(totalOptimazed / 100).toFixed(2)}</h3>
+            </div>
+            <div>
+              <h4 className={style.checkoutTitles}>Diference</h4>
+              <h3 className={style.checkoutTotals}>{difference}</h3>
+              <h3 className={style.checkoutTotals}>
+                {/* <h3 className={style.checkoutTotals difference}>{(totalMin - totalOptimazed).toFixed(2)}</h3>
+            <h3 className={style.checkoutTotals difference}> */}
+                {differencePercent + '%'}
+              </h3>
+            </div>
+            <button className={style.checkoutBtn}>Proceed to checkout</button>
           </div>
-          <div>
-            <h4 className='checkout-titles'>Minimun</h4>
-            <h4 className='checkout-titles'>by Market</h4>
-            <h3 className='checkout-totals'>{Number(totalMin).toFixed(2)}</h3>
-          </div>
-          <div>
-            <h4 className='checkout-titles'>Total Optimized</h4>
-            <h3 className='checkout-totals'>{totalOptimazed.toFixed(2)}</h3>
-          </div>
-          <div>
-            <h4 className='checkout-titles'>Diference</h4>
-            <h3 className='checkout-totals difference'>{(totalMin - totalOptimazed).toFixed(2)}</h3>
-            <h3 className='checkout-totals difference'>
-              {(((totalMin - totalOptimazed) / totalMin) * 100).toFixed(2) + '%'}
-            </h3>
-          </div>
-          <button className='btn checkout-btn'>Proceed to checkout</button>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
