@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -13,7 +13,7 @@ export function Modal({ children, isOpen, closeModal }) {
       <article className={`modal ${isOpen && 'is-open'}`} onClick={closeModal}>
         <div className='modal-container' onClick={handleModalClick}>
           <button className='modal-close' onClick={closeModal}>
-            <img src={close} alt='' />
+            <img src={close} loading={lazy} alt='' />
           </button>
           {children}
         </div>

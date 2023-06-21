@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { lazy, useEffect, useState } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -27,7 +27,7 @@ export const RecipeAdd = ({ recipe, url, token, user_id, closeAddRecipeModal }) 
     getRecipe({ url, token, id: recipe?.recipe.id, setRecipe: setRecipeToBook })
   }, [recipe])
 
-  function addToBook () {
+  function addToBook() {
     addRecipe({
       url,
       token,
@@ -65,7 +65,11 @@ export const RecipeAdd = ({ recipe, url, token, user_id, closeAddRecipeModal }) 
       <h1>add recipe</h1>
       <div>
         <h3>{recipe?.recipe.title}</h3>
-        <img src={recipe?.recipe.image} alt={`recipe image of ${recipe?.recipe.image}`} />
+        <img
+          src={recipe?.recipe.image}
+          loading={lazy}
+          alt={`recipe image of ${recipe?.recipe.image}`}
+        />
         <button className='btn' onClick={addToBook}>
           accept
         </button>

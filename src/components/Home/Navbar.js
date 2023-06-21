@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from '../../styles/styles.module.css'
 import logo from '../../images/logo.png'
 
-export function Navbar () {
+export function Navbar() {
   return (
     <div className={styles.navbarcontainer}>
       <div>
-        <img src={logo} alt='' className={styles.logo} />
+        <img src={logo} loading={lazy} alt='' className={styles.logo} />
       </div>
       <div>
         <ul className={styles.navbarlist}>
