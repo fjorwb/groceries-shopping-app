@@ -303,7 +303,7 @@ export const ShoppingList = () => {
             addProduct({
               url,
               token,
-              xdata: {
+              data: {
                 barcode: 'XOXO',
                 extid: ingredientsListReduce[i].idext,
                 name: ingredientsListReduce[i].ing,
