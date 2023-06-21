@@ -1,9 +1,11 @@
 import axios from 'axios'
 
-export async function addProduct({ url, token, inputAddProduct }) {
-  console.log('INPUT ADD PRODUCT', inputAddProduct)
-  await axios
-    .post(`${url}products`, inputAddProduct, {
+export async function addProduct({ url, token, data }) {
+  // console.log(url)
+  if (!data) return
+
+  return await axios
+    .post(`${url}products`, data, {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
@@ -11,11 +13,11 @@ export async function addProduct({ url, token, inputAddProduct }) {
       }
     })
     .then((resp) => {
-      console.log('RESXXX')
+      // console.log('RESXXX')
       console.log(resp)
     })
     .catch((error) => {
-      console.log('ERRXXX')
+      // console.log('ERRXXX')
       console.log(error)
     })
     .finally(() => {

@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 export const addProductMock = async ({ url, token, inputAddProduct }) => {
-  // console.log(inputAddProduct)
+  // console.log('IPM! ', inputAddProduct)
   await axios
-    .post(url + 'productmocks', inputAddProduct, {
+    .post(`${url}productmocks`, inputAddProduct, {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
@@ -11,11 +11,11 @@ export const addProductMock = async ({ url, token, inputAddProduct }) => {
       }
     })
     .then((resp) => {
-      // console.log(resp)
-      return resp.data
+      console.log(resp)
+      // return resp.data
     })
     .catch((error) => {
-      return error.response.data.message
+      console.log(error.response.data.message)
     })
 }
 

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export async function deleteProduct({ url, token, id }) {
-  await axios
+  const product = await axios
     .delete(`${url}products/${id}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -10,11 +10,15 @@ export async function deleteProduct({ url, token, id }) {
       }
     })
     .then((resp) => {
-      console.log(resp)
+      console.log(resp.data.message)
     })
     .catch((error) => {
       console.log(error)
     })
+    .finally(() => {
+      console.log('deleteProduct.js')
+    })
+  return product
 }
 
 export default deleteProduct

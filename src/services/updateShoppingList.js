@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export const updateShoppingList = async ({ url, token, data }) => {
+  // console.log(data)
   await axios
     .put(`${url}shoppinglists/${data.shop_list_id}`, data, {
       headers: {

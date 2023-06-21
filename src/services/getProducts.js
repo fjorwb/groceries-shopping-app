@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export async function getProducts({ url, token, setDataProducts }) {
-  await axios
-    .get(url + 'products', {
+export async function getProducts({ url, token }) {
+  const data = await axios
+    .get(`${url}products`, {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -10,13 +10,14 @@ export async function getProducts({ url, token, setDataProducts }) {
       }
     })
     .then((resp) => {
+      // console.log(resp.data)
       const sort = resp.data.sort((a, b) => a.name.localeCompare(b.name))
-      setDataProducts(sort)
-      // setSelectedProduct ? setSelectedProduct(resp.data[0]) : ' '
+      return sort
     })
     .catch((error) => {
       console.log(error)
     })
+  return data
 }
 
 export default getProducts

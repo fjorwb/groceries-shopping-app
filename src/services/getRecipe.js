@@ -1,21 +1,22 @@
 import axios from 'axios'
 
-export const getRecipe = async ( { url, token, id, setRecipe } ) => {
+export const getRecipe = async ({ url, token, id, setRecipe }) => {
+  // if (id === undefined) return
 
   await axios
-    .get( `${ url }recipes/recipes/${ id }`, {
+    .get(`${url}recipes/recipes/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
-        Authorization: `Bearer ${ token }`
+        Authorization: `Bearer ${token}`
       }
-    } )
-    .then( ( resp ) => {
-      setRecipe( resp.data )
-    } )
-    .catch( ( err ) => {
-      console.log( err )
-    } )
+    })
+    .then((resp) => {
+      setRecipe(resp.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 export default getRecipe

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const deleteProductMock = async ({ url, token }) => {
   await axios
-    .delete(url + 'productmocks', {
+    .delete(`${url}productmocks`, {
       headers: {
         'content-type': 'application/json',
         accept: 'application/json',

@@ -14,8 +14,6 @@ h1 {
   margin-top: 1rem;
   padding: 1rem;
   background: var(--clr-background);
-
-  /* position: fixed; */
   margin: auto;
 }
 
@@ -51,6 +49,7 @@ h1 {
   align-items: center;
   margin: 0;
 }
+
 .navbarlist,
 .loginlist {
   display: flex;
@@ -58,6 +57,7 @@ h1 {
   justify-content: left;
   font-size: 1.25rem;
   align-items: center;
+  list-style: none;
 }
 
 ul {
@@ -81,20 +81,3 @@ button {
   font-family: var(--fnt-fam);
   color: var(--clr-font);
 }
-
-/* .login-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-}
-
-.login {
-	padding: 0.5rem;
-	font-size: var(--fnt-menu);
-}
-
-.login:hover {
-	border-bottom: 4px solid var(--clr-contrast);
-	cursor: pointer;
-} */

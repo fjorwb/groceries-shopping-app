@@ -3,10 +3,10 @@ import React, { Suspense, lazy } from 'react'
 import styles from '../styles/styles.module.css'
 
 // const Footer = lazy(() => import('../components/Footer'))
-const Header = lazy(() => import('../components/Header'))
-const SlideShow = lazy(() => import('../components/SlideShow'))
+const Header = lazy(() => import('../components/Home/Header'))
+const SlideShow = lazy(() => import('../components/Home/SlideShow'))
 
-export function Home() {
+export function Home () {
   return (
     <div className={styles.maincontainer}>
       <Suspense>

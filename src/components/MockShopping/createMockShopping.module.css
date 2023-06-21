@@ -1,0 +1,122 @@
+.checkoutContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  font-family: 'Roboto', sans-serif;
+  /* font-family: var(--fnt-fam); */
+  /* background: rgb(215, 167, 167); */
+}
+
+.checkoutBody {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  gap: 1rem;
+}
+
+td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #d5d1d1;
+  font-weight: 400;
+}
+
+.checkoutTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.25rem 0;
+  background: none;
+  text-decoration: underline;
+}
+
+.checkoutTable {
+  width: -moz-fit-content;
+  width: fit-content;
+  border: 1px solid var(--clr-contrast);
+  /* border-collapse: collapse; */
+  padding: 0 1rem rem;
+  margin: 0;
+  border-radius: 5px;
+  padding: 0.8rem;
+  background: azure;
+}
+
+.checkoutAnalysis {
+  width: fit-content;
+  border: 1px solid var(--clr-contrast);
+  border-radius: 5px;
+  padding: 5px 20px;
+  height: fit-content;
+  /* background-color: lightcyan; */
+  padding-bottom: 1rem;
+}
+
+.checkoutMarkets {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* border: 1px solid var(--clr-contrast); */
+  border: 1px solid lightgrey;
+
+  border-radius: 5px;
+  padding: 5px 20px;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  background-color: rgb(253, 253, 253);
+  box-shadow: 3px 2px lightsteelblue, 0.19em 0.14em 0 var(--clr-contrast);
+}
+
+.checkoutMarket {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--clr-contrast);
+  border-radius: 5px;
+  /* margin-bottom: 0.5rem; */
+  margin-bottom: 1rem;
+  background-color: white;
+}
+
+.checkoutMarket h3 {
+  margin: 0.25rem 0;
+}
+
+.checkoutTotals {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  /* border: 1px solid var(--clr-contrast); */
+  border: 1px solid lightgrey;
+
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 0.5rem;
+  background-color: white;
+  box-shadow: 3px 2px lightsteelblue, 0.19em 0.14em 0 var(--clr-contrast);
+  box-shadow: 3px 2px lightsteelblue, 0.19em 0.14em 0;
+}
+
+.checkoutTitles {
+  margin: 1rem 0;
+}
+
+.difference {
+  background-color: var(--clr-contrast);
+  /* background-color: orange; */
+  border: 1px solid lightgrey;
+
+  color: white;
+  font-size: 1.25rem;
+  margin: 1rem;
+}
+
+.checkoutBtn {
+  background-color: orange;
+  padding: 0.75rem;
+  font-weight: 700;
+  margin: 0;
+  margin-top: 1rem;
+  border-radius: 5px;
+  box-shadow: 3px 2px lightsteelblue, 0.19em 0.14em 0;
+}

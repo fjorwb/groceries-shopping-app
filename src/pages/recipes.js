@@ -1,9 +1,9 @@
 import React, { lazy, Suspense } from 'react'
 
-import '../components/RecipesCard.css'
+// import '../components/Recipes/Recipes.css'
 
-const Header = lazy( () => import( '../components/Header' ) )
-const Recipes = lazy( () => import( '../components/Recipes' ) )
+const Header = lazy(() => import('../components/Home/Header'))
+const Recipes = lazy(() => import('../components/Recipes/Recipes'))
 
 export function RecipesPage () {
   return (

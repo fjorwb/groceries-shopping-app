@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  extends: ['standard', 'plugin:react/recommended'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -12,5 +12,11 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: ['react'],
-  rules: {}
+  rules: {
+    'space-before-function-paren': 'off',
+    camelcase: 'off',
+    'object-curly-spacing': 'off',
+    eqeqeq: 'off',
+    'multiline-ternary': 0
+  }
 }

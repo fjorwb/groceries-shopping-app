@@ -1,27 +1,11 @@
 import axios from 'axios'
 
-// export const getShoppingListId = async ({ url, token, shop_list_id, setIsShoppingList }) => {
-//   console.log('SHOP LIST ID', shop_list_id)
-//   await axios(`${url}shoppinglist/shoplistid/${shop_list_id}`, {
-//     headers: {
-//       'Content-Type': 'application/json',
-//       accept: 'application/json',
-//       Authorization: `Bearer ${token}`
-//     }
-//   })
-//     .then((resp) => {
-//       console.log('QQQQQQQQQQQQ')
-//       console.log(resp.data)
-//       setIsShoppingList(true)
-//       return resp.data.shop_list_id
-//     })
-//     .catch((error) => {
-//       console.log(error.response.data.message)
-//     })
-// }
+export const getShoppingListId = async ({ url, token, id }) => {
+  // console.log('INSIDE', url)
+  // console.log('INSIDE', token)
+  // console.log('INSIDE%%%%%%%%%%%%%', id)
 
-export const getShoppingListId = async ({ url, token, shop_list_id, setIsShoppingList }) => {
-  await axios(`${url}shoppinglist/shoplistid/${shop_list_id}`, {
+  const data = await axios(`${url}shoppinglists/shoplistid/${id}`, {
     headers: {
       'Content-Type': 'application/json',
       accept: 'application/json',
@@ -29,12 +13,15 @@ export const getShoppingListId = async ({ url, token, shop_list_id, setIsShoppin
     }
   })
     .then((resp) => {
-      console.log('QQQQQQQQQQQQ')
-      console.log(resp.data)
-      setIsShoppingList(true)
+      // console.log('QQQQQQQQQQQQ')
+      // console.log('GET SHOP LIST RESP.DATA', resp.data.shop_list_id)
       return resp.data.shop_list_id
     })
     .catch((error) => {
-      console.log(error.response.data.message)
+      console.log('ERRORRRRRR', error)
     })
+  // console.log('44444444444444', data)
+  return data
 }
+
+export default getShoppingListId

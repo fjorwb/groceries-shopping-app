@@ -3,8 +3,6 @@ const urlInitialStore = {
   url: 'http://localhost:5000/'
 }
 
-export const urlReducer = (state = urlInitialStore) => {
+export default function urlReducer(state = urlInitialStore) {
   return state
 }
-
-export default urlReducer

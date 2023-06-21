@@ -1,16 +1,7 @@
 import axios from 'axios'
 
-export async function getMarket ({ url, token, id, setDataSelected }) {
-  // console.log(id)
-  // console.log(url)
-  // console.log(token)
-
-  if (id === undefined) {
-    setDataSelected({})
-    return
-  }
-
-  await axios
+export async function getMarket({ url, token, id }) {
+  return await axios
     .get(`${url}markets/${id}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +10,7 @@ export async function getMarket ({ url, token, id, setDataSelected }) {
       }
     })
     .then((resp) => {
-      setDataSelected(resp.data)
+      return resp.data
     })
     .catch((error) => {
       console.log(error)
