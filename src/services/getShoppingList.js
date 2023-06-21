@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export const getShoppingList = async ({ url, token, setDataShoppingList }) => {
-  await axios(url + 'shoppinglists', {
+export const getShoppingList = async ({ url, token }) => {
+  const data = await axios(`${url}shoppinglists`, {
     headers: {
       'Content-Type': 'application/json',
       accept: 'application/json',
@@ -9,12 +9,13 @@ export const getShoppingList = async ({ url, token, setDataShoppingList }) => {
     }
   })
     .then((resp) => {
-      // console.log(resp.data)
-      setDataShoppingList(resp.data)
+      console.log(resp.data)
+      return resp.data
     })
     .catch((error) => {
       console.log(error)
     })
+  return data
 }
 
 export default getShoppingList
