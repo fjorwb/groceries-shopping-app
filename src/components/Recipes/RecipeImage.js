@@ -1,16 +1,12 @@
-import React from 'react'
+import React, { lazy } from 'react'
 
 import PropTypes from 'prop-types'
 
 const RecipeImage = ({ image }) => {
   return (
-        <div className="recipe-view-img-container">
-            <img
-                src={ `${image}` }
-                alt="recipe image"
-                className="recipe-view-img"
-            />
-        </div>
+    <div className='recipe-view-img-container'>
+      <img src={`${image}`} loading={lazy} alt='recipe image' className='recipe-view-img' />
+    </div>
   )
 }
 
