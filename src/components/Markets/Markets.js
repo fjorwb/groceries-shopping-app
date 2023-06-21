@@ -1,8 +1,3 @@
-/* eslint-disable multiline-ternary */
-/* eslint-disable space-before-function-paren */
-/* eslint-disable no-tabs */
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -22,7 +17,7 @@ function Market() {
 
   const url = state.url.url
 
-  const [dataMarkets, setDataMarkets] = useState({})
+  const [dataMarkets, setDataMarkets] = useState([])
   const [dataSelected, setDataSelected] = useState({})
   const [id, setId] = useState(1)
   const [updated, setUpdated] = useState(false)
@@ -31,35 +26,77 @@ function Market() {
   // console.log(dataSelected)
 
   useEffect(() => {
-    getMarkets({ url, token, setDataMarkets, setDataSelected })
-    setUpdated(false)
+    const mkt = async () => {
+      try {
+        const markets = await getMarkets({ url, token })
+        // console.log('Markets', markets)
+        setDataMarkets(() => markets)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    mkt()
+    // console.log(dataMarkets)
+    // setUpdated(false)
   }, [token, url, updated])
 
   useEffect(() => {
-    // console.log(id)
-    // console.log('market')
-    getMarket({ url, token, id, setDataSelected })
+    console.log('ID Mkt', id)
+
+    const mktSelect = async () => {
+      try {
+        const market = await getMarket({ url, token, id })
+        // console.log('MKT selected', market)
+        setDataSelected(() => market)
+        setUpdated(true)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    mktSelect()
+
     // setUpdated(false)
   }, [id, token, url])
 
   useEffect(() => {
     if (updated) {
-      console.log(id)
-      // console.log('update')
-      getMarkets({ url, token, setDataMarkets, setDataSelected })
-      getMarket({ url, token, id, setDataSelected })
+      const mkt = async () => {
+        try {
+          await getMarkets({ url, token })
+          setDataMarkets(() => dataMarkets)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      mkt()
+      const mktSelect = async () => {
+        try {
+          await getMarket({ url, token, id })
+          setDataSelected(() => dataSelected)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      mktSelect()
       setUpdated(false)
     }
+    // if (updated) {
+    //   console.log(id)
+    //   // console.log('update')
+    //   getMarkets({ url, token, setDataMarkets, setDataSelected })
+    //   getMarket({ url, token, id, setDataSelected })
+    setUpdated(false)
+    // }
   }, [id, token, updated, url])
 
   return (
     <div className='markets-container'>
       <MarketList
         dataMarkets={dataMarkets}
-        getMarket={getMarket}
+        // getMarket={getMarket}
         url={url}
         token={token}
-        setDataSelected={setDataSelected}
+        // setDataSelected={setDataSelected}
         setId={setId}
         setUpdated={setUpdated}
       />

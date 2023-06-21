@@ -1,5 +1,3 @@
-/* eslint-disable space-before-function-paren */
-/* eslint-disable camelcase */
 import React, { useEffect, useState, useRef } from 'react'
 
 import PropTypes from 'prop-types'
@@ -21,16 +19,7 @@ import './markets.css'
 // password: ''
 // }
 
-function MarketCrud({
-  setMarketForm,
-  dataSelected,
-  setUpdated,
-  url,
-  token,
-  // eslint-disable-next-line camelcase
-  user_id,
-  id
-}) {
+function MarketCrud({ setMarketForm, dataSelected, setUpdated, url, token, user_id, id }) {
   // console.log(id)
   // console.log(dataSelected)
 
@@ -61,7 +50,6 @@ function MarketCrud({
     setPasswordA(dataSelected.password)
   }, [
     dataSelected,
-    // marketForm,
     id
     // isAdded
     // dataSelected.address,
@@ -105,8 +93,7 @@ function MarketCrud({
   function handleChange(e) {
     e.preventDefault()
     const { name, value } = e.target
-    // console.log(inputMarkets)
-    // console.log(name, value)
+    console.log(name, value)
     setInputMarkets({
       ...inputMarkets,
       [name]: value
@@ -133,6 +120,7 @@ function MarketCrud({
   }
 
   const handleUpdateMarket = () => {
+    console.log('DATA to UPD', dataSelected)
     setInputMarkets({
       ...inputMarkets,
       name: dataSelected.name,
@@ -146,10 +134,12 @@ function MarketCrud({
       website: dataSelected.website,
       password: dataSelected.password
     })
+    console.log('INPUT', inputMarkets)
     updateMarket({ url, token, inputMarkets, id: dataSelected.id, setUpdated })
     // getMarkets()
-    // setUpdated(true)
+    setUpdated(true)
     setInputMarkets({ user_id })
+    resetForm()
   }
 
   return (
@@ -161,7 +151,7 @@ function MarketCrud({
           <input
             type='text'
             id='nameA'
-            name='nameA'
+            name='name'
             placeholder='market'
             defaultValue={nameA}
             onChange={handleChange}
@@ -172,7 +162,7 @@ function MarketCrud({
           <input
             type='text'
             id='addressA'
-            name='addressA'
+            name='address'
             placeholder='address'
             defaultValue={addressA}
             onChange={handleChange}
@@ -183,7 +173,7 @@ function MarketCrud({
           <input
             type='text'
             id='cityA'
-            name='cityA'
+            name='city'
             placeholder='city'
             defaultValue={cityA}
             onChange={handleChange}
@@ -194,7 +184,7 @@ function MarketCrud({
           <input
             type='text'
             id='stateA'
-            name='stateA'
+            name='state'
             placeholder='state'
             defaultValue={stateA}
             onChange={handleChange}
@@ -205,7 +195,7 @@ function MarketCrud({
           <input
             type='text'
             id='zipA'
-            name='zipA'
+            name='zip'
             placeholder='zip'
             defaultValue={zipA}
             onChange={handleChange}
@@ -216,7 +206,7 @@ function MarketCrud({
           <input
             type='text'
             id='countryA'
-            name='countryA'
+            name='country'
             placeholder='country'
             defaultValue={countryA}
             onChange={handleChange}
@@ -227,7 +217,7 @@ function MarketCrud({
           <input
             type='text'
             id='phoneA'
-            name='phoneA'
+            name='phone'
             placeholder='phone'
             defaultValue={phoneA}
             onChange={handleChange}
@@ -238,7 +228,7 @@ function MarketCrud({
           <input
             type='text'
             id='emailA'
-            name='emailA'
+            name='email'
             placeholder='email'
             defaultValue={emailA}
             onChange={handleChange}
@@ -249,7 +239,7 @@ function MarketCrud({
           <input
             type='text'
             id='websiteA'
-            name='websiteA'
+            name='website'
             placeholder='website'
             defaultValue={websiteA}
             onChange={handleChange}
@@ -260,7 +250,7 @@ function MarketCrud({
           <input
             type='text'
             id='passwordA'
-            name='passwordA'
+            name='password'
             placeholder='password'
             defaultValue={passwordA}
             onChange={handleChange}
