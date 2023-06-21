@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export async function editProduct({ url, token, id, inputEditProduct }) {
+  console.log(inputEditProduct)
   await axios
     .put(`${url}products/${id}`, inputEditProduct, {
       headers: {

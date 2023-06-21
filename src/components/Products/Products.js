@@ -19,6 +19,8 @@ function Products() {
   const [isUpdated, setIsUpdated] = useState(false)
   const [checkZero, setCheckZero] = useState(false)
 
+  // console.log('isUpdated', isUpdated)
+
   const dispatch = useDispatch()
 
   const state = useSelector((state) => state)
@@ -77,7 +79,7 @@ function Products() {
 
     if (checkZero) {
       const filteredProducts = productsState?.filter((product) => {
-        return product.price == '0.00'
+        return product.price == '0'
         // (product.name.toLowerCase().includes(search.toLowerCase()) ||
         //   product.description.toLowerCase().includes(search.toLowerCase()) ||
         //   product.category.toLowerCase().includes(search.toLowerCase()) ||

@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-export async function addProduct({ url, token, xdata }) {
-  console.log(url)
-  if (!xdata) return
+export async function addProduct({ url, token, data }) {
+  // console.log(url)
+  if (!data) return
 
-  const product = await axios
-    .post(`${url}products`, xdata, {
+  return await axios
+    .post(`${url}products`, data, {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
@@ -23,8 +23,6 @@ export async function addProduct({ url, token, xdata }) {
     .finally(() => {
       console.log('addProduct.js')
     })
-
-  return product
 }
 
 export default addProduct

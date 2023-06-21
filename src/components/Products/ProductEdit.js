@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -17,10 +17,11 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
     unit: '',
     presentation: '',
     category: ' ',
-    price: 0.0
+    price: 0,
+    market_id: 0
   }
 
-  const [inputEditProduct, setInputEditProduct] = useState({})
+  const [inputEditProduct, setInputEditProduct] = useState(initialForm)
   const [categories, setCategories] = useState({})
 
   const state = useSelector((state) => state)
@@ -47,6 +48,19 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
   const handleChange = (e) => {
     e.preventDefault()
     const { name, value } = e.target
+    if (name === 'price') {
+      console.log('PRICE', value)
+      setInputEditProduct({
+        ...inputEditProduct,
+        [name]: Number(value).toFixed(0)
+      })
+      return
+    } else {
+      setInputEditProduct({
+        ...inputEditProduct,
+        [name]: value
+      })
+    }
     console.log(name, value)
     setInputEditProduct({
       ...inputEditProduct,
@@ -54,35 +68,38 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
     })
   }
 
-  const handleEditProduct = useCallback((e) => {
+  const handleEditProduct = (e) => {
     e.preventDefault()
     console.log(inputEditProduct)
-    editProduct({
-      url,
-      token,
-      id: editId,
-      inputEditProduct
-    })
+    const edit = async () => {
+      try {
+        await editProduct({
+          url,
+          token,
+          id: editId,
+          inputEditProduct
+        })
+        setIsUpdated((isUpdated) => true)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    // editProduct({
+    //   url,
+    //   token,
+    //   id: editId,
+    //   inputEditProduct
+    // })
 
-    setIsUpdated((isUpdated) => !isUpdated)
+    edit()
+
+    setTimeout(() => {
+      setIsUpdated((isUpdated) => true)
+    }, 1500)
+
     // console.trace()
     closeEditProductModal()
-  })
-
-  // const handleEditProduct = (e) => {
-  //   e.preventDefault()
-  //   console.log(inputEditProduct)
-  //   editProduct({
-  //     url,
-  //     token,
-  //     id: editId,
-  //     inputEditProduct
-  //   })
-
-  //   setIsUpdated(true)
-  //   // console.trace()
-  //   closeEditProductModal()
-  // }
+  }
 
   const formRef = useRef()
 
@@ -131,19 +148,6 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='unit' className={style.labels}>
-            unit
-          </label>
-          <input
-            className={style.productFormInput}
-            type='text'
-            name='unit'
-            id='unit'
-            onChange={handleChange}
-            defaultValue={inputEditProduct.unit}
-          />
-        </div>
-        <div className={style.productsFormInput}>
           <label htmlFor='presentation' className={style.labels}>
             presentation
           </label>
@@ -156,6 +160,20 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
             defaultValue={inputEditProduct.presentation}
           />
         </div>
+        <div className={style.productsFormInput}>
+          <label htmlFor='unit' className={style.labels}>
+            unit
+          </label>
+          <input
+            className={style.productFormInput}
+            type='text'
+            name='unit'
+            id='unit'
+            onChange={handleChange}
+            defaultValue={inputEditProduct.unit}
+          />
+        </div>
+
         <div className={style.productFormCategory}>
           <label htmlFor='category' className={style.labels}>
             category
@@ -164,7 +182,7 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
             name='category'
             id='category'
             className={style.productCategory}
-            defaultValue={inputEditProduct.category}
+            // defaultValue={inputEditProduct.category}
             onChange={handleChange}
             // onMouseOver={changeOptionColor}
             autoComplete='off'

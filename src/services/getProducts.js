@@ -10,6 +10,7 @@ export async function getProducts({ url, token }) {
       }
     })
     .then((resp) => {
+      // console.log(resp.data)
       const sort = resp.data.sort((a, b) => a.name.localeCompare(b.name))
       return sort
     })

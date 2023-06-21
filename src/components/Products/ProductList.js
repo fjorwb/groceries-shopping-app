@@ -50,18 +50,18 @@ function ProductList({ products, setIsUpdated }) {
           {products?.map((product) => {
             return (
               <tr key={product.id}>
-                <td>{product.extid}</td>
-                <td>{product.name}</td>
-                <td>{product.presentation}</td>
-                <td>{product.unit}</td>
-                <td>{product.price}</td>
-                <td>{product.category}</td>
-                <td>
+                <td className={style.td}>{product.extid}</td>
+                <td className={style.td}>{product.name}</td>
+                <td className={style.td}>{product.presentation}</td>
+                <td className={style.td}>{product.unit}</td>
+                <td className={style.td}>{(product.price / 100).toFixed(2)}</td>
+                <td className={style.td}>{product.category}</td>
+                <td className={style.td}>
                   <button className={style.btn} value={product.id} onClick={handleEdit}>
                     edit
                   </button>
                 </td>
-                <td>
+                <td className={style.td}>
                   <button className={style.btn} value={product.id} onClick={handleDelete}>
                     delete
                   </button>

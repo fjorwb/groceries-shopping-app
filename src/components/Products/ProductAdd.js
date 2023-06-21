@@ -34,7 +34,7 @@ export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
     unit: '',
     presentation: '',
     category: '',
-    price: 0.0,
+    price: 0,
     market_id: 0
   }
 
