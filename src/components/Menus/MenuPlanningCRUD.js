@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useId } from 'react'
 
 import parseISO from 'date-fns/parseISO'
 
@@ -12,6 +12,8 @@ import './MenuPlanningCRUD.css'
 
 function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpdated }) {
   const { id, url, token } = menuCrud
+
+  const fid = useId()
 
   const [menuItem, setMenuItem] = useState({})
   const [servings, setServings] = useState(menuItem.servings || 0)
@@ -69,9 +71,10 @@ function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpd
   return (
     <div className='menuCRUD-container'>
       <p className='menuCRUD-title'>{menuItem.recipe_title}</p>
-      <label htmlFor='servings' className='menuCRUD-label'>
+      {/* <label htmlFor='servings' className='menuCRUD-label'>
         servings
-      </label>
+      </label> */}
+      <p className='menuCRUD-label'>servings</p>
       <div className='menuCRUD-counter-container'>
         <button className='menuCRUD-counter-btn' onClick={decrementServings}>
           -
@@ -82,14 +85,14 @@ function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpd
         </button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className='menuCRUD-form'>
-        <label htmlFor='meal' className='menuCRUD-label'>
+        <label htmlFor={`${fid}meal`} className='menuCRUD-label'>
           meal
         </label>
         <select
           {...register('meal')}
           className='menuCRUD-select'
+          id={`${fid}meal`}
           name='meal'
-          id='meal'
           value={menuItem.meal}
           defaultValue='lunch'
           onChange={(e) => handleChange(e)}
@@ -104,7 +107,7 @@ function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpd
             dinner
           </option>
         </select>
-        <label htmlFor='date' className='menuCRUD-label'>
+        <label htmlFor={`${fid}date`} className='menuCRUD-label'>
           date
         </label>
         <input
@@ -113,7 +116,7 @@ function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpd
           pattern='\d{4}-\d{2}-\d{2}'
           {...register('date')}
           className='menuCRUD-input'
-          id='date'
+          id={`${fid}date`}
           name='date'
           value={menuItem.date}
           onChange={(e) => handleChange(e)}

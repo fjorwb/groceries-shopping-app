@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
 /* eslint-disable space-before-function-paren */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useId } from 'react'
 import { addMarket } from '../../services'
 
 import './markets.css'
@@ -21,7 +21,7 @@ const initialInputMarkets = {
 }
 
 function MarketAdd({ setMarketForm, dataSelected, setUpdated, url, token, user_id }) {
-  // console.log(user_id)
+  const id = useId()
 
   const [inputMarkets, setInputMarkets] = useState({ user_id })
   // const [isAdded, setIsAdded] = useState(false)
@@ -127,10 +127,10 @@ function MarketAdd({ setMarketForm, dataSelected, setUpdated, url, token, user_i
       <h1>ADD</h1>
       <form name='formAdd' className='markets-form' autoComplete='off'>
         <div className='markets-input'>
-          <label htmlFor='name'>market</label>
+          <label htmlFor={`${id}name`}>market</label>
           <input
             type='text'
-            id='name'
+            id={`${id}name`}
             name='name'
             placeholder='market'
             defaultValue={name}
@@ -138,10 +138,10 @@ function MarketAdd({ setMarketForm, dataSelected, setUpdated, url, token, user_i
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='address'>address</label>
+          <label htmlFor={`${id}address`}>address</label>
           <input
             type='text'
-            id='address'
+            id={`${id}address`}
             name='address'
             placeholder='address'
             defaultValue={address}
@@ -149,10 +149,10 @@ function MarketAdd({ setMarketForm, dataSelected, setUpdated, url, token, user_i
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='city'>city</label>
+          <label htmlFor={`${id}city`}>city</label>
           <input
             type='text'
-            id='city'
+            id={`${id}city`}
             name='city'
             placeholder='city'
             defaultValue={city}
@@ -160,10 +160,10 @@ function MarketAdd({ setMarketForm, dataSelected, setUpdated, url, token, user_i
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='state'>state</label>
+          <label htmlFor={`${id}state`}>state</label>
           <input
             type='text'
-            id='state'
+            id={`${id}state`}
             name='state'
             placeholder='state'
             defaultValue={state}
@@ -171,10 +171,10 @@ function MarketAdd({ setMarketForm, dataSelected, setUpdated, url, token, user_i
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='zip'>zip</label>
+          <label htmlFor={`${id}zip`}>zip</label>
           <input
             type='text'
-            id='zip'
+            id={`${id}zip`}
             name='zip'
             placeholder='zip'
             defaultValue={zip}
@@ -182,10 +182,10 @@ function MarketAdd({ setMarketForm, dataSelected, setUpdated, url, token, user_i
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='country'>country</label>
+          <label htmlFor={`${id}country`}>country</label>
           <input
             type='text'
-            id='country'
+            id={`${id}country`}
             name='country'
             placeholder='country'
             defaultValue={country}
@@ -193,10 +193,10 @@ function MarketAdd({ setMarketForm, dataSelected, setUpdated, url, token, user_i
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='phone'>phone</label>
+          <label htmlFor={`${id}phone`}>phone</label>
           <input
             type='text'
-            id='phone'
+            id={`${id}phone`}
             name='phone'
             placeholder='phone'
             defaultValue={phone}
@@ -204,10 +204,10 @@ function MarketAdd({ setMarketForm, dataSelected, setUpdated, url, token, user_i
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='email'>email</label>
+          <label htmlFor={`${id}email`}>email</label>
           <input
             type='text'
-            id='email'
+            id={`${id}email`}
             name='email'
             placeholder='email'
             defaultValue={email}
@@ -215,10 +215,10 @@ function MarketAdd({ setMarketForm, dataSelected, setUpdated, url, token, user_i
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='website'>website</label>
+          <label htmlFor={`${id}website`}>website</label>
           <input
             type='text'
-            id='website'
+            id={`${id}website`}
             name='website'
             placeholder='website'
             defaultValue={website}
@@ -226,10 +226,10 @@ function MarketAdd({ setMarketForm, dataSelected, setUpdated, url, token, user_i
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='password'>password</label>
+          <label htmlFor={`${id}password`}>password</label>
           <input
             type='text'
-            id='password'
+            id={`${id}password`}
             name='password'
             placeholder='password'
             defaultValue={password}

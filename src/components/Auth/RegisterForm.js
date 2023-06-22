@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useId } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -117,7 +117,7 @@ export const RegisterForm = ({ data, setData, url }) => {
               <input
                 type='text'
                 name='firstname'
-                id='firstname'
+                id={`${useId()}firstname`}
                 placeholder='firstname'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -130,7 +130,7 @@ export const RegisterForm = ({ data, setData, url }) => {
               <input
                 type='text'
                 name='lastname'
-                id='lastname'
+                id={`${useId()}lastname`}
                 placeholder='lastname'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -143,7 +143,7 @@ export const RegisterForm = ({ data, setData, url }) => {
               <input
                 type='text'
                 name='username'
-                id='username'
+                id={`${useId()}username`}
                 placeholder='username'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -156,7 +156,7 @@ export const RegisterForm = ({ data, setData, url }) => {
               <input
                 type='text'
                 name='email'
-                id='email'
+                id={`${useId()}email`}
                 placeholder='email'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -169,7 +169,7 @@ export const RegisterForm = ({ data, setData, url }) => {
               <input
                 type='password'
                 name='password'
-                id='password'
+                id={`${useId()}password`}
                 placeholder='password'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -182,7 +182,7 @@ export const RegisterForm = ({ data, setData, url }) => {
               <input
                 type='text'
                 name='phone'
-                id='phone'
+                id={`${useId()}phone`}
                 placeholder='phone'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -197,7 +197,7 @@ export const RegisterForm = ({ data, setData, url }) => {
               <input
                 type='text'
                 name='address'
-                id='address'
+                id={`${useId()}address`}
                 placeholder='address'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -210,7 +210,7 @@ export const RegisterForm = ({ data, setData, url }) => {
               <input
                 type='text'
                 name='address2'
-                id='address2'
+                id={`${useId()}address2`}
                 placeholder='additional address'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -222,7 +222,7 @@ export const RegisterForm = ({ data, setData, url }) => {
               <input
                 type='text'
                 name='city'
-                id='city'
+                id={`${useId()}city`}
                 placeholder='city'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -235,7 +235,7 @@ export const RegisterForm = ({ data, setData, url }) => {
               <input
                 type='text'
                 name='state'
-                id='state'
+                id={`${useId()}state`}
                 placeholder='state'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -248,7 +248,7 @@ export const RegisterForm = ({ data, setData, url }) => {
               <input
                 type='text'
                 name='zip_code'
-                id='zip_code'
+                id={`${useId()}zip_code`}
                 placeholder='zip_code'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -261,7 +261,7 @@ export const RegisterForm = ({ data, setData, url }) => {
               <input
                 type='text'
                 name='country'
-                id='country'
+                id={`${useId()}country`}
                 placeholder='country'
                 onBlur={handleBlur}
                 onChange={handleChange}
