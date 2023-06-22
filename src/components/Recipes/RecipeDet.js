@@ -12,24 +12,26 @@ export const RecipeDet = ({
   handleAddToBook,
   handleDeleteRecipe
 }) => {
-  // console.log( recipe )
+  console.log(recipe)
 
   return (
     <article className='recipe-card'>
       <div className='recipe-img-container'>
-        <img src={`${recipe.image}`} className='recipe-img' alt={recipe.title} decoding='async' />
+        <img
+          src={`${recipe.image}`}
+          className='recipe-img'
+          // alt={`${recipe.title}`}
+          decoding='async'
+        />
         <div className='recipe-title'>
           <h2>{recipe.title}</h2>
         </div>
       </div>
-      {recipeBook === 'own book'
-        ? (
+      {recipeBook === 'own book' ? (
         <h5 className='recipe-servings'>servings: {recipe.servings}</h5>
-          )
-        : null}
+      ) : null}
       <div className='recipe-buttons'>
-        {recipeBook === 'own book'
-          ? (
+        {recipeBook === 'own book' ? (
           <div>
             <button className='recipe-btn' onClick={() => handleViewRecipe({ id: recipe.idext })}>
               view
@@ -41,8 +43,7 @@ export const RecipeDet = ({
               add to menu
             </button>
           </div>
-            )
-          : (
+        ) : (
           <div>
             <button
               className='recipe-btn ext-btn'
@@ -54,7 +55,7 @@ export const RecipeDet = ({
               add to book
             </button>
           </div>
-            )}
+        )}
       </div>
     </article>
   )

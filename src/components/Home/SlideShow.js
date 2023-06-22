@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, lazy } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 // import styles from '../styles/styles.module.css'
@@ -26,7 +26,7 @@ export function SlideShow() {
           {images.map((image) => {
             return (
               <motion.div className='carousel-item' key={image}>
-                <img src={image} loading={lazy} alt='' />
+                <img src={image} alt='' />
               </motion.div>
             )
           })}
