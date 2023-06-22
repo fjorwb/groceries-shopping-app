@@ -16,17 +16,23 @@ export function SlideShow() {
   }, [])
 
   return (
-    <motion.div ref={carousel} className='carousel' whileTap={{ cursor: 'grabbing' }}>
-      <motion.div drag='x' dragConstraints={{ right: 0, left: -width }} className='carousel-inner'>
-        {images.map((image) => {
-          return (
-            <motion.div className='carousel-item' key={image}>
-              <img src={image} loading={lazy} alt='' />
-            </motion.div>
-          )
-        })}
+    <div>
+      <motion.div ref={carousel} className='carousel' whileTap={{ cursor: 'grabbing' }}>
+        <motion.div
+          drag='x'
+          dragConstraints={{ right: 0, left: -width }}
+          className='carousel-inner'
+        >
+          {images.map((image) => {
+            return (
+              <motion.div className='carousel-item' key={image}>
+                <img src={image} loading={lazy} alt='' />
+              </motion.div>
+            )
+          })}
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </div>
   )
 }
 
