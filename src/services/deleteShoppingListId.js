@@ -6,7 +6,8 @@ export const deleteShoppingListById = async ({ url, token, shop_list_id }) => {
       headers: {
         'content-type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*'
       }
     })
     .then((res) => {

@@ -1,13 +1,14 @@
 import axios from 'axios'
 
-export async function addToMenu (data, url, token) {
+export async function addToMenu(data, url, token) {
   try {
     const resp = await axios(`${url}menus`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*'
       },
       data
     })

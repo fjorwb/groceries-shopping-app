@@ -8,7 +8,8 @@ export const getRecipe = async ({ url, token, id, setRecipe }) => {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*'
       }
     })
     .then((resp) => {

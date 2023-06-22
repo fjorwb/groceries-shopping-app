@@ -7,7 +7,8 @@ export async function editProduct({ url, token, id, inputEditProduct }) {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*'
       }
     })
     .then((res) => {

@@ -34,7 +34,8 @@ export const useForm = (initialForm, validateForm, url, data, setData, closeLogi
           body: form,
           headers: {
             'Content-Type': 'application/json',
-            Accept: 'application/json'
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*'
           }
         })
         .then((res) => {

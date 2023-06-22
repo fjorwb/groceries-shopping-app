@@ -49,7 +49,8 @@ function MenuPlanningCRUD({ menuCrud, closeMenuCrudModal, setIsDeleted, setIsUpd
           headers: {
             'Content-Type': 'application/json',
             accept: 'application/json',
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            'Access-Control-Allow-Origin': '*'
           }
         })
         const sss = { ...resp.data, date: resp.data.date.slice(0, 10) }

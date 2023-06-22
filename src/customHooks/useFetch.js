@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export function useFetch (url, token) {
+export function useFetch(url, token) {
   const [fetchData, setFetchData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -21,6 +21,7 @@ export function useFetch (url, token) {
           'content-type': 'application/json',
           accept: 'application/json',
           Authorization: Bearer,
+          'Access-Control-Allow-Origin': '*',
           sameSite: 'Lax'
         }
       })

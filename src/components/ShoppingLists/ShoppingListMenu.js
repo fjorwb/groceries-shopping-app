@@ -10,7 +10,8 @@ function ShoppingListMenu({ token, url, dataMenu, setDataMenu, user_id }) {
         headers: {
           'Content-Type': 'application/json',
           accept: 'application/json',
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          'Access-Control-Allow-Origin': '*'
         }
       })
       // console.log(resp.data)

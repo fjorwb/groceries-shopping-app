@@ -9,7 +9,8 @@ export const getShoppingListId = async ({ url, token, id }) => {
     headers: {
       'Content-Type': 'application/json',
       accept: 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      'Access-Control-Allow-Origin': '*'
     }
   })
     .then((resp) => {
