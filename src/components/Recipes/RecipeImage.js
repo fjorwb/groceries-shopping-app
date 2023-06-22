@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 const RecipeImage = ({ image }) => {
   return (
     <div className='recipe-view-img-container'>
-      <img src={`${image}`} loading={lazy} alt='recipe image' className='recipe-view-img' />
+      <img src={`${image}`} alt='recipe image' className='recipe-view-img' />
     </div>
   )
 }

@@ -8,7 +8,7 @@ export function Navbar() {
   return (
     <div className={styles.navbarcontainer}>
       <div>
-        <img src={logo} loading={lazy} alt='' className={styles.logo} />
+        <img src={logo} alt='' className={styles.logo} />
       </div>
       <div>
         <ul className={styles.navbarlist}>
