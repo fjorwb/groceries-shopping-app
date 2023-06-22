@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useId } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -20,6 +20,8 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
     price: 0,
     market_id: 0
   }
+
+  const fid = useId()
 
   const [inputEditProduct, setInputEditProduct] = useState(initialForm)
   const [categories, setCategories] = useState({})
@@ -122,65 +124,65 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
           <p className={style.productInfo}>{inputEditProduct.barcode}</p>
         </div> */}
         <div className={style.productsFormInput}>
-          <label htmlFor='name' className={style.labels}>
+          <label htmlFor={`${fid}name`} className={style.labels}>
             name
           </label>
           <input
             className={style.productFormInput}
+            id={`${fid}name`}
             type='text'
             name='name'
-            id='name'
             onChange={handleChange}
             defaultValue={inputEditProduct.name}
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='description' className={style.labels}>
+          <label htmlFor={`${fid}description`} className={style.labels}>
             description
           </label>
           <input
             className={style.productFormInput}
+            id={`${fid}description`}
             type='text'
             name='description'
-            id='description'
             onChange={handleChange}
             defaultValue={inputEditProduct.description}
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='presentation' className={style.labels}>
+          <label htmlFor={`${fid}presentation`} className={style.labels}>
             presentation
           </label>
           <input
             className={style.productFormInput}
+            id={`${fid}presentation`}
             type='text'
             name='presentation'
-            id='presentation'
             onChange={handleChange}
             defaultValue={inputEditProduct.presentation}
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='unit' className={style.labels}>
+          <label htmlFor={`${fid}unit`} className={style.labels}>
             unit
           </label>
           <input
             className={style.productFormInput}
+            id={`${fid}unit`}
             type='text'
             name='unit'
-            id='unit'
             onChange={handleChange}
             defaultValue={inputEditProduct.unit}
           />
         </div>
 
         <div className={style.productFormCategory}>
-          <label htmlFor='category' className={style.labels}>
+          <label htmlFor={`${fid}category`} className={style.labels}>
             category
           </label>
           <select
+            id={`${fid}category`}
             name='category'
-            id='category'
             className={style.productCategory}
             // defaultValue={inputEditProduct.category}
             onChange={handleChange}
@@ -205,14 +207,14 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
           </select>
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='price' className={style.labels}>
+          <label htmlFor={`${fid}price`} className={style.labels}>
             price
           </label>
           <input
             className={style.productFormInput}
+            id={`${fid}price`}
             type='text'
             name='price'
-            id='price'
             onChange={handleChange}
             // defaultValue={
             //   isNaN(inputEditProduct.price)

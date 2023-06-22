@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useId } from 'react'
 
-export function Form () {
+export function Form() {
   const [form, setForm] = useState({})
+
+  const id = useId()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -15,13 +17,19 @@ export function Form () {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='email'>Name</label>
-        <input type='text' name='email' id='email' value={form.email} onChange={handleChange} />
-        <label htmlFor='email'>Password</label>
+        <label htmlFor={`${id}email`}>Name</label>
+        <input
+          type='text'
+          name='email'
+          id={`${id}email`}
+          value={form.email}
+          onChange={handleChange}
+        />
+        <label htmlFor={`${id}password`}>Password</label>
         <input
           type='password'
           name='password'
-          id='password'
+          id={`${id}password`}
           value={form.password}
           onChange={handleChange}
         />

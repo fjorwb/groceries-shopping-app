@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useId } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -22,6 +22,7 @@ import './markets.css'
 function MarketCrud({ setMarketForm, dataSelected, setUpdated, url, token, user_id, id }) {
   // console.log(id)
   // console.log(dataSelected)
+  const fid = useId()
 
   const [inputMarkets, setInputMarkets] = useState({ user_id })
   // const [isAdded, setIsAdded] = useState(false)
@@ -147,10 +148,10 @@ function MarketCrud({ setMarketForm, dataSelected, setUpdated, url, token, user_
       <h1>EDIT / DELETE</h1>
       <form name='formCRUD' className='markets-form' ref={formRef} autoComplete='off'>
         <div className='markets-input'>
-          <label htmlFor='nameA'>market</label>
+          <label htmlFor={`${fid}name`}>market</label>
           <input
             type='text'
-            id='nameA'
+            id={`${fid}name`}
             name='name'
             placeholder='market'
             defaultValue={nameA}
@@ -158,10 +159,10 @@ function MarketCrud({ setMarketForm, dataSelected, setUpdated, url, token, user_
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='addressA'>address</label>
+          <label htmlFor={`${fid}address`}>address</label>
           <input
             type='text'
-            id='addressA'
+            id={`${fid}address`}
             name='address'
             placeholder='address'
             defaultValue={addressA}
@@ -169,10 +170,10 @@ function MarketCrud({ setMarketForm, dataSelected, setUpdated, url, token, user_
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='cityA'>city</label>
+          <label htmlFor={`${fid}city`}>city</label>
           <input
             type='text'
-            id='cityA'
+            id={`${fid}city`}
             name='city'
             placeholder='city'
             defaultValue={cityA}
@@ -180,10 +181,10 @@ function MarketCrud({ setMarketForm, dataSelected, setUpdated, url, token, user_
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='stateA'>state</label>
+          <label htmlFor={`${fid}state`}>state</label>
           <input
             type='text'
-            id='stateA'
+            id={`${fid}state`}
             name='state'
             placeholder='state'
             defaultValue={stateA}
@@ -191,10 +192,10 @@ function MarketCrud({ setMarketForm, dataSelected, setUpdated, url, token, user_
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='zipA'>zip</label>
+          <label htmlFor={`${fid}zip`}>zip</label>
           <input
             type='text'
-            id='zipA'
+            id={`${fid}zip`}
             name='zip'
             placeholder='zip'
             defaultValue={zipA}
@@ -202,10 +203,10 @@ function MarketCrud({ setMarketForm, dataSelected, setUpdated, url, token, user_
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='countryA'>country</label>
+          <label htmlFor={`${fid}country`}>country</label>
           <input
             type='text'
-            id='countryA'
+            id={`${fid}country`}
             name='country'
             placeholder='country'
             defaultValue={countryA}
@@ -213,10 +214,10 @@ function MarketCrud({ setMarketForm, dataSelected, setUpdated, url, token, user_
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='phoneA'>phone</label>
+          <label htmlFor={`${fid}phone`}>phone</label>
           <input
             type='text'
-            id='phoneA'
+            id={`${fid}phone`}
             name='phone'
             placeholder='phone'
             defaultValue={phoneA}
@@ -224,10 +225,10 @@ function MarketCrud({ setMarketForm, dataSelected, setUpdated, url, token, user_
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='emailA'>email</label>
+          <label htmlFor={`${fid}email`}>email</label>
           <input
             type='text'
-            id='emailA'
+            id={`${fid}email`}
             name='email'
             placeholder='email'
             defaultValue={emailA}
@@ -235,10 +236,10 @@ function MarketCrud({ setMarketForm, dataSelected, setUpdated, url, token, user_
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='websiteA'>website</label>
+          <label htmlFor={`${fid}website`}>website</label>
           <input
             type='text'
-            id='websiteA'
+            id={`${fid}website`}
             name='website'
             placeholder='website'
             defaultValue={websiteA}
@@ -246,10 +247,10 @@ function MarketCrud({ setMarketForm, dataSelected, setUpdated, url, token, user_
           />
         </div>
         <div className='markets-input'>
-          <label htmlFor='passwordA'>password</label>
+          <label htmlFor={`${fid}password`}>password</label>
           <input
             type='text'
-            id='passwordA'
+            id={`${fid}password`}
             name='password'
             placeholder='password'
             defaultValue={passwordA}

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useId } from 'react'
 import { useForm } from '../../customHooks/useForm'
 
 import '../Forms/Form.css'
@@ -8,6 +8,8 @@ import Message from '../Message'
 
 export const LoginForm = ({ data, setData, closeLoginModal, url }) => {
   const initialForm = { email: '', password: '' }
+
+  const id = useId()
 
   const validationsForm = (form) => {
     const errors = {}
@@ -48,7 +50,7 @@ export const LoginForm = ({ data, setData, closeLoginModal, url }) => {
         <input
           type='text'
           name='email'
-          id='emailLogin'
+          id={`${id}emailLogin`}
           placeholder='email'
           onBlur={handleBlur}
           onChange={handleChange}
@@ -61,7 +63,7 @@ export const LoginForm = ({ data, setData, closeLoginModal, url }) => {
         <input
           type='text'
           name='password'
-          id='passwordLogin'
+          id={`${id}passwordLogin`}
           placeholder='password'
           onBlur={handleBlur}
           onChange={handleChange}

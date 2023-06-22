@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useId } from 'react'
 import { useSelector } from 'react-redux'
 
 import PropTypes from 'prop-types'
@@ -16,6 +16,8 @@ function generateId() {
 export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
   const [inputAddProduct, setInputAddProduct] = useState({})
   const [categories, setCategories] = useState([])
+
+  const fid = useId()
 
   const state = useSelector((state) => state)
 
@@ -78,35 +80,35 @@ export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
       <h1 className={style.productsFormTitle}>AddProduct</h1>
       <form name='productAddForm' className={style.productForm} ref={formRef}>
         <div className={style.productsFormInput}>
-          <label htmlFor='extid' className={style.labels}>
+          <label htmlFor={`${fid}extid`} className={style.labels}>
             extid
           </label>
-          <span name='extid' id='extid' className={style.extid}>
+          <span name='extid' id={`${fid}extid`} className={style.extid}>
             {inputAddProduct.extid}
           </span>
         </div>
 
         <div className={style.productsFormInput}>
-          <label htmlFor='barcode' className={style.labels}>
+          <label htmlFor={`${fid}barcode`} className={style.labels}>
             barcode
           </label>
           <input
             className={style.productFormInput}
             type='text'
-            id='barcode'
+            id={`${fid}barcode`}
             name='barcode'
             onChange={handleChange}
             defaultValue={inputAddProduct.barcode || ''}
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='name' className={style.labels}>
+          <label htmlFor={`${fid}name`} className={style.labels}>
             name
           </label>
           <input
             className={style.productFormInput}
             type='text'
-            id='name'
+            id={`${fid}name`}
             name='name'
             onChange={handleChange}
             defaultValue={inputAddProduct.name || ''}
@@ -115,13 +117,13 @@ export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='description' className={style.labels}>
+          <label htmlFor={`${fid}description`} className={style.labels}>
             description
           </label>
           <input
             className={style.productFormInput}
             type='text'
-            id='description'
+            id={`${fid}description`}
             name='description'
             onChange={handleChange}
             defaultValue={inputAddProduct.description || ''}
@@ -129,13 +131,13 @@ export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='presentation' className={style.labels}>
+          <label htmlFor={`${fid}presentation`} className={style.labels}>
             presentation
           </label>
           <input
             className={style.productFormInput}
             type='text'
-            id='presentation'
+            id={`${fid}presentation`}
             name='presentation'
             onChange={handleChange}
             defaultValue={inputAddProduct.presentation || ''}
@@ -143,13 +145,13 @@ export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='unit' className={style.labels}>
+          <label htmlFor={`${fid}unit`} className={style.labels}>
             unit
           </label>
           <input
             className={style.productFormInput}
             type='text'
-            id='unit'
+            id={`${fid}unit`}
             name='unit'
             onChange={handleChange}
             defaultValue={inputAddProduct.unit || ''}
@@ -157,11 +159,11 @@ export function ProductAdd({ closeAddProductModal, setIsUpdated }) {
           />
         </div>
         <div className={style.productsFormInput}>
-          <label htmlFor='category' className={style.labels}>
+          <label htmlFor={`${fid}category`} className={style.labels}>
             category
           </label>
           <select
-            id='category'
+            id={`${fid}category`}
             name='category'
             className={style.productCategory}
             defaultValue={inputAddProduct.category}
