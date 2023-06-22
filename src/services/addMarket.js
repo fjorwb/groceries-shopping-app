@@ -9,7 +9,8 @@ async function addMarket({ url, token, inputMarkets, setUpdated }) {
       headers: {
         'content-type': 'application/json',
         accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*'
       }
     })
     .then((resp) => {

@@ -21,7 +21,8 @@ export async function updateMenu(id, date, meal, url, token) {
         headers: {
           'Content-Type': 'application/json',
           accept: 'application/json',
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          'Access-Control-Allow-Origin': '*'
         }
       }
     )

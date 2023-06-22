@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // import React from 'react'
 
-export async function getMenuItem ({ id, token }) {
+export async function getMenuItem({ id, token }) {
   console.log(id)
   console.log(token)
 
@@ -11,7 +11,8 @@ export async function getMenuItem ({ id, token }) {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*'
       }
     })
     .then((resp) => {

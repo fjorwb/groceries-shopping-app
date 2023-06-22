@@ -5,7 +5,8 @@ export const deleteMenuItem = async ({ id, url, token, setIsDeleted, closeMenuCr
     headers: {
       'Content-Type': 'application/json',
       accept: 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      'Access-Control-Allow-Origin': '*'
     }
   })
   setIsDeleted(true)

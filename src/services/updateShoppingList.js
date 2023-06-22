@@ -7,7 +7,8 @@ export const updateShoppingList = async ({ url, token, data }) => {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*'
       }
     })
     .then((resp) => {

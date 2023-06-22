@@ -10,7 +10,8 @@ function ShoppingListIngredients({ token, url, dataIngredients, setDataIngredien
         headers: {
           'Content-Type': 'application/json',
           accept: 'application/json',
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          'Access-Control-Allow-Origin': '*'
         }
       })
       // console.log(resp.data)

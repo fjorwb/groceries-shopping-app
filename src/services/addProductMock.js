@@ -7,7 +7,8 @@ export const addProductMock = async ({ url, token, inputAddProduct }) => {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*'
       }
     })
     .then((resp) => {
