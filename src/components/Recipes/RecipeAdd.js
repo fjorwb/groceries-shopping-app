@@ -65,7 +65,7 @@ export const RecipeAdd = ({ recipe, url, token, user_id, closeAddRecipeModal }) 
       <h1>add recipe</h1>
       <div>
         <h3>{recipe?.recipe.title}</h3>
-        <img src={recipe?.recipe.image} alt={`recipe image of ${recipe?.recipe.image}`} />
+        <img src={recipe?.recipe.image} alt={`recipe image of ${recipe?.recipe.title}`} />
         <button className='btn' onClick={addToBook}>
           accept
         </button>
