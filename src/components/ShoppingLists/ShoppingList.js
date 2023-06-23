@@ -232,7 +232,7 @@ export const ShoppingList = () => {
     week = '0' + week.toString()
   }
   const shop_list_id = `W${week}${year}`
-  // console.log(shop_list_id)
+  console.log(shop_list_id)
 
   const data = {
     shop_list_id,
@@ -280,13 +280,14 @@ export const ShoppingList = () => {
     const addShopList = async () => {
       try {
         const data1 = await addShoppingList({ url, token, data })
+        console.log(data1)
         data1 && setIsShoppingList(() => true)
       } catch (error) {
         console.log(error)
       }
     }
 
-    addShopList()
+    addShopList({ url, token, data })
   }, [shop_list_id])
 
   useEffect(() => {
