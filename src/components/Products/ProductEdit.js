@@ -51,7 +51,7 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
     e.preventDefault()
     const { name, value } = e.target
     if (name === 'price') {
-      console.log('PRICE', value)
+      // console.log('PRICE', value)
       setInputEditProduct({
         ...inputEditProduct,
         [name]: Number(value).toFixed(0)
@@ -72,7 +72,7 @@ function EditProduct({ editId, closeEditProductModal, products, setIsUpdated }) 
 
   const handleEditProduct = (e) => {
     e.preventDefault()
-    console.log(inputEditProduct)
+    // console.log(inputEditProduct)
     const edit = async () => {
       try {
         await editProduct({

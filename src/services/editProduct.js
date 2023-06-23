@@ -12,10 +12,10 @@ export async function editProduct({ url, token, id, inputEditProduct }) {
       }
     })
     .then((res) => {
-      console.log(res.data)
+      console.log(res)
     })
     .catch((err) => {
-      console.log(err)
+      console.log('WRR ', err.response.data)
     })
     .finally(() => {
       console.log('editProduct.js')
