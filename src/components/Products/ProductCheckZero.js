@@ -45,7 +45,7 @@ function ProductCheckZero({ products, setIsUpdated }) {
             <th> </th>
             <th> </th>
           </tr>
-          {products.map((product) => {
+          {products?.map((product) => {
             return (
               <tr key={product.id}>
                 <td>{product.extid}</td>
