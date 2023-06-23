@@ -12,6 +12,7 @@ export const deleteShoppingListById = async ({ url, token, shop_list_id }) => {
     })
     .then((res) => {
       console.log('shoplist deleted successfully')
+      console.log(res)
       return res
     })
     .catch((err) => {
