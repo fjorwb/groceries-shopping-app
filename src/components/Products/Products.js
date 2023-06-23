@@ -19,7 +19,7 @@ function Products() {
   const [isUpdated, setIsUpdated] = useState(false)
   const [checkZero, setCheckZero] = useState(false)
 
-  // console.log('isUpdated', isUpdated)
+  console.log('isUpdated', isUpdated)
 
   const dispatch = useDispatch()
 
@@ -31,15 +31,6 @@ function Products() {
 
   const productsState = useSelector((state) => state.products.products)
   // console.log('PRODUCT STATE', productsState)
-
-  // useEffect(() => {
-  //   getProducts({ url, token }).then((res) => {
-  //     console.log('RES', res)
-  //     setProducts(res)
-  //   })
-
-  //   dispatch(getProductsAction(products))
-  // }, [])
 
   useEffect(() => {
     const prod = async () => {
@@ -55,40 +46,26 @@ function Products() {
     // console.log('PRODUCTS', products)
   }, [isUpdated])
 
-  // useEffect(() => {
-  //   getProducts({ url, token }).then((res) => {
-  //     setProducts(res)
-  //   })
-  //   dispatch(getProductsAction(products))
-  // }, [isUpdated])
-
-  // useEffect(() => {
-  //   getProducts({ url, token }).then((res) => {
-  //     setProducts(res)
-  //     console.log('PRODUCTS', products)
-  //   })
-  //   dispatch(getProductsAction(products))
-  // }, [dispatch, url, token, isUpdated])
-
   useEffect(() => {
     if (products.length === 0) {
       return
     }
 
-    // console.log('productState', productsState.length)
-
     if (checkZero) {
-      const filteredProducts = productsState?.filter((product) => {
+      // setIsUpdated(() => true)
+      const filteredProducts = productsState.filter((product) => {
         return product.price == '0'
+
         // (product.name.toLowerCase().includes(search.toLowerCase()) ||
         //   product.description.toLowerCase().includes(search.toLowerCase()) ||
         //   product.category.toLowerCase().includes(search.toLowerCase()) ||
         //   product.presentation.toLowerCase().includes(search.toLowerCase()) ||
         //   product.unit.toLowerCase().includes(search.toLowerCase()))
       })
-      // console.log(filteredProducts)
-      setFilteredZeroProducts((filteredZeroProducts) => filteredProducts)
+      setFilteredZeroProducts(() => filteredProducts)
+      // setIsUpdated(() => false)
     } else {
+      // setIsUpdated(() => true)
       const filteredProducts = productsState?.filter((product) => {
         return (
           product.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -101,9 +78,7 @@ function Products() {
       setFilteredProducts(() => filteredProducts)
     }
     setIsUpdated(() => false)
-  }, [search, isUpdated])
-
-  // console.log(filteredProducts)
+  }, [isUpdated, checkZero, search])
 
   return (
     <div className={style.container}>
