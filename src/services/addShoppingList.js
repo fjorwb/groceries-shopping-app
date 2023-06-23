@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const addShoppingList = async ({ url, token, data }) => {
-  if (!data.shop_list.length) {
+  if (!data.shop_list.length === 0) {
     return
   }
 
