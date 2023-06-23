@@ -220,14 +220,14 @@ export const ShoppingList = () => {
     return 0
   })
 
-  console.log('ING LIST REDUCED', ingredientsListReduce)
+  // console.log('ING LIST REDUCED', ingredientsListReduce)
 
   const today = Date.now()
-  // console.log(today)
+  console.log(today)
 
   let week = getWeekNumber(today)
   const year = new Date().getFullYear()
-  // console.log(week)
+  console.log(week)
   if (week < 10) {
     week = '0' + week.toString()
   }
@@ -257,9 +257,9 @@ export const ShoppingList = () => {
       return data
     }
     getShopList()
-    console.log('IS SL', isShoppingList)
+    // console.log('IS SL', isShoppingList)
 
-    console.log('SHOPPING LIST ID', isShoppingList)
+    // console.log('SHOPPING LIST ID', isShoppingList)
 
     const deleteShopList = async () => {
       try {
@@ -298,8 +298,8 @@ export const ShoppingList = () => {
           const data = await getProduct({ url, token, extid })
           console.log('DATA', data)
           if (data !== 'exist') {
-            console.log('@@@@', data)
-            console.log(ingredientsListReduce[i])
+            // console.log('@@@@', data)
+            // console.log(ingredientsListReduce[i])
             addProduct({
               url,
               token,

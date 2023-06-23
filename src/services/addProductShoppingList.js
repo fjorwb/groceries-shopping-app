@@ -12,6 +12,5 @@ export default function addProductsFromShoppingList({ mkts, shop }) {
       })
     }
   }
-  console.log('addPFSL', arr)
   return arr
 }
