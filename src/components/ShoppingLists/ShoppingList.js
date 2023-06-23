@@ -223,16 +223,16 @@ export const ShoppingList = () => {
   // console.log('ING LIST REDUCED', ingredientsListReduce)
 
   const today = Date.now()
-  console.log(today)
+  // console.log(today)
 
   let week = getWeekNumber(today)
   const year = new Date().getFullYear()
-  console.log(week)
+  // console.log(week)
   if (week < 10) {
     week = '0' + week.toString()
   }
   const shop_list_id = `W${week}${year}`
-  console.log(shop_list_id)
+  // console.log(shop_list_id)
 
   const data = {
     shop_list_id,
@@ -245,7 +245,7 @@ export const ShoppingList = () => {
     const getShopList = async () => {
       try {
         const data = await getShoppingListId({ url, token, id: shop_list_id })
-        // console.log('SHOPLISTID INSIDE', data)
+        console.log('SHOPLISTID INSIDE', data)
         if (data) {
           setIsShoppingList(() => true)
         } else {
@@ -257,21 +257,23 @@ export const ShoppingList = () => {
       return data
     }
     getShopList()
-    // console.log('IS SL', isShoppingList)
+    console.log('IS SL', isShoppingList)
 
     // console.log('SHOPPING LIST ID', isShoppingList)
 
     const deleteShopList = async () => {
       try {
         const data = await deleteShoppingListById({ url, token, shop_list_id })
-        // data && setIsShoppingList(() => false)
+        data && setIsShoppingList(() => false)
         console.log(data)
       } catch (error) {
         console.log(error)
       }
     }
 
-    if (!isShoppingList) deleteShopList()
+    console.log('ISL', isShoppingList)
+
+    if (isShoppingList) deleteShopList() // delete current week shoppingList
 
     const addShopList = async () => {
       try {
@@ -282,7 +284,7 @@ export const ShoppingList = () => {
       }
     }
 
-    if (!isShoppingList) addShopList()
+    if (isShoppingList) addShopList()
   }, [shop_list_id])
 
   useEffect(() => {
@@ -291,13 +293,13 @@ export const ShoppingList = () => {
     // console.log( ingredientsListReduce )
     for (let i = 0; i < ingredientsListReduce.length; i++) {
       const extid = ingredientsListReduce[i].idext
-      console.log('extid!!!', extid)
+      // console.log('extid!!!', extid)
 
       const newP = async () => {
         try {
           const data = await getProduct({ url, token, extid })
           console.log('DATA', data)
-          if (data !== 'exist') {
+          if (data.data !== 'exist') {
             // console.log('@@@@', data)
             // console.log(ingredientsListReduce[i])
             addProduct({

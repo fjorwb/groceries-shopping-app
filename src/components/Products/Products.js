@@ -19,7 +19,7 @@ function Products() {
   const [isUpdated, setIsUpdated] = useState(false)
   const [checkZero, setCheckZero] = useState(false)
 
-  console.log('isUpdated', isUpdated)
+  // console.log('isUpdated', isUpdated)
 
   const dispatch = useDispatch()
 
@@ -91,7 +91,7 @@ function Products() {
         />
       </section>
       <section className={style.list}>
-        {checkZero ? (
+        {checkZero && filteredZeroProducts.length > 0 ? (
           <ProductCheckZero products={filteredZeroProducts} setIsUpdated={setIsUpdated} />
         ) : (
           <ProductList

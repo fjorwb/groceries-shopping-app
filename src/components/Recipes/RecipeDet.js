@@ -12,7 +12,7 @@ export const RecipeDet = ({
   handleAddToBook,
   handleDeleteRecipe
 }) => {
-  console.log(recipe)
+  // console.log(recipe)
 
   return (
     <article className='recipe-card'>

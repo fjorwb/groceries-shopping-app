@@ -69,7 +69,7 @@ export const MenuPlanningCal = () => {
           'Access-Control-Allow-Origin': '*'
         }
       })
-      console.log(resp.data)
+      // console.log(resp.data)
       setDataMenu(resp.data)
     } catch (error) {
       console.log(error)
