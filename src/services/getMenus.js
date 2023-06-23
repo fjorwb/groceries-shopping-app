@@ -11,7 +11,6 @@ export async function getMenus({ url, token }) {
       }
     })
     .then((resp) => {
-      // console.log(resp.data)
       return resp.data
     })
     .catch((error) => {
