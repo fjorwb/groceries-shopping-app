@@ -257,7 +257,7 @@ export const ShoppingList = () => {
       return data
     }
     getShopList()
-    console.log('IS SL', isShoppingList)
+    console.log('IS SLAAAA', isShoppingList)
 
     // console.log('SHOPPING LIST ID', isShoppingList)
 
@@ -280,8 +280,9 @@ export const ShoppingList = () => {
     const addShopList = async () => {
       try {
         const data1 = await addShoppingList({ url, token, data })
-        console.log(data1)
-        data1 && setIsShoppingList(() => true)
+        // console.log(data1)
+        setIsShoppingList(() => true)
+        return data1
       } catch (error) {
         console.log(error)
       }
@@ -301,7 +302,7 @@ export const ShoppingList = () => {
       const newP = async () => {
         try {
           const data = await getProduct({ url, token, extid })
-          console.log('DATA', data)
+          // console.log('DATA', data)
           if (data.data !== 'exist') {
             // console.log('@@@@', data)
             // console.log(ingredientsListReduce[i])

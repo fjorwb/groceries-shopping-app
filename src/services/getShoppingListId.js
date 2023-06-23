@@ -19,7 +19,7 @@ export const getShoppingListId = async ({ url, token, id }) => {
       return resp.data.shop_list_id
     })
     .catch((error) => {
-      console.log('ERRORRRRRR', error)
+      console.log('ERRORRRRRR', error.response.data)
     })
   // console.log('44444444444444', data)
   return data
