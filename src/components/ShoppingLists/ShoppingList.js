@@ -273,7 +273,9 @@ export const ShoppingList = () => {
 
     console.log('ISL', isShoppingList)
 
-    if (isShoppingList) deleteShopList() // delete current week shoppingList
+    if (isShoppingList) {
+      deleteShopList()
+    } // delete current week shoppingList
 
     const addShopList = async () => {
       try {
@@ -284,7 +286,7 @@ export const ShoppingList = () => {
       }
     }
 
-    if (isShoppingList) addShopList()
+    addShopList()
   }, [shop_list_id])
 
   useEffect(() => {
