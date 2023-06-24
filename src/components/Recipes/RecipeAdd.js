@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 
 import PropTypes from 'prop-types'
 
-import getRecipe from '../../services/getRecipe'
-import addRecipe from '../../services/addRecipe'
-import addIngredient from '../../services/addIngredient'
+import getRecipe from '../../services/recipes/getRecipe'
+import addRecipe from '../../services/recipes/addRecipe'
+import addIngredient from '../../services/ingredients/addIngredient'
 
 export const RecipeAdd = ({ recipe, url, token, user_id, closeAddRecipeModal }) => {
   const [recipeToBook, setRecipeToBook] = useState({})

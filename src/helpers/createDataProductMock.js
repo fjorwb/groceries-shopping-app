@@ -1,5 +1,5 @@
-import deleteProductMock from '../services/deleteProductMock'
-import addProductMock from '../services/addProductMock'
+import deleteProductMock from '../services/productmocks/deleteProductMock'
+import addProductMock from '../services/productmocks/addProductMock'
 
 export function createDataProductMock({ url, token, productMockArray, user_id }) {
   deleteProductMock({ url, token })

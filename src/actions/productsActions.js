@@ -4,7 +4,7 @@
 
 import { useSelector } from 'react-redux'
 
-import getProducts from '../services/getProducts'
+import getProducts from '../services/products/getProducts'
 import { useEffect, useState } from 'react'
 
 export const getProductsAction = (data) => {

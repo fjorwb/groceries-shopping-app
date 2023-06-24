@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import style from './Product.module.css'
 
-import deleteProduct from '../../services/deleteProduct'
+import deleteProduct from '../../services/products/deleteProduct'
 
 function DeleteProduct({ deleteId, closeDeleteProductModal, setIsUpdated }) {
   const [confirmDelete, setConfirmDelete] = useState(false)

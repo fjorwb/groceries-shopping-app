@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 
 import style from './Product.module.css'
 
-import addProduct from '../../services/addProduct'
-import getCategories from '../../services/getCategories'
+import addProduct from '../../services/products/addProduct'
+import getCategories from '../../services/categories/getCategories'
 
 function generateId() {
   const date = (Date.now() / 1000).toFixed(0)

@@ -3,22 +3,17 @@ import { useSelector } from 'react-redux'
 
 import getWeekNumber from '../../helpers/calcWeekNumber'
 
-import getRecipes from '../../services/getRecipes'
-import getMenus from '../../services/getMenus'
-import getIngredients from '../../services/getIngredients'
-import getShoppingListId from '../../services/getShoppingListId'
-import addShoppingList from '../../services/addShoppingList'
-// import updateShoppingList from '../../services/updateShoppingList'
-import deleteShoppingListById from '../../services/deleteShoppingListId'
-import addProduct from '../../services/addProduct'
+import getRecipes from '../../services/recipes/getRecipes'
+import getMenus from '../../services/menus/getMenus'
+import getIngredients from '../../services/ingredients/getIngredients'
+import getShoppingListId from '../../services/shoppinglists/getShoppingListId'
+import addShoppingList from '../../services/shoppinglists/addShoppingList'
+import deleteShoppingListById from '../../services/shoppinglists/deleteShoppingListId'
+import addProduct from '../../services/products/addProduct'
 
-import getProduct from '../../services/getProduct'
-// import ingredientsListReduce from '../helpers/addProductFromShoppingList.js'
-
-// import checkNewProduct from '../../helpers/checkNewProduct'
+import getProduct from '../../services/products/getProduct'
 
 import './ShoppingList.css'
-// import getShoppingList from '../services/getShoppingList'
 
 export const ShoppingList = () => {
   const state = useSelector((state) => state)

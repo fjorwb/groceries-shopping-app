@@ -9,7 +9,7 @@ import ProductBarOptions from './ProductBarOptions'
 import ProductList from './ProductList'
 import ProductCheckZero from './ProductCheckZero'
 
-import getProducts from '../../services/getProducts'
+import getProducts from '../../services/products/getProducts'
 
 function Products() {
   const [products, setProducts] = useState([])

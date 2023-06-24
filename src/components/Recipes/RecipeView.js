@@ -7,7 +7,7 @@ import Loader from '../Loader'
 import RecipeImage from './RecipeImage'
 import RecipeViewIngredients from './RecipeViewIngredients'
 
-import getRecipe from '../../services/getRecipe'
+import getRecipe from '../../services/recipes/getRecipe'
 // import useFetch from '../customHooks/useFetch'
 
 import './RecipeView.css'

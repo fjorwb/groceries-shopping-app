@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import getMarkets from '../../services/getMarkets'
-import getShoppingList from '../../services/getShoppingList'
-import getProducts from '../../services/getProducts'
-import getProductMock from '../../services/getProductMock'
-import addProductsFromShoppingList from '../../services/addProductShoppingList'
+import getMarkets from '../../services/markets/getMarkets'
+import getShoppingList from '../../services/shoppinglists/getShoppingList'
+import getProducts from '../../services/products/getProducts'
+import getProductMock from '../../services/productmocks/getProductMock'
 
+import addProductsFromShoppingList from '../../helpers/addProductFromShoppingList.js'
 import createDataProductMock from '../../helpers/createDataProductMock'
 import calcTotalShoppingList from '../../helpers/calcTotalShoppingList'
 import calcMinProductByMarket from '../../helpers/calcMinProductByMarket'
