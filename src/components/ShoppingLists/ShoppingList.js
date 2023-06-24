@@ -123,7 +123,16 @@ export const ShoppingList = () => {
   // console.log('DATA INGREDIENTS!!!', dataIngredients)
 
   useEffect(() => {
-    setDataMenu(getIngredients({ url, token }))
+    const ingredients = async () => {
+      try {
+        const ingredient = await getIngredients({ url, token })
+        console.log('INGREDIENT!!!!', ingredient)
+        setDataIngredients(() => ingredient)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    ingredients()
   }, [token, url])
 
   const arr1 = []
@@ -220,7 +229,7 @@ export const ShoppingList = () => {
     return 0
   })
 
-  // console.log('ING LIST REDUCED', ingredientsListReduce)
+  console.log('ING LIST REDUCED', ingredientsListReduce)
 
   const today = Date.now()
   // console.log(today)
@@ -231,32 +240,41 @@ export const ShoppingList = () => {
   if (week < 10) {
     week = '0' + week.toString()
   }
-  const shop_list_id = `W${week}${year}`
+  let shop_list_id = ''
+  shop_list_id = `W${week}${year}`
   console.log(shop_list_id)
 
-  const data = {
+  const dataShoppingList = {
     shop_list_id,
     shop_list: ingredientsListReduce,
     user_id
   }
-  // console.log(data)
+  console.log(dataShoppingList)
 
   useEffect(() => {
-    const getShopList = async () => {
+    if (shop_list_id === '') return
+
+    const getShopListId = async () => {
       try {
         const data = await getShoppingListId({ url, token, id: shop_list_id })
-        console.log('SHOPLISTID INSIDE', data)
-        if (data) {
-          setIsShoppingList(() => true)
-        } else {
-          setIsShoppingList(() => false)
-        }
+        console.log(data)
+        return data
       } catch (error) {
         console.log(error)
       }
-      return data
+      const data = getShopListId()
+
+      if (data) {
+        console.log('DATA@@@@@', data)
+        setIsShoppingList(() => true)
+      } else {
+        setIsShoppingList(() => false)
+      }
+
+      // return data
     }
-    getShopList()
+
+    getShopListId()
     console.log('IS SLAAAA', isShoppingList)
 
     // console.log('SHOPPING LIST ID', isShoppingList)
@@ -279,8 +297,9 @@ export const ShoppingList = () => {
 
     const addShopList = async () => {
       try {
-        const data1 = await addShoppingList({ url, token, data })
-        // console.log(data1)
+        console.log('DATAXXXX', dataShoppingList)
+        const data1 = await addShoppingList({ url, token, data: dataShoppingList })
+        console.log(data1)
         setIsShoppingList(() => true)
         return data1
       } catch (error) {
@@ -288,13 +307,13 @@ export const ShoppingList = () => {
       }
     }
 
-    addShopList({ url, token, data })
+    addShopList({ url, token, dataShoppingList })
   }, [shop_list_id])
 
   useEffect(() => {
     // ingredientsListReduce({ url, token, user_id, ingredientsListReduce })
 
-    // console.log( ingredientsListReduce )
+    // console.log(ingredientsListReduce)
     for (let i = 0; i < ingredientsListReduce.length; i++) {
       const extid = ingredientsListReduce[i].idext
       // console.log('extid!!!', extid)
@@ -357,7 +376,7 @@ export const ShoppingList = () => {
               <tr className='table-row' key={index}>
                 <td className='p1'>{menu.ing.replace(/\b\w/g, (l) => l.toUpperCase())}</td>
                 <td className='p2'>{menu.un}</td>
-                <td className='p3'>{menu.amount}</td>
+                <td className='p3'>{menu.amount.toFixed(3)}</td>
               </tr>
             )
           })}

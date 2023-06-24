@@ -1,12 +1,11 @@
 import axios from 'axios'
 
 export const addShoppingList = async ({ url, token, data }) => {
-  if (!data.shop_list.length === 0) {
-    return
-  }
+  console.log('inisde addShoppingList', data.shop_list.length)
+  if (data.shop_list.length === 0) return
 
-  await axios
-    .post(url + 'shoppinglists', data, {
+  try {
+    await axios.post(`${url}shoppinglists`, data, {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
@@ -14,12 +13,9 @@ export const addShoppingList = async ({ url, token, data }) => {
         'Access-Control-Allow-Origin': '*'
       }
     })
-    .then((resp) => {
-      console.log(resp.data)
-    })
-    .catch((error) => {
-      console.log(error.response.data.message)
-    })
+  } catch (error) {
+    console.log(error.response.data.message)
+  }
 }
 
 export default addShoppingList
