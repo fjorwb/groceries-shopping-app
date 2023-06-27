@@ -2,7 +2,7 @@ import React, { useId } from 'react'
 
 import PropTypes from 'prop-types'
 
-import { useForm } from '../../customHooks/useForm'
+import { useForm } from '../../Hooks/useForm'
 
 import '../Forms/Form.css'
 import Loader from '../Loader'
