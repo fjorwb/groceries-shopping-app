@@ -1,7 +1,15 @@
 import deleteProductMock from '../services/productmocks/deleteProductMock'
 import addProductMock from '../services/productmocks/addProductMock'
+// import getProductMock from '../services/productmocks/getProductMock'
 
-export function createDataProductMock({ url, token, productMockArray, user_id }) {
+export const createDataProductMock = async ({
+  url,
+  token,
+  productMockArray,
+  user_id,
+  setDataProductMock
+}) => {
+  const data = []
   deleteProductMock({ url, token })
 
   for (const item in productMockArray) {
@@ -21,7 +29,18 @@ export function createDataProductMock({ url, token, productMockArray, user_id })
       token,
       inputAddProduct
     })
+
+    data.push(inputAddProduct)
   }
+
+  // try {
+  //   const data = await getProductMock({ url, token })
+  //   setDataProductMock(() => data)
+  // } catch (error) {
+  //   console.log(error)
+  // }
+  // setDataProductMock(() => data)
+  // return data
 }
 
 export default createDataProductMock

@@ -2,7 +2,8 @@ import addProduct from '../services/products/addProduct'
 
 export function addProductFromShoppingList({ url, token, user_id, ingredientsListReduce }) {
   console.log(ingredientsListReduce)
-  for (let i = 0; i < ingredientsListReduce.length; i++) {
+
+  for (let i = 0; i < ingredientsListReduce?.length; i++) {
     addProduct({
       url,
       token,
