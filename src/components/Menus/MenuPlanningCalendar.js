@@ -12,7 +12,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 
 import { Modal } from '../Modal'
-import useModal from '../../customHooks/useModal'
+import useModal from '../../Hooks/useModal'
 
 import MenuPlanningCRUD from './MenuPlanningCRUD'
 
