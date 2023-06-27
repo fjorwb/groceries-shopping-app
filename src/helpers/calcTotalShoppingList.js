@@ -2,30 +2,30 @@ function rangeRandom(min, max) {
   return Math.random() * (max - min) + min
 }
 
-export function calcTotalShoppingList({ dataProductMock }) {
+function calcTotalShoppingList({ dataProductMock }) {
   const arrTotal = []
 
-  const arrRand = []
-
-  for (let i = 0; i < dataProductMock?.length; i++) {
+  const arrRand = dataProductMock.map((product) => {
     const rand = rangeRandom(-20, 20)
-    arrRand.push(rand)
-    dataProductMock[i].price = (dataProductMock[i].price * (1 + rand / 100)).toFixed(2)
-    const total = (dataProductMock[i].total = (
-      dataProductMock[i].amount * dataProductMock[i].price
-    ).toFixed(2))
+    product.price = (product.price * (1 + rand / 100)).toFixed(2)
+    const total = (product.total = (product.amount * product.price).toFixed(2))
+    return { rand, total }
+  })
+
+  console.log('arrRand', arrRand)
+
+  dataProductMock.forEach((product) => {
     arrTotal.push({
-      market_id: dataProductMock[i].market_id,
-      extid: dataProductMock[i].idext,
-      product: dataProductMock[i].name,
-      total
+      market_id: product.market_id,
+      extid: product.idext,
+      product: product.name,
+      total: product.total
     })
-  }
+  })
 
-  console.log('MIN', Math.min(...arrRand))
-  console.log('MAX', Math.max(...arrRand))
+  const sortedArrTotal = arrTotal.sort((a, b) => a.total - b.total)
 
-  return arrTotal.sort((a, b) => a.total - b.total)
+  return sortedArrTotal
 }
 
 export default calcTotalShoppingList

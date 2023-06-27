@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 
 import PropTypes from 'prop-types'
 
-import deleteRecipe from '../../services/deleteRecipe'
+import deleteRecipe from '../../services/recipes/deleteRecipe'
 
 export const RecipeDelete = ({ recipe, url, token, setRecipeBook, closeDeleteRecipeModal }) => {
   const [delRecipe, setDelRecipe] = useState(true)
 
-  function deleteFromBook () {
+  function deleteFromBook() {
     setDelRecipe(true)
     deleteRecipe({ url, token, id: recipe.recipe.idext, setRecipeBook })
     console.log('delete recipe')

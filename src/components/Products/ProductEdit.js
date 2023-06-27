@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 
 import style from './Product.module.css'
 
-import editProduct from '../../services/editProduct'
-import getCategories from '../../services/getCategories'
+import editProduct from '../../services/products/editProduct'
+import getCategories from '../../services/categories/getCategories'
 
 import { useSelector } from 'react-redux'
 

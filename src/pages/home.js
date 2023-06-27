@@ -6,7 +6,7 @@ import styles from '../styles/styles.module.css'
 const Header = lazy(() => import('../components/Home/Header'))
 const SlideShow = lazy(() => import('../components/Home/SlideShow'))
 
-export function Home () {
+export function Home() {
   return (
     <div className={styles.maincontainer}>
       <Suspense>

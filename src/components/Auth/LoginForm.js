@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useId } from 'react'
-import { useForm } from '../../customHooks/useForm'
+import { useForm } from '../../Hooks/useForm'
 
 import '../Forms/Form.css'
 import Loader from '../Loader'

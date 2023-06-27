@@ -3,22 +3,17 @@ import { useSelector } from 'react-redux'
 
 import getWeekNumber from '../../helpers/calcWeekNumber'
 
-import getRecipes from '../../services/getRecipes'
-import getMenus from '../../services/getMenus'
-import getIngredients from '../../services/getIngredients'
-import getShoppingListId from '../../services/getShoppingListId'
-import addShoppingList from '../../services/addShoppingList'
-// import updateShoppingList from '../../services/updateShoppingList'
-import deleteShoppingListById from '../../services/deleteShoppingListId'
-import addProduct from '../../services/addProduct'
+import getRecipes from '../../services/recipes/getRecipes'
+import getMenus from '../../services/menus/getMenus'
+import getIngredients from '../../services/ingredients/getIngredients'
+import getShoppingListId from '../../services/shoppinglists/getShoppingListId'
+import addShoppingList from '../../services/shoppinglists/addShoppingList'
+import deleteShoppingListById from '../../services/shoppinglists/deleteShoppingListId'
+import addProduct from '../../services/products/addProduct'
 
-import getProduct from '../../services/getProduct'
-// import ingredientsListReduce from '../helpers/addProductFromShoppingList.js'
-
-// import checkNewProduct from '../../helpers/checkNewProduct'
+import getProduct from '../../services/products/getProduct'
 
 import './ShoppingList.css'
-// import getShoppingList from '../services/getShoppingList'
 
 export const ShoppingList = () => {
   const state = useSelector((state) => state)
@@ -126,7 +121,7 @@ export const ShoppingList = () => {
     const ingredients = async () => {
       try {
         const ingredient = await getIngredients({ url, token })
-        console.log('INGREDIENT!!!!', ingredient)
+        // console.log('INGREDIENT!!!!', ingredient)
         setDataIngredients(() => ingredient)
       } catch (error) {
         console.log(error)
@@ -229,7 +224,7 @@ export const ShoppingList = () => {
     return 0
   })
 
-  console.log('ING LIST REDUCED', ingredientsListReduce)
+  // console.log('ING LIST REDUCED', ingredientsListReduce)
 
   const today = Date.now()
   // console.log(today)
@@ -242,14 +237,14 @@ export const ShoppingList = () => {
   }
   let shop_list_id = ''
   shop_list_id = `W${week}${year}`
-  console.log(shop_list_id)
+  // console.log(shop_list_id)
 
   const dataShoppingList = {
     shop_list_id,
     shop_list: ingredientsListReduce,
     user_id
   }
-  console.log(dataShoppingList)
+  // console.log(dataShoppingList)
 
   useEffect(() => {
     if (shop_list_id === '') return
@@ -257,29 +252,30 @@ export const ShoppingList = () => {
     const getShopListId = async () => {
       try {
         const data = await getShoppingListId({ url, token, id: shop_list_id })
-        console.log(data)
+        // console.log(data)
         return data
       } catch (error) {
         console.log(error)
       }
       const data = getShopListId()
 
-      if (data) {
+      if (data === undefined) {
+        setIsShoppingList(() => false)
+      } else {
         console.log('DATA@@@@@', data)
         setIsShoppingList(() => true)
-      } else {
-        setIsShoppingList(() => false)
       }
 
       // return data
     }
 
     getShopListId()
-    console.log('IS SLAAAA', isShoppingList)
+    // console.log('IS SLAAAA', isShoppingList)
 
     // console.log('SHOPPING LIST ID', isShoppingList)
 
     const deleteShopList = async () => {
+      // console.log(url, token, shop_list_id)
       try {
         const data = await deleteShoppingListById({ url, token, shop_list_id })
         data && setIsShoppingList(() => false)
@@ -289,7 +285,7 @@ export const ShoppingList = () => {
       }
     }
 
-    console.log('ISL', isShoppingList)
+    // console.log('ISL', isShoppingList)
 
     if (isShoppingList) {
       deleteShopList()
@@ -297,9 +293,9 @@ export const ShoppingList = () => {
 
     const addShopList = async () => {
       try {
-        console.log('DATAXXXX', dataShoppingList)
-        const data1 = await addShoppingList({ url, token, data: dataShoppingList })
-        console.log(data1)
+        // console.log('DATAXXXX', dataShoppingList)
+        const data1 = await addShoppingList({ url, token, dataShoppingList })
+        // console.log('DATA 1', data1)
         setIsShoppingList(() => true)
         return data1
       } catch (error) {

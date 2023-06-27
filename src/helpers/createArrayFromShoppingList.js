@@ -1,8 +1,8 @@
 export default function createArrayFromShoppingList({ dataMarkets, dataShoppingList }) {
-  let shopList = null
-
   if (!dataMarkets || !dataShoppingList) return
 
-  shopList = Object.entries(dataShoppingList.at(-1))[2][1].sort((a, b) => a.ing - b.ing)
+  const shopList = Object.entries(dataShoppingList.at(-1))[2][1].sort((a, b) => a.ing - b.ing)
+  console.log('SL', shopList)
+  console.log('11 shopList')
   return shopList
 }

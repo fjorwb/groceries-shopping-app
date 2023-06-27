@@ -14,8 +14,8 @@ export async function addProduct({ url, token, data }) {
       }
     })
     .then((resp) => {
-      // console.log('RESXXX')
-      console.log(resp)
+      console.log('RESXXX')
+      return resp
     })
     .catch((error) => {
       // console.log('ERRXXX')
