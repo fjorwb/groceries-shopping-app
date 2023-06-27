@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import style from './Product.module.css'
 
 import Modal from '../Modal'
-import useModal from '../../customHooks/useModal'
+import useModal from '../../Hooks/useModal'
 
 import EditProduct from './ProductEdit'
 import DeleteProduct from './ProductDelete'
