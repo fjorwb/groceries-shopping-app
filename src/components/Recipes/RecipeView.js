@@ -8,7 +8,7 @@ import RecipeImage from './RecipeImage'
 import RecipeViewIngredients from './RecipeViewIngredients'
 
 import getRecipe from '../../services/recipes/getRecipe'
-// import useFetch from '../customHooks/useFetch'
+// import useFetch from '../Hooks/useFetch'
 
 import './RecipeView.css'
 
