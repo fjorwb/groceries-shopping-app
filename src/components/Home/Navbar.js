@@ -2,14 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from '../../styles/styles.module.css'
-import logo from '../../images/logo.png'
+// import logo from '../../images/logo.png'
 
 export function Navbar() {
   return (
     <div className={styles.navbarcontainer}>
-      <div>
+      {/* <div>
         <img src={logo} alt='' className={styles.logo} />
-      </div>
+      </div> */}
       <div>
         <ul className={styles.navbarlist}>
           <li>

@@ -10,8 +10,9 @@
   color: var(--clr-font);
   border: none;
   margin: 0 1rem;
-  font-size: var(--fnt-menu);
   cursor: pointer;
+  font-size: calc(var(--fnt-menu) - 0.03rem);
+  font-weight: 700;
 }
 
 .auth-btn:hover {
@@ -27,4 +28,17 @@
 .join-btn {
   display: flex;
   flex-direction: row;
+}
+
+@media all and (max-width: 768px) {
+  .auth-container {
+    display: flex;
+    flex-direction: row;
+    font-weight: 700;
+  }
+
+  .auth-btn:hover {
+    border-bottom: 1px solid var(--clr-contrast);
+    /* cursor: pointer; */
+  }
 }

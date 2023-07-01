@@ -30,7 +30,7 @@ function ProductBarOptions({ checkZero, setCheckZero, setIsUpdated }) {
         addProduct
       </button>
       <button type='text' className={style.btn} onClick={handleCheckZero}>
-        checkPrice
+        checkPrice = 0
       </button>
       <Modal isOpen={isOpenAddProduct} closeModal={closeAddProductModal}>
         <ProductAdd closeAddProductModal={closeAddProductModal} setIsUpdated={setIsUpdated} />

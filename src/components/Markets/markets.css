@@ -96,3 +96,48 @@
   border-color: var(--clr-font);
   border-width: 2px;
 }
+
+@media all and (max-width: 760px) {
+
+  .markets-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .markets-list-container {
+    width: 90%;
+    margin-bottom: 2rem;
+  }
+
+  .markets-crud-container {
+    width: 90%;
+  }
+
+  .markets-form {
+    width: 100%;
+  }
+
+  .marketTitle {
+    margin-bottom: 1rem;
+  }
+
+  .markets-input {
+    width: 90%;
+    justify-content: left;
+  }
+
+  .markets-input label {
+    width: fit-content;
+    text-align: left;
+    margin-right: 1rem;
+    padding: 0;
+  }
+
+  .markets-input input {
+    border: 1px solid var(--clr-contrast);
+    border-radius: 5px;
+    padding: 0 0.5rem;
+  }
+
+}

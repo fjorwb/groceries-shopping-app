@@ -11,7 +11,7 @@ export function MarketList({ dataMarkets, setId }) {
 
   return (
     <div className='markets-list-container'>
-      <h1>MARKETS</h1>
+      <h1 className='marketTitle'>MARKETS</h1>
       {/* {Object.values(dataMarkets) */}
       {dataMarkets
         .sort((a, b) => a.name.localeCompare(b.name))

@@ -42,3 +42,23 @@ h3 {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
+
+@media all and (max-width: 760px) {
+  .modal-container {
+    position: absolute;
+    padding: 1rem;
+    min-width: 380px;
+    max-width: 90%;
+    min-height: 200px;
+    max-height: 800px;
+    overflow-y: auto;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 2px 5px 5px 1px rgba(22, 22, 24, 0.35);
+    scale: 0.95;
+    top: 0;
+    margin-top: 2rem;
+  }
+
+}
