@@ -31,8 +31,8 @@ export function RecipesSearchBar({ setRecipeBook, setUrlRecipe }) {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmitSearch} className='recipe-form' ref={formRef}>
+    <div className='recipe-form'>
+      <form onSubmit={handleSubmitSearch} ref={formRef}>
         <select
           className='recipe-select'
           name='recipesBook'

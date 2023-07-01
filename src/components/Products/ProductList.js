@@ -38,7 +38,7 @@ function ProductList({ products, setIsUpdated }) {
       <table>
         <tbody>
           <tr className={style.columnName}>
-            <th>idext</th>
+            {/* <th>idext</th> */}
             <th>product</th>
             <th>pres</th>
             <th>unit</th>
@@ -50,7 +50,7 @@ function ProductList({ products, setIsUpdated }) {
           {products?.map((product) => {
             return (
               <tr key={product.id}>
-                <td className={style.td}>{product.extid}</td>
+                {/* <td className={style.td}>{product.extid}</td> */}
                 <td className={style.td}>{product.name}</td>
                 <td className={style.td}>{product.presentation}</td>
                 <td className={style.td}>{product.unit}</td>
