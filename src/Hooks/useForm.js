@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import { helpHttp } from '../helpers/helpHttp'
-import { useSelector } from 'react-redux'
 
 export const useForm = (initialForm, validateForm, url, data, setData, closeLoginModal) => {
   const [form, setForm] = useState(initialForm)
@@ -12,6 +12,7 @@ export const useForm = (initialForm, validateForm, url, data, setData, closeLogi
   const state = useSelector((state) => state)
   const urlx = state.url
 
+  console.log(url)
   console.log(urlx)
 
   const handleChange = (e) => {
@@ -37,7 +38,7 @@ export const useForm = (initialForm, validateForm, url, data, setData, closeLogi
 
       helpHttp()
         // .post(`http://localhost:5000/auth/${url}`, {
-        .post(`{urlx}/auth/${url}`, {
+        .post(`{urlx}auth/${url}`, {
           body: form,
           headers: {
             'Content-Type': 'application/json',
