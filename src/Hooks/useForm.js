@@ -14,6 +14,7 @@ export const useForm = (initialForm, validateForm, url, data, setData, closeLogi
 
   console.log(url)
   console.log(urlx)
+  console.log(`{urlx}auth/${url}`)
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -38,7 +39,7 @@ export const useForm = (initialForm, validateForm, url, data, setData, closeLogi
 
       helpHttp()
         // .post(`http://localhost:5000/auth/${url}`, {
-        .post(`{urlx}auth/${url}`, {
+        .post(`${urlx}auth/${url}`, {
           body: form,
           headers: {
             'Content-Type': 'application/json',
