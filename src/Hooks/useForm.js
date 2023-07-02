@@ -10,11 +10,11 @@ export const useForm = (initialForm, validateForm, url, data, setData, closeLogi
   const [response, setResponse] = useState(null)
 
   const state = useSelector((state) => state)
-  const urlx = state.url
+  const urlx = Object.values(state.url)
 
   console.log(url)
   console.log(urlx)
-  console.log(`{urlx}auth/${url}`)
+  console.log(`${urlx}auth/${url}`)
 
   const handleChange = (e) => {
     e.preventDefault()
