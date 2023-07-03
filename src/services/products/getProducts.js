@@ -6,6 +6,7 @@ export async function getProducts({ url, token }) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Access-Control-Allow-Origin': '*',
         Authorization: `Bearer ${token}`
       }
     })
