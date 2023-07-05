@@ -12,10 +12,6 @@ export const useForm = (initialForm, validateForm, url, data, setData, closeLogi
   const state = useSelector((state) => state)
   const urlx = Object.values(state.url)
 
-  console.log(url)
-  console.log(urlx)
-  console.log(`${urlx}auth/${url}`)
-
   const handleChange = (e) => {
     e.preventDefault()
     const { name, value } = e.target

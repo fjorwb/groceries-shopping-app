@@ -1,23 +1,26 @@
+import { useState } from 'react'
+
 import deleteProductMock from '../services/productmocks/deleteProductMock'
 import addProductMock from '../services/productmocks/addProductMock'
 // import getProductMock from '../services/productmocks/getProductMock'
 
-export const createDataProductMock = async ({
-  url,
-  token,
-  productMockArray,
-  user_id,
-  setDataProductMock
-}) => {
+export const createDataProductMock = async ({ url, token, user_id, productMockArray }) => {
+  const [dataProd, setDataProd] = useState([])
   const data = []
+
   deleteProductMock({ url, token })
 
-  for (const item in productMockArray) {
+  console.log('PRODUCT<MOCK', productMockArray)
+
+  const dataprd = [...productMockArray]
+  console.log('SP productMockArray', dataprd)
+
+  for (const item in dataprd) {
     const inputAddProduct = {
-      idext: productMockArray[item].extid,
-      amount: productMockArray[item].amount,
-      name: productMockArray[item].shop_list_id,
-      market_id: productMockArray[item].id,
+      idext: dataprd[item].extid,
+      amount: dataprd[item].amount,
+      name: dataprd[item].shop_list_id,
+      market_id: dataprd[item].id,
       barcode: 'XOXO',
       presentation: 'mock',
       unit: 'mock',
@@ -30,17 +33,13 @@ export const createDataProductMock = async ({
       inputAddProduct
     })
 
+    // console.log(inputAddProduct.name)
+
     data.push(inputAddProduct)
   }
-
-  // try {
-  //   const data = await getProductMock({ url, token })
-  //   setDataProductMock(() => data)
-  // } catch (error) {
-  //   console.log(error)
-  // }
-  // setDataProductMock(() => data)
-  // return data
+  setDataProd(() => data)
+  console.log('DATA PRODUCT MOCK', dataProd)
+  return dataProd
 }
 
 export default createDataProductMock

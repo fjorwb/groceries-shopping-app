@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 // import { getMarkets, getShoppingList, getProducts, getProductMock } from '../services/shoppinglists'
@@ -11,15 +11,15 @@ import getProductMock from '../services/productmocks/getProductMock'
 import {
   addProductShoppingList,
   createDataProductMock,
-  calcTotalShoppingList,
-  calcMinProductByMarket,
+  // calcTotalShoppingList,
+  // calcMinProductByMarket,
   createArrayFromShoppingList,
-  updateProductMockPrices,
-  calcTotalProductMock
+  updateProductMockPrices
+  // calcTotalProductMock
 } from '../helpers'
 
 const initialState = {
-  arrTotalReduce: {},
+  arrTotalReduce: [],
   totalMin: 0,
   totalOptimized: 0,
   difference: 0,
@@ -36,6 +36,8 @@ export function useDataCheckout() {
   const user_id = state.auth.user.user_id
   const token = state.auth.user.accessToken
 
+  console.log('userID', user_id)
+
   //   const { token, user_id } = state.auth.user
   const url = state.url.url
 
@@ -43,7 +45,7 @@ export function useDataCheckout() {
     try {
       const marketsData = await getMarkets({ url, token })
       setDataMarkets(marketsData)
-      console.log('DMKT', marketsData)
+      // console.log('DMKT', marketsData)
     } catch (error) {
       console.log(error)
     }
@@ -53,7 +55,7 @@ export function useDataCheckout() {
     try {
       const shoppingListData = await getShoppingList({ url, token })
       setDataShoppingList(shoppingListData)
-      console.log('DSKS', shoppingListData)
+      // console.log('DSKS', shoppingListData)
     } catch (error) {
       console.log(error)
     }
@@ -63,7 +65,7 @@ export function useDataCheckout() {
     try {
       const productsData = await getProducts({ url, token })
       setDataProducts(productsData)
-      console.log('DPRD', productsData)
+      // console.log('DPRD', productsData)
     } catch (error) {
       console.log(error)
     }
@@ -72,8 +74,8 @@ export function useDataCheckout() {
   const fetchProductMock = useCallback(async () => {
     try {
       const productMockData = await getProductMock({ url, token })
+      // console.log('DPMK', productMockData)
       setDataProductMock(productMockData)
-      console.log('DPMK', productMockData)
     } catch (error) {
       console.log(error)
     }
@@ -84,95 +86,123 @@ export function useDataCheckout() {
     fetchShoppingList()
     fetchProducts()
     fetchProductMock()
+    // }, [fetchMarkets, fetchShoppingList, fetchProducts])
   }, [fetchMarkets, fetchShoppingList, fetchProducts, fetchProductMock])
 
   const initialData = useRef(initialState)
+  console.log('initialData', initialData)
 
-  const dataCheckout = useMemo(() => {
-    if (!dataMarkets || !dataShoppingList || !dataProducts || !dataProductMock) {
-      return initialData.current
-    }
+  console.log('dataMarkets', dataMarkets)
+  console.log('dataShoppingList', dataShoppingList)
+  console.log('dataProducts', dataProducts)
+  console.log('dataProductMock', dataProductMock)
 
-    //   if (!dataMarkets || !dataShoppingList || !dataProducts || !dataProductMock) {
-    //     return initialData
-    //   }
+  // const dataCheckout = useMemo(() => {
+  if (!dataMarkets || !dataShoppingList || !dataProducts) {
+    return initialData.current
+  }
 
-    console.log('DATA MARKETS', dataMarkets)
-    console.log('DATA SHOPPING LIST', dataShoppingList)
-    console.log('DATA PRODUCTS', dataProducts)
-    console.log('DATA PRODUCT MOCK', dataProductMock)
+  const shopList = createArrayFromShoppingList({
+    dataMarkets,
+    dataShoppingList
+  })
+  console.log('shopList', shopList)
 
-    const shopList = createArrayFromShoppingList({
-      dataMarkets,
-      dataShoppingList
-    })
-    console.log('shopList', shopList)
+  if (!shopList) return initialData
 
-    if (!shopList) return initialData
+  const productMockArray = addProductShoppingList({
+    mkts: dataMarkets,
+    shop: shopList
+  })
+  console.log('productMockArray', productMockArray)
+  console.log('productMockArray Length', productMockArray.length)
 
-    const productMockArray = addProductShoppingList({
-      mkts: dataMarkets,
-      shop: shopList
-    })
-    console.log('productMockArray', productMockArray)
+  if (productMockArray.length === 0) return initialData
 
-    if (productMockArray.length === 0) return initialData
+  createDataProductMock({ url, token, user_id, productMockArray })
 
-    createDataProductMock({ url, token, user_id, productMockArray, setDataProductMock })
-    console.log('DATAPRODMOCL', dataProductMock)
+  if (dataProductMock.length === 0) return initialData
 
-    if (dataProductMock.length === 0) return initialData
+  updateProductMockPrices(dataProductMock, dataProducts)
+  setDataProductMock(() => productMockArray)
+  console.log('dataPRODMOCK!!!', dataProductMock)
 
-    updateProductMockPrices(dataProductMock, dataProducts)
+  // return dataProductMock
+  // }, [dataMarkets, dataShoppingList, dataProducts])
 
-    let arrTotal = []
-    arrTotal = calcTotalShoppingList({ dataProductMock })
-    console.log('arrTotal', arrTotal)
+  //   console.log('DATA MARKETS 1', dataMarkets)
+  //   console.log('DATA SHOPPING LIST 1', dataShoppingList)
+  //   console.log('DATA PRODUCTS 1', dataProducts)
+  //   console.log('DATA PRODUCT MOCK 1', dataProductMock)
 
-    const arrMKT = calcMinProductByMarket({ arrTotal })
-    console.log('arrMKT', arrMKT)
+  //   if (productMockArray.length > 0) {
+  //     const sss = createDataProductMock({ url, token, user_id, productMockArray })
+  //     console.log('SSS', sss)
 
-    const arrTotalReduce = calcTotalProductMock({ arrTotal })
-    console.log('ATR!', arrTotalReduce)
+  //     setDataProductMock(sss)
 
-    const totalMin = Object.values(arrTotalReduce).reduce((acc, total) => {
-      if (acc === null || total < acc) return total
-      return acc
-    }, null)
+  //     console.log('dataPRODMOCK!!!', dataProductMock)
 
-    const arrTotalReduce2 = arrMKT.reduce((acc, cur) => {
-      if (acc[cur.market_id]) {
-        acc[cur.market_id] += Number(cur.total)
-      } else {
-        acc[cur.market_id] = Number(cur.total)
-      }
-      return acc
-    }, {})
+  //     if (dataProductMock.length === 0) return initialData
 
-    const totalOptimized = Object.values(arrTotalReduce2).reduce((acc, cur) => {
-      return acc + cur
-    }, 0)
+  //     updateProductMockPrices(dataProductMock, dataProducts)
 
-    const difference = ((totalMin - totalOptimized) / 100).toFixed(2)
-    const differencePercent = (((totalMin - totalOptimized) / totalMin) * 100).toFixed(2)
+  //     let arrTotal = []
+  //     if (dataProductMock.length === 0) return initialData
 
-    console.log(arrTotalReduce)
-    console.log(totalMin)
-    console.log(totalOptimized)
-    console.log(difference)
-    console.log(differencePercent)
+  //     arrTotal = calcTotalShoppingList({ dataProductMock })
+  //     console.log('arrTotal', arrTotal)
 
-    return {
-      arrTotalReduce,
-      totalMin,
-      totalOptimized,
-      difference,
-      differencePercent,
-      dataProductMock
-    }
-  }, [dataMarkets, dataShoppingList, dataProducts, dataProductMock])
+  //     const arrMKT = calcMinProductByMarket({ arrTotal })
+  //     console.log('arrMKT', arrMKT)
 
-  return dataCheckout
+  //     const arrTotalReduce = calcTotalProductMock({ arrTotal })
+  //     console.log('ATR!', arrTotalReduce)
+
+  //     const totalMin = Object.values(arrTotalReduce).reduce((acc, total) => {
+  //       if (acc === null || total < acc) return total
+  //       return acc
+  //     }, null)
+
+  //     const arrTotalReduce2 = arrMKT.reduce((acc, cur) => {
+  //       if (acc[cur.market_id]) {
+  //         acc[cur.market_id] += Number(cur.total)
+  //       } else {
+  //         acc[cur.market_id] = Number(cur.total)
+  //       }
+  //       return acc
+  //     }, {})
+
+  //     console.log('ArrTotalReduce 2', arrTotalReduce2)
+
+  //     const totalOptimized = Object.values(arrTotalReduce2).reduce((acc, cur) => {
+  //       return acc + cur
+  //     }, 0)
+
+  //     const difference = ((totalMin - totalOptimized) / 100).toFixed(2)
+  //     const differencePercent = (((totalMin - totalOptimized) / totalMin) * 100).toFixed(2)
+
+  //     console.log(arrTotalReduce)
+  //     console.log(totalMin)
+  //     console.log(totalOptimized)
+  //     console.log(difference)
+  //     console.log(differencePercent)
+
+  //     return {
+  //       arrTotalReduce,
+  //       totalMin,
+  //       totalOptimized,
+  //       difference,
+  //       differencePercent,
+  //       dataProductMock
+  //     }
+  //   } else {
+  //     return initialData
+  //   }
+  //   // }, [dataMarkets, dataShoppingList, dataProducts])
+
+  // return dataCheckout
+  return dataProductMock
 }
 
 export default useDataCheckout

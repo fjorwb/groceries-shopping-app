@@ -1,39 +1,16 @@
 import React from 'react'
-// import React, { useEffect, useState } from 'react'
-// import { useSelector } from 'react-redux'
 
 import useDataCheckout from '../../Hooks/useDataCheckout'
+// import useDataMockAnalysis from '../../Hooks/useDataMockAnalysis'
 
-// import getMarkets from '../../services/markets/getMarkets'
-// import getShoppingList from '../../services/shoppinglists/getShoppingList'
-// import getProducts from '../../services/products/getProducts'
-// import getProductMock from '../../services/productmocks/getProductMock'
-
-// import addProductsFromShoppingList from '../../helpers/addProductShoppingList'
-// import createDataProductMock from '../../helpers/createDataProductMock'
-// import calcTotalShoppingList from '../../helpers/calcTotalShoppingList'
-// import calcMinProductByMarket from '../../helpers/calcMinProductByMarket'
-// import createArrayFromShoppingList from '../../helpers/createArrayFromShoppingList'
-// import updateProductMockPrices from '../../helpers/updateProductMockPrices'
-// import calcTotal from '../../helpers/calcTotalProductMock'
-
-// import calcDataTotalCheckout from '../../helpers/calcDataTotalCheckout'
-
-// import '../ShoppingLists/ShoppingList.css'
 import style from './createMockShopping.module.css'
-// import axios from 'axios'
 
 export const MakeMockData = () => {
-  // const state = useSelector((state) => state)
-
-  // const token = state.auth.user.accessToken
-  // const user_id = state.auth.user.id
-  // const url = state.url.url
-
-  // const [dataMarkets, setDataMarkets] = useState(null)
-  // const [dataShoppingList, setDataShoppingList] = useState(null)
-  // const [dataProducts, setDataProducts] = useState(null)
-  // const [dataProductMock, setDataProductMock] = useState([])
+  // const arrTotalReduce = []
+  // const totalMin = 0
+  // const totalOptimized = 0
+  // const difference = 0
+  // const differencePercent = 0
 
   const {
     arrTotalReduce,
@@ -44,150 +21,15 @@ export const MakeMockData = () => {
     dataProductMock
   } = useDataCheckout()
 
-  // const { arrTotalReduce, totalMin, totalOptimazed, difference, differencePercent } =
-  //   useDataCheckout({
-  //     dataMarkets,
-  //     dataShoppingList,
-  //     dataProducts,
-  //     dataProductMock,
-  //     url,
-  //     token,
-  //     user_id
-  //   })
+  // const { arrTotalReduce, totalMin, totalOptimized, difference, differencePercent } =
+  // useDataMockAnalysis(dataProductMock)
 
-  //! Load data from products, markets, shoppingList & productMock
-
-  // useEffect(() => {
-  //   const market = async () => {
-  //     try {
-  //       const data = await getMarkets({ url, token })
-  //       setDataMarkets(data)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   market()
-
-  //   const shoppingList = async () => {
-  //     try {
-  //       const data = await getShoppingList({ url, token })
-  //       setDataShoppingList(data)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   shoppingList()
-
-  //   const products = async () => {
-  //     try {
-  //       const data = await getProducts({ url, token })
-  //       setDataProducts(data)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   products()
-
-  //   const productMock = async () => {
-  //     try {
-  //       const data = await getProductMock({ url, token })
-  //       setDataProductMock(data)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   productMock()
-  // }, [url, token])
-
-  // useEffect(() => {
-  //   const productMock = async () => {
-  //     try {
-  //       const data = await getProductMock({ url, token })
-  //       setDataProductMock(data)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   productMock()
-  // }, [dataMarkets])
-
-  // console.log('DATA MARKETS', dataMarkets)
-  // console.log('DATA SHOPPING LIST', dataShoppingList)
-  // console.log('DATA PRODUCTS', dataProducts)
-  // console.log('DATA PRODUCT MOCK', dataProductMock)
-
-  // //! Shopping list data
-  // const shopList = createArrayFromShoppingList({ dataMarkets, dataShoppingList })
-
-  // if (shopList === undefined) return
-  // // console.log(shopList)
-
-  // //! create ProductMock array  (from markets & shoppingList)
-  // if (!dataMarkets || !shopList) return
-
-  // const productMockArray = addProductsFromShoppingList({
-  //   mkts: dataMarkets,
-  //   shop: shopList
-  // })
-
-  // //! create ProductMock data in DB (from ProductMock array)
-  // createDataProductMock({ url, token, user_id, productMockArray })
-
-  // //! Update productMock prices with product prices (from products)
-  // updateProductMockPrices(dataProductMock, dataProducts)
-
-  // //! Calculate total shoppingList by product
-  // const arrTotal = calcTotalShoppingList({ dataProductMock })
-
-  // //! Calculate Minimun by Market
-  // if (arrTotal.length === 0) return
-
-  // const arrMKT = calcMinProductByMarket({ arrTotal })
-
-  // //! Calculate total by Market
-
-  // const arrTotalReduce = calcTotal({ arrTotal })
-
-  // //! Calculate total minimum
-  // const totalMin = Object.values(arrTotalReduce).reduce((acc, total) => {
-  //   if (acc === null || total < acc) return total
-  //   return acc
-  // }, null)
-
-  // //! Calculate total optimized
-  // const arrTotalReduce2 = arrMKT.reduce((acc, cur) => {
-  //   if (acc[cur.market_id]) {
-  //     acc[cur.market_id] += Number(cur.total)
-  //   } else {
-  //     acc[cur.market_id] = Number(cur.total)
-  //   }
-  //   return acc
-  // }, {})
-
-  // const totalOptimazed = Object.values(arrTotalReduce2).reduce((acc, cur) => {
-  //   return acc + cur
-  // }, 0)
-
-  // //! Calculate difference between total minimun & total optimized
-  // const difference = ((totalMin - totalOptimazed) / 100).toFixed(2)
-  // const differencePercent = (((totalMin - totalOptimazed) / totalMin) * 100).toFixed(2)
-
-  // const dataSL = calcDataTotalCheckout({
-  //   dataMarkets,
-  //   dataShoppingList,
-  //   dataProducts,
-  //   dataProductMock
-  // })
-
-  // const { arrTotalReduce, totalMin, totalOptimazed, difference, differencePercent } = dataSL
-
-  console.log(arrTotalReduce)
-  console.log(totalMin)
-  console.log(totalOptimized)
-  console.log(difference)
-  console.log(differencePercent)
-
-  console.log('dataProductMock', dataProductMock)
+  console.log('IMDS dataProductMock', dataProductMock)
+  // console.log(arrTotalReduce)
+  // console.log(totalMin)
+  // console.log(totalOptimized)
+  // console.log(difference)
+  // console.log(differencePercent)
 
   return (
     <section>

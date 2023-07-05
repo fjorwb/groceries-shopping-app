@@ -41,12 +41,15 @@ export const ShoppingList = () => {
       }
     }
     recipe()
-  }, [token, url])
+  }, [])
+
+  // console.log('SL dataRecipes', dataRecipes)
 
   const arrRecipes = []
   for (const key in dataRecipes) {
     arrRecipes.push({ id: dataRecipes[key].id, servings: dataRecipes[key].servings })
   }
+  // console.log('ARR RECIPES', arrRecipes)
 
   // --> get menu list to calculate ingredients based on recipes planned for the week
 
@@ -60,7 +63,7 @@ export const ShoppingList = () => {
       }
     }
     menu()
-  }, [token, url])
+  }, [])
 
   // console.log('DATA MENU!!!!!', dataMenu)
 
@@ -113,7 +116,7 @@ export const ShoppingList = () => {
       }
     }
     ingredient()
-  }, [token, url])
+  }, [])
 
   // console.log('DATA INGREDIENTS!!!', dataIngredients)
 
@@ -128,7 +131,7 @@ export const ShoppingList = () => {
       }
     }
     ingredients()
-  }, [token, url])
+  }, [])
 
   const arr1 = []
   const arrIngredientsList = []
@@ -174,22 +177,6 @@ export const ShoppingList = () => {
     }
   }
 
-  // console.log(arrIngredients)
-
-  // const finalIngredientsList = []
-
-  // arrIngredients.forEach((item, index) => {
-  //   // console.log(item.idext, arrIngredients[index + 1].idext)
-  //   if (arrIngredients[index + 1] && item.idext === arrIngredients[index + 1].idext) {
-  //     console.log('in', arrIngredients[index].idext)
-  //     item.amount += arrIngredients[index + 1].amount
-  //     finalIngredientsList.push(item)
-  //   } else {
-  //     console.log('out', arrIngredients[index].idext)
-  //     finalIngredientsList.push(item)
-  //   }
-  // })
-
   const arrIngredientesSort = arrIngredients.sort((a, b) => a.idext - b.idext)
   // console.log(arrIngredientesSort)
 
@@ -224,7 +211,7 @@ export const ShoppingList = () => {
     return 0
   })
 
-  // console.log('ING LIST REDUCED', ingredientsListReduce)
+  console.log('ING LIST REDUCED', ingredientsListReduce)
 
   const today = Date.now()
   // console.log(today)
@@ -237,14 +224,14 @@ export const ShoppingList = () => {
   }
   let shop_list_id = ''
   shop_list_id = `W${week}${year}`
-  // console.log(shop_list_id)
+  console.log('IIIDDDDDD', shop_list_id)
 
   const dataShoppingList = {
     shop_list_id,
     shop_list: ingredientsListReduce,
     user_id
   }
-  // console.log(dataShoppingList)
+  console.log('DATASHOPPING LIST', dataShoppingList)
 
   useEffect(() => {
     if (shop_list_id === '') return
@@ -252,48 +239,52 @@ export const ShoppingList = () => {
     const getShopListId = async () => {
       try {
         const data = await getShoppingListId({ url, token, id: shop_list_id })
-        // console.log(data)
+        console.log('SLID inside getShoppingListId', data)
         return data
       } catch (error) {
         console.log(error)
       }
-      const data = getShopListId()
 
-      if (data === undefined) {
+      const data1 = getShoppingListId()
+      console.log('SLID Call', data1)
+
+      if (data1 === undefined) {
         setIsShoppingList(() => false)
       } else {
-        console.log('DATA@@@@@', data)
+        console.log('DATA1@@@@@', data1)
         setIsShoppingList(() => true)
       }
-
-      // return data
+      return data1
     }
 
     getShopListId()
-    // console.log('IS SLAAAA', isShoppingList)
-
-    // console.log('SHOPPING LIST ID', isShoppingList)
-
-    const deleteShopList = async () => {
-      // console.log(url, token, shop_list_id)
-      try {
-        const data = await deleteShoppingListById({ url, token, shop_list_id })
-        data && setIsShoppingList(() => false)
-        console.log(data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    // console.log('ISL', isShoppingList)
+    console.log('IS SHOPPING LIST ID', isShoppingList)
 
     if (isShoppingList) {
-      deleteShopList()
-    } // delete current week shoppingList
+      console.log('Shopping List exist')
+
+      const deleteShopList = async (url, token, shop_list_id) => {
+        console.log('WWWWWW', url, token, shop_list_id)
+        try {
+          const data = await deleteShoppingListById({ url, token, shop_list_id })
+          data && setIsShoppingList(() => false)
+          // console.log(data.message)
+          console.log(data)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      deleteShopList(url, token, shop_list_id)
+    }
+    // console.log('ISL', isShoppingList)
+
+    // if (isShoppingList) {
+    //   deleteShopList()
+    // } // delete current week shoppingList
 
     const addShopList = async () => {
       try {
-        // console.log('DATAXXXX', dataShoppingList)
+        console.log('DATAXXXX', dataShoppingList)
         const data1 = await addShoppingList({ url, token, dataShoppingList })
         // console.log('DATA 1', data1)
         setIsShoppingList(() => true)
