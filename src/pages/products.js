@@ -1,14 +1,15 @@
 import React, { lazy, Suspense } from 'react'
-import Product from '../components/Products'
 
-const Header = lazy( () => import( '../components/Header' ) )
+import Products from '../components/Products/Products'
 
-export function ProductsPage () {
+const Header = lazy(() => import('../components/Home/Header'))
+
+export function ProductsPage() {
   return (
     <div>
       <Suspense>
         <Header />
-        <Product />
+        <Products />
       </Suspense>
     </div>
   )

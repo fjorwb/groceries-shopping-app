@@ -1,0 +1,11 @@
+.checkoutContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1rem;
+    background: green;
+}
