@@ -11,7 +11,7 @@ export const getProductMock = async ({ url, token }) => {
       }
     })
     .then((resp) => {
-      //   console.log(resp.data)
+      console.log('RESP DATA in getProductMock', resp.data)
       // setDataProductMock(resp.data)
       return resp.data
     })
