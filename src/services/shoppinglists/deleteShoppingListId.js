@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 export const deleteShoppingListById = async ({ url, token, shop_list_id }) => {
-  console.log('url inside deleteShoppingListById', url)
-  console.log('SLID inside deleteShoppingListById', shop_list_id)
+  // console.log('url inside deleteShoppingListById', url)
+  // console.log('SLID inside deleteShoppingListById', shop_list_id)
   const data = await axios
     .delete(`${url}shoppinglists/shoplistid/${shop_list_id}`, {
       headers: {

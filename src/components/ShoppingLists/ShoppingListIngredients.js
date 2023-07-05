@@ -96,7 +96,7 @@ function ShoppingListIngredients({ token, url, dataIngredients, setDataIngredien
 
   const finalIngredientsList = finalIngredientsListFunction(arrIngredients)
 
-  console.log('FINAL INGR LST', finalIngredientsList)
+  // console.log('FINAL INGR LST', finalIngredientsList)
 
   const ingredientsListReduceFunction = (finalIngredientsList) => {
     const ingredientsListReduce = []
@@ -132,7 +132,7 @@ function ShoppingListIngredients({ token, url, dataIngredients, setDataIngredien
 
   const ingredientsListReduce = ingredientsListReduceFunction(finalIngredientsList)
 
-  console.log('INGR REDUCE', ingredientsListReduce)
+  // console.log('INGR REDUCE', ingredientsListReduce)
 
   setDataIngredients(ingredientsListReduce)
 }

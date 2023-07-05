@@ -10,7 +10,7 @@ export const getShoppingListId = async ({ url, token, id }) => {
     }
   })
     .then((resp) => {
-      console.log('resp', resp.data)
+      // console.log('resp', resp.data)
       return resp.data.shop_list_id
     })
     .catch((error) => {

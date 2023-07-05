@@ -18,7 +18,7 @@ function ShoppingListRecipes({ token, url, dataRecipe, setDataRecipe, arrRecipe,
     setArrRecipe(arrRecipes)
   }, [dataRecipe, setArrRecipe])
 
-  console.log('ARR RECIPES', arrRecipe)
+  // console.log('ARR RECIPES', arrRecipe)
 }
 
 export default memo(ShoppingListRecipes)

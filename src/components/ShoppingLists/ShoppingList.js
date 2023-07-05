@@ -211,7 +211,7 @@ export const ShoppingList = () => {
     return 0
   })
 
-  console.log('ING LIST REDUCED', ingredientsListReduce)
+  // console.log('ING LIST REDUCED', ingredientsListReduce)
 
   const today = Date.now()
   // console.log(today)
@@ -224,14 +224,14 @@ export const ShoppingList = () => {
   }
   let shop_list_id = ''
   shop_list_id = `W${week}${year}`
-  console.log('IIIDDDDDD', shop_list_id)
+  // console.log('IIIDDDDDD', shop_list_id)
 
   const dataShoppingList = {
     shop_list_id,
     shop_list: ingredientsListReduce,
     user_id
   }
-  console.log('DATASHOPPING LIST', dataShoppingList)
+  // console.log('DATASHOPPING LIST', dataShoppingList)
 
   useEffect(() => {
     if (shop_list_id === '') return
@@ -239,32 +239,32 @@ export const ShoppingList = () => {
     const getShopListId = async () => {
       try {
         const data = await getShoppingListId({ url, token, id: shop_list_id })
-        console.log('SLID inside getShoppingListId', data)
+        // console.log('SLID inside getShoppingListId', data)
         return data
       } catch (error) {
         console.log(error)
       }
 
       const data1 = getShoppingListId()
-      console.log('SLID Call', data1)
+      // console.log('SLID Call', data1)
 
       if (data1 === undefined) {
         setIsShoppingList(() => false)
       } else {
-        console.log('DATA1@@@@@', data1)
+        // console.log('DATA1@@@@@', data1)
         setIsShoppingList(() => true)
       }
       return data1
     }
 
     getShopListId()
-    console.log('IS SHOPPING LIST ID', isShoppingList)
+    // console.log('IS SHOPPING LIST ID', isShoppingList)
 
     if (isShoppingList) {
       console.log('Shopping List exist')
 
       const deleteShopList = async (url, token, shop_list_id) => {
-        console.log('WWWWWW', url, token, shop_list_id)
+        // console.log('WWWWWW', url, token, shop_list_id)
         try {
           const data = await deleteShoppingListById({ url, token, shop_list_id })
           data && setIsShoppingList(() => false)
@@ -284,7 +284,7 @@ export const ShoppingList = () => {
 
     const addShopList = async () => {
       try {
-        console.log('DATAXXXX', dataShoppingList)
+        // console.log('DATAXXXX', dataShoppingList)
         const data1 = await addShoppingList({ url, token, dataShoppingList })
         // console.log('DATA 1', data1)
         setIsShoppingList(() => true)
