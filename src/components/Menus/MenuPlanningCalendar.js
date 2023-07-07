@@ -52,7 +52,7 @@ export const MenuPlanningCal = () => {
   const handleMenuCrud = (event) => {
     console.log(event)
 
-    setMenuCrud({ id: event.id, url, token })
+    setMenuCrud({ id: String(event.id), url, token })
 
     console.log(menuCrud.id)
 
@@ -70,7 +70,7 @@ export const MenuPlanningCal = () => {
         }
       })
       // console.log(resp.data)
-      setDataMenu(resp.data)
+      setDataMenu(() => resp.data)
     } catch (error) {
       console.log(error)
     }
