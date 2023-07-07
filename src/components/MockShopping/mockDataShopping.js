@@ -6,30 +6,33 @@ import useDataCheckout from '../../Hooks/useDataCheckout'
 import style from './createMockShopping.module.css'
 
 export const MakeMockData = () => {
-  // const arrTotalReduce = []
+  // const arrTotalReduce = {}
   // const totalMin = 0
   // const totalOptimized = 0
   // const difference = 0
-  // const differencePercent = 0
+  // const differencePercent = 0,
+  // const dataProductMock = []
 
   const {
+    dataProductMock,
     arrTotalReduce,
     totalMin,
     totalOptimized,
     difference,
-    differencePercent,
-    dataProductMock
+    differencePercent
   } = useDataCheckout()
+  console.log('IMDS dataProductMock', dataProductMock)
+
+  if (dataProductMock.length === 0) return
 
   // const { arrTotalReduce, totalMin, totalOptimized, difference, differencePercent } =
-  // useDataMockAnalysis(dataProductMock)
+  //   useDataMockAnalysis({ dataProductMock })
 
-  console.log('IMDS dataProductMock', dataProductMock)
-  // console.log(arrTotalReduce)
-  // console.log(totalMin)
-  // console.log(totalOptimized)
-  // console.log(difference)
-  // console.log(differencePercent)
+  console.log(arrTotalReduce)
+  console.log(totalMin)
+  console.log(totalOptimized)
+  console.log(difference)
+  console.log(differencePercent)
 
   return (
     <section>
