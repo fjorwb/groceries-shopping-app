@@ -2,9 +2,12 @@
   --clr-font: #070b7a;
   --clr-font-contrast: #ffffff;
   --clr-grid: #707070;
-  --clr-contrast: #2596be;
+  --clr-contrast: rgba(37, 150, 190, 1);
+  --clr-contrast-hover: rgba(235, 135, 14, 0.8);
+  /* --clr-contrast-hover: rgba(37, 150, 190, 0.8); */
   --clr-background: #fff;
-  --clr-contrast-hover: #1d7a9f;
+
+  --clr-shadow: rgba(120, 194, 247, 0.199);
 
   --bar-width: 30px;
   --bar-height: 4px;

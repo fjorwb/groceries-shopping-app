@@ -81,18 +81,19 @@ li {
 }
 
 li:hover {
-  border-bottom: 4px solid red;
+  border-bottom: 3px solid var(--clr-contrast);
   cursor: pointer;
 }
 
 a {
+  color: var(--clr-font);
   font-size: var(--fnt-menu);
-  font-weight: 700;
   text-decoration: none;
 }
 
 a:hover {
   color: var(--clr-contrast);
+  font-weight: 700;
 }
 
 button {
