@@ -136,31 +136,22 @@ export function useDataCheckout() {
     // setDataProductMock(() => productMockArray)
     console.log('dataPRODMOCK!!!', dataProductMock)
 
-    let arrTotal,
-      arrMKT,
-      arrTotalReduce,
-      arrTotalReduce2,
-      totalMin,
-      totalOptimized,
-      difference,
-      differencePercent
-
-    // let arrTotal = []
+    let arrTotal = []
     arrTotal = calcTotalShoppingList({ dataProductMock })
     console.log('arrTotal', arrTotal)
 
-    arrMKT = calcMinProductByMarket({ arrTotal })
+    const arrMKT = calcMinProductByMarket({ arrTotal })
     console.log('arrMKT', arrMKT)
 
-    arrTotalReduce = calcTotalProductMock({ arrTotal })
+    const arrTotalReduce = calcTotalProductMock({ arrTotal })
     console.log('ATR!', arrTotalReduce)
 
-    totalMin = Object.values(arrTotalReduce).reduce((acc, total) => {
+    const totalMin = Object.values(arrTotalReduce).reduce((acc, total) => {
       if (acc === null || total < acc) return total
       return acc
     }, null)
 
-    arrTotalReduce2 = arrMKT.reduce((acc, cur) => {
+    const arrTotalReduce2 = arrMKT.reduce((acc, cur) => {
       if (acc[cur.market_id]) {
         acc[cur.market_id] += Number(cur.total)
       } else {
@@ -171,12 +162,12 @@ export function useDataCheckout() {
 
     console.log('ArrTotalReduce 2', arrTotalReduce2)
 
-    totalOptimized = Object.values(arrTotalReduce2).reduce((acc, cur) => {
+    const totalOptimized = Object.values(arrTotalReduce2).reduce((acc, cur) => {
       return acc + cur
     }, 0)
 
-    difference = ((totalMin - totalOptimized) / 100).toFixed(2)
-    differencePercent = (((totalMin - totalOptimized) / totalMin) * 100).toFixed(2)
+    const difference = ((totalMin - totalOptimized) / 100).toFixed(2)
+    const differencePercent = (((totalMin - totalOptimized) / totalMin) * 100).toFixed(2)
 
     return {
       dataProductMock,
