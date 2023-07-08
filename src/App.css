@@ -5,16 +5,17 @@
 }
 
 body {
-  width: 100%;
+  /* width: 80%; */
   font-family: 'jetBrainsMono', monospace;
   font-size: 16px;
-  background-color: var(--clr-background);
+  /* background-color: var(--clr-background); */
+  background-color: #fff;
   color: var(--clr-font);
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: 15px;
+  /* border-radius: 15px; */
 }
 
 .btn {

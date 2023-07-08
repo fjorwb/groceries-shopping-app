@@ -1,10 +1,11 @@
+const urlenv = process.env.REACT_APP_URL
+console.log('URL env', urlenv)
+
 const urlInitialStore = {
-  // url: 'https://groceries-shopping.herokuapp.com/'
-  url: 'http://localhost:5000/'
+  // url: 'http://localhost:5000/'
+  url: urlenv || 'http://localhost:5000/'
 }
 
-export const urlReducer = (state = urlInitialStore) => {
+export default function urlReducer(state = urlInitialStore) {
   return state
 }
-
-export default urlReducer

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Mapgrid() {
+function Mapgrid () {
   return <div>Mapgrid</div>
 }
 
