@@ -17,11 +17,11 @@ import { ProductsPage } from './pages/products'
 import { ShoppingListPage } from './pages/shoppinglist'
 import { CheckoutPage } from './pages/checkout'
 
-function App () {
-  const state = useSelector( ( state ) => state )
+function App() {
+  const state = useSelector((state) => state)
 
   let isAllowed
-  if ( state.auth.user !== null ) {
+  if (state.auth.user !== null) {
     isAllowed = true
   } else {
     isAllowed = false
@@ -31,14 +31,14 @@ function App () {
     // <Provider store={store}>
     <Router>
       <Routes>
-        <Route index path='/' element={ <Home /> } />
-        <Route element={ <ProtectedRoute isAllowed={ isAllowed } /> }>
-          <Route path='/recipes' element={ <RecipesPage /> } />
-          <Route path='/menuplanning' element={ <MenuPlanningPage /> } />
-          <Route path='/markets' element={ <MarketsPage /> } />
-          <Route path='/products' element={ <ProductsPage /> } />
-          <Route path='/shoppinglist' element={ <ShoppingListPage /> } />
-          <Route path='/checkout' element={ <CheckoutPage /> } />
+        <Route index path='/' element={<Home />} />
+        <Route element={<ProtectedRoute isAllowed={isAllowed} />}>
+          <Route path='/recipes' element={<RecipesPage />} />
+          <Route path='/menuplanning' element={<MenuPlanningPage />} />
+          <Route path='/markets' element={<MarketsPage />} />
+          <Route path='/products' element={<ProductsPage />} />
+          <Route path='/shoppinglist' element={<ShoppingListPage />} />
+          <Route path='/checkout' element={<CheckoutPage />} />
         </Route>
       </Routes>
     </Router>
@@ -46,7 +46,7 @@ function App () {
   )
 }
 
-export function Navigation () {
+export function Navigation() {
   return (
     <nav>
       <ul>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useId } from 'react'
 import { useForm } from '../Hooks/useForm'
 import Loader from './Loader'
 import Message from './Message'
@@ -7,6 +7,8 @@ import '../App.css'
 
 export const ContacForm = () => {
   const initialForm = { firstname: '', lastname: '', email: '', subject: '', comments: '' }
+
+  const id = useId()
 
   const validationsForm = (form) => {
     const errors = {}
@@ -52,7 +54,7 @@ export const ContacForm = () => {
         <input
           type='text'
           name='firstname'
-          id='firstname'
+          id={`${id}firstname`}
           placeholder='firstname'
           onBlur={handleBlur}
           onChange={handleChange}
@@ -63,7 +65,7 @@ export const ContacForm = () => {
         <input
           type='text'
           name='lastname'
-          id='last'
+          id={`${id}lastname`}
           placeholder='lastname'
           onBlur={handleBlur}
           onChange={handleChange}
@@ -74,7 +76,7 @@ export const ContacForm = () => {
         <input
           type='text'
           name='email'
-          id='email'
+          id={`${id}email`}
           placeholder='email'
           onBlur={handleBlur}
           onChange={handleChange}
@@ -85,7 +87,7 @@ export const ContacForm = () => {
         <input
           type='text'
           name='subject'
-          id='subject'
+          id={`${id}subject`}
           placeholder='subject'
           onBlur={handleBlur}
           onChange={handleChange}
@@ -95,7 +97,7 @@ export const ContacForm = () => {
         {errors.subject && <p className='error-message'>{errors.subject}</p>}
         <textarea
           name='comments'
-          id=''
+          id={`${id}comments`}
           cols='50'
           rows='5'
           placeholder='write your comments'
