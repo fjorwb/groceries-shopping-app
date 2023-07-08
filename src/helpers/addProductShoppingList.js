@@ -17,6 +17,4 @@ export default function addProductsFromShoppingList({ mkts, shop }) {
   } else {
     return []
   }
-
-  // return arr
 }

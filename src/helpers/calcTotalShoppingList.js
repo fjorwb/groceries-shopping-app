@@ -2,24 +2,32 @@ function rangeRandom(min, max) {
   return Math.random() * (max - min) + min
 }
 
-function calcTotalShoppingList({ dataProductMock }) {
-  const arrTotal = []
-
-  const arrRand = dataProductMock.map((product) => {
+function calculateProductTotals({ dataProductMock }) {
+  const calculatedData = dataProductMock.map((product) => {
     const rand = rangeRandom(-20, 20)
-    product.price = (product.price * (1 + rand / 100)).toFixed(2)
-    const total = (product.total = (product.amount * product.price).toFixed(2))
-    return { rand, total }
+    const price = (product.price * (1 + rand / 100)).toFixed(2)
+    const total = (product.amount * price).toFixed(2)
+
+    return {
+      rand,
+      total
+    }
   })
 
-  console.log('arrRand', arrRand)
+  const arrTotal = []
 
-  dataProductMock.forEach((product) => {
+  calculatedData.forEach((product, index) => {
+    dataProductMock[index].price = (
+      dataProductMock[index].price *
+      (1 + product.rand / 100)
+    ).toFixed(2)
+    dataProductMock[index].total = product.total
+
     arrTotal.push({
-      market_id: product.market_id,
-      extid: product.idext,
-      product: product.name,
-      total: product.total
+      market_id: dataProductMock[index].market_id,
+      extid: dataProductMock[index].idext,
+      product: dataProductMock[index].name,
+      total: dataProductMock[index].total
     })
   })
 
@@ -28,4 +36,4 @@ function calcTotalShoppingList({ dataProductMock }) {
   return sortedArrTotal
 }
 
-export default calcTotalShoppingList
+export default calculateProductTotals
