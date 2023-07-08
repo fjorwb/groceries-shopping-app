@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export function useFetch(url, token) {
+export function useFetchData({ url, token, addUrl }) {
   const [fetchData, setFetchData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -15,7 +15,7 @@ export function useFetch(url, token) {
 
     setLoading(true)
     axios
-      .get(`${url}`, {
+      .get(`${url}${addUrl}`, {
         headers: {
           'content-type': 'application/json',
           accept: 'application/json',
@@ -38,4 +38,4 @@ export function useFetch(url, token) {
   return { fetchData, loading, error }
 }
 
-export default useFetch
+export default useFetchData
