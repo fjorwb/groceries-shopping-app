@@ -17,6 +17,7 @@ module.exports = {
     camelcase: 'off',
     'object-curly-spacing': 'off',
     eqeqeq: 'off',
-    'multiline-ternary': 0
+    'multiline-ternary': 0,
+    'react/react-in-jsx-scope': 'off'
   }
 }

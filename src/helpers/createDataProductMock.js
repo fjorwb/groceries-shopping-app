@@ -1,20 +1,11 @@
 import deleteProductMock from '../services/productmocks/deleteProductMock'
 import addProductMock from '../services/productmocks/addProductMock'
-// import getProductMock from '../services/productmocks/getProductMock'
 
-export const createDataProductMock = async ({
-  url,
-  token,
-  user_id,
-  productMockArray,
-  setDataProductMock
-}) => {
+export const createDataProductMock = ({ url, token, user_id, productMockArray }) => {
   const data = []
 
   if (productMockArray.length > 0) {
     deleteProductMock({ url, token })
-
-    // console.log('SP productMockArray', productMockArray)
 
     for (const item in productMockArray) {
       const inputAddProduct = {
@@ -36,12 +27,10 @@ export const createDataProductMock = async ({
 
       data.push(inputAddProduct)
     }
-    setDataProductMock(() => data)
     return data
   } else {
     return []
   }
-  // console.log('DATA INSIDE createDataProductMock', data)
 }
 
 export default createDataProductMock
