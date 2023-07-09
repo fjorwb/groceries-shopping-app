@@ -7,13 +7,16 @@ const initialState = {
   difference: 0,
   differencePercent: 0
 }
+
 function useDataMockAnalysis({ dataProductMock }) {
   if (dataProductMock.length === 0) return initialState
 
-  let arrTotal = []
-  arrTotal = calcTotalShoppingList({ dataProductMock })
+  const reload = () => {
+    // Reload logic here, e.g., fetch the data again or trigger a reload action
+    console.log('Reloading data...')
+  }
 
-  const arrMKT = calcMinProductByMarket({ arrTotal })
+  const arrTotal = calcTotalShoppingList({ dataProductMock })
 
   const arrTotalReduce = calcTotalProductMock({ arrTotal })
 
@@ -22,20 +25,22 @@ function useDataMockAnalysis({ dataProductMock }) {
     return acc
   }, null)
 
+  const arrMKT = calcMinProductByMarket({ arrTotal })
+
   const arrTotalReduce2 = arrMKT.reduce((acc, cur) => {
-    if (acc[cur.market_id]) {
-      acc[cur.market_id] += Number(cur.total)
-    } else {
-      acc[cur.market_id] = Number(cur.total)
-    }
+    acc[cur.market_id] = (acc[cur.market_id] || 0) + Number(cur.total)
     return acc
   }, {})
 
-  const totalOptimized = Object.values(arrTotalReduce2).reduce((acc, cur) => {
-    return acc + cur
-  }, 0)
+  const totalOptimized = Object.values(arrTotalReduce2).reduce((acc, cur) => acc + cur, 0)
 
   const difference = ((totalMin - totalOptimized) / 100).toFixed(2)
+
+  if (difference < 0) {
+    reload() // Trigger reload when difference is less than 0
+    // return initialState
+  }
+
   const differencePercent = (((totalMin - totalOptimized) / totalMin) * 100).toFixed(2)
 
   return {

@@ -54,13 +54,14 @@ export function useDataCheckout() {
 
     updateProductMockPrices(dataProductMock, dataProducts)
 
-    const isLoading = !dataProductMock
+    const load = !dataProductMock
 
     return {
       dataProductMock,
-      isLoading
+      load
     }
   }, [dataMarkets, dataShoppingList, dataProducts])
+
   return dataCheckout
 }
 
